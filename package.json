@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "LANG=au npm run start:lang",
+    "start": "npm run start:au",
+    "start:au": "LANG=au npm run start:lang",
+    "start:nz": "LANG=nz npm run start:lang",
     "start:lang": "vue-cli-service serve ./src/main-${LANG}.ts",
     "build:lib": "vue-cli-service build --no-clean --target lib --inline-vue --name ${npm_package_name}-${LANG} ./src/main-${LANG}.ts",
     "build": "LANG=au npm run build:lib && LANG=nz npm run build:lib",

@@ -1,24 +1,32 @@
 import { createApp, Component } from 'vue'
 import { getCurrentScript, getAllScriptURLParameters } from 'src/utils/utils'
 import { isDevelopment } from 'src/utils/constants'
+import { LanguageCodeEnum } from 'src/models/LanguageCodeEnum'
 
 /**
  * Mounts the Vue app at a created root element directly after the initialising script tag
  * @param component Vue app entry point component
- * @param elementID element id selector, with # prefix
+ * @param config
+ * * @param elementID element id selector, with # prefix
+ * * @param lang region language code
  */
 export const createDynamicAppAtScriptTag = (
   component: Component,
-  elementID: string
+  config: {
+    elementID: string
+    lang: LanguageCodeEnum
+  }
 ): void => {
+  const { elementID, lang } = config
+
   if (elementID.slice(0, 1) !== '#') {
     throw new Error(
       'elementID must be a valid id selector string. E.g: #my-component'
     )
   }
 
-  const mountTargetID = elementID.substring(1)
-  if (!isDevelopment && document.getElementById(mountTargetID)) {
+  const mountTargetSelector = `${elementID.substring(1)}-${lang}`
+  if (!isDevelopment && document.getElementById(mountTargetSelector)) {
     throw new Error(
       'An instance of the widget has already been initialized. You can only add one widget script tag per page'
     )
@@ -28,13 +36,16 @@ export const createDynamicAppAtScriptTag = (
   const props = getAllScriptURLParameters(scriptEl)
 
   // In development we don't want to inject the app at the script tag in index.html
-  // In this case we use the element in index.html - remember to define VUE_APP_NAME and VUE_APP_DEFAULT_LANG in a .env
   if (!isDevelopment) {
     const mountTargetEl = document.createElement('div')
-    mountTargetEl.id = mountTargetID
+    mountTargetEl.id = mountTargetSelector
 
     scriptEl.insertAdjacentElement('afterend', mountTargetEl)
   }
 
-  createApp(component, props).mount(elementID)
+  // In development we only render one region's app at the time by using a generic selector
+  // in production we use a region specific selector
+  const mountTargetID = isDevelopment ? elementID : `${elementID}-${lang}`
+
+  createApp(component, { ...props, lang }).mount(mountTargetID)
 }
