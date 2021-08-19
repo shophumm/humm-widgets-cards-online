@@ -1,12 +1,13 @@
 <template>
-  <Theme>
+  <Theme :lang="lang">
     <WidgetMainSmall
       title="Up To 60 months interest-free."
       subtitle="No deposit needed. T&Cs apply."
       buttonPrimaryLabel="Find out more"
       buttonCloseLabel="Close"
+      :productPrice="productPrice"
+      :lang="lang"
     />
-    {{ productPrice }}
   </Theme>
 </template>
 
@@ -23,9 +24,8 @@ export default defineComponent({
     WidgetMainSmall,
   },
   props: {
-    productPrice: {
-      type: Number,
-    },
+    productPrice: Number,
+    lang: String,
   },
 })
 </script>
