@@ -25,17 +25,39 @@ To get started with development, add a `.env` file in the root of this project. 
 4. Do not commit other .env files to Github since these values should be kept secure
 5. Please use LastPass or an equivalent tool to save and share these .env variable values with your team
 
+### Overview
+
+The code base is designed to be bundled into two separate libraries: one for Australia and one for New Zealand.
+This is to only bundle the necessary files and dependencies for each region to reduce the production bundle size as much as possible.
+Building the project into a library instead of a standard web app means that the individual Javascript files per region will include Vue, scripts, styles and everything that is needed to only load the Javascript file to embed the app. Furthermore, the Javascript file will handle the creation of a DOM node adjacent to the script tag that will be used for mounting the app.
+
 ### Scripts
 
-See package.json for more details.
+See `package.json` for more details.
+
+**Installing dependencies**
+
+```sh
+yarn
+```
 
 **Starting the project**
 
-Runs the app in the development mode.
+Runs the app in the development mode. Starts the Australian widget by default
 Open [http://localhost:8081](http://localhost:8081) to view it in the browser.
 
 ```sh
-yarn && yarn start
+yarn start
+```
+
+For more granular control of region-specific build targets use the following commands:
+
+```sh
+start:au
+```
+
+```sh
+start:nz
 ```
 
 **Building**
