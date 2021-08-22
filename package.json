@@ -2,6 +2,9 @@
   "name": "humm-widgets-cards",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
     "start": "npm run start:au",
     "start:au": "LANG=au npm run start:lang",
