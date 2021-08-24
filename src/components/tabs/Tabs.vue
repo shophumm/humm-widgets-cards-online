@@ -1,19 +1,19 @@
 <template>
   <div class="tabs">
-    <ul class="tabs__controls" :id="id" role="tablist">
+    <ul class="tabs__controls" role="tablist">
       <li
         class="tabs__control"
+        role="presentation"
         v-for="tab in tabs"
         v-bind:key="tab.id"
-        role="presentation"
       >
         <button
-          :class="['tabs__button', { 'is-active': activeTabId === tab.id }]"
-          :id="tab.id + '-tab'"
           type="button"
           role="tab"
-          :aria-controls="tab.id"
           v-on:click="changeTab(tab.id)"
+          :class="['tabs__button', { 'is-active': activeTabId === tab.id }]"
+          :id="tab.id + '-tab'"
+          :aria-controls="tab.id"
           :aria-selected="activeTabId === tab.id"
         >
           {{ tab.label }}
@@ -21,15 +21,15 @@
       </li>
     </ul>
 
-    <div class="tabs__item" :id="id">
+    <div class="tabs__item">
       <div
-        :class="['tabs__content', { 'is-active': activeTabId === tab.id }]"
-        v-for="tab in tabs"
-        v-bind:key="tab.id"
-        :id="tab.id"
-        :aria-labelledby="tab.id + '-tab'"
         role="tabpanel"
         tabindex="0"
+        v-for="tab in tabs"
+        v-bind:key="tab.id"
+        :class="['tabs__content', { 'is-active': activeTabId === tab.id }]"
+        :id="tab.id"
+        :aria-labelledby="tab.id + '-tab'"
       >
         {{ tab.content }}
       </div>
@@ -49,10 +49,6 @@ export default defineComponent({
     }
   },
   props: {
-    id: {
-      type: String,
-      required: true,
-    },
     defaultTabId: String,
     tabs: {
       type: Array as () => TabItemProps[],

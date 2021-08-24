@@ -14,7 +14,9 @@
   <Dialog v-if="isDialogOpen" @toggle-dialog="isDialogOpen = false">
     <template v-slot:body>
       <Tabs :tabs="tabs" />
-      <Accordion :content="terms">Terms & Conditions</Accordion>
+      <Accordion id="widget-terms" :content="terms"
+        >Terms & Conditions</Accordion
+      >
     </template>
   </Dialog>
 </template>
