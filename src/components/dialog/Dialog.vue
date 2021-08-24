@@ -9,8 +9,9 @@
               @click="toggleDialog"
               iconOpacity="0.5"
               fill="var(--color-3)"
-              >{{ buttonCloseLabel }}</ButtonClose
             >
+              {{ buttonCloseLabel }}
+            </ButtonClose>
           </div>
 
           <div class="dialog__body">
