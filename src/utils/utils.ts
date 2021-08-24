@@ -12,8 +12,8 @@ export const getCurrentScript = (): HTMLOrSVGScriptElement =>
 // Do not get script parameters in development, as this doesn't work with the auto-injected script tag
 export const getAllScriptURLParameters = (
   scriptEl: HTMLOrSVGScriptElement
-): Record<string, string> => {
-  if (isDevelopment) return {}
+): Record<string, string | number> => {
+  if (isDevelopment) return { productPrice: 56 }
 
   const scriptString = scriptEl.getAttribute('src') || ''
   const paramsString = scriptString.split('?').pop()
