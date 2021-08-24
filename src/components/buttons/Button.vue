@@ -40,18 +40,20 @@ export default defineComponent({
 <style scoped lang="scss">
 .button {
   font-family: var(--font-base);
-  font-weight: 700;
+  font-weight: 500;
   border: 0;
   background: transparent;
   border: 1px solid currentColor;
-  padding: 6px 7px 4px;
+  padding: 5px 13px 5px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  line-height: 1;
+  line-height: 0.85;
   text-transform: uppercase;
   appearance: none;
-  font-size: 9px;
+  font-size: 12px;
+  border-radius: 4px;
+  min-width: 20px;
 
   &--primary {
     background: var(--color-1);

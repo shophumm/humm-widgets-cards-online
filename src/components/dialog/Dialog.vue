@@ -33,11 +33,6 @@ export default defineComponent({
     ButtonClose,
   },
   props: {
-    id: {
-      type: String,
-      required: true,
-    },
-    label: String,
     isOpen: {
       type: Boolean,
       default: false,

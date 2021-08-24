@@ -43,11 +43,6 @@ import type { TabItemProps } from 'src/models/Tabs'
 
 export default defineComponent({
   name: 'Tabs',
-  data() {
-    return {
-      activeTabId: this.defaultTabId || this.tabs[0].id,
-    }
-  },
   props: {
     defaultTabId: String,
     tabs: {
@@ -56,12 +51,16 @@ export default defineComponent({
       default: () => [],
     },
   },
+  data() {
+    return {
+      activeTabId: this.defaultTabId || this.tabs[0].id,
+    }
+  },
   methods: {
     changeTab(tabId: string) {
       this.activeTabId = tabId
     },
   },
-  emits: ['clickTab'],
 })
 </script>
 

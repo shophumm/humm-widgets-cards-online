@@ -1,14 +1,22 @@
 <template>
   <div class="widget">
-    <div class="widget__text">
-      <p class="widget__title">{{ title }}</p>
-      <span class="widget__subtitle">{{ subtitle }}</span>
+    <div class="widget__content">
+      <div>
+        <IconHumm90Bird fill="var(--color-1-contrast)" />
+      </div>
+      <div class="widget__container">
+        <div class="widget__text">
+          <p class="widget__title">{{ title }}</p>
+          <span class="widget__subtitle">{{ subtitle }}</span>
+        </div>
+        <Button buttonColor="var(--color-2)" @click="isDialogOpen = true">{{
+          buttonPrimaryLabel
+        }}</Button>
+      </div>
     </div>
-    <Button buttonColor="var(--color-2)" @click="isDialogOpen = true">{{
-      buttonPrimaryLabel
-    }}</Button>
-    <IconHumm90Bird fill="var(--color-1-contrast)" />
-    <ButtonClose iconOpacity="0.5">{{ buttonCloseLabel }}</ButtonClose>
+    <ButtonClose iconOpacity=".3" fill="var(--color-1-contrast)">{{
+      buttonCloseLabel
+    }}</ButtonClose>
   </div>
 
   <Dialog v-if="isDialogOpen" @toggle-dialog="isDialogOpen = false">
@@ -77,11 +85,28 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   font-family: var(--font-base);
   background-color: var(--color-1);
   color: var(--color-1-contrast);
-  padding: 8px 16px;
+  padding: 5px 8px;
   max-width: 430px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  border-radius: 10px;
+  min-height: 37px;
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0px 10px;
+  }
 
   &__text {
     display: flex;
@@ -89,14 +114,15 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   }
 
   &__title {
-    text-transform: uppercase;
-    text-decoration: underline;
-    font-weight: bold;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 200;
     margin: 0;
   }
 
   &__title + &__subtitle {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
     margin-top: 2px;
   }
 }

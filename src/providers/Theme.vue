@@ -35,9 +35,9 @@ export default defineComponent({
 
   &[data-theme='nz'],
   &[data-theme='qmc'] {
-    --color-1: #f7f7f7;
-    --color-1-contrast: #000000;
-    --color-2: #e92162; // Web / Tile / Button / Secondary
+    --color-1: #ffffff;
+    --color-1-contrast: #002555;
+    --color-2: #002555; // Web / Tile / Button / Secondary
     --color-3: #8c8c8c; // Mid grey
     --color-4: #f5f6f7;
   }

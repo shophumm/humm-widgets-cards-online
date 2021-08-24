@@ -1,9 +1,9 @@
 <template>
   <Theme :lang="lang">
     <WidgetMainSmall
-      title="Up To 60 months interest-free."
+      title="Up To 60 Months Interest-Free."
       subtitle="No deposit needed. T&Cs apply."
-      buttonPrimaryLabel="Find out more"
+      buttonPrimaryLabel="Explore"
       buttonCloseLabel="Close"
       :productPrice="productPrice"
       :lang="lang"
