@@ -14,7 +14,7 @@
           role="tab"
           :aria-controls="tab.id"
           v-on:click="changeTab(tab.id)"
-          aria-selected="true"
+          :aria-selected="activeTabId === tab.id"
         >
           {{ tab.label }}
         </button>
