@@ -45,7 +45,7 @@ export default defineComponent({
   name: 'Tabs',
   data() {
     return {
-      activeTabId: this.defaultTabId || this.tabs[0].id,
+      activeTabId: this.defaultTabId || this.tabs?.[0]?.id,
     }
   },
   props: {
@@ -53,7 +53,7 @@ export default defineComponent({
     tabs: {
       type: Array as () => TabItemProps[],
       required: true,
-      default: () => [],
+      validator: (tabs: unknown[]) => !!tabs.length,
     },
   },
   methods: {
