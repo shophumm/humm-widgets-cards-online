@@ -10,7 +10,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<TabsProps> = (args) => ({
+const Template: Story<TabsProps> = args => ({
   // Components used in your story `template` are defined in the `components` object
   components: { Tabs },
   // The story's `args` need to be mapped into the template through the `setup()` method
