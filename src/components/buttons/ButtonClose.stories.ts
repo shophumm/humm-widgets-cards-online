@@ -11,7 +11,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<ButtonCloseProps> = (args) => ({
+const Template: Story<ButtonCloseProps> = args => ({
   // Components used in your story `template` are defined in the `components` object
   components: { ButtonClose },
   // The story's `args` need to be mapped into the template through the `setup()` method
