@@ -1,14 +1,18 @@
 <template>
-  <div class="theme">
+  <div class="theme" :data-theme="lang">
     <slot></slot>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { LanguageCodeEnum } from 'src/models/LanguageCodeEnum'
 
 export default defineComponent({
   name: 'Theme',
+  props: {
+    lang: String as () => LanguageCodeEnum,
+  },
 })
 </script>
 
@@ -29,8 +33,13 @@ export default defineComponent({
   --color-3: #8c8c8c; // Mid grey
   --color-4: #f5f6f7;
 
+  &[data-theme='nz'],
   &[data-theme='qmc'] {
-    --color-1: #e92162;
+    --color-1: #f7f7f7;
+    --color-1-contrast: #000000;
+    --color-2: #e92162; // Web / Tile / Button / Secondary
+    --color-3: #8c8c8c; // Mid grey
+    --color-4: #f5f6f7;
   }
 }
 </style>

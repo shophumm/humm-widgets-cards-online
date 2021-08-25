@@ -2,8 +2,13 @@
   "name": "humm-widgets-cards",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
-    "start": "LANG=au npm run start:lang",
+    "start": "npm run start:au",
+    "start:au": "LANG=au npm run start:lang",
+    "start:nz": "LANG=nz npm run start:lang",
     "start:lang": "vue-cli-service serve ./src/main-${LANG}.ts",
     "build:lib": "vue-cli-service build --no-clean --target lib --inline-vue --name ${npm_package_name}-${LANG} ./src/main-${LANG}.ts",
     "build": "LANG=au npm run build:lib && LANG=nz npm run build:lib",
@@ -19,6 +24,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.15.0",
+    "@babel/plugin-proposal-optional-chaining": "7.14.5",
     "@storybook/addon-a11y": "6.3.7",
     "@storybook/addon-actions": "6.3.7",
     "@storybook/addon-essentials": "6.3.7",
