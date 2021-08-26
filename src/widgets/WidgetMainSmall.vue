@@ -2,7 +2,7 @@
   <div class="widget">
     <div class="widget__content">
       <div class="widget__icon">
-        <IconHumm90Bird fill="var(--color-1-contrast)" />
+        <IconHumm90Bird v-if="lang === 'au'" fill="var(--color-1-contrast)" />
       </div>
       <div class="widget__container">
         <div class="widget__text">
@@ -14,9 +14,11 @@
         }}</Button>
       </div>
     </div>
-    <ButtonClose iconOpacity="1" fill="var(--color-1-contrast)">{{
-      buttonCloseLabel
-    }}</ButtonClose>
+    <div class="widget__close">
+      <ButtonClose iconOpacity="1" fill="var(--color-1-contrast)">{{
+        buttonCloseLabel
+      }}</ButtonClose>
+    </div>
   </div>
 
   <Dialog v-if="isDialogOpen" @toggle-dialog="isDialogOpen = false">
@@ -45,6 +47,7 @@ export default defineComponent({
     subtitle: String,
     buttonPrimaryLabel: String,
     productPrice: Number,
+    lang: String,
   },
   components: {
     IconHumm90Bird,
@@ -86,11 +89,16 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   background-color: var(--color-1);
   color: var(--color-1-contrast);
   padding: 5px 8px;
-  max-width: 430px;
+  max-width: 414px;
   display: flex;
   align-items: center;
   border-radius: 10px;
   min-height: 37px;
+  position: relative;
+  @media (max-width: 429px) {
+    display: block;
+    padding: 10px 8px;
+  }
 
   &__content {
     display: flex;
@@ -106,6 +114,8 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
     width: 100%;
     justify-content: space-between;
     padding: 0px 9px;
+    margin-left: 75px;
+    margin-right: 20px;
     @media (max-width: 429px) {
       display: block;
     }
@@ -127,8 +137,27 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   &__title + &__subtitle {
     font-size: 12px;
     font-weight: 200;
-    line-height: 14px;
+    letter-spacing: -0.03em;
+    line-height: 13px;
     margin-top: 2px;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 15px;
+    left: 8px;
+    @media (max-width: 429px) {
+      top: 10px;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    @media (max-width: 429px) {
+      top: 10px;
+    }
   }
 }
 </style>
