@@ -3,9 +3,9 @@ export enum ScriptParametersEnum {
   MerchantId = 'merchantId',
 }
 
-export interface ScriptParameters {
-  [ScriptParametersEnum.ProductPrice]: number
-  [ScriptParametersEnum.MerchantId]: string
+type ScriptParametersEnumKeys = `${ScriptParametersEnum}`
+type ScriptParameters = {
+  [key in ScriptParametersEnumKeys]: string | number
 }
 
 export default ScriptParameters
