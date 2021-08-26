@@ -40,7 +40,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .button {
   font-family: var(--font-base);
-  font-weight: 500;
+  font-weight: 700;
   border: 0;
   background: transparent;
   border: 1px solid currentColor;
@@ -51,16 +51,18 @@ export default defineComponent({
   line-height: 0.85;
   text-transform: uppercase;
   appearance: none;
-  font-size: 11px;
+  font-size: 13px;
   border-radius: 4px;
-  min-width: 20px;
-  @media (max-width: 429px) {
-    font-size: 13px;
-    font-weight: 700;
-    min-width: 138px;
-    min-height: 35px;
-    justify-content: center;
-    margin-top: 5px;
+  min-width: 138px;
+  min-height: 35px;
+  justify-content: center;
+  margin-top: 5px;
+  @media (min-width: 430px) {
+    margin-top: 0px;
+    font-size: 11px;
+    font-weight: 500;
+    min-width: 20px;
+    min-height: 20px;
   }
 
   &--primary {
