@@ -26,19 +26,22 @@ export const getAllScriptURLParameters = (
   const paramsString = scriptString.split('?').pop()
   const paramsUrl = new URLSearchParams(paramsString)
   const paramsRaw = Object.fromEntries(paramsUrl)
-  const paramsKeysAllowed = Object.values(ScriptParametersEnum)
+  const paramsKeysAllowed = Object.values<string | ScriptParametersEnum>(
+    ScriptParametersEnum
+  )
 
   // Filter allowed script URL parameters to values in ScriptParametersEnum which are keys on ScriptParameters
   // Do some basic sanitizing of string values
   const params = Object.keys(paramsRaw)
-    .filter(key => paramsKeysAllowed.includes(key as ScriptParametersEnum))
-    .reduce((obj, key) => {
+    .filter(key => paramsKeysAllowed.includes(key))
+    .reduce<ScriptParameters>((obj, key) => {
       const cleanString = paramsRaw[key].replace(/[^.a-z0-9]/gi, '')
-
-      return {
+      const cleanParams: ScriptParameters = {
         ...obj,
         [key]: cleanString,
       }
+
+      return cleanParams
     }, {} as ScriptParameters)
 
   return params
