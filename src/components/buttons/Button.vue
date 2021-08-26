@@ -49,6 +49,7 @@ export default defineComponent({
   align-items: center;
   line-height: 0.85;
   text-transform: uppercase;
+  appearance: none;
   font-size: 13px;
   border-radius: 4px;
   min-width: 138px;
