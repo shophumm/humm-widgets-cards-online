@@ -1,8 +1,12 @@
 <template>
   <div class="widget">
     <div class="widget__content">
-      <div class="widget__icon">
-        <IconHumm90Bird v-if="lang === 'au'" fill="var(--color-1-contrast)" />
+      <div class="widget__iconbird" v-if="lang === 'au'">
+        <IconHumm90Bird fill="var(--color-1-contrast)" />
+      </div>
+      <div class="widget__iconcard" v-if="lang === 'nz'">
+        <IconHumm90Card />
+        <IconHumm90Card />
       </div>
       <div class="widget__container">
         <div class="widget__text">
@@ -34,6 +38,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import IconHumm90Bird from 'src/components/icons/IconHumm90Bird.vue'
+import IconHumm90Card from 'src/components/icons/IconHumm90Card.vue'
 import Button from 'src/components/buttons/Button.vue'
 import ButtonClose from 'src/components/buttons/ButtonClose.vue'
 import Dialog from 'src/components/dialog/Dialog.vue'
@@ -51,6 +56,7 @@ export default defineComponent({
   },
   components: {
     IconHumm90Bird,
+    IconHumm90Card,
     Button,
     ButtonClose,
     Dialog,
@@ -142,9 +148,18 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
     margin-top: 2px;
   }
 
-  &__icon {
+  &__iconbird {
     position: absolute;
     top: 15px;
+    left: 8px;
+    @media (max-width: 429px) {
+      top: 10px;
+    }
+  }
+
+  &__iconcard {
+    position: absolute;
+    top: 10px;
     left: 8px;
     @media (max-width: 429px) {
       top: 10px;
