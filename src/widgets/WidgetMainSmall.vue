@@ -1,7 +1,7 @@
 <template>
   <div class="widget">
     <div class="widget__content">
-      <div>
+      <div class="widget__icon">
         <IconHumm90Bird fill="var(--color-1-contrast)" />
       </div>
       <div class="widget__container">
@@ -14,7 +14,7 @@
         }}</Button>
       </div>
     </div>
-    <ButtonClose iconOpacity=".3" fill="var(--color-1-contrast)">{{
+    <ButtonClose iconOpacity="1" fill="var(--color-1-contrast)">{{
       buttonCloseLabel
     }}</ButtonClose>
   </div>
@@ -105,7 +105,10 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
-    padding: 0px 10px;
+    padding: 0px 9px;
+    @media (max-width: 429px) {
+      display: block;
+    }
   }
 
   &__text {
@@ -116,12 +119,14 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   &__title {
     font-size: 14px;
     font-weight: 200;
+    letter-spacing: -0.03em;
     margin: 0;
+    text-transform: uppercase;
   }
 
   &__title + &__subtitle {
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 200;
     line-height: 14px;
     margin-top: 2px;
   }

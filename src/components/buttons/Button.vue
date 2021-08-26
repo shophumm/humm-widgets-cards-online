@@ -44,7 +44,7 @@ export default defineComponent({
   border: 0;
   background: transparent;
   border: 1px solid currentColor;
-  padding: 5px 13px 5px;
+  padding: 5px 12px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
