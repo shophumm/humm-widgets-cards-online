@@ -44,16 +44,24 @@ export default defineComponent({
   border: 0;
   background: transparent;
   border: 1px solid currentColor;
-  padding: 5px 12px;
+  padding: 5px 11px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   line-height: 0.85;
   text-transform: uppercase;
   appearance: none;
-  font-size: 12px;
+  font-size: 11px;
   border-radius: 4px;
   min-width: 20px;
+  @media (max-width: 429px) {
+    font-size: 13px;
+    font-weight: 700;
+    min-width: 138px;
+    min-height: 35px;
+    justify-content: center;
+    margin-top: 5px;
+  }
 
   &--primary {
     background: var(--color-1);
