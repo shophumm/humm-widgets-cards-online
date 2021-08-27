@@ -1,18 +1,25 @@
 <template>
-  <img class="card" src="../../assets/images/humm90Card.png" />
+  <div class="card">
+    <slot></slot>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'IconHumm90Card',
+  name: 'IconCard',
 })
 </script>
 
 <style scoped lang="scss">
 .card {
-  height: 22px;
+  width: 34px;
   margin: 2px;
+  ::v-slotted(img, svg) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
 }
 </style>
