@@ -63,11 +63,20 @@ start:nz
 **Building**
 
 Compiles and minifies two library packages for production.
-Use `build/demo.html` to test production builds.
+Use `build/index.html` to test production builds, or see **Build preview** below.
 [Read more about library build targets](https://cli.vuejs.org/guide/build-targets.html#library)
 
 ```sh
 yarn build
+```
+
+**Build preview**
+Does a production build as above and serves `build/index.html` to be previewed.
+Note that `public/demo.html` is renamed and copied to `build/index.html` on production build.
+Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
+
+```sh
+yarn preview
 ```
 
 **Linting**
@@ -173,7 +182,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<ComponentNameProps> = (args) => ({
+const Template: Story<ComponentNameProps> = args => ({
   // Components used in your story `template` are defined in the `components` object
   components: { ComponentName },
   // The story's `args` need to be mapped into the template through the `setup()` method
