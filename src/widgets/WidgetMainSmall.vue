@@ -1,10 +1,10 @@
 <template>
   <div class="widget">
     <div class="widget__content">
-      <div class="widget__iconbird" v-if="lang === 'au'">
+      <div v-if="lang === 'au'" class="widget__iconbird">
         <IconHumm90Bird fill="var(--color-1-contrast)" />
       </div>
-      <div class="widget__iconcard" v-if="lang === 'nz'">
+      <div v-if="lang === 'nz'" class="widget__iconcard">
         <IconCard>
           <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
         </IconCard>
@@ -17,13 +17,13 @@
           <p class="widget__title">{{ title }}</p>
           <span class="widget__subtitle">{{ subtitle }}</span>
         </div>
-        <Button buttonColor="var(--color-2)" @click="isDialogOpen = true">
+        <Button button-color="var(--color-2)" @click="isDialogOpen = true">
           {{ buttonPrimaryLabel }}
         </Button>
       </div>
     </div>
     <div class="widget__close">
-      <ButtonClose iconOpacity="1" fill="var(--color-1-contrast)">
+      <ButtonClose icon-opacity="1" fill="var(--color-1-contrast)">
         {{ buttonCloseLabel }}
       </ButtonClose>
     </div>
@@ -31,14 +31,14 @@
 
   <Dialog
     v-if="isDialogOpen"
+    :button-close-label="buttonCloseLabel"
     @toggle-dialog="isDialogOpen = false"
-    :buttonCloseLabel="buttonCloseLabel"
   >
-    <template v-slot:body>
+    <template #body>
       <Tabs :tabs="tabs" />
-      <Accordion id="widget-terms" :content="terms"
-        >Terms & Conditions</Accordion
-      >
+      <Accordion id="widget-terms" :content="terms">
+        Terms & Conditions
+      </Accordion>
     </template>
   </Dialog>
 </template>
@@ -55,14 +55,6 @@ import Accordion from 'src/components/accordion/Accordion.vue'
 
 export default defineComponent({
   name: 'WidgetMainSmall',
-  props: {
-    title: String,
-    subtitle: String,
-    buttonPrimaryLabel: String,
-    buttonCloseLabel: String,
-    productPrice: Number,
-    lang: String,
-  },
   components: {
     IconHumm90Bird,
     IconCard,
@@ -71,6 +63,14 @@ export default defineComponent({
     Dialog,
     Tabs,
     Accordion,
+  },
+  props: {
+    title: String,
+    subtitle: String,
+    buttonPrimaryLabel: String,
+    buttonCloseLabel: String,
+    productPrice: Number,
+    lang: String,
   },
   data() {
     return {

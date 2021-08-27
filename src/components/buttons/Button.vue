@@ -2,8 +2,8 @@
   <button
     type="button"
     :class="['button', { 'button--primary': primary }]"
-    @click="onClick"
     :style="style"
+    @click="onClick"
   >
     <slot></slot>
   </button>
