@@ -41,17 +41,28 @@ export default defineComponent({
 .button {
   font-family: var(--font-base);
   font-weight: 700;
-  border: 0;
   background: transparent;
   border: 1px solid currentColor;
-  padding: 6px 7px 4px;
+  padding: 5px 11px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  line-height: 1;
+  line-height: 0.85;
   text-transform: uppercase;
   appearance: none;
-  font-size: 9px;
+  font-size: 13px;
+  border-radius: 4px;
+  min-width: 138px;
+  min-height: 35px;
+  justify-content: center;
+  margin-top: 5px;
+  @media (min-width: 430px) {
+    margin-top: 0;
+    font-size: 11px;
+    font-weight: 500;
+    min-width: 20px;
+    min-height: 20px;
+  }
 
   &--primary {
     background: var(--color-1);

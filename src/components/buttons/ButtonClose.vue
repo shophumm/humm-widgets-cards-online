@@ -14,7 +14,6 @@ import IconClose from 'src/components/icons/IconClose.vue'
 export default defineComponent({
   name: 'ButtonClose',
   props: {
-    backgroundColor: String,
     iconOpacity: String,
     fill: String,
   },
@@ -37,8 +36,8 @@ export default defineComponent({
   border: 0;
   padding: 0;
   border-radius: 50%;
-  width: 12px;
-  height: 12px;
+  width: 18px;
+  height: 18px;
   cursor: pointer;
   display: inline-flex;
   background: transparent;

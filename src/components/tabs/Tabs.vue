@@ -61,7 +61,6 @@ export default defineComponent({
       this.activeTabId = tabId
     },
   },
-  emits: ['clickTab'],
 })
 </script>
 

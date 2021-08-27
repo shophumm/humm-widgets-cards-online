@@ -3,7 +3,7 @@
     <WidgetMainSmall
       title="Up To 60 months interest-free."
       subtitle="No deposit needed. T&Cs apply."
-      buttonPrimaryLabel="Find out more"
+      buttonPrimaryLabel="Explore"
       buttonCloseLabel="Close"
       :productPrice="productPrice"
       :lang="lang"

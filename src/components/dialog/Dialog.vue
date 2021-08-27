@@ -34,14 +34,13 @@ export default defineComponent({
     ButtonClose,
   },
   props: {
-    id: {
-      type: String,
-      required: true,
-    },
-    label: String,
     isOpen: {
       type: Boolean,
       default: false,
+    },
+    buttonCloseLabel: {
+      type: String,
+      default: 'Close',
     },
   },
   setup(props, { emit }) {
