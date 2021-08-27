@@ -78,6 +78,7 @@ export default defineComponent({
     width: 100%;
     display: flex;
   }
+
   &__control {
     flex-grow: 1;
     margin: 0 4px;
@@ -85,10 +86,12 @@ export default defineComponent({
     &:first-child {
       margin-left: 0;
     }
+
     &:last-child {
       margin-right: 0;
     }
   }
+
   &__button {
     width: 100%;
     background: #8c8c8c;
@@ -108,10 +111,12 @@ export default defineComponent({
       background: var(--color-1-contrast);
     }
   }
+
   &__item {
     display: block;
     background: #fff;
   }
+
   &__content {
     padding: 11px;
     display: none;

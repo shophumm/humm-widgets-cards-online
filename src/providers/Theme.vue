@@ -25,6 +25,10 @@ export default defineComponent({
 
   // Shared properties
   --font-base: 'proxima nova', sans-serif;
+  --font-secondary: -apple-system, BlinkMacSystemFont, Helvetica, Arial,
+    sans-serif;
+  --radius-1: 4px;
+  --radius-2: 10px;
 
   // Default theme
   --color-1: #002555;

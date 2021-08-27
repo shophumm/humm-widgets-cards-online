@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "stylelint-config-recommended"
+  ],
+  "rules": {
+    "function-calc-no-invalid": true,
+    "font-family-no-missing-generic-family-keyword": null,
+    "length-zero-no-unit": true,
+    "number-max-precision": 3,
+    "no-descending-specificity": null,
+    "no-duplicate-selectors": null,
+    "at-rule-empty-line-before": "always",
+    "rule-empty-line-before": [
+      "always-multi-line",
+      { "except": ["first-nested", "after-single-line-comment"] }
+    ],
+    "selector-pseudo-element-no-unknown": [true, {
+      "ignorePseudoElements": ["v-slotted"]
+    }]
+  }
+}

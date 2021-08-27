@@ -81,13 +81,13 @@ export default defineComponent({
   &__container {
     width: 100%;
     max-width: 300px;
-    margin: 0px auto;
+    margin: 0 auto;
     padding: 6px 12px;
     background-color: #f7f7f7;
     border-radius: var(--radius-1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.3s ease;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: var(--font-secondary);
   }
 
   &__header {
