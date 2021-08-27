@@ -38,6 +38,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    buttonCloseLabel: {
+      type: String,
+      default: 'Close',
+    },
   },
   setup(props, { emit }) {
     return {
