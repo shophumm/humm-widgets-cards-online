@@ -21,7 +21,7 @@ module.exports = {
     })
 
     config.plugins.push(
-      new CopyWebpackPlugin([{ from: 'public/demo.html', to: './' }])
+      new CopyWebpackPlugin([{ from: 'public/demo.html', to: './index.html' }])
     )
 
     // Allow for absolute path imports
