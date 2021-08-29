@@ -87,7 +87,7 @@ export default defineComponent({
     border-radius: var(--radius-1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.3s ease;
-    font-family: var(--font-secondary);
+    font-family: var(--font-base);
   }
 
   &__header {
