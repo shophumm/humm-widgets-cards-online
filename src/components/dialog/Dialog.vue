@@ -88,7 +88,6 @@ export default defineComponent({
     transition: all 0.3s ease;
     font-family: Helvetica, Arial, sans-serif;
     color: var(--color-1);
-    border-radius: 3px;
     @media (min-width: 560px) {
       max-width: 560px;
     }

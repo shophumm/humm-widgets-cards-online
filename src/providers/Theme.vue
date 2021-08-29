@@ -32,6 +32,7 @@ export default defineComponent({
   --color-2: #ecb250; // Web / Tile / Button / Secondary
   --color-3: #8c8c8c; // Mid grey
   --color-4: #f5f6f7;
+  --radius-1: 3px;
 
   &[data-theme='nz'],
   &[data-theme='qmc'] {
@@ -40,6 +41,7 @@ export default defineComponent({
     --color-2: #e92162; // Web / Tile / Button / Secondary
     --color-3: #8c8c8c; // Mid grey
     --color-4: #f5f6f7;
+    --radius-1: 5.55px;
   }
 }
 </style>
