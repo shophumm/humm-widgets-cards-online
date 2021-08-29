@@ -68,7 +68,6 @@ export default defineComponent({
 .tabs {
   display: block;
   width: 100%;
-  max-width: 300px;
 
   &__controls {
     list-style: none;
@@ -101,6 +100,7 @@ export default defineComponent({
     font-weight: bold;
     text-align: center;
     min-height: 23px;
+    border-radius: 3px 3px 0 0;
 
     &.is-active {
       border-top-color: var(--color-2);

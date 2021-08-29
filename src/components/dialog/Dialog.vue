@@ -79,7 +79,7 @@ export default defineComponent({
 
   &__container {
     width: 100%;
-    max-width: 300px;
+    max-width: 355px;
     margin: 0px auto;
     padding: 6px 12px;
     background-color: #f7f7f7;
@@ -87,12 +87,18 @@ export default defineComponent({
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.3s ease;
     font-family: Helvetica, Arial, sans-serif;
+    color: var(--color-1);
+    border-radius: 3px;
+    @media (min-width: 560px) {
+      max-width: 560px;
+    }
   }
 
   &__header {
-    margin-top: 0;
-    font-family: var(--font-base);
-    font-weight: bold;
+    margin-top: 12px;
+    // font-family: var(--font-base);
+    font-size: 16px;
+    font-weight: 700;
     width: 100%;
     display: flex;
     justify-content: space-between;
