@@ -27,8 +27,10 @@ export default defineComponent({
   --font-base: 'proxima nova', sans-serif;
   --radius-1: 4px;
   --radius-2: 10px;
+  --radius-3: 3px;
 
   // Default theme
+  --color-0: #002555;
   --color-1: #002555;
   --color-1-contrast: #fff;
   --color-2: #ecb250; // Web / Tile / Button / Secondary
@@ -37,6 +39,7 @@ export default defineComponent({
 
   &[data-theme='nz'],
   &[data-theme='qmc'] {
+    --color-0: #000000;
     --color-1: #ffffff;
     --color-1-contrast: #002555;
     --color-2: #e92162; // Web / Tile / Button / Secondary

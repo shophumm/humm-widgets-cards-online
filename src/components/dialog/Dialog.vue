@@ -80,20 +80,25 @@ export default defineComponent({
 
   &__container {
     width: 100%;
-    max-width: 300px;
+    max-width: 331px;
     margin: 0 auto;
     padding: 6px 12px;
     background-color: #f7f7f7;
-    border-radius: var(--radius-1);
+    border-radius: var(--radius-3);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.3s ease;
     font-family: var(--font-base);
+    color: var(--color-0);
+
+    @media (min-width: 560px) {
+      max-width: 536px;
+    }
   }
 
   &__header {
-    margin-top: 0;
-    font-family: var(--font-base);
-    font-weight: bold;
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: 700;
     width: 100%;
     display: flex;
     justify-content: space-between;
