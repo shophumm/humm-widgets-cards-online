@@ -98,14 +98,14 @@ export default defineComponent({
     border-top-left-radius: var(--radius-1);
     border-top-right-radius: var(--radius-1);
     cursor: pointer;
-    color: var(--color-1);
+    color: var(--color-0);
     font-weight: bold;
     text-align: center;
     min-height: 23px;
 
     &.is-active {
       border-top-color: var(--color-2);
-      background: var(--color-1-contrast);
+      background: #fff;
     }
   }
   &__item {
