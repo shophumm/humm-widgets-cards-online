@@ -6,7 +6,7 @@
           <div class="dialog__header">
             <slot name="header">Monthly payments</slot>
             <ButtonClose
-              icon-opacity="0.5"
+              icon-opacity="0.8"
               fill="var(--color-3)"
               @click="toggleDialog"
             >
@@ -82,7 +82,7 @@ export default defineComponent({
     width: 100%;
     max-width: 331px;
     margin: 0 auto;
-    padding: 6px 12px;
+    padding: 18px 20px;
     background-color: #f7f7f7;
     border-radius: var(--radius-3);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -96,7 +96,6 @@ export default defineComponent({
   }
 
   &__header {
-    margin-top: 12px;
     font-size: 16px;
     font-weight: 700;
     width: 100%;
@@ -106,7 +105,7 @@ export default defineComponent({
   }
 
   &__body {
-    margin: 20px 0;
+    margin: 20px 0 0;
   }
 }
 </style>
