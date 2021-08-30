@@ -31,7 +31,30 @@
         :class="['tabs__content', { 'is-active': activeTabId === tab.id }]"
         :aria-labelledby="tab.id + '-tab'"
       >
-        {{ tab.content }}
+        <dl>
+          <div>
+            <dt>Interest free period</dt>
+            <dd>{{ tab.content.interestFree }}</dd>
+          </div>
+          <div>
+            <dt>Purchase amount</dt>
+            <dd>{{ tab.content.purchaseAmount }}</dd>
+          </div>
+          <div>
+            <dt>Establishment fee</dt>
+            <dd>{{ tab.content.estFee }}</dd>
+          </div>
+          <div>
+            <dt>Indicative minimum monthly repayments*</dt>
+            <dd>{{ tab.content.minimumMonthlyPayment }}</dd>
+          </div>
+          <div>
+            <dt>
+              Indicative repayment to pay before Interest free period expires ^
+            </dt>
+            <dd>{{ tab.content.repayBeforeInterest }}</dd>
+          </div>
+        </dl>
       </div>
     </div>
   </div>
@@ -81,7 +104,6 @@ export default defineComponent({
 
   &__control {
     flex-grow: 1;
-    margin: 0 4px;
 
     &:first-child {
       margin-left: 0;
@@ -96,7 +118,7 @@ export default defineComponent({
     width: 100%;
     background: #8c8c8c;
     border: none;
-    border-top: 7px solid transparent;
+    border-top: 4px solid transparent;
     padding: 4px 0;
     border-top-left-radius: var(--radius-1);
     border-top-right-radius: var(--radius-1);
@@ -125,6 +147,31 @@ export default defineComponent({
 
     &.is-active {
       display: block;
+    }
+  }
+}
+
+dl {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 0;
+
+    dt {
+      display: flex;
+      align-items: center;
+    }
+
+    dd {
+      display: flex;
+      align-items: center;
     }
   }
 }
