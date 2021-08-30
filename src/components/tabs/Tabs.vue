@@ -92,7 +92,6 @@ export default defineComponent({
 .tabs {
   display: block;
   width: 100%;
-  max-width: 300px;
 
   &__controls {
     list-style: none;
@@ -120,17 +119,17 @@ export default defineComponent({
     border: none;
     border-top: 4px solid transparent;
     padding: 4px 0;
-    border-top-left-radius: var(--radius-1);
-    border-top-right-radius: var(--radius-1);
+    border-top-left-radius: var(--radius-3);
+    border-top-right-radius: var(--radius-3);
     cursor: pointer;
-    color: var(--color-1);
+    color: var(--color-0);
     font-weight: bold;
     text-align: center;
     min-height: 23px;
 
     &.is-active {
       border-top-color: var(--color-2);
-      background: var(--color-1-contrast);
+      background: #fff;
     }
   }
 
@@ -142,7 +141,7 @@ export default defineComponent({
   &__content {
     padding: 11px;
     display: none;
-    color: var(--color-1);
+    color: var(--color-0);
     font-family: var(--font-base);
 
     &.is-active {
