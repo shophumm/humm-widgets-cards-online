@@ -79,7 +79,7 @@ export default defineComponent({
 
   &__container {
     width: 100%;
-    max-width: 355px;
+    max-width: 331px;
     margin: 0px auto;
     padding: 6px 12px;
     background-color: #f7f7f7;
@@ -89,7 +89,7 @@ export default defineComponent({
     font-family: Helvetica, Arial, sans-serif;
     color: var(--color-0);
     @media (min-width: 560px) {
-      max-width: 560px;
+      max-width: 536px;
     }
   }
 
