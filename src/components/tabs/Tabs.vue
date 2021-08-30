@@ -97,8 +97,8 @@ export default defineComponent({
     border: none;
     border-top: 7px solid transparent;
     padding: 4px 0;
-    border-top-left-radius: var(--radius-1);
-    border-top-right-radius: var(--radius-1);
+    border-top-left-radius: var(--radius-3);
+    border-top-right-radius: var(--radius-3);
     cursor: pointer;
     color: var(--color-0);
     font-weight: bold;

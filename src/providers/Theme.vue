@@ -27,6 +27,7 @@ export default defineComponent({
   --font-base: 'proxima nova', sans-serif;
   --radius-1: 4px;
   --radius-2: 10px;
+  --radius-3: 3px;
 
   // Default theme
   --color-0: #002555;
@@ -35,7 +36,6 @@ export default defineComponent({
   --color-2: #ecb250; // Web / Tile / Button / Secondary
   --color-3: #8c8c8c; // Mid grey
   --color-4: #f5f6f7;
-  --radius-1: 3px;
 
   &[data-theme='nz'],
   &[data-theme='qmc'] {
@@ -45,7 +45,6 @@ export default defineComponent({
     --color-2: #e92162; // Web / Tile / Button / Secondary
     --color-3: #8c8c8c; // Mid grey
     --color-4: #f5f6f7;
-    --radius-1: 5.55px;
   }
 }
 </style>
