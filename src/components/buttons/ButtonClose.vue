@@ -1,5 +1,5 @@
 <template>
-  <button type="button" class="button" @click="onClick" :style="style">
+  <button type="button" class="button" @click="onClick">
     <IconClose focusable="false" :opacity="iconOpacity" :fill="fill" />
     <span class="button__label">
       <slot></slot>
@@ -13,12 +13,12 @@ import IconClose from 'src/components/icons/IconClose.vue'
 
 export default defineComponent({
   name: 'ButtonClose',
+  components: {
+    IconClose,
+  },
   props: {
     iconOpacity: String,
     fill: String,
-  },
-  components: {
-    IconClose,
   },
   emits: ['click-close'],
   setup(props, { emit }) {

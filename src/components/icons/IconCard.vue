@@ -16,6 +16,7 @@ export default defineComponent({
 .card {
   width: 34px;
   margin: 2px;
+
   ::v-slotted(img, svg) {
     display: block;
     max-width: 100%;
