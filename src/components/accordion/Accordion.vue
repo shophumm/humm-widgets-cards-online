@@ -74,10 +74,11 @@ export default defineComponent({
 .accordion {
   &__button {
     font-family: var(--font-base);
-    font-weight: 700;
-    font-size: 9px;
+    font-weight: 400;
+    font-size: 12px;
     border: 0;
     padding: 0;
+    margin-top: 30px;
     cursor: pointer;
     display: inline-block;
     line-height: 1;

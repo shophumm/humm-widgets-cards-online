@@ -27,7 +27,7 @@ export default defineComponent({
   --font-base: 'proxima nova', sans-serif;
   --radius-1: 4px;
   --radius-2: 10px;
-  --radius-3: 3px;
+  --radius-3: 5px;
 
   // Default theme
   --color-0: #002555;
