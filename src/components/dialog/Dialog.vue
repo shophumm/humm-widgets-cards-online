@@ -95,7 +95,6 @@ export default defineComponent({
 
   &__header {
     margin-top: 12px;
-    // font-family: var(--font-base);
     font-size: 16px;
     font-weight: 700;
     width: 100%;
