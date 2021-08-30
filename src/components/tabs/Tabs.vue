@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import type { TabItemProps } from 'src/models/Tabs'
 
 export default defineComponent({
