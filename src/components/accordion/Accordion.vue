@@ -1,13 +1,13 @@
 <template>
-  <div :class="classes" :style="style">
+  <div>
     <button
+      :id="id + '-header'"
       type="button"
       class="accordion__button"
-      @clickAccordion="onClick"
-      v-on:click="toggleOpen"
       :aria-expanded="isOpen"
       :aria-controls="id + '-collapse'"
-      :id="id + '-header'"
+      @clickAccordion="onClick"
+      @click="toggleOpen"
     >
       <span class="accordion__label">
         <slot></slot>
@@ -49,6 +49,14 @@ export default defineComponent({
       default: false,
     },
   },
+  emits: ['click-accordion'],
+  setup(props: AccordionProps, { emit }) {
+    return {
+      onClick() {
+        emit('click-accordion')
+      },
+    }
+  },
   data() {
     return {
       isOpen: this.isDefaultOpen,
@@ -58,14 +66,6 @@ export default defineComponent({
     toggleOpen() {
       this.isOpen = !this.isOpen
     },
-  },
-  emits: ['click-accordion'],
-  setup(props: AccordionProps, { emit }) {
-    return {
-      onClick() {
-        emit('click-accordion')
-      },
-    }
   },
 })
 </script>

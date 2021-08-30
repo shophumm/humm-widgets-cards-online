@@ -6,9 +6,9 @@
           <div class="dialog__header">
             <slot name="header">Monthly payments</slot>
             <ButtonClose
-              @click="toggleDialog"
-              iconOpacity="0.5"
+              icon-opacity="0.5"
               fill="var(--color-3)"
+              @click="toggleDialog"
             >
               {{ buttonCloseLabel }}
             </ButtonClose>
@@ -43,6 +43,7 @@ export default defineComponent({
       default: 'Close',
     },
   },
+  emits: ['toggle-dialog'],
   setup(props, { emit }) {
     return {
       toggleDialog() {
@@ -86,8 +87,9 @@ export default defineComponent({
     border-radius: var(--radius-1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.3s ease;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: var(--font-base);
     color: var(--color-0);
+
     @media (min-width: 560px) {
       max-width: 536px;
     }

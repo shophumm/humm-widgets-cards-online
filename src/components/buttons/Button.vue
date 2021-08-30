@@ -2,8 +2,8 @@
   <button
     type="button"
     :class="['button', { 'button--primary': primary }]"
-    @click="onClick"
     :style="style"
+    @click="onClick"
   >
     <slot></slot>
   </button>
@@ -51,11 +51,12 @@ export default defineComponent({
   text-transform: uppercase;
   appearance: none;
   font-size: 13px;
-  border-radius: 4px;
+  border-radius: var(--radius-1);
   min-width: 138px;
   min-height: 35px;
   justify-content: center;
   margin-top: 5px;
+
   @media (min-width: 430px) {
     margin-top: 0;
     font-size: 11px;

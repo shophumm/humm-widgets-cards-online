@@ -2,19 +2,19 @@
   <div class="tabs">
     <ul class="tabs__controls" role="tablist">
       <li
+        v-for="tab in tabs"
+        :key="tab.id"
         class="tabs__control"
         role="presentation"
-        v-for="tab in tabs"
-        v-bind:key="tab.id"
       >
         <button
+          :id="tab.id + '-tab'"
           type="button"
           role="tab"
-          v-on:click="changeTab(tab.id)"
           :class="['tabs__button', { 'is-active': activeTabId === tab.id }]"
-          :id="tab.id + '-tab'"
           :aria-controls="tab.id"
           :aria-selected="activeTabId === tab.id"
+          @click="changeTab(tab.id)"
         >
           {{ tab.label }}
         </button>
@@ -23,12 +23,12 @@
 
     <div class="tabs__item">
       <div
+        v-for="tab in tabs"
+        :id="tab.id"
+        :key="tab.id"
         role="tabpanel"
         tabindex="0"
-        v-for="tab in tabs"
-        v-bind:key="tab.id"
         :class="['tabs__content', { 'is-active': activeTabId === tab.id }]"
-        :id="tab.id"
         :aria-labelledby="tab.id + '-tab'"
       >
         {{ tab.content }}
@@ -43,7 +43,6 @@ import type { TabItemProps } from 'src/models/Tabs'
 
 export default defineComponent({
   name: 'Tabs',
-  components: {},
   props: {
     defaultTabId: String,
     tabs: {
@@ -52,16 +51,16 @@ export default defineComponent({
       validator: (tabs: unknown[]) => !!tabs.length,
     },
   },
-  setup(props) {
-    let activeTabId = ref(props.defaultTabId || props.tabs?.[0]?.id)
-    const changeTab = (tabId: string) => {
-      activeTabId.value = tabId
-    }
-
+  emits: ['clickTab'],
+  data() {
     return {
-      activeTabId,
-      changeTab,
+      activeTabId: this.defaultTabId || this.tabs?.[0]?.id,
     }
+  },
+  methods: {
+    changeTab(tabId: string) {
+      this.activeTabId = tabId
+    },
   },
 })
 </script>
@@ -78,6 +77,7 @@ export default defineComponent({
     width: 100%;
     display: flex;
   }
+
   &__control {
     flex-grow: 1;
     margin: 0 4px;
@@ -85,10 +85,12 @@ export default defineComponent({
     &:first-child {
       margin-left: 0;
     }
+
     &:last-child {
       margin-right: 0;
     }
   }
+
   &__button {
     width: 100%;
     background: #8c8c8c;
@@ -108,10 +110,12 @@ export default defineComponent({
       background: #fff;
     }
   }
+
   &__item {
     display: block;
     background: #fff;
   }
+
   &__content {
     padding: 11px;
     display: none;
