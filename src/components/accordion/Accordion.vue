@@ -82,6 +82,8 @@ export default defineComponent({
     display: inline-block;
     line-height: 1;
     background: transparent;
+    text-transform: uppercase;
+    color: var(--color-0);
   }
 
   &__icon {
