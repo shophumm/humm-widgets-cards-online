@@ -38,16 +38,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import type { TabItemProps } from 'src/models/Tabs'
 
 export default defineComponent({
   name: 'Tabs',
-  data() {
-    return {
-      activeTabId: this.defaultTabId || this.tabs?.[0]?.id,
-    }
-  },
+  components: {},
   props: {
     defaultTabId: String,
     tabs: {
@@ -56,10 +52,16 @@ export default defineComponent({
       validator: (tabs: unknown[]) => !!tabs.length,
     },
   },
-  methods: {
-    changeTab(tabId: string) {
-      this.activeTabId = tabId
-    },
+  setup(props) {
+    let activeTabId = ref(props.defaultTabId || props.tabs?.[0]?.id)
+    const changeTab = (tabId: string) => {
+      activeTabId.value = tabId
+    }
+
+    return {
+      activeTabId,
+      changeTab,
+    }
   },
 })
 </script>
@@ -113,7 +115,7 @@ export default defineComponent({
   &__content {
     padding: 11px;
     display: none;
-    color: var(--color-1);
+    color: var(--color-0);
     font-family: var(--font-base);
 
     &.is-active {
