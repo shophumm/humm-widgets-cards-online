@@ -80,20 +80,11 @@ export default defineComponent({
 
   &__control {
     flex-grow: 1;
-    margin: 0 4px;
-
-    &:first-child {
-      margin-left: 0;
-    }
-
-    &:last-child {
-      margin-right: 0;
-    }
   }
 
   &__button {
     width: 100%;
-    background: #8c8c8c;
+    background: var(--color-4);
     border: none;
     border-top: 7px solid transparent;
     padding: 4px 0;

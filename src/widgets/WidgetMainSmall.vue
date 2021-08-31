@@ -107,6 +107,7 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   padding: 10px 8px;
   border-radius: var(--radius-2);
   position: relative;
+  filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.1));
 
   @media (min-width: 430px) {
     display: flex;
