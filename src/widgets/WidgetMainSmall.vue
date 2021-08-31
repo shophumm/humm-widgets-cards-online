@@ -31,6 +31,7 @@
 
   <Dialog
     v-if="isDialogOpen"
+    id="widget-dialog"
     :button-close-label="buttonCloseLabel"
     @toggle-dialog="isDialogOpen = false"
   >
