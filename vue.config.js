@@ -8,7 +8,7 @@ module.exports = {
 
   // Inlines the css into the JS file
   css: {
-    extract: false,
+    extract: true,
   },
 
   configureWebpack(config) {

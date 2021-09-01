@@ -1,6 +1,10 @@
 import { createApp, Component } from 'vue'
-import { getCurrentScript, getAllScriptURLParameters } from 'src/utils/utils'
-import { isDevelopment } from 'src/utils/constants'
+import {
+  getCurrentScript,
+  getAllScriptURLParameters,
+  injectLinkTag,
+} from 'src/utils/utils'
+import { isDevelopment, publicUrl, appName } from 'src/utils/constants'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 
 /**
@@ -34,6 +38,14 @@ export const createDynamicAppAtScriptTag = (
 
   const scriptEl = getCurrentScript()
   const props = getAllScriptURLParameters(scriptEl)
+  const removeCss = !!props.removeCss
+
+  // Inject the stylesheet by default if in prod
+  if (!isDevelopment && !removeCss) {
+    const stylesheetUrl = `${publicUrl}/${appName}-${lang}.css`
+
+    injectLinkTag(stylesheetUrl)
+  }
 
   // In development we don't want to inject the app at the script tag in index.html
   if (!isDevelopment) {
