@@ -1,5 +1,5 @@
 <template>
-  <div class="widget">
+  <div :class="['widget', { 'is-closed': isClosed }]">
     <div class="widget__content">
       <div v-if="lang === 'au'" class="widget__iconbird">
         <IconHumm90Bird fill="var(--color-1-contrast)" />
@@ -25,7 +25,11 @@
         </Button>
       </div>
       <div class="widget__close">
-        <ButtonClose icon-opacity="1" fill="var(--color-1-contrast)">
+        <ButtonClose
+          icon-opacity="1"
+          fill="var(--color-1-contrast)"
+          @click="closeWidget()"
+        >
           {{ buttonCloseLabel }}
         </ButtonClose>
       </div>
@@ -95,6 +99,7 @@ export default defineComponent({
   },
   data() {
     return {
+      isClosed: false,
       isDialogOpen: false,
       // TODO: replace placeholder data
       cards: [
@@ -137,6 +142,12 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
 
 ^ Indicative repayments (Transaction amount divided by Interest Free Period) are an estimate only, which excl $99 Annual Fee, and assumes no additional purchases, cash advances or other fees or charges. Interest Free Period available when indicative monthly repayments are made by each statement period due date, resulting in full repayment of purchase amount within the Interest Free Period. `,
     }
+  },
+  methods: {
+    closeWidget() {
+      console.log('in closeWidget')
+      this.isClosed = true
+    },
   },
 })
 </script>
@@ -223,6 +234,10 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
     @media (min-width: 430px) {
       align-items: center;
     }
+  }
+
+  &.is-closed {
+    display: none;
   }
 }
 </style>
