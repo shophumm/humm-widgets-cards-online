@@ -41,7 +41,7 @@ export default defineComponent({
   },
   data() {
     return {
-      activeTabId: this.defaultTabId,
+      activeTabId: this.defaultTabId || this.tabs?.[0]?.id,
     }
   },
   methods: {

@@ -36,7 +36,7 @@
     @toggle-dialog="isDialogOpen = false"
   >
     <template #body>
-      <Tabs :tabs="tabs" :default-tab-id="tabs[0].id">
+      <Tabs :tabs="tabs">
         <template #default="{ activeTabId }">
           <Tab tab-id="12months" :active-tab-id="activeTabId">
             <DataList
