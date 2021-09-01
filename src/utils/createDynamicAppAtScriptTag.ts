@@ -1,7 +1,7 @@
 import { createApp, Component } from 'vue'
 import { getCurrentScript, getAllScriptURLParameters } from 'src/utils/utils'
 import { isDevelopment } from 'src/utils/constants'
-import { LanguageCodeEnum } from 'src/models/LanguageCodeEnum'
+import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 
 /**
  * Mounts the Vue app at a created root element directly after the initialising script tag

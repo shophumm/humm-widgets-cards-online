@@ -1,5 +1,5 @@
 import { isDevelopment, merchantId } from 'src/utils/constants'
-import { ScriptParametersEnum } from 'src/models/ScriptParameters'
+import ScriptParametersEnum from 'src/models/enums/ScriptParametersEnum'
 import type ScriptParameters from 'src/models/ScriptParameters'
 
 export const getCurrentScript = (): HTMLOrSVGScriptElement =>

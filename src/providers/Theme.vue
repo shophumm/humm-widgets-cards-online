@@ -6,8 +6,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import LanguageCodeEnum from 'src/models/LanguageCodeEnum'
-import ThemeEnum from 'src/models/ThemeEnum'
+import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
+import ThemeEnum from 'src/models/enums/ThemeEnum'
 
 export default defineComponent({
   name: 'Theme',

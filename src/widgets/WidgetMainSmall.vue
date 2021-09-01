@@ -4,13 +4,16 @@
       <div v-if="lang === 'au'" class="widget__iconbird">
         <IconHumm90Bird fill="var(--color-1-contrast)" />
       </div>
-      <div v-if="lang === 'nz'" class="widget__iconcard">
-        <IconCard>
-          <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
-        </IconCard>
-        <IconCard>
-          <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
-        </IconCard>
+      <!-- TODO: render cards dynamically -->
+      <div v-if="lang === 'nz'" class="cards">
+        <div class="cards__products">
+          <Card>
+            <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
+          </Card>
+          <Card>
+            <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
+          </Card>
+        </div>
       </div>
       <div class="widget__container">
         <div class="widget__text">
@@ -21,11 +24,11 @@
           {{ buttonPrimaryLabel }}
         </Button>
       </div>
-    </div>
-    <div class="widget__close">
-      <ButtonClose icon-opacity="1" fill="var(--color-1-contrast)">
-        {{ buttonCloseLabel }}
-      </ButtonClose>
+      <div class="widget__close">
+        <ButtonClose icon-opacity="1" fill="var(--color-1-contrast)">
+          {{ buttonCloseLabel }}
+        </ButtonClose>
+      </div>
     </div>
   </div>
 
@@ -53,6 +56,20 @@
       <Accordion id="widget-terms" :content="terms">
         Terms & Conditions
       </Accordion>
+      <!-- TODO: replace placeholder data -->
+      <!-- TODO: view logic for displaying card options -->
+      <div v-if="theme === 'qmc'">
+        <div class="cards cards--full cards--border">
+          <p class="cards__title">Learn more about our credit card options.</p>
+          <div class="cards__products">
+            <Card v-for="card in cards" :key="card.id" :size="card.size">
+              <img src="../assets/images/humm90Card.png" :alt="card.alt" />
+            </Card>
+          </div>
+          <!-- TODO: link with button styling -->
+          <Button size="lg" button-color="var(--color-2)">Apply now</Button>
+        </div>
+      </div>
     </template>
   </Dialog>
 </template>
@@ -60,7 +77,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import IconHumm90Bird from 'src/components/icons/IconHumm90Bird.vue'
-import IconCard from 'src/components/icons/IconCard.vue'
+import Card from 'src/components/dataDisplay/Card.vue'
 import Button from 'src/components/buttons/Button.vue'
 import ButtonClose from 'src/components/buttons/ButtonClose.vue'
 import Dialog from 'src/components/dialog/Dialog.vue'
@@ -68,12 +85,14 @@ import Tabs from 'src/components/tabs/Tabs.vue'
 import Tab from 'src/components/tabs/Tab.vue'
 import DataList from 'src/components/tabs/DataList.vue'
 import Accordion from 'src/components/accordion/Accordion.vue'
+import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
+import ThemeEnum from 'src/models/enums/ThemeEnum'
 
 export default defineComponent({
   name: 'WidgetMainSmall',
   components: {
     IconHumm90Bird,
-    IconCard,
+    Card,
     Button,
     ButtonClose,
     Dialog,
@@ -88,12 +107,35 @@ export default defineComponent({
     buttonPrimaryLabel: String,
     buttonCloseLabel: String,
     productPrice: Number,
-    lang: String,
+    lang: String as () => LanguageCodeEnum,
+    theme: String as () => ThemeEnum,
   },
   data() {
     return {
       isDialogOpen: false,
       // TODO: replace placeholder data
+      cards: [
+        {
+          id: 'card1',
+          size: 'lg',
+          alt: 'Humm90 card',
+        },
+        {
+          id: 'card2',
+          size: 'lg',
+          alt: 'Humm90 card',
+        },
+        {
+          id: 'card3',
+          size: 'lg',
+          alt: 'Humm90 card',
+        },
+        {
+          id: 'card4',
+          size: 'lg',
+          alt: 'Humm90 card',
+        },
+      ],
       tabs: [
         {
           id: '12months',
@@ -144,18 +186,19 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
 </script>
 
 <style scoped lang="scss">
+@import 'src/styles/cards.scss';
+
 .widget {
   font-family: var(--font-base);
   background-color: var(--color-1);
   color: var(--color-1-contrast);
-  padding: 10px 8px;
+  padding: 10px;
   border-radius: var(--radius-2);
   position: relative;
   filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.1));
 
   @media (min-width: 430px) {
     display: flex;
-    padding: 5px 8px;
     max-width: 414px;
     min-height: 37px;
   }
@@ -167,8 +210,7 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
 
   &__container {
     display: block;
-    padding: 0 9px;
-    margin-left: 75px;
+    margin-left: 10px;
     margin-right: 20px;
 
     @media (min-width: 430px) {
@@ -176,12 +218,22 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
       align-items: center;
       width: 100%;
       justify-content: space-between;
+      margin-right: 12px;
+    }
+
+    .button {
+      margin-top: 5px;
+
+      @media (min-width: 430px) {
+        margin-top: 0;
+      }
     }
   }
 
   &__text {
     display: flex;
     flex-direction: column;
+    padding-right: 5px;
   }
 
   &__title {
@@ -201,29 +253,19 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   }
 
   &__iconbird {
-    position: absolute;
-    top: 10px;
-    left: 8px;
+    margin: 10px 0 0 8px;
 
     @media (min-width: 430px) {
-      top: 15px;
+      margin: 15px 0 0 8px;
     }
   }
 
-  &__iconcard {
-    display: flex;
-    position: absolute;
-    top: 10px;
-    left: 8px;
-  }
-
   &__close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    display: flex;
+    margin-left: auto;
 
     @media (min-width: 430px) {
-      top: 14px;
+      align-items: center;
     }
   }
 }
