@@ -1,43 +1,43 @@
 import { Story, Meta } from '@storybook/vue3'
-import Button from 'src/components/buttons/Button.vue'
-import type ButtonProps from 'src/models/Button'
+import Card from 'src/components/dataDisplay/Card.vue'
+import type CardProps from 'src/models/Card'
 
 export default {
-  title: 'Buttons/Button',
-  component: Button,
+  title: 'dataDisplay/Card',
+  component: Card,
   argTypes: {
-    buttonColor: { control: 'color' },
     size: {
-      options: ['auto', 'sm', 'lg'],
+      options: ['auto', 'sm', 'md', 'lg'],
       type: 'select',
     },
     onClick: {},
   },
 } as Meta
 
-const Template: Story<ButtonProps> = args => ({
+const Template: Story<CardProps> = args => ({
   // Components used in your story `template` are defined in the `components` object
-  components: { Button },
+  components: { Card },
   // The story's `args` need to be mapped into the template through the `setup()` method
   setup() {
     return { args }
   },
   // And then the `args` are bound to your component with `v-bind="args"`
-  template: '<Button v-bind="args">Find out more</Button>',
+  template:
+    '<Card v-bind="args"><img src="https://via.placeholder.com/55x36" alt="Humm90 card" /></Card>',
 })
 
 export const Default = Template.bind({})
 Default.args = {}
 Default.storyName = 'Default (auto)'
 
-export const Primary = Template.bind({})
-Primary.args = {
-  primary: true,
-}
-
 export const SizeSmall = Template.bind({})
 SizeSmall.args = {
   size: 'sm',
+}
+
+export const SizeMedium = Template.bind({})
+SizeMedium.args = {
+  size: 'md',
 }
 
 export const SizeLarge = Template.bind({})

@@ -1,7 +1,4 @@
-export enum ScriptParametersEnum {
-  ProductPrice = 'productPrice',
-  MerchantId = 'merchantId',
-}
+import ScriptParametersEnum from 'src/models/enums/ScriptParametersEnum'
 
 type ScriptParametersEnumKeys = `${ScriptParametersEnum}`
 type ScriptParameters = {

@@ -1,7 +1,10 @@
 <template>
   <button
     type="button"
-    :class="['button', { 'button--primary': primary }]"
+    :class="[
+      'button',
+      { 'button--primary': primary, [`button--${size}`]: size },
+    ]"
     :style="style"
     @click="onClick"
   >
@@ -12,6 +15,9 @@
 <script lang="ts">
 import { reactive, computed, defineComponent } from 'vue'
 import { ButtonProps } from 'src/models/Button'
+import SizeEnum from 'src/models/enums/SizeEnum'
+import type { PropType } from 'vue'
+import type { Sizes } from 'src/models/enums/SizeEnum'
 
 export default defineComponent({
   name: 'Button',
@@ -19,6 +25,10 @@ export default defineComponent({
     buttonColor: {
       type: String,
       required: true,
+    },
+    size: {
+      type: String as PropType<Sizes>,
+      default: SizeEnum.Auto,
     },
     primary: Boolean,
   },
@@ -52,17 +62,36 @@ export default defineComponent({
   appearance: none;
   font-size: 13px;
   border-radius: var(--radius-1);
-  min-width: 138px;
-  min-height: 35px;
   justify-content: center;
-  margin-top: 5px;
 
-  @media (min-width: 430px) {
-    margin-top: 0;
+  &--auto {
+    min-height: 35px;
+    width: 100%;
+    max-width: 138px;
+
+    @media (min-width: 430px) {
+      font-size: 11px;
+      font-weight: 500;
+      width: auto;
+      min-width: 20px;
+      min-height: 20px;
+    }
+  }
+
+  &--sm {
     font-size: 11px;
     font-weight: 500;
+    width: auto;
     min-width: 20px;
     min-height: 20px;
+  }
+
+  &--lg {
+    font-size: 13px;
+    font-weight: 700;
+    min-height: 35px;
+    width: 100%;
+    max-width: 138px;
   }
 
   &--primary {
