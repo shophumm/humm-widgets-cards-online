@@ -42,14 +42,10 @@
       <Tabs :tabs="tabs">
         <template #default="{ activeTabId }">
           <Tab tab-id="12months" :active-tab-id="activeTabId">
-            <DataList
-              :contents="tabs.find(item => item.id === '12months').contents"
-            />
+            <DataList :contents="tabsContents('12months')" />
           </Tab>
           <Tab tab-id="18months" :active-tab-id="activeTabId">
-            <DataList
-              :contents="tabs.find(item => item.id === '18months').contents"
-            />
+            <DataList :contents="tabsContents('18months')" />
           </Tab>
         </template>
       </Tabs>
@@ -159,7 +155,7 @@ export default defineComponent({
           id: '18months',
           label: '18 months',
           contents: [
-            { name: 'Interest free period', value: '12 months' },
+            { name: 'Interest free period', value: '18 months' },
             { name: 'Purchase amount', value: '$1,699.00' },
             { name: 'Establishment fee', value: '$50.00' },
             {
@@ -171,7 +167,6 @@ export default defineComponent({
                 'Indicative repayment to pay before Interest free period expires ^',
               value: '$450.50',
             },
-            { name: 'A lil extra', value: '$101.00' },
           ],
         },
       ],
@@ -181,6 +176,11 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
 
 ^ Indicative repayments (Transaction amount divided by Interest Free Period) are an estimate only, which excl $99 Annual Fee, and assumes no additional purchases, cash advances or other fees or charges. Interest Free Period available when indicative monthly repayments are made by each statement period due date, resulting in full repayment of purchase amount within the Interest Free Period. `,
     }
+  },
+  methods: {
+    tabsContents(id: string): Record<string, string>[] | undefined {
+      return this.tabs.find(item => item.id === id)?.contents
+    },
   },
 })
 </script>

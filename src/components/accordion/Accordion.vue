@@ -72,12 +72,13 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .accordion {
+  margin-top: 30px;
+
   &__button {
     font-family: var(--font-base);
     font-size: 12px;
     border: 0;
     padding: 0;
-    margin-top: 30px;
     cursor: pointer;
     display: inline-block;
     line-height: 1;

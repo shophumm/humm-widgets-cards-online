@@ -20,7 +20,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .tab {
   display: none;
-  background: #fff;
+  background: var(--color-5);
 
   &.is-active {
     display: block;

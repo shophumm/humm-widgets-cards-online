@@ -85,7 +85,7 @@ export default defineComponent({
 
     &.is-active {
       border-top-color: var(--color-2);
-      background: #fff;
+      background: var(--color-5);
     }
   }
 }
