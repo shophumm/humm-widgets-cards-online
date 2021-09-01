@@ -27,24 +27,10 @@ Default.args = {
     {
       id: '18months',
       label: '18 months',
-      content: {
-        interestFree: '12 months',
-        purchaseAmount: '$1,699.00',
-        estFee: '$50.00',
-        minimumMonthlyPayment: '$48.00',
-        repayBeforeInterest: '$450.50',
-      },
     },
     {
       id: '24months',
       label: '24 months',
-      content: {
-        interestFree: '12 months',
-        purchaseAmount: '$1,699.00',
-        estFee: '$50.00',
-        minimumMonthlyPayment: '$48.00',
-        repayBeforeInterest: '$450.50',
-      },
     },
   ],
 }
@@ -56,24 +42,10 @@ WithDefaultTabId.args = {
     {
       id: '18months',
       label: '18 months',
-      content: {
-        interestFree: '12 months',
-        purchaseAmount: '$1,699.00',
-        estFee: '$50.00',
-        minimumMonthlyPayment: '$48.00',
-        repayBeforeInterest: '$450.50',
-      },
     },
     {
       id: '24months',
       label: '24 months',
-      content: {
-        interestFree: '12 months',
-        purchaseAmount: '$1,699.00',
-        estFee: '$50.00',
-        minimumMonthlyPayment: '$48.00',
-        repayBeforeInterest: '$450.50',
-      },
     },
   ],
 }

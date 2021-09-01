@@ -35,7 +35,16 @@
     @toggle-dialog="isDialogOpen = false"
   >
     <template #body>
-      <Tabs :tabs="tabs" />
+      <Tabs :tabs="tabs" :default-tab-id="tabs[0].id">
+        <template #default="slotProps">
+          <Tab tab-id="12months" :active-tab-id="slotProps.activeTabId">
+            Hello From Tab 1
+          </Tab>
+          <Tab tab-id="18months" :active-tab-id="slotProps.activeTabId">
+            Hello From Tab 2
+          </Tab>
+        </template>
+      </Tabs>
       <Accordion id="widget-terms" :content="terms">
         Terms & Conditions
       </Accordion>
@@ -51,6 +60,7 @@ import Button from 'src/components/buttons/Button.vue'
 import ButtonClose from 'src/components/buttons/ButtonClose.vue'
 import Dialog from 'src/components/dialog/Dialog.vue'
 import Tabs from 'src/components/tabs/Tabs.vue'
+import Tab from 'src/components/tabs/Tab.vue'
 import Accordion from 'src/components/accordion/Accordion.vue'
 
 export default defineComponent({
@@ -62,6 +72,7 @@ export default defineComponent({
     ButtonClose,
     Dialog,
     Tabs,
+    Tab,
     Accordion,
   },
   props: {

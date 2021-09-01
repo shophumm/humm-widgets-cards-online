@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs">
+  <div class="tabs" :data-activeTabId="activeTabId">
     <ul class="tabs__controls" role="tablist">
       <li
         v-for="tab in tabs"
@@ -20,43 +20,7 @@
         </button>
       </li>
     </ul>
-
-    <div class="tabs__item">
-      <div
-        v-for="tab in tabs"
-        :id="tab.id"
-        :key="tab.id"
-        role="tabpanel"
-        tabindex="0"
-        :class="['tabs__content', { 'is-active': activeTabId === tab.id }]"
-        :aria-labelledby="tab.id + '-tab'"
-      >
-        <dl>
-          <div>
-            <dt>Interest free period</dt>
-            <dd>{{ tab.content.interestFree }}</dd>
-          </div>
-          <div>
-            <dt>Purchase amount</dt>
-            <dd>{{ tab.content.purchaseAmount }}</dd>
-          </div>
-          <div>
-            <dt>Establishment fee</dt>
-            <dd>{{ tab.content.estFee }}</dd>
-          </div>
-          <div>
-            <dt>Indicative minimum monthly repayments*</dt>
-            <dd>{{ tab.content.minimumMonthlyPayment }}</dd>
-          </div>
-          <div>
-            <dt>
-              Indicative repayment to pay before Interest free period expires ^
-            </dt>
-            <dd>{{ tab.content.repayBeforeInterest }}</dd>
-          </div>
-        </dl>
-      </div>
-    </div>
+    <slot :activeTabId="activeTabId"></slot>
   </div>
 </template>
 
@@ -74,10 +38,9 @@ export default defineComponent({
       validator: (tabs: unknown[]) => !!tabs.length,
     },
   },
-  emits: ['clickTab'],
   data() {
     return {
-      activeTabId: this.defaultTabId || this.tabs?.[0]?.id,
+      activeTabId: this.defaultTabId,
     }
   },
   methods: {
@@ -130,22 +93,6 @@ export default defineComponent({
     &.is-active {
       border-top-color: var(--color-2);
       background: #fff;
-    }
-  }
-
-  &__item {
-    display: block;
-    background: #fff;
-  }
-
-  &__content {
-    padding: 11px;
-    display: none;
-    color: var(--color-0);
-    font-family: var(--font-base);
-
-    &.is-active {
-      display: block;
     }
   }
 }
