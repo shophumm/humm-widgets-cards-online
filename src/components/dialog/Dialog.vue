@@ -141,6 +141,7 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     pointer-events: none;
+    padding: 10px;
   }
 
   &__container {

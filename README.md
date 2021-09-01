@@ -133,13 +133,15 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     ├── build                       # Target build folder
     ├── public                      # Override index.html, demo.html
     ├── src
-    │   ├── assets                  # Images, videos, etc. that are imported by the components
+    │   ├── assets                  # Images, etc. that are imported by components
+    │   ├── providers               # Providers wrap multiple children and provide some form of context
     │   ├── components              # App components
     │   │   ├── dataDisplay         # Avatars, Badges, Tables
     │   │   ├── layout              # Containers, Grids
     │   │   └── navigation          # Links, Drawers, Tabs, Steppers
-    │   ├── models                  # FE Models, types and enums
-    │   ├── styles                  # Theme and global styles
+    │   ├── models                  # FE Models and types
+    │   │   └── enums               # Model enums
+    │   ├── styles                  # Theme and host environment styles
     │   └── utils                   # Helper functions and constants
     │
     ├── .env.{environment}          # Environment specific variables
