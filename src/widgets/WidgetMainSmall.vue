@@ -39,12 +39,14 @@
       <Tabs :tabs="tabs" :default-tab-id="tabs[0].id">
         <template #default="{ activeTabId }">
           <Tab tab-id="12months" :active-tab-id="activeTabId">
-            Tab 1
-            <!-- TODO: dl -->
+            <DataList
+              :contents="tabs.find(item => item.id === '12months').contents"
+            />
           </Tab>
           <Tab tab-id="18months" :active-tab-id="activeTabId">
-            Tab 2
-            <!-- TODO: dl -->
+            <DataList
+              :contents="tabs.find(item => item.id === '18months').contents"
+            />
           </Tab>
         </template>
       </Tabs>
@@ -64,6 +66,7 @@ import ButtonClose from 'src/components/buttons/ButtonClose.vue'
 import Dialog from 'src/components/dialog/Dialog.vue'
 import Tabs from 'src/components/tabs/Tabs.vue'
 import Tab from 'src/components/tabs/Tab.vue'
+import DataList from 'src/components/tabs/DataList.vue'
 import Accordion from 'src/components/accordion/Accordion.vue'
 
 export default defineComponent({
@@ -76,6 +79,7 @@ export default defineComponent({
     Dialog,
     Tabs,
     Tab,
+    DataList,
     Accordion,
   },
   props: {
@@ -94,24 +98,39 @@ export default defineComponent({
         {
           id: '12months',
           label: '12 months',
-          content: {
-            interestFree: '12 months',
-            purchaseAmount: '$1,699.00',
-            estFee: '$50.00',
-            minimumMonthlyPayment: '$48.00',
-            repayBeforeInterest: '$450.50',
-          },
+          contents: [
+            { name: 'Interest free period', value: '12 months' },
+            { name: 'Purchase amount', value: '$1,699.00' },
+            { name: 'Establishment fee', value: '$50.00' },
+            {
+              name: 'Indicative minimum monthly repayments*',
+              value: '$48.00',
+            },
+            {
+              name:
+                'Indicative repayment to pay before Interest free period expires ^',
+              value: '$450.50',
+            },
+          ],
         },
         {
           id: '18months',
           label: '18 months',
-          content: {
-            interestFree: '18 months',
-            purchaseAmount: '$1,699.50',
-            estFee: '$50.25',
-            minimumMonthlyPayment: '$48.45',
-            repayBeforeInterest: '$450.89',
-          },
+          contents: [
+            { name: 'Interest free period', value: '12 months' },
+            { name: 'Purchase amount', value: '$1,699.00' },
+            { name: 'Establishment fee', value: '$50.00' },
+            {
+              name: 'Indicative minimum monthly repayments*',
+              value: '$48.00',
+            },
+            {
+              name:
+                'Indicative repayment to pay before Interest free period expires ^',
+              value: '$450.50',
+            },
+            { name: 'A lil extra', value: '$101.00' },
+          ],
         },
       ],
       terms: `*Approved applicants only, fees, terms, conditions and minimum monthly payment [and minimum finance amount $<XX>][AU LEGAL NOTE: only include if a minimum finance amount applies] apply, including a $99 Annual Fee charged on first debit to your humm90 Account and annually thereafter; which attracts interest (charged at the humm90 Purchase Rate, currently 23.99% p.a) from the date charged unless fully paid within Interest Free Period and the Interest Free Criteria are met. Indicative monthly payment excl the Annual Fee and assumes no additional purchases, cash advances or other fees and no interest applies. 
