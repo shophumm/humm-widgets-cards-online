@@ -32,7 +32,7 @@ export default defineComponent({
     lang: String as () => LanguageCodeEnum,
     theme: {
       type: String as () => ThemeEnum,
-      default: (props: AppProps) => 'qmc',
+      default: (props: AppProps) => props.lang,
     },
   },
 })
