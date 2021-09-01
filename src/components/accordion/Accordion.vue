@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="accordion">
     <button
       :id="id + '-header'"
       type="button"
@@ -72,9 +72,10 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .accordion {
+  margin-top: 32px;
+
   &__button {
     font-family: var(--font-base);
-    font-weight: 400;
     font-size: 12px;
     border: 0;
     padding: 0;
@@ -101,13 +102,13 @@ export default defineComponent({
   }
 
   &__collapse {
-    margin-top: 8px;
-    font-size: 9px;
+    margin-top: 17px;
   }
 
   &__body {
     font-family: var(--font-base);
-    line-height: 1.2;
+    font-size: 14px;
+    line-height: 1.3;
   }
 }
 </style>

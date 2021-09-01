@@ -1,12 +1,19 @@
 <template>
   <Transition name="dialog">
-    <div class="dialog__mask">
+    <div ref="dialogMask" class="dialog__mask" @click="handleMaskClick">
       <div class="dialog__wrapper">
-        <div class="dialog__container">
+        <div
+          role="dialog"
+          aria-modal="true"
+          :aria-labelledby="id + '-label'"
+          class="dialog__container"
+        >
           <div class="dialog__header">
-            <slot name="header">Monthly payments</slot>
+            <div :id="id + '-label'" ref="dialogHeader" tabindex="-1">
+              <slot name="header">Monthly payments</slot>
+            </div>
             <ButtonClose
-              icon-opacity="0.5"
+              icon-opacity="0.8"
               fill="var(--color-3)"
               @click="toggleDialog"
             >
@@ -34,9 +41,9 @@ export default defineComponent({
     ButtonClose,
   },
   props: {
-    isOpen: {
-      type: Boolean,
-      default: false,
+    id: {
+      type: String,
+      required: true,
     },
     buttonCloseLabel: {
       type: String,
@@ -50,6 +57,63 @@ export default defineComponent({
         emit('toggle-dialog')
       },
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      // Focus on the first element when mounting as a11y best practice
+      const element = this.$refs.dialogHeader as HTMLDivElement | undefined
+      element?.focus()
+
+      // Allow closing the dialog with esc
+      document.addEventListener('keydown', this.handleKeyboardToggle)
+
+      // Add a focus trap within the dialog as a best practice
+      document.addEventListener('keydown', this.handleFocusTrap)
+    })
+  },
+  beforeUnmount() {
+    document.removeEventListener('keydown', this.handleKeyboardToggle)
+    document.removeEventListener('keydown', this.handleFocusTrap)
+  },
+  methods: {
+    handleFocusTrap: function (event: KeyboardEvent) {
+      if (event.key !== 'Tab') return
+
+      const focusableSelectors =
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      const element = this.$refs.dialogMask as HTMLDivElement | undefined
+      const focusableElements = element?.querySelectorAll(focusableSelectors)
+      const firstFocusableElement = focusableElements?.[0] as HTMLElement | null
+      const lastFocusableElement = focusableElements?.[
+        focusableElements.length - 1
+      ] as HTMLElement | null
+
+      // if tabbing back, tab+shift
+      if (event.shiftKey && document.activeElement === firstFocusableElement) {
+        lastFocusableElement?.focus()
+        event.preventDefault()
+      }
+
+      // if tabbing forwards, tab
+      if (!event.shiftKey && document.activeElement === lastFocusableElement) {
+        firstFocusableElement?.focus()
+        event.preventDefault()
+      }
+    },
+    handleKeyboardToggle: function (event: KeyboardEvent) {
+      if (event.key !== 'Escape') return
+
+      this.toggleDialog()
+    },
+    handleMaskClick: function (event: Event) {
+      const element = this.$refs.dialogMask as HTMLDivElement | undefined
+      const target = event.target as HTMLElement | null
+
+      // Toggle the dialog if clicking exactly on the mask
+      if (target === element) {
+        this.toggleDialog()
+      }
+    },
   },
 })
 </script>
@@ -76,18 +140,20 @@ export default defineComponent({
     display: flex;
     justify-content: center;
     align-items: center;
+    pointer-events: none;
   }
 
   &__container {
     width: 100%;
     max-width: 331px;
     margin: 0 auto;
-    padding: 6px 12px;
+    padding: 18px 20px;
     background-color: #f7f7f7;
     border-radius: var(--radius-3);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.3s ease;
     font-family: var(--font-base);
+    pointer-events: all;
     color: var(--color-0);
 
     @media (min-width: 560px) {
@@ -96,7 +162,6 @@ export default defineComponent({
   }
 
   &__header {
-    margin-top: 12px;
     font-size: 16px;
     font-weight: 700;
     width: 100%;
@@ -106,7 +171,7 @@ export default defineComponent({
   }
 
   &__body {
-    margin: 20px 0;
+    margin: 20px 0 0;
   }
 }
 </style>
