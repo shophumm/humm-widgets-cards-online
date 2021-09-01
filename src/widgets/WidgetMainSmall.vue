@@ -54,7 +54,9 @@
             </Card>
           </div>
           <!-- TODO: link with button styling -->
-          <Button size="lg" button-color="var(--color-2)">Apply now</Button>
+          <Button href="#apply-now" size="lg" button-color="var(--color-2)">
+            Apply now
+          </Button>
         </div>
       </div>
     </template>
