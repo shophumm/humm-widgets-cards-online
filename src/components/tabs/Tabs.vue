@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs" :data-activeTabId="activeTabId">
+  <div class="tabs">
     <ul class="tabs__controls" role="tablist">
       <li
         v-for="tab in tabs"
@@ -20,6 +20,7 @@
         </button>
       </li>
     </ul>
+
     <slot :activeTabId="activeTabId"></slot>
   </div>
 </template>
@@ -93,31 +94,6 @@ export default defineComponent({
     &.is-active {
       border-top-color: var(--color-2);
       background: #fff;
-    }
-  }
-}
-
-dl {
-  font-size: 14px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  overflow: hidden;
-
-  div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 10px 0;
-
-    dt {
-      display: flex;
-      align-items: center;
-    }
-
-    dd {
-      display: flex;
-      align-items: center;
     }
   }
 }

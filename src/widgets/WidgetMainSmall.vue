@@ -36,12 +36,14 @@
   >
     <template #body>
       <Tabs :tabs="tabs" :default-tab-id="tabs[0].id">
-        <template #default="slotProps">
-          <Tab tab-id="12months" :active-tab-id="slotProps.activeTabId">
-            Hello From Tab 1
+        <template #default="{ activeTabId }">
+          <Tab tab-id="12months" :active-tab-id="activeTabId">
+            Tab 1
+            <!-- TODO: dl -->
           </Tab>
-          <Tab tab-id="18months" :active-tab-id="slotProps.activeTabId">
-            Hello From Tab 2
+          <Tab tab-id="18months" :active-tab-id="activeTabId">
+            Tab 2
+            <!-- TODO: dl -->
           </Tab>
         </template>
       </Tabs>
@@ -102,13 +104,6 @@ export default defineComponent({
         {
           id: '18months',
           label: '18 months',
-          content: {
-            interestFree: '18 months',
-            purchaseAmount: '$1,699.50',
-            estFee: '$50.25',
-            minimumMonthlyPayment: '$48.45',
-            repayBeforeInterest: '$450.89',
-          },
         },
       ],
       terms: `*Approved applicants only, fees, terms, conditions and minimum monthly payment [and minimum finance amount $<XX>][AU LEGAL NOTE: only include if a minimum finance amount applies] apply, including a $99 Annual Fee charged on first debit to your humm90 Account and annually thereafter; which attracts interest (charged at the humm90 Purchase Rate, currently 23.99% p.a) from the date charged unless fully paid within Interest Free Period and the Interest Free Criteria are met. Indicative monthly payment excl the Annual Fee and assumes no additional purchases, cash advances or other fees and no interest applies. 
