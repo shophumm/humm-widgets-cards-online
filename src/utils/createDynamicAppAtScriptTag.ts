@@ -41,6 +41,7 @@ export const createDynamicAppAtScriptTag = (
   const removeCss = !!props.removeCss
 
   // Inject the stylesheet by default if in prod
+  // TODO, consider waiting to inject the App after the css has been loaded to avoid FOUC
   if (!isDevelopment && !removeCss) {
     const stylesheetUrl = `${publicUrl}/${appName}-${lang}.css`
 
