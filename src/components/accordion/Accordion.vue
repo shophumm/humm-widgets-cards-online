@@ -72,7 +72,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .accordion {
-  margin-top: 32px;
+  margin-top: 30px;
 
   &__button {
     font-family: var(--font-base);

@@ -29,7 +29,7 @@ export default defineComponent({
   --font-base: 'proxima nova', sans-serif;
   --radius-1: 4px;
   --radius-2: 10px;
-  --radius-3: 3px;
+  --radius-3: 5px;
 
   // Default theme
   --color-0: #002555;
@@ -38,6 +38,7 @@ export default defineComponent({
   --color-2: #ecb250; // Web / Tile / Button / Secondary
   --color-3: #8c8c8c; // Mid grey
   --color-4: #e7e7e7;
+  --color-5: #fff;
 
   &[data-lang='nz'],
   &[data-theme='qmc'] {
