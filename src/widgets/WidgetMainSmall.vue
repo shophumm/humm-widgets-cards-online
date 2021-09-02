@@ -83,6 +83,7 @@ import DataList from 'src/components/tabs/DataList.vue'
 import Accordion from 'src/components/accordion/Accordion.vue'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
+import fetchData from 'src/utils/apiUtils'
 
 export default defineComponent({
   name: 'WidgetMainSmall',
@@ -176,6 +177,9 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
 
 ^ Indicative repayments (Transaction amount divided by Interest Free Period) are an estimate only, which excl $99 Annual Fee, and assumes no additional purchases, cash advances or other fees or charges. Interest Free Period available when indicative monthly repayments are made by each statement period due date, resulting in full repayment of purchase amount within the Interest Free Period. `,
     }
+  },
+  beforeCreate() {
+    fetchData('/widget', { method: 'GET' })
   },
   methods: {
     tabsContents(id: string): Record<string, string>[] | undefined {
