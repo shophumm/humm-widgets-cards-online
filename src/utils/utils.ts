@@ -9,12 +9,40 @@ export const getCurrentScript = (): HTMLOrSVGScriptElement =>
     return scripts[scripts.length - 1]
   })()
 
-export const injectLinkTag = (url: string): void => {
-  const link = document.createElement('link')
-  link.href = url
-  link.rel = 'stylesheet'
+export const injectStyles = (styles?: string): void => {
+  if (!styles) return
 
-  document.getElementsByTagName('head')[0].appendChild(link)
+  const style = document.createElement('style')
+  style.innerHTML = styles
+
+  document.getElementsByTagName('head')[0].appendChild(style)
+}
+
+export const fetchStyles = async (url: string): Promise<string | undefined> => {
+  try {
+    const response = await fetch(url)
+    return await response.text()
+  } catch (error) {
+    throw new Error(
+      `Could not load CSS from ${url}\n More details: ${error.toString()}`
+    )
+  }
+}
+
+export const loadStyles = async (url: string): Promise<void> => {
+  const styles = await fetchStyles(url)
+
+  return new Promise((resolve, reject) => {
+    try {
+      injectStyles(styles)
+    } catch (e) {
+      return reject(e)
+    }
+
+    requestAnimationFrame(() => {
+      resolve()
+    })
+  })
 }
 
 // Get all parameters set on the script URL to pass a set restricted to ScriptParametersEnum in as initial properties
