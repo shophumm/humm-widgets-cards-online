@@ -1,5 +1,5 @@
 <template>
-  <div :class="['widget', { 'is-closed': isClosed }]">
+  <div v-if="isWidgetOpen" class="widget">
     <div class="widget__content">
       <div v-if="lang === 'au'" class="widget__iconbird">
         <IconHumm90Bird fill="var(--color-1-contrast)" />
@@ -99,7 +99,7 @@ export default defineComponent({
   },
   data() {
     return {
-      isClosed: false,
+      isWidgetOpen: true,
       isDialogOpen: false,
       // TODO: replace placeholder data
       cards: [
@@ -145,8 +145,7 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   },
   methods: {
     closeWidget() {
-      console.log('in closeWidget')
-      this.isClosed = true
+      this.isWidgetOpen = false
     },
   },
 })
@@ -234,10 +233,6 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
     @media (min-width: 430px) {
       align-items: center;
     }
-  }
-
-  &.is-closed {
-    display: none;
   }
 }
 </style>
