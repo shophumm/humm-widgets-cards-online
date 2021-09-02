@@ -39,6 +39,7 @@ export const loadStyles = async (url: string): Promise<void> => {
       return reject(e)
     }
 
+    // Resolve for the next repaint
     requestAnimationFrame(() => {
       resolve()
     })
