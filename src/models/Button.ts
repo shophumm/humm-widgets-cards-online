@@ -4,6 +4,7 @@ export interface ButtonProps {
   buttonColor: string
   primary?: boolean
   size?: Sizes
+  href?: string
 }
 
 export default ButtonProps

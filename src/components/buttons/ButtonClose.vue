@@ -2,7 +2,7 @@
   <button type="button" class="button" @click="onClick">
     <IconClose focusable="false" :opacity="iconOpacity" :fill="fill" />
     <span class="button__label">
-      <slot></slot>
+      <slot />
     </span>
   </button>
 </template>

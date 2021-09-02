@@ -44,3 +44,8 @@ export const SizeLarge = Template.bind({})
 SizeLarge.args = {
   size: 'lg',
 }
+
+export const Link = Template.bind({})
+Link.args = {
+  href: '#anchor',
+}

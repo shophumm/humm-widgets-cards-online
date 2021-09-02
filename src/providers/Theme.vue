@@ -1,6 +1,6 @@
 <template>
   <div class="theme" :data-lang="lang" :data-theme="theme">
-    <slot></slot>
+    <slot />
   </div>
 </template>
 
