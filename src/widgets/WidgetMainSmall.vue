@@ -1,5 +1,5 @@
 <template>
-  <div class="widget">
+  <div v-if="isWidgetOpen" class="widget">
     <div class="widget__content">
       <div v-if="lang === 'au'" class="widget__iconbird">
         <IconHumm90Bird fill="var(--color-1-contrast)" />
@@ -25,7 +25,11 @@
         </Button>
       </div>
       <div class="widget__close">
-        <ButtonClose icon-opacity="1" fill="var(--color-1-contrast)">
+        <ButtonClose
+          icon-opacity="1"
+          fill="var(--color-1-contrast)"
+          @click="closeWidget"
+        >
           {{ buttonCloseLabel }}
         </ButtonClose>
       </div>
@@ -110,6 +114,7 @@ export default defineComponent({
   },
   data() {
     return {
+      isWidgetOpen: true,
       isDialogOpen: false,
       // TODO: replace placeholder data
       cards: [
@@ -172,7 +177,7 @@ export default defineComponent({
           ],
         },
       ],
-      terms: `*Approved applicants only, fees, terms, conditions and minimum monthly payment [and minimum finance amount $<XX>][AU LEGAL NOTE: only include if a minimum finance amount applies] apply, including a $99 Annual Fee charged on first debit to your humm90 Account and annually thereafter; which attracts interest (charged at the humm90 Purchase Rate, currently 23.99% p.a) from the date charged unless fully paid within Interest Free Period and the Interest Free Criteria are met. Indicative monthly payment excl the Annual Fee and assumes no additional purchases, cash advances or other fees and no interest applies. 
+      terms: `*Approved applicants only, fees, terms, conditions and minimum monthly payment [and minimum finance amount $<XX>][AU LEGAL NOTE: only include if a minimum finance amount applies] apply, including a $99 Annual Fee charged on first debit to your humm90 Account and annually thereafter; which attracts interest (charged at the humm90 Purchase Rate, currently 23.99% p.a) from the date charged unless fully paid within Interest Free Period and the Interest Free Criteria are met. Indicative monthly payment excl the Annual Fee and assumes no additional purchases, cash advances or other fees and no interest applies.
 
 Indicative monthly payment is a minimum monthly repayment (MMP) of the greater of $30 or 3% of the outstanding balance for the first month, as the first month’s MMP is greater than the Transaction amount divided by the Interest Free Period. The MMP decreases each month as the Eligible Unpaid Balance decreases, therefore the purchase price of the Transaction will not be repaid within the Interest Free Period if you only pay the contractual MMP over the entire Interest Free Period.  Credit provided by humm Cards Pty Ltd ABN 31 099 651 877 Australian Credit Licence number 247415.
 
@@ -180,6 +185,9 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
     }
   },
   methods: {
+    closeWidget() {
+      this.isWidgetOpen = false
+    },
     tabsContents(id: string): Record<string, string>[] | undefined {
       return this.tabs.find(item => item.id === id)?.contents
     },
