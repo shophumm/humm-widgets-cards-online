@@ -179,7 +179,9 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
     }
   },
   beforeCreate() {
-    fetchData('/widget', { method: 'GET' })
+    fetchData('/widget', {
+      method: 'POST',
+    })
   },
   methods: {
     tabsContents(id: string): Record<string, string>[] | undefined {
