@@ -28,7 +28,7 @@
         <ButtonClose
           icon-opacity="1"
           fill="var(--color-1-contrast)"
-          @click="closeWidget()"
+          @click="closeWidget"
         >
           {{ buttonCloseLabel }}
         </ButtonClose>
