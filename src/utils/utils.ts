@@ -18,25 +18,30 @@ export const injectStyles = (styles?: string): void => {
   document.getElementsByTagName('head')[0].appendChild(style)
 }
 
-export const fetchStyles = async (url: string): Promise<string | undefined> => {
+export const fetchText = async (url: string): Promise<string | undefined> => {
   try {
     const response = await fetch(url)
+
+    if (!response.ok) {
+      throw new Error(response.statusText)
+    }
+
     return await response.text()
   } catch (error) {
     throw new Error(
-      `Could not load CSS from ${url}\n More details: ${error.toString()}`
+      `Could not load resource from ${url}\n More details: ${error.toString()}`
     )
   }
 }
 
 export const loadStyles = async (url: string): Promise<void> => {
-  const styles = await fetchStyles(url)
+  const styles = await fetchText(url)
 
   return new Promise((resolve, reject) => {
     try {
       injectStyles(styles)
-    } catch (e) {
-      return reject(e)
+    } catch (error) {
+      return reject(error)
     }
 
     // Resolve for the next repaint

@@ -45,7 +45,13 @@ export const createDynamicAppAtScriptTag = async (
   if (!isDevelopment && !removeCss) {
     const stylesheetUrl = `${publicUrl}/${appName}-${lang}.css`
 
-    await loadStyles(stylesheetUrl)
+    try {
+      await loadStyles(stylesheetUrl)
+    } catch (error) {
+      throw new Error(
+        `Could not load CSS from ${stylesheetUrl}\n More details: ${error.toString()}`
+      )
+    }
   }
 
   // In development we don't want to inject the app at the script tag in index.html
