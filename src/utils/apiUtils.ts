@@ -1,10 +1,11 @@
 import { apiUrl } from './constants'
 
 export const fetchData = async (
-  input: RequestInfo,
+  endpoint: string,
   config?: RequestInit
 ): Promise<Response> => {
-  const response = await (await fetch(apiUrl + input, config)).json()
+  const request = await fetch(`${apiUrl}/${endpoint}`, config)
+  const response = request.json()
   console.log(response)
   return response
 }
