@@ -1,5 +1,33 @@
 # humm-widgets-cards-online
 
+## Usage
+
+You will need to insert the script where you want the widget to display (typically directly below the product price), replacing the `PLACE_YOUR_PRODUCT_PRICE` field with the product's price parameter.
+
+In addition, you will need to replace the `PLACE_YOUR_MERCHANT_ID` field with your unique merchant ID. This will have been provided to you in your welcome email.
+
+```html
+<script src="http://example.com/humm-widgets-cards-au.umd.js?productPrice=PLACE_YOUR_PRODUCT_PRICE&merchantId=PLACE_YOUR_MERCHANT_ID"></script>
+```
+
+**Note: the widget is asynchronously inserted into the web page directly after the script tag.**
+In addition to waiting for script download and parse time, by default the widget will wait for the default CSS to load.
+
+### Script parameters
+
+Script parameters include required and optional data or configuration settings that will be passed in to the widget.
+
+`productPrice` **required**
+The product's price. Used for the widget API call to get pricing calculations and a breakdown.
+
+`merchantId` **required**
+Your provided merchant ID. Used for the widget API call to get applicable products.
+
+`removeCss`
+Default: false
+Values: true | false
+If set to false this will prevent the loading of the widget's CSS to make it easier to apply custom styling.
+
 ## Development
 
 ### Quick start
