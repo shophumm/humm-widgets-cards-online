@@ -6,7 +6,6 @@ export const fetchData = async (
 ): Promise<Response> => {
   const request = await fetch(`${apiUrl}/${endpoint}`, config)
   const response = request.json()
-  console.log(response)
   return response
 }
 
