@@ -38,7 +38,7 @@ export const createDynamicAppAtScriptTag = async (
 
   const scriptEl = getCurrentScript()
   const props = getAllScriptURLParameters(scriptEl)
-  const removeCss = !!props.removeCss
+  const removeCss = String(props.removeCss).toLowerCase() === 'true'
 
   // Inject the stylesheet by default if in prod
   // TODO, reserve the space for the widget before it loads to prevent CLS
