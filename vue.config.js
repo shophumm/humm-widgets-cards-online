@@ -6,7 +6,7 @@ module.exports = {
   // Set the production output dir to build/ instead of dist/
   outputDir: 'build',
 
-  // Inlines the css into the JS file
+  // Inlines the css into the JS file if false
   css: {
     extract: true,
   },
