@@ -26,7 +26,7 @@ Your provided merchant ID. Used for the widget API call to get applicable produc
 `removeCss`
 Default: false
 Values: true | false
-If set to false this will prevent the loading of the widget's CSS to make it easier to apply custom styling.
+If set to true this will prevent the loading of the widget's CSS to make it easier to apply custom styling.
 
 ## Development
 
