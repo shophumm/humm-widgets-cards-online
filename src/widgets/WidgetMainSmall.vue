@@ -17,7 +17,21 @@
       </div>
       <div class="widget__container">
         <div class="widget__text">
-          <p class="widget__title">{{ title }}</p>
+          <p
+            v-if="theme === 'au'"
+            class="widget__title"
+            v-html="generateAuTitle()"
+          ></p>
+          <p
+            v-if="theme === Theme.QMasterCard"
+            class="widget__title"
+            v-html="generateQmcTitle()"
+          ></p>
+          <p
+            v-if="theme === Theme.Farmers"
+            class="widget__title"
+            v-html="generateFarmersTitle()"
+          ></p>
           <span class="widget__subtitle">{{ subtitle }}</span>
         </div>
         <Button button-color="var(--color-2)" @click="isDialogOpen = true">
@@ -192,6 +206,18 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
     tabsContents(id: string): Record<string, string>[] | undefined {
       return this.tabs.find(item => item.id === id)?.contents
     },
+    generateAuTitle() {
+      return this.title?.toUpperCase()
+    },
+    generateQmcTitle() {
+      return this.title?.replace(
+        /60 months interest-free\./i,
+        '<b>60 Months Interest-Free.</b>'
+      )
+    },
+    generateFarmersTitle() {
+      return '<b>' + this.title + '</b>'
+    },
   },
 })
 </script>
@@ -252,7 +278,6 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
     font-weight: 200;
     letter-spacing: -0.04em;
     margin: 0;
-    text-transform: uppercase;
   }
 
   &__title + &__subtitle {

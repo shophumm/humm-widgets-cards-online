@@ -1,7 +1,7 @@
 <template>
   <Theme :lang="lang" :theme="theme">
     <WidgetMainSmall
-      title="Up To 60 months interest-free."
+      title="Up To 60 Months Interest-Free."
       subtitle="Indicative payments. Ts&Cs apply."
       button-primary-label="Explore"
       button-close-label="Close"
