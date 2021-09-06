@@ -58,7 +58,7 @@
       </Accordion>
       <!-- TODO: replace placeholder data -->
       <!-- TODO: view logic for displaying card options -->
-      <div v-if="theme === 'qmc'">
+      <div v-if="theme === Theme.QMasterCard">
         <div class="cards cards--full cards--border">
           <p class="cards__title">Learn more about our credit card options.</p>
           <div class="cards__products">
@@ -116,6 +116,7 @@ export default defineComponent({
     return {
       isWidgetOpen: true,
       isDialogOpen: false,
+      Theme: ThemeEnum,
       // TODO: replace placeholder data
       cards: [
         {
@@ -202,15 +203,16 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   font-family: var(--font-base);
   background-color: var(--color-1);
   color: var(--color-1-contrast);
-  padding: 10px;
+  padding: 11px 10px 8px 8px;
   border-radius: var(--radius-2);
   position: relative;
   filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.1));
 
   @media (min-width: 430px) {
     display: flex;
-    max-width: 414px;
-    min-height: 37px;
+    padding: 5px 10px 6px 8px;
+    max-width: 412px;
+    min-height: 36px;
   }
 
   &__content {
@@ -221,14 +223,13 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   &__container {
     display: block;
     margin-left: 10px;
-    margin-right: 20px;
 
     @media (min-width: 430px) {
       display: flex;
       align-items: center;
       width: 100%;
       justify-content: space-between;
-      margin-right: 12px;
+      margin-right: 10px;
     }
 
     .button {
@@ -249,7 +250,7 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   &__title {
     font-size: 14px;
     font-weight: 200;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
     margin: 0;
     text-transform: uppercase;
   }
@@ -263,10 +264,10 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   }
 
   &__iconbird {
-    margin: 10px 0 0 8px;
+    margin: 0;
 
     @media (min-width: 430px) {
-      margin: 15px 0 0 8px;
+      margin: 11px 0 0 0;
     }
   }
 
