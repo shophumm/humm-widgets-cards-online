@@ -44,7 +44,7 @@ export default defineComponent({
   &[data-theme='qmc'] {
     --color-0: #000000;
     --color-1: #ffffff;
-    --color-1-contrast: #002555;
+    --color-1-contrast: #000000;
     --color-2: #e92162; // Web / Tile / Button / Secondary
   }
 

@@ -17,8 +17,14 @@
       </div>
       <div class="widget__container">
         <div class="widget__text">
-          <p class="widget__title">{{ title }}</p>
-          <span class="widget__subtitle">{{ subtitle }}</span>
+          <component
+            :is="currentTitleComponent"
+            :text="title"
+            class="widget__title"
+          />
+          <span class="widget__subtitle">
+            {{ updateFirstLetterToUpperCase(subtitle) }}
+          </span>
         </div>
         <Button button-color="var(--color-2)" @click="isDialogOpen = true">
           {{ buttonPrimaryLabel }}
@@ -58,7 +64,7 @@
       </Accordion>
       <!-- TODO: replace placeholder data -->
       <!-- TODO: view logic for displaying card options -->
-      <div v-if="theme === 'qmc'">
+      <div v-if="theme === Theme.QMasterCard">
         <div class="cards cards--full cards--border">
           <p class="cards__title">Learn more about our credit card options.</p>
           <div class="cards__products">
@@ -87,9 +93,13 @@ import Tabs from 'src/components/tabs/Tabs.vue'
 import Tab from 'src/components/tabs/Tab.vue'
 import DataList from 'src/components/tabs/DataList.vue'
 import Accordion from 'src/components/accordion/Accordion.vue'
+import TitleAu from 'src/components/dataDisplay/TitleAu.vue'
+import TitleQmc from 'src/components/dataDisplay/TitleQmc.vue'
+import TitleFarmers from 'src/components/dataDisplay/TitleFarmers.vue'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import fetchData from 'src/utils/apiUtils'
+import { updateFirstLetterToUpperCase } from 'src/utils/utils'
 
 export default defineComponent({
   name: 'WidgetMainSmall',
@@ -117,6 +127,7 @@ export default defineComponent({
     return {
       isWidgetOpen: true,
       isDialogOpen: false,
+      Theme: ThemeEnum,
       // TODO: replace placeholder data
       cards: [
         {
@@ -185,6 +196,18 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
 ^ Indicative repayments (Transaction amount divided by Interest Free Period) are an estimate only, which excl $99 Annual Fee, and assumes no additional purchases, cash advances or other fees or charges. Interest Free Period available when indicative monthly repayments are made by each statement period due date, resulting in full repayment of purchase amount within the Interest Free Period. `,
     }
   },
+  computed: {
+    currentTitleComponent() {
+      switch (this.theme) {
+        case ThemeEnum.QMasterCard:
+          return TitleQmc
+        case ThemeEnum.Farmers:
+          return TitleFarmers
+        default:
+          return TitleAu
+      }
+    },
+  },
   created() {
     fetchData('widget', {
       method: 'POST',
@@ -197,6 +220,9 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
     tabsContents(id: string): Record<string, string>[] | undefined {
       return this.tabs.find(item => item.id === id)?.contents
     },
+    updateFirstLetterToUpperCase(sentence: string) {
+      return updateFirstLetterToUpperCase(sentence)
+    },
   },
 })
 </script>
@@ -208,15 +234,16 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   font-family: var(--font-base);
   background-color: var(--color-1);
   color: var(--color-1-contrast);
-  padding: 10px;
+  padding: 11px 10px 8px 8px;
   border-radius: var(--radius-2);
   position: relative;
   filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.1));
 
   @media (min-width: 430px) {
     display: flex;
-    max-width: 414px;
-    min-height: 37px;
+    padding: 5px 10px 6px 8px;
+    max-width: 412px;
+    min-height: 36px;
   }
 
   &__content {
@@ -227,14 +254,13 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   &__container {
     display: block;
     margin-left: 10px;
-    margin-right: 20px;
 
     @media (min-width: 430px) {
       display: flex;
       align-items: center;
       width: 100%;
       justify-content: space-between;
-      margin-right: 12px;
+      margin-right: 10px;
     }
 
     .button {
@@ -255,9 +281,8 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   &__title {
     font-size: 14px;
     font-weight: 200;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
     margin: 0;
-    text-transform: uppercase;
   }
 
   &__title + &__subtitle {
@@ -269,10 +294,10 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   }
 
   &__iconbird {
-    margin: 10px 0 0 8px;
+    margin: 0;
 
     @media (min-width: 430px) {
-      margin: 15px 0 0 8px;
+      margin: 11px 0 0 0;
     }
   }
 

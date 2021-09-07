@@ -1,7 +1,6 @@
 .cards {
   display: flex;
   flex-wrap: wrap;
-  flex-grow: 1;
 
   &--full {
     width: 100%;
@@ -28,7 +27,6 @@
 
   &__products {
     display: flex;
-    margin-right: 10px;
 
     @media (min-width: 430px) {
       align-items: center;
