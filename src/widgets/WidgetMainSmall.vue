@@ -17,21 +17,11 @@
       </div>
       <div class="widget__container">
         <div class="widget__text">
-          <p
-            v-if="theme === 'au'"
+          <component
+            :is="currentTitleComponent"
+            :text="title"
             class="widget__title"
-            v-html="generateAuTitle()"
-          ></p>
-          <p
-            v-if="theme === Theme.QMasterCard"
-            class="widget__title"
-            v-html="generateQmcTitle()"
-          ></p>
-          <p
-            v-if="theme === Theme.Farmers"
-            class="widget__title"
-            v-html="generateFarmersTitle()"
-          ></p>
+          />
           <span class="widget__subtitle">{{ subtitle }}</span>
         </div>
         <Button button-color="var(--color-2)" @click="isDialogOpen = true">
@@ -101,6 +91,9 @@ import Tabs from 'src/components/tabs/Tabs.vue'
 import Tab from 'src/components/tabs/Tab.vue'
 import DataList from 'src/components/tabs/DataList.vue'
 import Accordion from 'src/components/accordion/Accordion.vue'
+import TitleAu from 'src/components/dataDisplay/TitleAu.vue'
+import TitleQmc from 'src/components/dataDisplay/TitleQmc.vue'
+import TitleFarmers from 'src/components/dataDisplay/TitleFarmers.vue'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 
@@ -199,24 +192,24 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
 ^ Indicative repayments (Transaction amount divided by Interest Free Period) are an estimate only, which excl $99 Annual Fee, and assumes no additional purchases, cash advances or other fees or charges. Interest Free Period available when indicative monthly repayments are made by each statement period due date, resulting in full repayment of purchase amount within the Interest Free Period. `,
     }
   },
+  computed: {
+    currentTitleComponent() {
+      switch (this.theme) {
+        case ThemeEnum.QMasterCard:
+          return TitleQmc
+        case ThemeEnum.Farmers:
+          return TitleFarmers
+        default:
+          return TitleAu
+      }
+    },
+  },
   methods: {
     closeWidget() {
       this.isWidgetOpen = false
     },
     tabsContents(id: string): Record<string, string>[] | undefined {
       return this.tabs.find(item => item.id === id)?.contents
-    },
-    generateAuTitle() {
-      return this.title?.toUpperCase()
-    },
-    generateQmcTitle() {
-      return this.title?.replace(
-        /60 months interest-free\./i,
-        '<b>60 Months Interest-Free.</b>'
-      )
-    },
-    generateFarmersTitle() {
-      return '<b>' + this.title + '</b>'
     },
   },
 })
