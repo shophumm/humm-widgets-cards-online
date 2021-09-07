@@ -98,6 +98,7 @@ import TitleQmc from 'src/components/dataDisplay/TitleQmc.vue'
 import TitleFarmers from 'src/components/dataDisplay/TitleFarmers.vue'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
+import fetchData from 'src/utils/apiUtils'
 import { updateFirstLetterToUpperCase } from 'src/utils/utils'
 
 export default defineComponent({
@@ -206,6 +207,11 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
           return TitleAu
       }
     },
+  },
+  created() {
+    fetchData('widget', {
+      method: 'POST',
+    })
   },
   methods: {
     closeWidget() {
