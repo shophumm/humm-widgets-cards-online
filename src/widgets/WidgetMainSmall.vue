@@ -178,7 +178,7 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
 ^ Indicative repayments (Transaction amount divided by Interest Free Period) are an estimate only, which excl $99 Annual Fee, and assumes no additional purchases, cash advances or other fees or charges. Interest Free Period available when indicative monthly repayments are made by each statement period due date, resulting in full repayment of purchase amount within the Interest Free Period. `,
     }
   },
-  beforeCreate() {
+  created() {
     fetchData('widget', {
       method: 'POST',
     })
