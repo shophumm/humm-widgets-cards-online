@@ -22,7 +22,9 @@
             :text="title"
             class="widget__title"
           />
-          <span class="widget__subtitle">{{ subtitle }}</span>
+          <span class="widget__subtitle">
+            {{ updateFirstLetterToUpperCase(subtitle) }}
+          </span>
         </div>
         <Button button-color="var(--color-2)" @click="isDialogOpen = true">
           {{ buttonPrimaryLabel }}
@@ -96,6 +98,7 @@ import TitleQmc from 'src/components/dataDisplay/TitleQmc.vue'
 import TitleFarmers from 'src/components/dataDisplay/TitleFarmers.vue'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
+import { updateFirstLetterToUpperCase } from 'src/utils/utils'
 
 export default defineComponent({
   name: 'WidgetMainSmall',
@@ -210,6 +213,9 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
     },
     tabsContents(id: string): Record<string, string>[] | undefined {
       return this.tabs.find(item => item.id === id)?.contents
+    },
+    updateFirstLetterToUpperCase(sentence: string) {
+      return updateFirstLetterToUpperCase(sentence)
     },
   },
 })

@@ -1,5 +1,5 @@
 <template>
-  <p>{{ upperCaseText }}</p>
+  <p>{{ upperCaseTitle }}</p>
 </template>
 
 <script lang="ts">
@@ -15,11 +15,11 @@ export default defineComponent({
   },
   data() {
     return {
-      upperCaseText: '',
+      upperCaseTitle: '',
     }
   },
   mounted() {
-    this.upperCaseText = this.text.toUpperCase()
+    this.upperCaseTitle = this.text.toUpperCase()
   },
 })
 </script>

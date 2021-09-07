@@ -1,11 +1,12 @@
 <template>
   <p>
-    {{ lightText + ' ' }} <b>{{ boldText }}</b>
+    {{ lightTitle + ' ' }} <b>{{ boldTitle }}</b>
   </p>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { updateFirstLetterToUpperCase } from 'src/utils/utils'
 
 export default defineComponent({
   name: 'TitleQmc',
@@ -17,13 +18,14 @@ export default defineComponent({
   },
   data() {
     return {
-      lightText: '',
-      boldText: '',
+      title: updateFirstLetterToUpperCase(this.text),
+      lightTitle: '',
+      boldTitle: '',
     }
   },
   mounted() {
-    this.lightText = this.text?.replace(/60 months interest-free\./i, '')
-    this.boldText = this.text?.replace(/up to /i, '')
+    this.lightTitle = this.title?.replace(/60 months interest-free\./i, '')
+    this.boldTitle = this.title?.replace(/up to /i, '')
   },
 })
 </script>
