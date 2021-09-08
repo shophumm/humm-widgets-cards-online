@@ -84,7 +84,7 @@ export default defineComponent({
     max-width: 138px;
 
     @media (min-width: 430px) {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 500;
       width: auto;
       min-width: 20px;
@@ -93,7 +93,7 @@ export default defineComponent({
   }
 
   &--sm {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     width: auto;
     min-width: 20px;

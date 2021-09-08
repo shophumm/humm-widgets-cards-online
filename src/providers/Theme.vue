@@ -23,7 +23,7 @@ export default defineComponent({
 
 .theme {
   // Shared properties
-  --font-base: 'proxima nova', sans-serif;
+  --font-base: 'proxima-nova', sans-serif;
   --radius-1: 4px;
   --radius-2: 10px;
   --radius-3: 5px;
