@@ -1,6 +1,6 @@
 <template>
   <p>
-    {{ lightTitle + ' ' }} <b>{{ boldTitle }}</b>
+    {{ lightTitle + ' ' }} <strong>{{ boldTitle }}</strong>
   </p>
 </template>
 
