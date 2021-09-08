@@ -1,11 +1,14 @@
 <template>
   <div v-if="isWidgetOpen" class="widget">
     <div class="widget__content">
-      <div v-if="lang === 'au'" class="widget__iconbird">
+      <div v-if="theme === Theme.Humm90" class="widget__iconbird">
         <IconHumm90Bird fill="var(--color-1-contrast)" />
       </div>
       <!-- TODO: render cards dynamically -->
-      <div v-if="lang === 'nz'" class="cards">
+      <div
+        v-if="theme === Theme.QMasterCard || theme === Theme.Farmers"
+        class="cards"
+      >
         <div class="cards__products">
           <Card>
             <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
@@ -14,6 +17,9 @@
             <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
           </Card>
         </div>
+      </div>
+      <div v-if="theme === Theme.HummGroup" class="widget__hummgroup">
+        <IconHummGroup fill="var(--color-1-contrast)" />
       </div>
       <div class="widget__container">
         <div class="widget__text">
@@ -64,7 +70,7 @@
       </Accordion>
       <!-- TODO: replace placeholder data -->
       <!-- TODO: view logic for displaying card options -->
-      <div v-if="theme === Theme.QMasterCard">
+      <div v-if="theme === Theme.QMasterCard || theme === Theme.HummGroup">
         <div class="cards cards--full cards--border">
           <p class="cards__title">Learn more about our credit card options.</p>
           <div class="cards__products">
@@ -85,6 +91,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import IconHumm90Bird from 'src/components/icons/IconHumm90Bird.vue'
+import IconHummGroup from 'src/components/icons/IconHummGroup.vue'
 import Card from 'src/components/dataDisplay/Card.vue'
 import Button from 'src/components/buttons/Button.vue'
 import ButtonClose from 'src/components/buttons/ButtonClose.vue'
@@ -96,6 +103,7 @@ import Accordion from 'src/components/accordion/Accordion.vue'
 import TitleAu from 'src/components/dataDisplay/TitleAu.vue'
 import TitleQmc from 'src/components/dataDisplay/TitleQmc.vue'
 import TitleFarmers from 'src/components/dataDisplay/TitleFarmers.vue'
+import TitleHummGroup from 'src/components/dataDisplay/TitleHummGroup.vue'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import fetchData from 'src/utils/apiUtils'
@@ -105,6 +113,7 @@ export default defineComponent({
   name: 'WidgetMainSmall',
   components: {
     IconHumm90Bird,
+    IconHummGroup,
     Card,
     Button,
     ButtonClose,
@@ -203,6 +212,8 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
           return TitleQmc
         case ThemeEnum.Farmers:
           return TitleFarmers
+        case ThemeEnum.HummGroup:
+          return TitleHummGroup
         default:
           return TitleAu
       }
@@ -281,7 +292,7 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   &__title {
     font-size: 14px;
     font-weight: 200;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
     margin: 0;
   }
 
@@ -295,6 +306,14 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
 
   &__iconbird {
     margin: 0;
+
+    @media (min-width: 430px) {
+      margin: 11px 0 0 0;
+    }
+  }
+
+  &__hummgroup {
+    width: 100px;
 
     @media (min-width: 430px) {
       margin: 11px 0 0 0;
