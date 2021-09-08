@@ -1,5 +1,5 @@
 <template>
-  <div class="widget">
+  <div v-if="isWidgetOpen" class="widget">
     <div class="widget__content">
       <div v-if="lang === 'au'" class="widget__iconbird">
         <IconHumm90Bird fill="var(--color-1-contrast)" />
@@ -17,15 +17,25 @@
       </div>
       <div class="widget__container">
         <div class="widget__text">
-          <p class="widget__title">{{ title }}</p>
-          <span class="widget__subtitle">{{ subtitle }}</span>
+          <component
+            :is="currentTitleComponent"
+            :text="title"
+            class="widget__title"
+          />
+          <span class="widget__subtitle">
+            {{ updateFirstLetterToUpperCase(subtitle) }}
+          </span>
         </div>
         <Button button-color="var(--color-2)" @click="isDialogOpen = true">
           {{ buttonPrimaryLabel }}
         </Button>
       </div>
       <div class="widget__close">
-        <ButtonClose icon-opacity="1" fill="var(--color-1-contrast)">
+        <ButtonClose
+          icon-opacity="1"
+          fill="var(--color-1-contrast)"
+          @click="closeWidget"
+        >
           {{ buttonCloseLabel }}
         </ButtonClose>
       </div>
@@ -39,13 +49,22 @@
     @toggle-dialog="isDialogOpen = false"
   >
     <template #body>
-      <Tabs :tabs="tabs" />
+      <Tabs :tabs="tabs">
+        <template #default="{ activeTabId }">
+          <Tab tab-id="12months" :active-tab-id="activeTabId">
+            <DataList :contents="tabsContents('12months')" />
+          </Tab>
+          <Tab tab-id="18months" :active-tab-id="activeTabId">
+            <DataList :contents="tabsContents('18months')" />
+          </Tab>
+        </template>
+      </Tabs>
       <Accordion id="widget-terms" :content="terms">
         Terms & Conditions
       </Accordion>
       <!-- TODO: replace placeholder data -->
       <!-- TODO: view logic for displaying card options -->
-      <div v-if="theme === 'qmc'">
+      <div v-if="theme === Theme.QMasterCard">
         <div class="cards cards--full cards--border">
           <p class="cards__title">Learn more about our credit card options.</p>
           <div class="cards__products">
@@ -54,7 +73,9 @@
             </Card>
           </div>
           <!-- TODO: link with button styling -->
-          <Button size="lg" button-color="var(--color-2)">Apply now</Button>
+          <Button href="#apply-now" size="lg" button-color="var(--color-2)">
+            Apply now
+          </Button>
         </div>
       </div>
     </template>
@@ -69,9 +90,16 @@ import Button from 'src/components/buttons/Button.vue'
 import ButtonClose from 'src/components/buttons/ButtonClose.vue'
 import Dialog from 'src/components/dialog/Dialog.vue'
 import Tabs from 'src/components/tabs/Tabs.vue'
+import Tab from 'src/components/tabs/Tab.vue'
+import DataList from 'src/components/tabs/DataList.vue'
 import Accordion from 'src/components/accordion/Accordion.vue'
+import TitleAu from 'src/components/dataDisplay/TitleAu.vue'
+import TitleQmc from 'src/components/dataDisplay/TitleQmc.vue'
+import TitleFarmers from 'src/components/dataDisplay/TitleFarmers.vue'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
+import fetchData from 'src/utils/apiUtils'
+import { updateFirstLetterToUpperCase } from 'src/utils/utils'
 
 export default defineComponent({
   name: 'WidgetMainSmall',
@@ -82,6 +110,8 @@ export default defineComponent({
     ButtonClose,
     Dialog,
     Tabs,
+    Tab,
+    DataList,
     Accordion,
   },
   props: {
@@ -95,7 +125,9 @@ export default defineComponent({
   },
   data() {
     return {
+      isWidgetOpen: true,
       isDialogOpen: false,
+      Theme: ThemeEnum,
       // TODO: replace placeholder data
       cards: [
         {
@@ -121,22 +153,76 @@ export default defineComponent({
       ],
       tabs: [
         {
-          id: '18months',
-          label: '18 months',
-          content: `Purchase amount $${this.productPrice}`,
+          id: '12months',
+          label: '12 months',
+          contents: [
+            { name: 'Interest free period', value: '12 months' },
+            { name: 'Purchase amount', value: '$1,699.00' },
+            { name: 'Establishment fee', value: '$50.00' },
+            {
+              name: 'Indicative minimum monthly repayments*',
+              value: '$48.00',
+            },
+            {
+              name:
+                'Indicative repayment to pay before Interest free period expires ^',
+              value: '$450.50',
+            },
+          ],
         },
         {
-          id: '24months',
-          label: '24 months',
-          content: 'Placeholder text 2',
+          id: '18months',
+          label: '18 months',
+          contents: [
+            { name: 'Interest free period', value: '18 months' },
+            { name: 'Purchase amount', value: '$1,699.00' },
+            { name: 'Establishment fee', value: '$50.00' },
+            {
+              name: 'Indicative minimum monthly repayments*',
+              value: '$48.00',
+            },
+            {
+              name:
+                'Indicative repayment to pay before Interest free period expires ^',
+              value: '$450.50',
+            },
+          ],
         },
       ],
-      terms: `*Approved applicants only, fees, terms, conditions and minimum monthly payment [and minimum finance amount $<XX>][AU LEGAL NOTE: only include if a minimum finance amount applies] apply, including a $99 Annual Fee charged on first debit to your humm90 Account and annually thereafter; which attracts interest (charged at the humm90 Purchase Rate, currently 23.99% p.a) from the date charged unless fully paid within Interest Free Period and the Interest Free Criteria are met. Indicative monthly payment excl the Annual Fee and assumes no additional purchases, cash advances or other fees and no interest applies. 
+      terms: `*Approved applicants only, fees, terms, conditions and minimum monthly payment [and minimum finance amount $<XX>][AU LEGAL NOTE: only include if a minimum finance amount applies] apply, including a $99 Annual Fee charged on first debit to your humm90 Account and annually thereafter; which attracts interest (charged at the humm90 Purchase Rate, currently 23.99% p.a) from the date charged unless fully paid within Interest Free Period and the Interest Free Criteria are met. Indicative monthly payment excl the Annual Fee and assumes no additional purchases, cash advances or other fees and no interest applies.
 
 Indicative monthly payment is a minimum monthly repayment (MMP) of the greater of $30 or 3% of the outstanding balance for the first month, as the first month’s MMP is greater than the Transaction amount divided by the Interest Free Period. The MMP decreases each month as the Eligible Unpaid Balance decreases, therefore the purchase price of the Transaction will not be repaid within the Interest Free Period if you only pay the contractual MMP over the entire Interest Free Period.  Credit provided by humm Cards Pty Ltd ABN 31 099 651 877 Australian Credit Licence number 247415.
 
 ^ Indicative repayments (Transaction amount divided by Interest Free Period) are an estimate only, which excl $99 Annual Fee, and assumes no additional purchases, cash advances or other fees or charges. Interest Free Period available when indicative monthly repayments are made by each statement period due date, resulting in full repayment of purchase amount within the Interest Free Period. `,
     }
+  },
+  computed: {
+    currentTitleComponent() {
+      switch (this.theme) {
+        case ThemeEnum.QMasterCard:
+          return TitleQmc
+        case ThemeEnum.Farmers:
+          return TitleFarmers
+        default:
+          return TitleAu
+      }
+    },
+  },
+  created() {
+    fetchData('widget', {
+      method: 'POST',
+    })
+  },
+  methods: {
+    closeWidget() {
+      this.isWidgetOpen = false
+    },
+    tabsContents(id: string): Record<string, string>[] | undefined {
+      return this.tabs.find(item => item.id === id)?.contents
+    },
+    updateFirstLetterToUpperCase(sentence: string) {
+      return updateFirstLetterToUpperCase(sentence)
+    },
   },
 })
 </script>
@@ -148,15 +234,16 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   font-family: var(--font-base);
   background-color: var(--color-1);
   color: var(--color-1-contrast);
-  padding: 10px;
+  padding: 11px 10px 8px 8px;
   border-radius: var(--radius-2);
   position: relative;
   filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.1));
 
   @media (min-width: 430px) {
     display: flex;
-    max-width: 414px;
-    min-height: 37px;
+    padding: 5px 10px 6px 8px;
+    max-width: 412px;
+    min-height: 36px;
   }
 
   &__content {
@@ -167,14 +254,13 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   &__container {
     display: block;
     margin-left: 10px;
-    margin-right: 20px;
 
     @media (min-width: 430px) {
       display: flex;
       align-items: center;
       width: 100%;
       justify-content: space-between;
-      margin-right: 12px;
+      margin-right: 10px;
     }
 
     .button {
@@ -195,9 +281,8 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   &__title {
     font-size: 14px;
     font-weight: 200;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
     margin: 0;
-    text-transform: uppercase;
   }
 
   &__title + &__subtitle {
@@ -209,10 +294,10 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   }
 
   &__iconbird {
-    margin: 10px 0 0 8px;
+    margin: 0;
 
     @media (min-width: 430px) {
-      margin: 15px 0 0 8px;
+      margin: 11px 0 0 0;
     }
   }
 

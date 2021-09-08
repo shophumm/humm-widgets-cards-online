@@ -89,3 +89,9 @@ export const getAllScriptURLParameters = (
 
   return params
 }
+
+export const updateFirstLetterToUpperCase = (sentence: string): string => {
+  return sentence.replace(/(^\w{1})|(\s{1}\w{1})|(-{1}\w{1})/g, match =>
+    match.toUpperCase()
+  )
+}

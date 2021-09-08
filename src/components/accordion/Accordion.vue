@@ -10,7 +10,7 @@
       @click="toggleOpen"
     >
       <span class="accordion__label">
-        <slot></slot>
+        <slot />
       </span>
       <span :class="['accordion__icon', { 'is-open': isOpen }]">
         <IconChevron fill="currentColor" />
@@ -72,7 +72,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .accordion {
-  margin-top: 32px;
+  margin-top: 30px;
 
   &__button {
     font-family: var(--font-base);

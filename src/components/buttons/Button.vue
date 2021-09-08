@@ -1,5 +1,18 @@
 <template>
+  <a
+    v-if="href"
+    :href="href"
+    :class="[
+      'button',
+      { 'button--primary': primary, [`button--${size}`]: size },
+    ]"
+    :style="style"
+    @click="onClick"
+  >
+    <slot />
+  </a>
   <button
+    v-else
     type="button"
     :class="[
       'button',
@@ -8,7 +21,7 @@
     :style="style"
     @click="onClick"
   >
-    <slot></slot>
+    <slot />
   </button>
 </template>
 
@@ -30,6 +43,7 @@ export default defineComponent({
       type: String as PropType<Sizes>,
       default: SizeEnum.Auto,
     },
+    href: String,
     primary: Boolean,
   },
   emits: ['click'],
@@ -53,7 +67,7 @@ export default defineComponent({
   font-weight: 700;
   background: transparent;
   border: 1px solid currentColor;
-  padding: 5px 11px;
+  padding: 5px 10px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -98,6 +112,11 @@ export default defineComponent({
     background: var(--color-1);
     color: var(--color-1-contrast);
     border-color: var(--color-1);
+  }
+
+  &[href] {
+    text-decoration: none;
+    color: inherit;
   }
 }
 </style>
