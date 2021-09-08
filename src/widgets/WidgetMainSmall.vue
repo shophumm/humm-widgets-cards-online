@@ -313,9 +313,10 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   }
 
   &__hummgroup {
-    width: 100px;
+    width: 72px;
 
     @media (min-width: 430px) {
+      width: 100px;
       margin: 11px 0 0 0;
     }
   }
