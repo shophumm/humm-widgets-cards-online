@@ -1,6 +1,6 @@
 <template>
   <p>
-    {{ lightTitle + ' ' }} <strong>{{ boldTitle }}</strong>
+    {{ lightTitle + ' ' }} <b>{{ boldTitle }}</b>
   </p>
 </template>
 
@@ -24,8 +24,14 @@ export default defineComponent({
     }
   },
   mounted() {
-    this.lightTitle = this.title?.replace(/60 months interest-free\./i, '')
-    this.boldTitle = this.title?.replace(/up to /i, '')
+    this.lightTitle = this.title
+      ?.toLowerCase()
+      .includes('first 12 months interest free.')
+      ? this.title.replace(/first 12 months interest free\./i, '')
+      : ''
+    this.boldTitle = this.title?.toLowerCase().includes('3 years.')
+      ? this.title.replace(/3 years./i, '')
+      : ''
   },
 })
 </script>

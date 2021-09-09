@@ -22,11 +22,8 @@ export default defineComponent({
 @import 'https://use.typekit.net/plq2clw.css';
 
 .theme {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
   // Shared properties
-  --font-base: 'proxima nova', sans-serif;
+  --font-base: 'proxima-nova', sans-serif;
   --radius-1: 4px;
   --radius-2: 10px;
   --radius-3: 5px;
@@ -53,6 +50,13 @@ export default defineComponent({
     --color-1: #ffffff;
     --color-1-contrast: #000000;
     --color-2: #732d81; // Web / Tile / Button / Secondary
+  }
+
+  &[data-theme='hummgroup'] {
+    --color-0: #000000;
+    --color-1: #ffffff;
+    --color-1-contrast: #000000;
+    --color-2: #ff6c00; // Web / Tile / Button / Secondary
   }
 }
 </style>
