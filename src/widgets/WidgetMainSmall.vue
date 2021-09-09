@@ -48,13 +48,14 @@
     </div>
   </div>
 
-  <Dialog
-    v-if="isDialogOpen"
+  <DialogOverlay
     id="widget-dialog"
+    :is-dialog-open="isDialogOpen"
     :button-close-label="buttonCloseLabel"
     @toggle-dialog="isDialogOpen = false"
   >
-    <template #body>
+    <template #heading>Monthly payments</template>
+    <template #tabs>
       <Tabs :tabs="tabs">
         <template #default="{ activeTabId }">
           <Tab tab-id="12months" :active-tab-id="activeTabId">
@@ -65,11 +66,13 @@
           </Tab>
         </template>
       </Tabs>
+    </template>
+    <template #terms>
       <Accordion id="widget-terms" :content="terms">
         Terms & Conditions
       </Accordion>
-      <!-- TODO: replace placeholder data -->
-      <!-- TODO: view logic for displaying card options -->
+    </template>
+    <template #applyNow>
       <div v-if="theme === Theme.QMasterCard || theme === Theme.HummGroup">
         <div class="cards cards--full cards--border">
           <p class="cards__title">Learn more about our credit card options.</p>
@@ -85,7 +88,7 @@
         </div>
       </div>
     </template>
-  </Dialog>
+  </DialogOverlay>
 </template>
 
 <script lang="ts">
@@ -108,6 +111,7 @@ import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import fetchData from 'src/utils/apiUtils'
 import { updateFirstLetterToUpperCase } from 'src/utils/utils'
+import DialogOverlay from 'src/modules/DialogOverlay.vue'
 
 export default defineComponent({
   name: 'WidgetMainSmall',
@@ -122,6 +126,7 @@ export default defineComponent({
     Tab,
     DataList,
     Accordion,
+    DialogOverlay,
   },
   props: {
     title: String,
