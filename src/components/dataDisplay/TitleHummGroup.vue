@@ -29,11 +29,9 @@ export default defineComponent({
       .includes('first 12 months interest free.')
       ? this.title.replace(/first 12 months interest free\./i, '')
       : ''
-    console.log(this.lightTitle)
     this.boldTitle = this.title?.toLowerCase().includes('3 years.')
       ? this.title.replace(/3 years./i, '')
       : ''
-    console.log(this.boldTitle)
   },
 })
 </script>
