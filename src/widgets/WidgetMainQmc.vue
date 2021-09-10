@@ -92,7 +92,6 @@ import DataList from 'src/components/tabs/DataList.vue'
 import Accordion from 'src/components/accordion/Accordion.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import fetchData from 'src/utils/apiUtils'
-import { updateFirstLetterToUpperCase } from 'src/utils/utils'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
 
 export default defineComponent({
@@ -195,9 +194,6 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
     },
     tabsContents(id: string): Record<string, string>[] | undefined {
       return this.tabs.find(item => item.id === id)?.contents
-    },
-    updateFirstLetterToUpperCase(sentence: string) {
-      return updateFirstLetterToUpperCase(sentence)
     },
   },
 })
