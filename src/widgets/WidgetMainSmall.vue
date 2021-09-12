@@ -83,8 +83,6 @@ import IconHummGroup from 'src/components/icons/IconHummGroup.vue'
 import Card from 'src/components/dataDisplay/Card.vue'
 import Button from 'src/components/buttons/Button.vue'
 import ButtonClose from 'src/components/buttons/ButtonClose.vue'
-import Dialog from 'src/components/dialog/Dialog.vue'
-import Accordion from 'src/components/accordion/Accordion.vue'
 import TitleAu from 'src/components/dataDisplay/TitleAu.vue'
 import TitleQmc from 'src/components/dataDisplay/TitleQmc.vue'
 import TitleFarmers from 'src/components/dataDisplay/TitleFarmers.vue'
@@ -103,8 +101,6 @@ export default defineComponent({
     Card,
     Button,
     ButtonClose,
-    Dialog,
-    Accordion,
     DialogOverlay,
   },
   props: {
