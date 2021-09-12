@@ -41,29 +41,13 @@
     id="widget-dialog"
     :is-dialog-open="isDialogOpen"
     :button-close-label="buttonCloseLabel"
+    :tabs-data="tabs"
+    :accordian-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
-    <template #heading>Monthly payments</template>
-    <template #tabs>
-      <Tabs :tabs="tabs">
-        <template #default="{ activeTabId }">
-          <Tab tab-id="12months" :active-tab-id="activeTabId">
-            <DataList :contents="tabsContents('12months')" />
-          </Tab>
-          <Tab tab-id="18months" :active-tab-id="activeTabId">
-            <DataList :contents="tabsContents('18months')" />
-          </Tab>
-        </template>
-      </Tabs>
-    </template>
-    <template #terms>
-      <Accordion id="widget-terms" :content="terms">
-        Terms & Conditions
-      </Accordion>
-    </template>
-    <template #applyNow>
-      <div>
-        <!-- TODO: remove parent <div> -->
+    <template #header>Monthly payments</template>
+    <template #footer>
+      <div v-if="theme === Theme.QMasterCard || theme === Theme.HummGroup">
         <div class="cards cards--full cards--border">
           <p class="cards__title">Learn more about our credit card options.</p>
           <div class="cards__products">
@@ -86,10 +70,6 @@ import { defineComponent } from 'vue'
 import Card from 'src/components/dataDisplay/Card.vue'
 import Button from 'src/components/buttons/Button.vue'
 import ButtonClose from 'src/components/buttons/ButtonClose.vue'
-import Tabs from 'src/components/tabs/Tabs.vue'
-import Tab from 'src/components/tabs/Tab.vue'
-import DataList from 'src/components/tabs/DataList.vue'
-import Accordion from 'src/components/accordion/Accordion.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import fetchData from 'src/utils/apiUtils'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
@@ -100,10 +80,6 @@ export default defineComponent({
     Card,
     Button,
     ButtonClose,
-    Tabs,
-    Tab,
-    DataList,
-    Accordion,
     DialogOverlay,
   },
   props: {
@@ -191,9 +167,6 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
   methods: {
     closeWidget() {
       this.isWidgetOpen = false
-    },
-    tabsContents(id: string): Record<string, string>[] | undefined {
-      return this.tabs.find(item => item.id === id)?.contents
     },
   },
 })
