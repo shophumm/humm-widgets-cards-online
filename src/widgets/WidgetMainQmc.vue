@@ -47,19 +47,17 @@
   >
     <template #header>Monthly payments</template>
     <template #footer>
-      <div v-if="theme === Theme.QMasterCard || theme === Theme.HummGroup">
-        <div class="cards cards--full cards--border">
-          <p class="cards__title">Learn more about our credit card options.</p>
-          <div class="cards__products">
-            <Card v-for="card in cards" :key="card.id" :size="card.size">
-              <img src="../assets/images/humm90Card.png" :alt="card.alt" />
-            </Card>
-          </div>
-          <!-- TODO: link with button styling -->
-          <Button href="#apply-now" size="lg" button-color="var(--color-2)">
-            Apply now
-          </Button>
+      <div class="cards cards--full cards--border">
+        <p class="cards__title">Learn more about our credit card options.</p>
+        <div class="cards__products">
+          <Card v-for="card in cards" :key="card.id" :size="card.size">
+            <img src="../assets/images/humm90Card.png" :alt="card.alt" />
+          </Card>
         </div>
+        <!-- TODO: link with button styling -->
+        <Button href="#apply-now" size="lg" button-color="var(--color-2)">
+          Apply now
+        </Button>
       </div>
     </template>
   </DialogOverlay>
@@ -90,6 +88,7 @@ export default defineComponent({
     return {
       isWidgetOpen: true,
       isDialogOpen: false,
+      buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
       // TODO: replace placeholder data
       cards: [
