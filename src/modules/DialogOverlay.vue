@@ -5,7 +5,9 @@
     :button-close-label="buttonCloseLabel"
     @toggle-dialog="toggleDialog"
   >
-    <template #header> <slot name="header"></slot> </template>
+    <template #header>
+      <slot name="header" />
+    </template>
     <template #body>
       <Tabs :tabs="tabsData">
         <template #default="{ activeTabId }">
@@ -20,7 +22,7 @@
       <Accordion id="widget-terms" :content="accordianData">
         Terms & Conditions
       </Accordion>
-      <slot name="footer"></slot>
+      <slot name="footer" />
     </template>
   </Dialog>
 </template>
