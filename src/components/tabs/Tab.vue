@@ -1,7 +1,7 @@
 <template>
   <div :class="['tab', { 'is-active': activeTabId === tabId }]">
     <div class="tab__content">
-      <slot></slot>
+      <slot />
     </div>
   </div>
 </template>
