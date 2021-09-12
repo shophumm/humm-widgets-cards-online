@@ -9,7 +9,6 @@ export interface TabItemProps {
 }
 
 export interface TabsProps {
-  id: string
   defaultTabId?: string
   tabs: TabItemProps[]
 }
