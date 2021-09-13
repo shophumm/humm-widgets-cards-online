@@ -1,6 +1,9 @@
 <template>
   <div v-if="isWidgetOpen" class="widget">
-    <WidgetContent @toggle-dialog="isDialogOpen = true">
+    <WidgetContent
+      @toggle-dialog="isDialogOpen = true"
+      @close-widget="isWidgetOpen = false"
+    >
       <template #logo>
         <div class="widget__iconbird">
           <IconHumm90Bird fill="var(--color-1-contrast)" />
@@ -126,11 +129,6 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
     fetchData('widget', {
       method: 'POST',
     })
-  },
-  methods: {
-    closeWidget() {
-      this.isWidgetOpen = false
-    },
   },
 })
 </script>

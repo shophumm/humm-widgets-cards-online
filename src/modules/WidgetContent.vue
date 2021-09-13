@@ -39,10 +39,13 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ['toggle-dialog'],
+  emits: ['toggle-dialog', 'close-widget'],
   methods: {
     toggleDialog() {
       this.$emit('toggle-dialog')
+    },
+    closeWidget() {
+      this.$emit('close-widget')
     },
   },
 })
