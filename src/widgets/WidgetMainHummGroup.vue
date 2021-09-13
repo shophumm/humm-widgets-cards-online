@@ -54,6 +54,7 @@ import IconHummGroup from 'src/components/icons/IconHummGroup.vue'
 import Card from 'src/components/dataDisplay/Card.vue'
 import Button from 'src/components/buttons/Button.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
+import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import fetchData from 'src/utils/apiUtils'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
@@ -69,6 +70,7 @@ export default defineComponent({
   },
   props: {
     productPrice: Number,
+    lang: String as () => LanguageCodeEnum,
     theme: String as () => ThemeEnum,
   },
   data() {

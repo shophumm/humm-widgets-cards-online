@@ -3,6 +3,7 @@
     <component
       :is="currentWidget"
       :product-price="productPrice"
+      :lang="lang"
       :theme="theme"
     />
   </Theme>

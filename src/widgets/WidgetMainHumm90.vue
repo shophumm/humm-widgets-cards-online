@@ -36,6 +36,7 @@
 import { defineComponent } from 'vue'
 import IconHumm90Bird from 'src/components/icons/IconHumm90Bird.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
+import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import fetchData from 'src/utils/apiUtils'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
@@ -49,6 +50,7 @@ export default defineComponent({
   },
   props: {
     productPrice: Number,
+    lang: String as () => LanguageCodeEnum,
     theme: String as () => ThemeEnum,
   },
   data() {
