@@ -1,32 +1,22 @@
 <template>
   <div v-if="isWidgetOpen" class="widget">
-    <div class="widget__content">
-      <div class="widget__hummgroup">
-        <IconHummGroup fill="var(--color-1-contrast)" />
-      </div>
-      <div class="widget__container">
-        <div class="widget__text">
-          <p class="widget__title">
-            3 Years. <strong>First 12 Months Interest-Free</strong>
-          </p>
-          <span class="widget__subtitle">
-            Indicative Payments. Ts&Cs Apply.
-          </span>
+    <WidgetContent @toggle-dialog="isDialogOpen = true">
+      <template #logo>
+        <div class="widget__hummgroup">
+          <IconHummGroup fill="var(--color-1-contrast)" />
         </div>
-        <Button button-color="var(--color-2)" @click="isDialogOpen = true">
-          Explore
-        </Button>
-      </div>
-      <div class="widget__close">
-        <ButtonClose
-          icon-opacity="1"
-          fill="var(--color-1-contrast)"
-          @click="closeWidget"
-        >
-          Close
-        </ButtonClose>
-      </div>
-    </div>
+      </template>
+      <template #title>
+        <p class="widget__title">
+          3 Years. <strong>First 12 Months Interest-Free</strong>
+        </p>
+      </template>
+      <template #subtitle>
+        <span class="widget__subtitle">
+          Indicative Payments. Ts&Cs Apply.
+        </span>
+      </template>
+    </WidgetContent>
   </div>
 
   <DialogOverlay
@@ -60,9 +50,9 @@ import { defineComponent } from 'vue'
 import IconHummGroup from 'src/components/icons/IconHummGroup.vue'
 import Card from 'src/components/dataDisplay/Card.vue'
 import Button from 'src/components/buttons/Button.vue'
-import ButtonClose from 'src/components/buttons/ButtonClose.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import fetchData from 'src/utils/apiUtils'
+import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
 
 export default defineComponent({
@@ -71,7 +61,7 @@ export default defineComponent({
     IconHummGroup,
     Card,
     Button,
-    ButtonClose,
+    WidgetContent,
     DialogOverlay,
   },
   props: {
