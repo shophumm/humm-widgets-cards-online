@@ -1,33 +1,30 @@
 <template>
-  <div v-if="isWidgetOpen" class="widget">
-    <WidgetContent
-      @toggle-dialog="isDialogOpen = true"
-      @close-widget="isWidgetOpen = false"
-    >
-      <template #logo>
-        <div class="cards">
-          <div class="cards__products">
-            <Card>
-              <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
-            </Card>
-            <Card>
-              <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
-            </Card>
-          </div>
+  <WidgetContent
+    :is-widget-open="isWidgetOpen"
+    @toggle-dialog="isDialogOpen = true"
+    @close-widget="isWidgetOpen = false"
+  >
+    <template #logo>
+      <div class="cards">
+        <div class="cards__products">
+          <Card>
+            <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
+          </Card>
+          <Card>
+            <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
+          </Card>
         </div>
-      </template>
-      <template #title>
-        <p class="widget__title">
-          Up To <strong>60 Months Interest-Free</strong>
-        </p>
-      </template>
-      <template #subtitle>
-        <span class="widget__subtitle">
-          Indicative Payments. Ts&Cs Apply.
-        </span>
-      </template>
-    </WidgetContent>
-  </div>
+      </div>
+    </template>
+    <template #title>
+      <p class="widget__title">
+        Up To <strong>60 Months Interest-Free</strong>
+      </p>
+    </template>
+    <template #subtitle>
+      <span class="widget__subtitle"> Indicative Payments. Ts&Cs Apply. </span>
+    </template>
+  </WidgetContent>
 
   <DialogOverlay
     id="widget-dialog"

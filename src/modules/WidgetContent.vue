@@ -1,23 +1,25 @@
 <template>
-  <div class="widget__content">
-    <slot name="logo" />
-    <div class="widget__container">
-      <div class="widget__text">
-        <slot name="title" />
-        <slot name="subtitle" />
+  <div v-if="isWidgetOpen" class="widget">
+    <div class="widget__content">
+      <slot name="logo" />
+      <div class="widget__container">
+        <div class="widget__text">
+          <slot name="title" />
+          <slot name="subtitle" />
+        </div>
+        <Button button-color="var(--color-2)" @click="toggleDialog">
+          Explore
+        </Button>
       </div>
-      <Button button-color="var(--color-2)" @click="toggleDialog">
-        Explore
-      </Button>
-    </div>
-    <div class="widget__close">
-      <ButtonClose
-        icon-opacity="1"
-        fill="var(--color-1-contrast)"
-        @click="closeWidget"
-      >
-        Close
-      </ButtonClose>
+      <div class="widget__close">
+        <ButtonClose
+          icon-opacity="1"
+          fill="var(--color-1-contrast)"
+          @click="closeWidget"
+        >
+          Close
+        </ButtonClose>
+      </div>
     </div>
   </div>
 </template>
@@ -34,7 +36,7 @@ export default defineComponent({
     ButtonClose,
   },
   props: {
-    isDialogOpen: {
+    isWidgetOpen: {
       type: Boolean,
       required: true,
     },

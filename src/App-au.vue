@@ -33,6 +33,7 @@ export default defineComponent({
   },
   computed: {
     currentWidget() {
+      // TODO: add future AU variants below
       switch (this.theme) {
         case ThemeEnum.Humm90:
           return WidgetMainHumm90

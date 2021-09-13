@@ -1,26 +1,23 @@
 <template>
-  <div v-if="isWidgetOpen" class="widget">
-    <WidgetContent
-      @toggle-dialog="isDialogOpen = true"
-      @close-widget="isWidgetOpen = false"
-    >
-      <template #logo>
-        <div class="widget__hummgroup">
-          <IconHummGroup fill="var(--color-1-contrast)" />
-        </div>
-      </template>
-      <template #title>
-        <p class="widget__title">
-          3 Years. <strong>First 12 Months Interest-Free</strong>
-        </p>
-      </template>
-      <template #subtitle>
-        <span class="widget__subtitle">
-          Indicative Payments. Ts&Cs Apply.
-        </span>
-      </template>
-    </WidgetContent>
-  </div>
+  <WidgetContent
+    :is-widget-open="isWidgetOpen"
+    @toggle-dialog="isDialogOpen = true"
+    @close-widget="isWidgetOpen = false"
+  >
+    <template #logo>
+      <div class="widget__hummgroup">
+        <IconHummGroup fill="var(--color-1-contrast)" />
+      </div>
+    </template>
+    <template #title>
+      <p class="widget__title">
+        3 Years. <strong>First 12 Months Interest-Free</strong>
+      </p>
+    </template>
+    <template #subtitle>
+      <span class="widget__subtitle"> Indicative Payments. Ts&Cs Apply. </span>
+    </template>
+  </WidgetContent>
 
   <DialogOverlay
     id="widget-dialog"
