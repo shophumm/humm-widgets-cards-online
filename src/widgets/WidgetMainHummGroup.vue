@@ -29,18 +29,11 @@
   >
     <template #header>Monthly payments</template>
     <template #footer>
-      <div class="cards cards--full cards--border">
-        <p class="cards__title">Learn more about our credit card options.</p>
-        <div class="cards__products">
-          <Card v-for="card in cards" :key="card.id" :size="card.size">
-            <img src="../assets/images/humm90Card.png" :alt="card.alt" />
-          </Card>
-        </div>
-        <!-- TODO: link with button styling -->
-        <Button href="#apply-now" size="lg" button-color="var(--color-2)">
-          Apply now
-        </Button>
-      </div>
+      <ApplyContent>
+        <Card v-for="card in cards" :key="card.id" :size="card.size">
+          <img src="../assets/images/humm90Card.png" :alt="card.alt" />
+        </Card>
+      </ApplyContent>
     </template>
   </DialogOverlay>
 </template>
@@ -49,21 +42,21 @@
 import { defineComponent } from 'vue'
 import IconHummGroup from 'src/components/icons/IconHummGroup.vue'
 import Card from 'src/components/dataDisplay/Card.vue'
-import Button from 'src/components/buttons/Button.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import fetchData from 'src/utils/apiUtils'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
+import ApplyContent from 'src/modules/ApplyContent.vue'
 
 export default defineComponent({
   name: 'WidgetMainHummGroup',
   components: {
     IconHummGroup,
     Card,
-    Button,
     WidgetContent,
     DialogOverlay,
+    ApplyContent,
   },
   props: {
     productPrice: Number,
