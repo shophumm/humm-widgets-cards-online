@@ -6,7 +6,6 @@
       :lang="lang"
       :theme="theme"
       :data="{
-        cards: cards,
         tabs: tabs,
         terms: terms,
       }"
@@ -39,28 +38,6 @@ export default defineComponent({
   },
   data() {
     return {
-      cards: [
-        {
-          id: 'card1',
-          size: 'lg',
-          alt: 'Humm90 card',
-        },
-        {
-          id: 'card2',
-          size: 'lg',
-          alt: 'Humm90 card',
-        },
-        {
-          id: 'card3',
-          size: 'lg',
-          alt: 'Humm90 card',
-        },
-        {
-          id: 'card4',
-          size: 'lg',
-          alt: 'Humm90 card',
-        },
-      ],
       tabs: [
         {
           id: '12months',

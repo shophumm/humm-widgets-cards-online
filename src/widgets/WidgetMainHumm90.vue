@@ -34,7 +34,6 @@ import { defineComponent } from 'vue'
 import IconHumm90Bird from 'src/components/icons/IconHumm90Bird.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
-import CardProps from 'src/models/Card'
 import TabProps from 'src/models/Tabs'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
@@ -52,7 +51,6 @@ export default defineComponent({
     theme: String as () => ThemeEnum,
     data: {
       type: Object as () => {
-        cards: CardProps
         tabs: TabProps
         terms: string
       },
@@ -65,7 +63,6 @@ export default defineComponent({
       isDialogOpen: false,
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
-      cards: this.data.cards,
       tabs: this.data.tabs,
       terms: this.data.terms,
     }
