@@ -5,16 +5,14 @@
     @close-widget="isWidgetOpen = false"
   >
     <template #logo>
-      <div class="cards">
-        <div class="cards__products">
-          <Card>
-            <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
-          </Card>
-          <Card>
-            <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
-          </Card>
-        </div>
-      </div>
+      <CardsLogo>
+        <Card>
+          <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
+        </Card>
+        <Card>
+          <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
+        </Card>
+      </CardsLogo>
     </template>
     <template #title>
       <p class="widget__title">
@@ -53,6 +51,7 @@ import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import CardProps from 'src/models/Card'
 import TabProps from 'src/models/Tabs'
 import WidgetContent from 'src/modules/WidgetContent.vue'
+import CardsLogo from 'src/modules/CardsLogo.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
 import ApplyContent from 'src/modules/ApplyContent.vue'
 
@@ -61,6 +60,7 @@ export default defineComponent({
   components: {
     Card,
     WidgetContent,
+    CardsLogo,
     DialogOverlay,
     ApplyContent,
   },
