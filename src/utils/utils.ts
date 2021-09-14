@@ -1,6 +1,9 @@
 import { isDevelopment, merchantId } from 'src/utils/constants'
 import ScriptParametersEnum from 'src/models/enums/ScriptParametersEnum'
 import type ScriptParameters from 'src/models/ScriptParameters'
+import { Product } from 'src/models/Response'
+import { ContentsProps, TabItemProps } from 'src/models/Tabs'
+import { ProductLanguage } from 'src/lang/ResponseLanguage'
 
 export const getCurrentScript = (): HTMLOrSVGScriptElement =>
   document.currentScript ||
@@ -45,4 +48,29 @@ export const getAllScriptURLParameters = (
     }, {} as ScriptParameters)
 
   return params
+}
+
+export const getTabsData = (productsData: Product[]): TabItemProps[] => {
+  const tabs = productsData.map(product => ({
+    id: product.id,
+    label: product.type,
+    contents: getProductContent(product),
+  }))
+  return tabs
+}
+
+export const getProductContent = (productData: Product): ContentsProps[] => {
+  const contents = []
+  for (const [key, value] of Object.entries(productData)) {
+    contents.push({
+      name: getProductLabel(key),
+      value: value,
+    })
+  }
+  return contents
+}
+
+export const getProductLabel = (property: string): string => {
+  const nameLabelPair = ProductLanguage.find(item => item.name === property)
+  return nameLabelPair ? nameLabelPair.label : property
 }
