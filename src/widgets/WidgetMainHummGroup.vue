@@ -63,12 +63,16 @@ export default defineComponent({
     productPrice: Number,
     lang: String as () => LanguageCodeEnum,
     theme: String as () => ThemeEnum,
-    data: {
-      type: Object as () => {
-        cards: CardProps
-        tabs: TabProps
-        terms: string
-      },
+    cards: {
+      type: Object as () => CardProps,
+      required: true,
+    },
+    tabs: {
+      type: Object as () => TabProps,
+      required: true,
+    },
+    terms: {
+      type: String,
       required: true,
     },
   },
@@ -78,9 +82,6 @@ export default defineComponent({
       isDialogOpen: false,
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
-      cards: this.data.cards,
-      tabs: this.data.tabs,
-      terms: this.data.terms,
     }
   },
 })

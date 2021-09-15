@@ -18,10 +18,10 @@ export interface Product {
   remainderInterestPeriodMontlyRepayment: number
 }
 
-export interface Response {
+export interface ResponseProps {
   products: Product[]
   cards: Card[]
   terms: string
 }
 
-export default Response
+export default ResponseProps
