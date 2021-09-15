@@ -1,8 +1,9 @@
 import { isDevelopment, merchantId } from 'src/utils/constants'
 import ScriptParametersEnum from 'src/models/enums/ScriptParametersEnum'
 import type ScriptParameters from 'src/models/ScriptParameters'
-import { Product } from 'src/models/Response'
+import { Product, Card } from 'src/models/Response'
 import { ContentsProps, TabItemProps } from 'src/models/Tabs'
+import CardProps from 'src/models/Card'
 import { ProductLanguage } from 'src/lang/ResponseLanguage'
 
 export const getCurrentScript = (): HTMLOrSVGScriptElement =>
@@ -73,4 +74,13 @@ export const getProductContent = (productData: Product): ContentsProps[] => {
 export const getProductLabel = (property: string): string => {
   const nameLabelPair = ProductLanguage.find(item => item.name === property)
   return nameLabelPair ? nameLabelPair.label : property
+}
+
+export const getCardsData = (cardsData: Card[]): CardProps[] => {
+  const cards = cardsData.map(card => ({
+    id: card.id,
+    alt: card.name,
+    src: card.image,
+  }))
+  return cards
 }

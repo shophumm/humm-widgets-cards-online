@@ -6,11 +6,8 @@
   >
     <template #logo>
       <CardsLogo>
-        <Card>
-          <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
-        </Card>
-        <Card>
-          <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
+        <Card v-for="card in cards.slice(0, 1)" :key="card.id" size="sm">
+          <img :src="card.src" :alt="card.alt" />
         </Card>
       </CardsLogo>
     </template>
@@ -20,7 +17,7 @@
       </p>
     </template>
     <template #subtitle>
-      <span class="widget__subtitle"> Indicative Payments. Ts&Cs Apply. </span>
+      <span class="widget__subtitle">Indicative Payments. Ts&Cs Apply.</span>
     </template>
   </WidgetContent>
 
@@ -60,11 +57,11 @@ export default defineComponent({
     lang: String as () => LanguageCodeEnum,
     theme: String as () => ThemeEnum,
     cards: {
-      type: Object as () => CardProps,
+      type: Array as () => CardProps[],
       required: true,
     },
     tabs: {
-      type: Object as () => TabProps,
+      type: Array as () => TabProps[],
       required: true,
     },
     terms: {

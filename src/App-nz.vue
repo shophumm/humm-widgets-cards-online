@@ -23,7 +23,7 @@ import ThemeEnum from 'src/models/enums/ThemeEnum'
 import AppProps from 'src/models/App'
 import ResponseProps from 'src/models/Response'
 import fetchData from 'src/utils/apiUtils'
-import { getTabsData } from 'src/utils/utils'
+import { getTabsData, getCardsData } from 'src/utils/utils'
 
 // TODO: i18n layer, use config/props to select widget type
 export default defineComponent({
@@ -41,28 +41,7 @@ export default defineComponent({
   },
   data() {
     return {
-      cards: [
-        {
-          id: 'card1',
-          size: 'lg',
-          alt: 'Humm90 card',
-        },
-        {
-          id: 'card2',
-          size: 'lg',
-          alt: 'Humm90 card',
-        },
-        {
-          id: 'card3',
-          size: 'lg',
-          alt: 'Humm90 card',
-        },
-        {
-          id: 'card4',
-          size: 'lg',
-          alt: 'Humm90 card',
-        },
-      ],
+      cards: [{}],
       tabs: [{}],
       terms: '',
     }
@@ -87,6 +66,7 @@ export default defineComponent({
     })) as unknown) as ResponseProps
     this.terms = responseData.terms
     this.tabs = getTabsData(responseData.products)
+    this.cards = getCardsData(responseData.cards)
   },
 })
 </script>
