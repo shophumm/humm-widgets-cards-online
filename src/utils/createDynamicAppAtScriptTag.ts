@@ -1,6 +1,10 @@
 import { createApp, Component } from 'vue'
-import { getCurrentScript, getAllScriptURLParameters } from 'src/utils/utils'
-import { isDevelopment } from 'src/utils/constants'
+import {
+  getCurrentScript,
+  getAllScriptURLParameters,
+  loadStyles,
+} from 'src/utils/utils'
+import { isDevelopment, publicUrl, appName } from 'src/utils/constants'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 
 /**
@@ -10,13 +14,13 @@ import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
  * * @param elementID element id selector, with # prefix
  * * @param lang region language code
  */
-export const createDynamicAppAtScriptTag = (
+export const createDynamicAppAtScriptTag = async (
   component: Component,
   config: {
     elementID: string
     lang: LanguageCodeEnum
   }
-): void => {
+): Promise<void> => {
   const { elementID, lang } = config
 
   if (elementID.slice(0, 1) !== '#') {
@@ -34,6 +38,21 @@ export const createDynamicAppAtScriptTag = (
 
   const scriptEl = getCurrentScript()
   const props = getAllScriptURLParameters(scriptEl)
+  const removeCss = String(props.removeCss).toLowerCase() === 'true'
+
+  // Inject the stylesheet by default if in prod
+  // TODO, reserve the space for the widget before it loads to prevent CLS
+  if (!isDevelopment && !removeCss) {
+    const stylesheetUrl = `${publicUrl}/${appName}-${lang}.css`
+
+    try {
+      await loadStyles(stylesheetUrl)
+    } catch (error) {
+      throw new Error(
+        `Could not load CSS from ${stylesheetUrl}\n More details: ${error.toString()}`
+      )
+    }
+  }
 
   // In development we don't want to inject the app at the script tag in index.html
   if (!isDevelopment) {
