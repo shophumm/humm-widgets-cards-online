@@ -34,11 +34,9 @@ import { defineComponent } from 'vue'
 import IconHumm90Bird from 'src/components/icons/IconHumm90Bird.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
-import fetchData from 'src/utils/apiUtils'
+import TabProps from 'src/models/Tabs'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
-import { getTabsData } from 'src/utils/utils'
-import Response from 'src/models/Response'
 
 export default defineComponent({
   name: 'WidgetMainHumm90',
@@ -51,6 +49,14 @@ export default defineComponent({
     productPrice: Number,
     lang: String as () => LanguageCodeEnum,
     theme: String as () => ThemeEnum,
+    tabs: {
+      type: Object as () => TabProps,
+      required: true,
+    },
+    terms: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {
@@ -58,46 +64,11 @@ export default defineComponent({
       isDialogOpen: false,
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
-      responseData: {},
-      // TODO: replace placeholder data
-      cards: [
-        {
-          id: 'card1',
-          size: 'lg',
-          alt: 'Humm90 card',
-        },
-        {
-          id: 'card2',
-          size: 'lg',
-          alt: 'Humm90 card',
-        },
-        {
-          id: 'card3',
-          size: 'lg',
-          alt: 'Humm90 card',
-        },
-        {
-          id: 'card4',
-          size: 'lg',
-          alt: 'Humm90 card',
-        },
-      ],
-      tabs: [{}],
-      terms: '',
     }
-  },
-  async created() {
-    this.responseData = await fetchData('widget', {
-      method: 'POST',
-    })
-    this.terms = (this.responseData as Response).terms
-    this.tabs = getTabsData((this.responseData as Response).products)
   },
 })
 </script>
 
 <style scoped lang="scss">
 @import 'src/styles/widget.scss';
-
-@import 'src/styles/cards.scss';
 </style>
