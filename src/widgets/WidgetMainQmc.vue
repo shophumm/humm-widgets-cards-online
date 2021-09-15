@@ -93,6 +93,4 @@ export default defineComponent({
 
 <style scoped lang="scss">
 @import 'src/styles/widget.scss';
-
-@import 'src/styles/cards.scss';
 </style>
