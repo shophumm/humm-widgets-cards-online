@@ -1,7 +1,9 @@
 import type { Sizes } from 'src/models/enums/SizeEnum'
 
 export interface CardProps {
-  size?: Sizes
+  id: string
+  size: Sizes
+  alt: string
 }
 
 export default CardProps
