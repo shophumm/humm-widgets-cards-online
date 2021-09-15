@@ -6,9 +6,9 @@ module.exports = {
   // Set the production output dir to build/ instead of dist/
   outputDir: 'build',
 
-  // Inlines the css into the JS file if false
+  // Inlines the css into the JS file
   css: {
-    extract: true,
+    extract: false,
   },
 
   configureWebpack(config) {

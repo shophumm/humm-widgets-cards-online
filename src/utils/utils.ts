@@ -9,48 +9,6 @@ export const getCurrentScript = (): HTMLOrSVGScriptElement =>
     return scripts[scripts.length - 1]
   })()
 
-export const injectStyles = (styles?: string): void => {
-  if (!styles) return
-
-  const style = document.createElement('style')
-  style.innerHTML = styles
-
-  document.getElementsByTagName('head')[0].appendChild(style)
-}
-
-export const fetchText = async (url: string): Promise<string | undefined> => {
-  try {
-    const response = await fetch(url)
-
-    if (!response.ok) {
-      throw new Error(response.statusText)
-    }
-
-    return await response.text()
-  } catch (error) {
-    throw new Error(
-      `Could not load resource from ${url}\n More details: ${error.toString()}`
-    )
-  }
-}
-
-export const loadStyles = async (url: string): Promise<void> => {
-  const styles = await fetchText(url)
-
-  return new Promise((resolve, reject) => {
-    try {
-      injectStyles(styles)
-    } catch (error) {
-      return reject(error)
-    }
-
-    // Resolve for the next repaint
-    requestAnimationFrame(() => {
-      resolve()
-    })
-  })
-}
-
 // Get all parameters set on the script URL to pass a set restricted to ScriptParametersEnum in as initial properties
 // No IE 11 support for URLSearchParams or Object.fromEntries
 // Do not get script parameters in development, as this doesn't work with the auto-injected script tag
@@ -60,7 +18,6 @@ export const getAllScriptURLParameters = (
   if (isDevelopment) {
     return {
       productPrice: 56,
-      removeCss: false,
       merchantId,
     }
   }
