@@ -48,28 +48,16 @@
     </div>
   </div>
 
-  <Dialog
-    v-if="isDialogOpen"
+  <DialogOverlay
     id="widget-dialog"
+    :is-dialog-open="isDialogOpen"
     :button-close-label="buttonCloseLabel"
+    :tabs-data="tabs"
+    :accordian-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
-    <template #body>
-      <Tabs :tabs="tabs">
-        <template #default="{ activeTabId }">
-          <Tab tab-id="12months" :active-tab-id="activeTabId">
-            <DataList :contents="tabsContents('12months')" />
-          </Tab>
-          <Tab tab-id="18months" :active-tab-id="activeTabId">
-            <DataList :contents="tabsContents('18months')" />
-          </Tab>
-        </template>
-      </Tabs>
-      <Accordion id="widget-terms" :content="terms">
-        Terms & Conditions
-      </Accordion>
-      <!-- TODO: replace placeholder data -->
-      <!-- TODO: view logic for displaying card options -->
+    <template #header>Monthly payments</template>
+    <template #footer>
       <div v-if="theme === Theme.QMasterCard || theme === Theme.HummGroup">
         <div class="cards cards--full cards--border">
           <p class="cards__title">Learn more about our credit card options.</p>
@@ -85,7 +73,7 @@
         </div>
       </div>
     </template>
-  </Dialog>
+  </DialogOverlay>
 </template>
 
 <script lang="ts">
@@ -95,11 +83,6 @@ import IconHummGroup from 'src/components/icons/IconHummGroup.vue'
 import Card from 'src/components/dataDisplay/Card.vue'
 import Button from 'src/components/buttons/Button.vue'
 import ButtonClose from 'src/components/buttons/ButtonClose.vue'
-import Dialog from 'src/components/dialog/Dialog.vue'
-import Tabs from 'src/components/tabs/Tabs.vue'
-import Tab from 'src/components/tabs/Tab.vue'
-import DataList from 'src/components/tabs/DataList.vue'
-import Accordion from 'src/components/accordion/Accordion.vue'
 import TitleAu from 'src/components/dataDisplay/TitleAu.vue'
 import TitleQmc from 'src/components/dataDisplay/TitleQmc.vue'
 import TitleFarmers from 'src/components/dataDisplay/TitleFarmers.vue'
@@ -108,6 +91,7 @@ import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import fetchData from 'src/utils/apiUtils'
 import { updateFirstLetterToUpperCase } from 'src/utils/utils'
+import DialogOverlay from 'src/modules/DialogOverlay.vue'
 
 export default defineComponent({
   name: 'WidgetMainSmall',
@@ -117,11 +101,7 @@ export default defineComponent({
     Card,
     Button,
     ButtonClose,
-    Dialog,
-    Tabs,
-    Tab,
-    DataList,
-    Accordion,
+    DialogOverlay,
   },
   props: {
     title: String,
@@ -228,9 +208,6 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
     closeWidget() {
       this.isWidgetOpen = false
     },
-    tabsContents(id: string): Record<string, string>[] | undefined {
-      return this.tabs.find(item => item.id === id)?.contents
-    },
     updateFirstLetterToUpperCase(sentence: string) {
       return updateFirstLetterToUpperCase(sentence)
     },
@@ -239,95 +216,7 @@ Indicative monthly payment is a minimum monthly repayment (MMP) of the greater o
 </script>
 
 <style scoped lang="scss">
+@import 'src/styles/widget.scss';
+
 @import 'src/styles/cards.scss';
-
-.widget {
-  font-family: var(--font-base);
-  background-color: var(--color-1);
-  color: var(--color-1-contrast);
-  padding: 11px 10px 8px 8px;
-  border-radius: var(--radius-2);
-  position: relative;
-  filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.1));
-
-  @media (min-width: 430px) {
-    display: flex;
-    padding: 5px 10px 6px 8px;
-    max-width: 412px;
-    min-height: 36px;
-  }
-
-  &__content {
-    display: flex;
-    width: 100%;
-  }
-
-  &__container {
-    display: block;
-    margin-left: 10px;
-
-    @media (min-width: 430px) {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      justify-content: space-between;
-      margin-right: 10px;
-    }
-
-    .button {
-      margin-top: 5px;
-
-      @media (min-width: 430px) {
-        margin-top: 0;
-      }
-    }
-  }
-
-  &__text {
-    display: flex;
-    flex-direction: column;
-    padding-right: 5px;
-  }
-
-  &__title {
-    font-size: 14px;
-    font-weight: 200;
-    letter-spacing: -0.03em;
-    margin: 0;
-  }
-
-  &__title + &__subtitle {
-    font-size: 12px;
-    font-weight: 200;
-    letter-spacing: -0.03em;
-    line-height: 13px;
-    margin-top: 2px;
-  }
-
-  &__iconbird {
-    margin: 0;
-
-    @media (min-width: 430px) {
-      margin: 11px 0 0 0;
-    }
-  }
-
-  &__hummgroup {
-    width: 72px;
-
-    @media (min-width: 430px) {
-      width: 100px;
-      margin: 11px 0 0 0;
-    }
-  }
-
-  &__close {
-    display: flex;
-    margin-left: auto;
-
-    @media (min-width: 430px) {
-      align-items: center;
-    }
-  }
-}
 </style>

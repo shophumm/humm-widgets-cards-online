@@ -21,7 +21,7 @@
       </li>
     </ul>
 
-    <slot :activeTabId="activeTabId"></slot>
+    <slot :activeTabId="activeTabId" />
   </div>
 </template>
 
