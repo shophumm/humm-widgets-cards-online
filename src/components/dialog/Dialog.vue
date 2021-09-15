@@ -132,7 +132,13 @@ export default defineComponent({
     background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     transition: opacity 0.3s ease;
+    overflow: scroll;
+
+    @media (min-width: 430px) {
+      align-items: center;
+    }
   }
 
   &__wrapper {
