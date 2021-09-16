@@ -71,9 +71,9 @@ export const getProductContent = (productData: Product): ContentsProps[] => {
   return contents
 }
 
-export const getProductLabel = (property: string): string => {
-  const nameLabelPair = ProductLanguage.find(item => item.name === property)
-  return nameLabelPair ? nameLabelPair.label : property
+export const getProductLabel = (nameKey: string): string => {
+  const nameLabelPair = ProductLanguage.find(item => item.name === nameKey)
+  return nameLabelPair ? nameLabelPair.label : nameKey
 }
 
 export const getCardsData = (cardsData: Card[]): CardProps[] => {
