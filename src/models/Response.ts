@@ -18,10 +18,10 @@ export interface Product {
   remainderInterestPeriodMontlyRepayment: number
 }
 
-export interface ResponseProps {
+export interface WidgetResponseBody {
   products: Product[]
   cards: Card[]
   terms: string
 }
 
-export default ResponseProps
+export default WidgetResponseBody

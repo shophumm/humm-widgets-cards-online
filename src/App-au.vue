@@ -18,7 +18,7 @@ import WidgetMainHumm90 from 'src/widgets/WidgetMainHumm90.vue'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import AppProps from 'src/models/App'
-import ResponseProps from 'src/models/Response'
+import WidgetResponseBody from 'src/models/Response'
 import fetchData from 'src/utils/apiUtils'
 import { getTabsData } from 'src/utils/utils'
 
@@ -56,7 +56,7 @@ export default defineComponent({
   async created() {
     const responseData = (await (fetchData('widget', {
       method: 'POST',
-    }) as unknown)) as ResponseProps
+    }) as unknown)) as WidgetResponseBody
     this.terms = responseData.terms
     this.tabs = getTabsData(responseData.products)
   },
