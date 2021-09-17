@@ -18,8 +18,7 @@ import WidgetMainHumm90 from 'src/widgets/WidgetMainHumm90.vue'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import AppProps from 'src/models/App'
-import WidgetResponseBody from 'src/models/Response'
-import fetchData from 'src/utils/apiUtils'
+import { fetchWidgetData } from 'src/utils/apiUtils'
 import { getTabsData } from 'src/utils/utils'
 
 // TODO: i18n layer, use config/props to select widget type
@@ -54,11 +53,11 @@ export default defineComponent({
     },
   },
   async created() {
-    const responseData = (await (fetchData('widget', {
-      method: 'POST',
-    }) as unknown)) as WidgetResponseBody
-    this.terms = responseData.terms
-    this.tabs = getTabsData(responseData.products)
+    const responseData = await fetchWidgetData()
+    if (responseData) {
+      this.terms = responseData.terms
+      this.tabs = getTabsData(responseData.products)
+    }
   },
 })
 </script>
