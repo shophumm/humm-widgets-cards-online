@@ -61,13 +61,10 @@ export const getTabsData = (productsData: Product[]): TabItemProps[] => {
 }
 
 export const getProductContent = (productData: Product): ContentsProps[] => {
-  const contents = []
-  for (const [key, value] of Object.entries(productData)) {
-    contents.push({
-      name: getProductLabel(key),
-      value: value,
-    })
-  }
+  const contents = Object.entries(productData).map(item => ({
+    name: getProductLabel(item[0]),
+    value: item[1],
+  }))
   return contents
 }
 
