@@ -6,7 +6,7 @@
   >
     <template #logo>
       <CardsLogo>
-        <Card v-for="card in cards.slice(0, 1)" :key="card.id" size="sm">
+        <Card v-for="card in getLogoCards" :key="card.id" size="sm">
           <img :src="card.src" :alt="card.alt" />
         </Card>
       </CardsLogo>
@@ -76,6 +76,11 @@ export default defineComponent({
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
     }
+  },
+  computed: {
+    getLogoCards(): CardProps[] {
+      return this.cards.slice(0, 1)
+    },
   },
 })
 </script>

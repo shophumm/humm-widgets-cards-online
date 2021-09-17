@@ -6,7 +6,7 @@
   >
     <template #logo>
       <CardsLogo>
-        <Card v-for="card in cards.slice(0, 2)" :key="card.id" size="sm">
+        <Card v-for="card in getLogoCards" :key="card.id" size="sm">
           <img :src="card.src" :alt="card.alt" />
         </Card>
       </CardsLogo>
@@ -32,7 +32,7 @@
     <template #header>Monthly payments</template>
     <template #footer>
       <ApplyContent>
-        <Card v-for="card in cards.slice(0, 4)" :key="card.id" size="lg">
+        <Card v-for="card in getApplyCards" :key="card.id" size="lg">
           <img :src="card.src" :alt="card.alt" />
         </Card>
       </ApplyContent>
@@ -85,6 +85,14 @@ export default defineComponent({
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
     }
+  },
+  computed: {
+    getLogoCards(): CardProps[] {
+      return this.cards.slice(0, 2)
+    },
+    getApplyCards(): CardProps[] {
+      return this.cards.slice(0, 4)
+    },
   },
 })
 </script>
