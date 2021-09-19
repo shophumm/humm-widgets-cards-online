@@ -61,10 +61,13 @@ export const getTabsData = (productsData: Product[]): TabItemProps[] => {
 }
 
 export const getProductContent = (productData: Product): ContentsProps[] => {
-  const contents = Object.entries(productData).map(item => ({
-    name: getProductLabel(item[0]),
-    value: item[1],
-  }))
+  const contents = Object.entries(productData).map(item => {
+    const [langKey, langValue] = item
+    return {
+      name: getProductLabel(langKey),
+      value: langValue,
+    }
+  })
   return contents
 }
 
