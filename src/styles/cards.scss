@@ -25,6 +25,14 @@
     margin-bottom: 20px;
   }
 
+  &--logo {
+    width: 75px;
+
+    @media (min-width: 430px) {
+      width: 107px;
+    }
+  }
+
   &__products {
     display: flex;
 

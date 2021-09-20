@@ -13,7 +13,7 @@
       <p class="widget__title">UP TO 60 MONTHS INTEREST-FREE.</p>
     </template>
     <template #subtitle>
-      <span class="widget__subtitle"> Indicative Payments. Ts&Cs Apply. </span>
+      <span class="widget__subtitle">Indicative Payments. Ts&Cs Apply.</span>
     </template>
   </WidgetContent>
 
@@ -49,11 +49,12 @@ export default defineComponent({
     productPrice: Number,
     lang: String as () => LanguageCodeEnum,
     theme: String as () => ThemeEnum,
-    data: {
-      type: Object as () => {
-        tabs: TabProps
-        terms: string
-      },
+    tabs: {
+      type: Array as () => TabProps[],
+      required: true,
+    },
+    terms: {
+      type: String,
       required: true,
     },
   },
@@ -63,8 +64,6 @@ export default defineComponent({
       isDialogOpen: false,
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
-      tabs: this.data.tabs,
-      terms: this.data.terms,
     }
   },
 })

@@ -131,17 +131,18 @@ export default defineComponent({
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
     display: flex;
-    justify-content: center;
     transition: opacity 0.3s ease;
+    overflow: auto;
   }
 
   &__wrapper {
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
     pointer-events: none;
     padding: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
   }
 
   &__container {
