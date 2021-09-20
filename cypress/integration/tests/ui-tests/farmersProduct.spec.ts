@@ -1,4 +1,4 @@
-import { merchantProductPage } from "../../page-objects/merchantProductPage";
+import { merchantProductPage } from "cypress/page-objects/merchantProductPage";
 
 describe('Farmers Product Page Injection Test', () => {
     beforeEach(() => {

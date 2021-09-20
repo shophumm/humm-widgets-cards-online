@@ -17,7 +17,10 @@
     "perf:svg": "npx svgo src/assets/images/*.svg -o src/assets/images/*.svg",
     "perf:build": "npx source-map-explorer build/*.js --no-border-checks",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "start:cypress": "npx cypress run",
+    "open": "npx cypress open",
+    "record": "npx cypress run --record --key 3d96ba1c-7211-4e98-bd5c-30dc82ed7d30"
   },
   "dependencies": {
     "core-js": "3.6.5",
@@ -44,6 +47,7 @@
     "@vue/eslint-config-typescript": "7.0.0",
     "@vue/test-utils": "2.0.0-rc.12",
     "babel-loader": "8.2.2",
+    "cypress": "8.4.1",
     "eslint": "6.7.2",
     "eslint-plugin-prettier": "3.3.1",
     "eslint-plugin-vue": "7.0.0",
