@@ -5,12 +5,21 @@ export const fetchData = async <T>(
   endpoint: string,
   config?: RequestInit
 ): Promise<T | undefined> => {
+  const url = `${apiUrl}/${endpoint}`
   try {
-    const request = await fetch(`${apiUrl}/${endpoint}`, config)
+    const request = await fetch(url, config)
+
+    if (!request.ok) {
+      throw new Error(request.statusText)
+    }
+
     const response = request.json()
     return response
-  } catch (err) {
-    console.log(err)
+  } catch (error) {
+    if (error instanceof Error)
+      throw new Error(
+        `Could not get a response from ${url}\n More details: ${error.toString()}`
+      )
   }
 }
 
