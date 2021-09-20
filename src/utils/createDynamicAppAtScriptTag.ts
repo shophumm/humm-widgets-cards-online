@@ -6,6 +6,7 @@ import {
 } from 'src/utils/utils'
 import { isDevelopment, publicUrl, appName } from 'src/utils/constants'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
+import ThemeEnum from 'src/models/enums/ThemeEnum'
 
 /**
  * Mounts the Vue app at a created root element directly after the initialising script tag
@@ -23,21 +24,30 @@ export const createDynamicAppAtScriptTag = async (
 ): Promise<void> => {
   const { elementID, lang } = config
 
+  const scriptEl = getCurrentScript()
+  const props = getAllScriptURLParameters(scriptEl)
+  const merchantId = props.merchantId
+  const theme = merchantId
+
   if (elementID.slice(0, 1) !== '#') {
     throw new Error(
       'elementID must be a valid id selector string. E.g: #my-component'
     )
   }
 
-  const mountTargetSelector = `${elementID.substring(1)}-${lang}`
+  if (theme && !Object.values(ThemeEnum).includes(theme as ThemeEnum))
+    console.warn('theme doesnt exist for this merchantId')
+
+  const mountTargetSelector = `${elementID.substring(1)}-${lang}-${
+    theme ? theme : 'default'
+  }`
+
   if (!isDevelopment && document.getElementById(mountTargetSelector)) {
     throw new Error(
       'An instance of the widget has already been initialized. You can only add one widget script tag per page'
     )
   }
 
-  const scriptEl = getCurrentScript()
-  const props = getAllScriptURLParameters(scriptEl)
   const removeCss = String(props.removeCss).toLowerCase() === 'true'
 
   // Inject the stylesheet by default if in prod
@@ -48,9 +58,10 @@ export const createDynamicAppAtScriptTag = async (
     try {
       await loadStyles(stylesheetUrl)
     } catch (error) {
-      throw new Error(
-        `Could not load CSS from ${stylesheetUrl}\n More details: ${error.toString()}`
-      )
+      if (error instanceof Error)
+        throw new Error(
+          `Could not load CSS from ${stylesheetUrl}\n More details: ${error.toString()}`
+        )
     }
   }
 
@@ -64,7 +75,9 @@ export const createDynamicAppAtScriptTag = async (
 
   // In development we only render one region's app at the time by using a generic selector
   // in production we use a region specific selector
-  const mountTargetID = isDevelopment ? elementID : `${elementID}-${lang}`
+  const mountTargetID = isDevelopment
+    ? elementID
+    : `${elementID}-${lang}-${theme ? theme : 'default'}`
 
-  createApp(component, { ...props, lang }).mount(mountTargetID)
+  createApp(component, { ...props, lang, theme }).mount(mountTargetID)
 }
