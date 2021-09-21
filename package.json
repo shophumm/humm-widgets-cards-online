@@ -12,7 +12,7 @@
     "start:lang": "vue-cli-service serve ./src/main-${LANG}.ts",
     "build:lib": "vue-cli-service build --no-clean --target lib --inline-vue --name ${npm_package_name}-${LANG} ./src/main-${LANG}.ts",
     "build": "LANG=au npm run build:lib && LANG=nz npm run build:lib",
-    "preview": "npm run build && npx serve ./build",
+    "preview": "npm run build && npx serve --config ./../serve.json ./build",
     "lint": "vue-cli-service lint",
     "perf:svg": "npx svgo src/assets/images/*.svg -o src/assets/images/*.svg",
     "perf:build": "npx source-map-explorer build/*.js --no-border-checks",
