@@ -28,9 +28,10 @@ export const fetchText = async (url: string): Promise<string | undefined> => {
 
     return await response.text()
   } catch (error) {
-    throw new Error(
-      `Could not load resource from ${url}\n More details: ${error.toString()}`
-    )
+    if (error instanceof Error)
+      throw new Error(
+        `Could not load resource from ${url}\n More details: ${error.toString()}`
+      )
   }
 }
 
@@ -62,6 +63,7 @@ export const getAllScriptURLParameters = (
       productPrice: 56,
       removeCss: false,
       merchantId,
+      theme: '',
     }
   }
 

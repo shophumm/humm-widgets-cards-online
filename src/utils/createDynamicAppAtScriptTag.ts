@@ -26,8 +26,6 @@ export const createDynamicAppAtScriptTag = async (
 
   const scriptEl = getCurrentScript()
   const props = getAllScriptURLParameters(scriptEl)
-  const merchantId = props.merchantId
-  const theme = merchantId
 
   if (elementID.slice(0, 1) !== '#') {
     throw new Error(
@@ -35,8 +33,9 @@ export const createDynamicAppAtScriptTag = async (
     )
   }
 
-  if (theme && !Object.values(ThemeEnum).includes(theme as ThemeEnum))
-    console.warn('theme doesnt exist for this merchantId')
+  const theme = !Object.values(ThemeEnum).includes(props.theme as ThemeEnum)
+    ? 'default'
+    : props.theme
 
   const mountTargetSelector = `${elementID.substring(1)}-${lang}-${
     theme ? theme : 'default'
