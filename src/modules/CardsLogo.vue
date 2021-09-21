@@ -1,5 +1,5 @@
 <template>
-  <div class="cards">
+  <div class="cards cards--logo">
     <CardsList>
       <slot />
     </CardsList>

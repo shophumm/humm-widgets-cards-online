@@ -1,6 +1,10 @@
 import { isDevelopment, merchantId } from 'src/utils/constants'
 import ScriptParametersEnum from 'src/models/enums/ScriptParametersEnum'
 import type ScriptParameters from 'src/models/ScriptParameters'
+import { Product, Card } from 'src/models/Response'
+import { ContentsProps, TabItemProps } from 'src/models/Tabs'
+import CardProps from 'src/models/Card'
+import { ProductLanguage } from 'src/lang/ResponseLanguage'
 
 export const getCurrentScript = (): HTMLOrSVGScriptElement =>
   document.currentScript ||
@@ -90,4 +94,38 @@ export const getAllScriptURLParameters = (
     }, {} as ScriptParameters)
 
   return params
+}
+
+export const getTabsData = (productsData: Product[]): TabItemProps[] => {
+  const tabs = productsData.map(product => ({
+    id: product.id,
+    label: product.type,
+    contents: getProductContent(product),
+  }))
+  return tabs
+}
+
+export const getProductContent = (productData: Product): ContentsProps[] => {
+  const contents = Object.entries(productData).map(item => {
+    const [langKey, langValue] = item
+    return {
+      name: getProductLabel(langKey),
+      value: langValue,
+    }
+  })
+  return contents
+}
+
+export const getProductLabel = (nameKey: string): string => {
+  const nameLabelPair = ProductLanguage.find(item => item.name === nameKey)
+  return nameLabelPair ? nameLabelPair.label : nameKey
+}
+
+export const getCardsData = (cardsData: Card[]): CardProps[] => {
+  const cards = cardsData.map(card => ({
+    id: card.id,
+    alt: card.name,
+    src: card.image,
+  }))
+  return cards
 }

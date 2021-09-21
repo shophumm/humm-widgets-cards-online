@@ -6,11 +6,8 @@
   >
     <template #logo>
       <CardsLogo>
-        <Card>
-          <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
-        </Card>
-        <Card>
-          <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
+        <Card v-for="card in getLogoCards" :key="card.id" size="sm">
+          <img :src="card.src" :alt="card.alt" />
         </Card>
       </CardsLogo>
     </template>
@@ -20,7 +17,7 @@
       </p>
     </template>
     <template #subtitle>
-      <span class="widget__subtitle"> Indicative Payments. Ts&Cs Apply. </span>
+      <span class="widget__subtitle">Indicative Payments. Ts&Cs Apply.</span>
     </template>
   </WidgetContent>
 
@@ -35,8 +32,8 @@
     <template #header>Monthly payments</template>
     <template #footer>
       <ApplyContent>
-        <Card v-for="card in cards" :key="card.id" :size="card.size">
-          <img src="../assets/images/humm90Card.png" :alt="card.alt" />
+        <Card v-for="card in getApplyCards" :key="card.id" size="lg">
+          <img :src="card.src" :alt="card.alt" />
         </Card>
       </ApplyContent>
     </template>
@@ -68,12 +65,16 @@ export default defineComponent({
     productPrice: Number,
     lang: String as () => LanguageCodeEnum,
     theme: String as () => ThemeEnum,
-    data: {
-      type: Object as () => {
-        cards: CardProps
-        tabs: TabProps
-        terms: string
-      },
+    cards: {
+      type: Array as () => CardProps[],
+      required: true,
+    },
+    tabs: {
+      type: Array as () => TabProps[],
+      required: true,
+    },
+    terms: {
+      type: String,
       required: true,
     },
   },
@@ -83,10 +84,15 @@ export default defineComponent({
       isDialogOpen: false,
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
-      cards: this.data.cards,
-      tabs: this.data.tabs,
-      terms: this.data.terms,
     }
+  },
+  computed: {
+    getLogoCards(): CardProps[] {
+      return this.cards.slice(0, 2)
+    },
+    getApplyCards(): CardProps[] {
+      return this.cards.slice(0, 4)
+    },
   },
 })
 </script>
