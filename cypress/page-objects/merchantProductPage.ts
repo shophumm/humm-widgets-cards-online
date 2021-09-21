@@ -5,10 +5,10 @@ class _merchantProductPage {
             onLoad: contentWindow => {
                 return new Cypress.Promise((resolve, reject) => {
                     // create script element
-                    let tag = document.createElement('script')
+                    const tag = document.createElement('script')
 
                     // append script element
-                    let el = cy.$$(<any>contentWindow.document.body).find(targetElement)
+                    const el = cy.$$(<any>contentWindow.document.body).find(targetElement)
 
                     switch (position) {
                         case 'append':
