@@ -37,9 +37,7 @@ export const createDynamicAppAtScriptTag = async (
     ? 'default'
     : props.theme
 
-  const mountTargetSelector = `${elementID.substring(1)}-${lang}-${
-    theme ? theme : 'default'
-  }`
+  const mountTargetSelector = `${elementID.substring(1)}-${lang}-${theme}`
 
   if (!isDevelopment && document.getElementById(mountTargetSelector)) {
     throw new Error(
@@ -76,7 +74,7 @@ export const createDynamicAppAtScriptTag = async (
   // in production we use a region specific selector
   const mountTargetID = isDevelopment
     ? elementID
-    : `${elementID}-${lang}-${theme ? theme : 'default'}`
+    : `${elementID}-${lang}-${theme}`
 
   createApp(component, { ...props, lang, theme }).mount(mountTargetID)
 }
