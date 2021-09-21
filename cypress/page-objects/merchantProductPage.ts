@@ -1,7 +1,5 @@
 class _merchantProductPage {
 
-    produdctPrice: string = '300'
-
     visitAndInjectWidget(url: string, targetElement: string, position: string) {
         cy.visit(url, {
             onLoad: contentWindow => {
