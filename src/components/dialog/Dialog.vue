@@ -8,9 +8,9 @@
           :aria-labelledby="id + '-label'"
           class="dialog__container"
         >
-          <div class="dialog__header">
-            <div :id="id + '-label'" ref="dialogHeader" tabindex="-1">
-              <slot name="header">Monthly payments</slot>
+          <div class="dialog__title">
+            <div :id="id + '-label'" ref="dialogTitle" tabindex="-1">
+              <slot name="title" />
             </div>
             <ButtonClose
               icon-opacity="0.8"
@@ -19,6 +19,10 @@
             >
               {{ buttonCloseLabel }}
             </ButtonClose>
+          </div>
+
+          <div class="dialog__header">
+            <slot name="header" />
           </div>
 
           <div class="dialog__body">
@@ -61,7 +65,7 @@ export default defineComponent({
   mounted() {
     this.$nextTick(() => {
       // Focus on the first element when mounting as a11y best practice
-      const element = this.$refs.dialogHeader as HTMLDivElement | undefined
+      const element = this.$refs.dialogTitle as HTMLDivElement | undefined
       element?.focus()
 
       // Allow closing the dialog with esc
@@ -162,13 +166,22 @@ export default defineComponent({
     }
   }
 
-  &__header {
-    font-size: 16px;
+  &__title {
+    font-size: 20px;
     font-weight: 700;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  &__header {
+    width: 100%;
+    display: block;
+
+    &:not(:empty) {
+      margin-top: 20px;
+    }
   }
 
   &__body {

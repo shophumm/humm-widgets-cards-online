@@ -5,8 +5,11 @@
     :button-close-label="buttonCloseLabel"
     @toggle-dialog="toggleDialog"
   >
+    <template #title>
+      <slot name="title">Interest-free Payment</slot>
+    </template>
     <template #header>
-      <slot name="header" />
+      <MastercardExisting />
     </template>
     <template #body>
       <Tabs :tabs="tabsData">
@@ -19,10 +22,10 @@
           </Tab>
         </template>
       </Tabs>
-      <Accordion id="widget-terms" :content="accordianData">
+      <slot name="footer" />
+      <Accordion id="widget-terms" :content="accordionData">
         Terms & Conditions
       </Accordion>
-      <slot name="footer" />
     </template>
   </Dialog>
 </template>
@@ -35,6 +38,7 @@ import Tabs from 'src/components/tabs/Tabs.vue'
 import Tab from 'src/components/tabs/Tab.vue'
 import DataList from 'src/components/tabs/DataList.vue'
 import { TabItemProps, ContentsProps } from 'src/models/Tabs'
+import MastercardExisting from 'src/modules/MastercardExisting.vue'
 
 export default defineComponent({
   name: 'DialogOverlay',
@@ -44,6 +48,7 @@ export default defineComponent({
     DataList,
     Tab,
     Tabs,
+    MastercardExisting,
   },
   props: {
     isDialogOpen: {
@@ -57,7 +62,7 @@ export default defineComponent({
       type: Array as () => TabItemProps[],
       required: true,
     },
-    accordianData: {
+    accordionData: {
       type: String,
       required: true,
     },

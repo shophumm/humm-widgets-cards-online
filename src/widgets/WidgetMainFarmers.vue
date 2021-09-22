@@ -29,11 +29,9 @@
     :is-dialog-open="isDialogOpen"
     :button-close-label="buttonCloseLabel"
     :tabs-data="tabs"
-    :accordian-data="terms"
+    :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
-  >
-    <template #header>Monthly payments</template>
-  </DialogOverlay>
+  />
 </template>
 
 <script lang="ts">

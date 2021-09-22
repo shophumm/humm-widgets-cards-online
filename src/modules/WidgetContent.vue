@@ -7,13 +7,17 @@
           <slot name="title" />
           <slot name="subtitle" />
         </div>
-        <Button button-color="var(--color-2)" @click="toggleDialog">
-          Explore
+        <Button
+          :button-color="buttonColor"
+          :is-bold="isButtonBold"
+          @click="toggleDialog"
+        >
+          {{ buttonLabel }}
         </Button>
       </div>
       <div class="widget__close">
         <ButtonClose
-          icon-opacity="1"
+          :icon-opacity="iconOpacity"
           fill="var(--color-1-contrast)"
           @click="closeWidget"
         >
@@ -40,6 +44,19 @@ export default defineComponent({
       type: Boolean,
       required: true,
     },
+    buttonLabel: {
+      type: String,
+      default: 'EXPLORE',
+    },
+    buttonColor: {
+      type: String,
+      default: 'var(--color-2)',
+    },
+    iconOpacity: {
+      type: String,
+      default: '1',
+    },
+    isButtonBold: Boolean,
   },
   emits: ['toggle-dialog', 'close-widget'],
   methods: {

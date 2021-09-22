@@ -42,7 +42,7 @@ export default defineComponent({
   &[data-lang='nz'],
   &[data-theme='qmc'] {
     --color-0: #000000;
-    --color-1: #ffffff;
+    --color-1: #732d81;
     --color-1-contrast: #000000;
     --color-2: #732d81; // Web / Tile / Button / Secondary
     --bg-1: #ffffff; // Widget background
