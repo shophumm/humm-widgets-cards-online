@@ -1,1 +1,8 @@
-{}
+{
+    "watchForFileChanges": false,
+    "screenshotOnRunFailure": false,
+    "video": false,
+    "env": {
+        "baseUrl": "http://localhost:5000/"
+    }
+}

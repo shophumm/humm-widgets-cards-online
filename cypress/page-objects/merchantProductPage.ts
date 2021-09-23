@@ -32,7 +32,7 @@ class _merchantProductPage {
 
                     // set source of element (Note, must be done post injection, else the script wont have a "DOM" location to inject
                     tag.src =
-                        'http://localhost:5000/humm-widgets-cards-nz.umd.js?productPrice=300'
+                        Cypress.env('baseUrl') + 'humm-widgets-cards-nz.umd.js?productPrice=300'
 
                     // Add a timeout, to reject promise after 2.5s of not "load" fired
                     setTimeout(() => {
