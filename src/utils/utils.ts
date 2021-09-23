@@ -5,6 +5,7 @@ import { Product, Card } from 'src/models/Response'
 import { ContentsProps, TabItemProps } from 'src/models/Tabs'
 import CardProps from 'src/models/Card'
 import { ProductLanguage } from 'src/lang/ResponseLanguage'
+import ThemeEnum from 'src/models/enums/ThemeEnum'
 
 export const getCurrentScript = (): HTMLOrSVGScriptElement =>
   document.currentScript ||
@@ -54,6 +55,19 @@ export const loadStyles = async (url: string): Promise<void> => {
       resolve()
     })
   })
+}
+
+export const parseThemeParameter = (
+  themeParam: unknown,
+  removeCss: boolean
+): string => {
+  const rawTheme = removeCss ? 'blank' : `${themeParam}`
+  const isValidTheme = Object.values<string | ThemeEnum>(ThemeEnum).includes(
+    rawTheme
+  )
+  const theme = isValidTheme ? rawTheme : 'default'
+
+  return theme
 }
 
 // Get all parameters set on the script URL to pass a set restricted to ScriptParametersEnum in as initial properties
