@@ -1,6 +1,10 @@
 <template>
   <WidgetContent
     :is-widget-open="isWidgetOpen"
+    :is-button-bold="true"
+    button-label="Learn More"
+    button-color="var(--color-1)"
+    icon-opacity="0.3"
     @toggle-dialog="isDialogOpen = true"
     @close-widget="isWidgetOpen = false"
   >
@@ -17,7 +21,7 @@
       </p>
     </template>
     <template #subtitle>
-      <span class="widget__subtitle">Indicative Payments. Ts&Cs Apply.</span>
+      <span class="widget__subtitle">T&Cs Apply.</span>
     </template>
   </WidgetContent>
 
@@ -26,16 +30,22 @@
     :is-dialog-open="isDialogOpen"
     :button-close-label="buttonCloseLabel"
     :tabs-data="tabs"
-    :accordian-data="terms"
+    :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
-    <template #header>Monthly payments</template>
-    <template #footer>
-      <ApplyContent>
+    <template #header>
+      <MastercardExisting>
         <Card v-for="card in getApplyCards" :key="card.id" size="lg">
           <img :src="card.src" :alt="card.alt" />
         </Card>
-      </ApplyContent>
+      </MastercardExisting>
+    </template>
+    <template #footer>
+      <MastercardApply>
+        <Card v-for="card in getApplyCards" :key="card.id" size="lg">
+          <img :src="card.src" :alt="card.alt" />
+        </Card>
+      </MastercardApply>
     </template>
   </DialogOverlay>
 </template>
@@ -50,7 +60,8 @@ import TabProps from 'src/models/Tabs'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import CardsLogo from 'src/modules/CardsLogo.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
-import ApplyContent from 'src/modules/ApplyContent.vue'
+import MastercardApply from 'src/modules/MastercardApply.vue'
+import MastercardExisting from 'src/modules/MastercardExisting.vue'
 
 export default defineComponent({
   name: 'WidgetMainQmc',
@@ -59,7 +70,8 @@ export default defineComponent({
     WidgetContent,
     CardsLogo,
     DialogOverlay,
-    ApplyContent,
+    MastercardApply,
+    MastercardExisting,
   },
   props: {
     productPrice: Number,

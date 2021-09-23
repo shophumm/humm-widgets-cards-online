@@ -1,5 +1,5 @@
 <template>
-  <Theme :lang="lang" :theme="theme">
+  <Theme :lang="lang" :theme="theme" :is-dark="darkMode">
     <component
       :is="currentWidget"
       :product-price="productPrice"
@@ -29,6 +29,7 @@ export default defineComponent({
   },
   props: {
     productPrice: Number,
+    darkMode: Boolean,
     lang: String as () => LanguageCodeEnum,
     theme: {
       type: String as () => ThemeEnum,

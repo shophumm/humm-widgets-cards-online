@@ -80,6 +80,7 @@ export const getAllScriptURLParameters = (
     return {
       productPrice: 56,
       removeCss: false,
+      darkMode: false,
       merchantId,
       theme: ThemeEnum.Default,
     }

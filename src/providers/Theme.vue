@@ -1,5 +1,5 @@
 <template>
-  <div class="theme" :data-lang="lang" :data-theme="theme">
+  <div class="theme" :data-lang="lang" :data-theme="theme" :data-dark="isDark">
     <slot />
   </div>
 </template>
@@ -14,6 +14,7 @@ export default defineComponent({
   props: {
     lang: String as () => LanguageCodeEnum,
     theme: String as () => ThemeEnum,
+    isDark: Boolean,
   },
 })
 </script>
@@ -40,13 +41,27 @@ export default defineComponent({
   --color-3: #8c8c8c; // Mid grey
   --color-4: #e7e7e7;
   --color-5: #fff;
+  --bg-1: #002555; // Widget background
 
   &[data-lang='nz'],
   &[data-theme='qmc'] {
     --color-0: #000000;
-    --color-1: #ffffff;
+    --color-1: #732d81;
     --color-1-contrast: #000000;
-    --color-2: #e92162; // Web / Tile / Button / Secondary
+    --color-2: #732d81; // Web / Tile / Button / Secondary
+    --bg-1: #ffffff; // Widget background
+  }
+
+  &[data-theme='qmc'][data-dark='true'] {
+    --color-0: #000000;
+    --color-1: #ffffff;
+    --color-1-contrast: #ffffff;
+    --color-2: #573a90; // Web / Tile / Button / Secondary
+    --bg-1: linear-gradient(
+      90deg,
+      #b83990 18.24%,
+      #573a90 87.88%
+    ); // Widget background
   }
 
   &[data-theme='farmers'] {
@@ -54,6 +69,7 @@ export default defineComponent({
     --color-1: #ffffff;
     --color-1-contrast: #000000;
     --color-2: #732d81; // Web / Tile / Button / Secondary
+    --bg-1: #ffffff; // Widget background
   }
 
   &[data-theme='hummgroup'] {
@@ -61,6 +77,7 @@ export default defineComponent({
     --color-1: #ffffff;
     --color-1-contrast: #000000;
     --color-2: #ff6c00; // Web / Tile / Button / Secondary
+    --bg-1: #ffffff; // Widget background
   }
 }
 </style>

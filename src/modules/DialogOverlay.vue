@@ -5,6 +5,9 @@
     :button-close-label="buttonCloseLabel"
     @toggle-dialog="toggleDialog"
   >
+    <template #title>
+      <slot name="title">Interest-free Payment</slot>
+    </template>
     <template #header>
       <slot name="header" />
     </template>
@@ -21,10 +24,10 @@
           </Tab>
         </template>
       </Tabs>
-      <Accordion id="widget-terms" :content="accordianData">
+      <slot name="footer" />
+      <Accordion id="widget-terms" :content="accordionData">
         Terms & Conditions
       </Accordion>
-      <slot name="footer" />
     </template>
   </Dialog>
 </template>
@@ -59,7 +62,7 @@ export default defineComponent({
       type: Array as () => TabItemProps[],
       required: true,
     },
-    accordianData: {
+    accordionData: {
       type: String,
       required: true,
     },

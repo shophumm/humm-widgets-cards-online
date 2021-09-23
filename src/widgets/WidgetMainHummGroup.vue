@@ -24,16 +24,15 @@
     :is-dialog-open="isDialogOpen"
     :button-close-label="buttonCloseLabel"
     :tabs-data="tabs"
-    :accordian-data="terms"
+    :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
-    <template #header>Monthly payments</template>
     <template #footer>
-      <ApplyContent>
+      <MastercardApply>
         <Card v-for="card in getApplyCards" :key="card.id" size="lg">
           <img :src="card.src" :alt="card.alt" />
         </Card>
-      </ApplyContent>
+      </MastercardApply>
     </template>
   </DialogOverlay>
 </template>
@@ -48,7 +47,7 @@ import CardProps from 'src/models/Card'
 import TabProps from 'src/models/Tabs'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
-import ApplyContent from 'src/modules/ApplyContent.vue'
+import MastercardApply from 'src/modules/MastercardApply.vue'
 
 export default defineComponent({
   name: 'WidgetMainHummGroup',
@@ -57,7 +56,7 @@ export default defineComponent({
     Card,
     WidgetContent,
     DialogOverlay,
-    ApplyContent,
+    MastercardApply,
   },
   props: {
     productPrice: Number,

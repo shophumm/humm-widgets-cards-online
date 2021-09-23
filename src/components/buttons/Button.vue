@@ -4,7 +4,12 @@
     :href="href"
     :class="[
       'button',
-      { 'button--primary': primary, [`button--${size}`]: size },
+      {
+        'button--primary': primary,
+        'button--bold': isBold,
+        'button--rounded': isRounded,
+        [`button--${size}`]: size,
+      },
     ]"
     :style="style"
     @click="onClick"
@@ -16,7 +21,12 @@
     type="button"
     :class="[
       'button',
-      { 'button--primary': primary, [`button--${size}`]: size },
+      {
+        'button--primary': primary,
+        'button--bold': isBold,
+        'button--rounded': isRounded,
+        [`button--${size}`]: size,
+      },
     ]"
     :style="style"
     @click="onClick"
@@ -45,6 +55,8 @@ export default defineComponent({
     },
     href: String,
     primary: Boolean,
+    isBold: Boolean,
+    isRounded: Boolean,
   },
   emits: ['click'],
   setup(props: ButtonProps, { emit }) {
@@ -72,7 +84,6 @@ export default defineComponent({
   display: inline-flex;
   align-items: center;
   line-height: 0.85;
-  text-transform: uppercase;
   appearance: none;
   font-size: 13px;
   border-radius: var(--radius-1);
@@ -100,6 +111,12 @@ export default defineComponent({
     min-height: 20px;
   }
 
+  &--md {
+    font-size: 14px;
+    min-height: 20px;
+    padding: 5px 15px;
+  }
+
   &--lg {
     font-size: 13px;
     font-weight: 700;
@@ -117,6 +134,14 @@ export default defineComponent({
   &[href] {
     text-decoration: none;
     color: inherit;
+  }
+
+  &--rounded {
+    border-radius: 10em;
+  }
+
+  &--bold {
+    font-weight: 700;
   }
 }
 </style>
