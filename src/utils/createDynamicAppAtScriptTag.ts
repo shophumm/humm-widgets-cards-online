@@ -38,7 +38,7 @@ export const createDynamicAppAtScriptTag = async (
     theme ? `-${theme}` : ``
   }`
 
-  if (!isDevelopment && (await document.getElementById(mountTargetSelector))) {
+  if (!isDevelopment && document.getElementById(mountTargetSelector)) {
     throw new Error(
       'An instance of the widget has already been initialized. You can only add one widget script tag per page'
     )
