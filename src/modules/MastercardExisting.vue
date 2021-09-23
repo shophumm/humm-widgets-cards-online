@@ -1,12 +1,7 @@
 <template>
   <div class="cards">
     <CardsList>
-      <Card size="lg">
-        <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
-      </Card>
-      <Card size="lg">
-        <img src="../assets/images/humm90Card.png" alt="Humm90 card" />
-      </Card>
+      <slot />
     </CardsList>
   </div>
   <p class="mc__title">Have a Farmers Mastercard® or Q Mastercard®?</p>
@@ -21,13 +16,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import CardsList from 'src/modules/CardsList.vue'
-import Card from 'src/components/dataDisplay/Card.vue'
 
 export default defineComponent({
   name: 'MastercardExisting',
   components: {
     CardsList,
-    Card,
   },
 })
 </script>

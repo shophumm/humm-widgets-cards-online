@@ -29,8 +29,8 @@
   >
     <template #footer>
       <MastercardApply>
-        <Card v-for="card in cards" :key="card.id" :size="card.size">
-          <img src="../assets/images/humm90Card.png" :alt="card.alt" />
+        <Card v-for="card in getApplyCards" :key="card.id" size="lg">
+          <img :src="card.src" :alt="card.alt" />
         </Card>
       </MastercardApply>
     </template>

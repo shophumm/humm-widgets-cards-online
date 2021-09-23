@@ -33,10 +33,17 @@
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
+    <template #header>
+      <MastercardExisting>
+        <Card v-for="card in getApplyCards" :key="card.id" size="lg">
+          <img :src="card.src" :alt="card.alt" />
+        </Card>
+      </MastercardExisting>
+    </template>
     <template #footer>
       <MastercardApply>
-        <Card v-for="card in cards" :key="card.id" :size="card.size">
-          <img src="../assets/images/humm90Card.png" :alt="card.alt" />
+        <Card v-for="card in getApplyCards" :key="card.id" size="lg">
+          <img :src="card.src" :alt="card.alt" />
         </Card>
       </MastercardApply>
     </template>
@@ -54,6 +61,7 @@ import WidgetContent from 'src/modules/WidgetContent.vue'
 import CardsLogo from 'src/modules/CardsLogo.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
 import MastercardApply from 'src/modules/MastercardApply.vue'
+import MastercardExisting from 'src/modules/MastercardExisting.vue'
 
 export default defineComponent({
   name: 'WidgetMainQmc',
@@ -63,6 +71,7 @@ export default defineComponent({
     CardsLogo,
     DialogOverlay,
     MastercardApply,
+    MastercardExisting,
   },
   props: {
     productPrice: Number,
@@ -102,4 +111,6 @@ export default defineComponent({
 
 <style scoped lang="scss">
 @import 'src/styles/widget.scss';
+
+@import 'src/styles/cards.scss';
 </style>

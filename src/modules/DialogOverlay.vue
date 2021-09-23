@@ -9,7 +9,7 @@
       <slot name="title">Interest-free Payment</slot>
     </template>
     <template #header>
-      <MastercardExisting />
+      <slot name="header" />
     </template>
     <template #body>
       <Tabs :tabs="tabsData">
@@ -40,7 +40,6 @@ import Tabs from 'src/components/tabs/Tabs.vue'
 import Tab from 'src/components/tabs/Tab.vue'
 import DataList from 'src/components/tabs/DataList.vue'
 import { TabItemProps, ContentsProps } from 'src/models/Tabs'
-import MastercardExisting from 'src/modules/MastercardExisting.vue'
 
 export default defineComponent({
   name: 'DialogOverlay',
@@ -50,7 +49,6 @@ export default defineComponent({
     DataList,
     Tab,
     Tabs,
-    MastercardExisting,
   },
   props: {
     isDialogOpen: {
