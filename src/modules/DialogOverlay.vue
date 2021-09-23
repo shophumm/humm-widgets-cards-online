@@ -14,11 +14,13 @@
     <template #body>
       <Tabs :tabs="tabsData">
         <template #default="{ activeTabId }">
-          <Tab tab-id="12months" :active-tab-id="activeTabId">
-            <DataList :contents="tabsContents('12months')" />
-          </Tab>
-          <Tab tab-id="18months" :active-tab-id="activeTabId">
-            <DataList :contents="tabsContents('18months')" />
+          <Tab
+            v-for="tab in tabsData"
+            :key="tab.id"
+            :tab-id="tab.id"
+            :active-tab-id="activeTabId"
+          >
+            <DataList :contents="tabsContents(tab.id)" />
           </Tab>
         </template>
       </Tabs>
