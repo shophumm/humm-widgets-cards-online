@@ -19,6 +19,10 @@ export default defineComponent({
 })
 </script>
 
+<style lang="scss">
+@import 'src/styles/reset.scss';
+</style>
+
 <style scoped lang="scss">
 @import 'https://use.typekit.net/plq2clw.css';
 

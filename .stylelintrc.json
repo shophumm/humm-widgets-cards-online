@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "stylelint-config-recommended"
-  ],
+  "extends": ["stylelint-config-recommended"],
   "rules": {
     "function-calc-no-invalid": true,
     "font-family-no-missing-generic-family-keyword": null,
@@ -14,8 +12,12 @@
       "always-multi-line",
       { "except": ["first-nested", "after-single-line-comment"] }
     ],
-    "selector-pseudo-element-no-unknown": [true, {
-      "ignorePseudoElements": ["v-slotted"]
-    }]
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["v-slotted", "v-deep"],
+        "ignoreAtRules": ["extend"]
+      }
+    ]
   }
 }

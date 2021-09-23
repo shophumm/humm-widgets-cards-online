@@ -3,6 +3,7 @@ export enum ScriptParametersEnum {
   MerchantId = 'merchantId',
   RemoveCss = 'removeCss',
   DarkMode = 'darkMode',
+  Theme = 'theme',
 }
 
 export default ScriptParametersEnum

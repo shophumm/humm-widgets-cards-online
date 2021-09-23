@@ -81,7 +81,9 @@ export default defineComponent({
     color: var(--color-0);
     font-weight: bold;
     text-align: center;
-    min-height: 23px;
+    min-height: 36px;
+    font-family: var(--font-base);
+    font-size: 14px;
 
     &.is-active {
       border-top-color: var(--color-2);

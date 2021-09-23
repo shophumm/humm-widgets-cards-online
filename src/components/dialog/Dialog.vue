@@ -128,7 +128,7 @@ export default defineComponent({
 
   &__mask {
     position: fixed;
-    z-index: 9998;
+    z-index: 2147483647;
     top: 0;
     left: 0;
     width: 100%;
