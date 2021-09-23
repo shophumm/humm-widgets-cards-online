@@ -65,7 +65,7 @@ export const parseThemeParameter = (
   const isValidTheme = Object.values<string | ThemeEnum>(ThemeEnum).includes(
     rawTheme
   )
-  const theme = isValidTheme ? rawTheme : 'default'
+  const theme = isValidTheme ? rawTheme : ThemeEnum.Default
 
   return theme
 }
@@ -81,7 +81,7 @@ export const getAllScriptURLParameters = (
       productPrice: 56,
       removeCss: false,
       merchantId,
-      theme: '',
+      theme: ThemeEnum.Default,
     }
   }
 
