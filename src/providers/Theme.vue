@@ -20,9 +20,6 @@ export default defineComponent({
 
 <style lang="scss">
 @import 'src/styles/reset.scss';
-[id^='humm-widgets-cards'] {
-  @extend %reset;
-}
 </style>
 
 <style scoped lang="scss">
