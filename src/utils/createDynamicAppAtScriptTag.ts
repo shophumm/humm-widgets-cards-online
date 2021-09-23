@@ -73,10 +73,5 @@ export const createDynamicAppAtScriptTag = async (
     ? elementID
     : `${elementID}-${lang}${theme ? `-${theme}` : ``}`
 
-  console.warn('mounttargetSelector', mountTargetSelector)
-  console.warn('mountTargetID', mountTargetID)
-  console.warn(document.getElementById(mountTargetSelector))
-  console.warn('isDevelopment', isDevelopment)
-
   createApp(component, { ...props, lang, theme }).mount(mountTargetID)
 }
