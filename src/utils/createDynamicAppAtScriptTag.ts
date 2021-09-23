@@ -2,6 +2,7 @@ import { createApp, Component } from 'vue'
 import {
   getCurrentScript,
   getAllScriptURLParameters,
+  parseThemeParameter,
   loadStyles,
 } from 'src/utils/utils'
 import { isDevelopment, publicUrl, appName } from 'src/utils/constants'
@@ -22,6 +23,10 @@ export const createDynamicAppAtScriptTag = async (
   }
 ): Promise<void> => {
   const { elementID, lang } = config
+  const scriptEl = getCurrentScript()
+  const props = getAllScriptURLParameters(scriptEl)
+  const removeCss = String(props.removeCss).toLowerCase() === 'true'
+  const theme = parseThemeParameter(props.theme, removeCss)
 
   if (elementID.slice(0, 1) !== '#') {
     throw new Error(
@@ -29,16 +34,9 @@ export const createDynamicAppAtScriptTag = async (
     )
   }
 
-  const mountTargetSelector = `${elementID.substring(1)}-${lang}`
-  if (!isDevelopment && document.getElementById(mountTargetSelector)) {
-    throw new Error(
-      'An instance of the widget has already been initialized. You can only add one widget script tag per page'
-    )
-  }
-
-  const scriptEl = getCurrentScript()
-  const props = getAllScriptURLParameters(scriptEl)
-  const removeCss = String(props.removeCss).toLowerCase() === 'true'
+  const mountTargetSelector = `${elementID.substring(1)}-${lang}${
+    theme ? `-${theme}` : ``
+  }`
 
   // Inject the stylesheet by default if in prod
   // TODO, reserve the space for the widget before it loads to prevent CLS
@@ -48,10 +46,17 @@ export const createDynamicAppAtScriptTag = async (
     try {
       await loadStyles(stylesheetUrl)
     } catch (error) {
-      throw new Error(
-        `Could not load CSS from ${stylesheetUrl}\n More details: ${error.toString()}`
-      )
+      if (error instanceof Error)
+        throw new Error(
+          `Could not load CSS from ${stylesheetUrl}\n More details: ${error.toString()}`
+        )
     }
+  }
+
+  if (!isDevelopment && document.getElementById(mountTargetSelector)) {
+    throw new Error(
+      'An instance of the widget has already been initialized. You can only add one widget script tag per page'
+    )
   }
 
   // In development we don't want to inject the app at the script tag in index.html
@@ -64,7 +69,9 @@ export const createDynamicAppAtScriptTag = async (
 
   // In development we only render one region's app at the time by using a generic selector
   // in production we use a region specific selector
-  const mountTargetID = isDevelopment ? elementID : `${elementID}-${lang}`
+  const mountTargetID = isDevelopment
+    ? elementID
+    : `${elementID}-${lang}${theme ? `-${theme}` : ``}`
 
-  createApp(component, { ...props, lang }).mount(mountTargetID)
+  createApp(component, { ...props, lang, theme }).mount(mountTargetID)
 }

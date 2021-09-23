@@ -5,6 +5,7 @@ import { Product, Card } from 'src/models/Response'
 import { ContentsProps, TabItemProps } from 'src/models/Tabs'
 import CardProps from 'src/models/Card'
 import { ProductLanguage } from 'src/lang/ResponseLanguage'
+import ThemeEnum from 'src/models/enums/ThemeEnum'
 
 export const getCurrentScript = (): HTMLOrSVGScriptElement =>
   document.currentScript ||
@@ -32,9 +33,10 @@ export const fetchText = async (url: string): Promise<string | undefined> => {
 
     return await response.text()
   } catch (error) {
-    throw new Error(
-      `Could not load resource from ${url}\n More details: ${error.toString()}`
-    )
+    if (error instanceof Error)
+      throw new Error(
+        `Could not load resource from ${url}\n More details: ${error.toString()}`
+      )
   }
 }
 
@@ -55,6 +57,19 @@ export const loadStyles = async (url: string): Promise<void> => {
   })
 }
 
+export const parseThemeParameter = (
+  themeParam: unknown,
+  removeCss: boolean
+): string => {
+  const rawTheme = removeCss ? 'blank' : `${themeParam}`
+  const isValidTheme = Object.values<string | ThemeEnum>(ThemeEnum).includes(
+    rawTheme
+  )
+  const theme = isValidTheme ? rawTheme : ThemeEnum.Default
+
+  return theme
+}
+
 // Get all parameters set on the script URL to pass a set restricted to ScriptParametersEnum in as initial properties
 // No IE 11 support for URLSearchParams or Object.fromEntries
 // Do not get script parameters in development, as this doesn't work with the auto-injected script tag
@@ -66,6 +81,7 @@ export const getAllScriptURLParameters = (
       productPrice: 56,
       removeCss: false,
       merchantId,
+      theme: ThemeEnum.Default,
     }
   }
 
