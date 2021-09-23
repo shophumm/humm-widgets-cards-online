@@ -6,7 +6,6 @@ import {
 } from 'src/utils/utils'
 import { isDevelopment, publicUrl, appName } from 'src/utils/constants'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
-import ThemeEnum from 'src/models/enums/ThemeEnum'
 
 /**
  * Mounts the Vue app at a created root element directly after the initialising script tag
@@ -26,6 +25,8 @@ export const createDynamicAppAtScriptTag = async (
 
   const scriptEl = getCurrentScript()
   const props = getAllScriptURLParameters(scriptEl)
+  const removeCss = String(props.removeCss).toLowerCase() === 'true'
+  const theme = removeCss ? 'blank' : props.theme
 
   if (elementID.slice(0, 1) !== '#') {
     throw new Error(
@@ -33,19 +34,15 @@ export const createDynamicAppAtScriptTag = async (
     )
   }
 
-  const theme = !Object.values(ThemeEnum).includes(props.theme as ThemeEnum)
-    ? 'default'
-    : props.theme
+  const mountTargetSelector = `${elementID.substring(1)}-${lang}${
+    theme ? `-${theme}` : ``
+  }`
 
-  const mountTargetSelector = `${elementID.substring(1)}-${lang}-${theme}`
-
-  if (!isDevelopment && document.getElementById(mountTargetSelector)) {
+  if (!isDevelopment && (await document.getElementById(mountTargetSelector))) {
     throw new Error(
       'An instance of the widget has already been initialized. You can only add one widget script tag per page'
     )
   }
-
-  const removeCss = String(props.removeCss).toLowerCase() === 'true'
 
   // Inject the stylesheet by default if in prod
   // TODO, reserve the space for the widget before it loads to prevent CLS
@@ -74,7 +71,7 @@ export const createDynamicAppAtScriptTag = async (
   // in production we use a region specific selector
   const mountTargetID = isDevelopment
     ? elementID
-    : `${elementID}-${lang}-${theme}`
+    : `${elementID}-${lang}${theme ? `-${theme}` : ``}`
 
   createApp(component, { ...props, lang, theme }).mount(mountTargetID)
 }
