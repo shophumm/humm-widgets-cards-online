@@ -79,7 +79,7 @@ export default defineComponent({
   font-weight: 700;
   background: transparent;
   border: 1px solid currentColor;
-  padding: 5px 10px;
+  padding: 5px 8px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -95,10 +95,11 @@ export default defineComponent({
     max-width: 138px;
 
     @media (min-width: 430px) {
+      letter-spacing: -0.01em;
       font-size: 12px;
       font-weight: 500;
       width: auto;
-      min-width: 20px;
+      min-width: 90px;
       min-height: 20px;
     }
   }
