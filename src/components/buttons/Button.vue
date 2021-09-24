@@ -79,11 +79,10 @@ export default defineComponent({
   font-weight: 700;
   background: transparent;
   border: 1px solid currentColor;
-  padding: 5px 8px;
+  padding: 2px 8px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  line-height: 0.85;
   appearance: none;
   font-size: 13px;
   border-radius: var(--radius-1);
