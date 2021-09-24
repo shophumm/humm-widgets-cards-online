@@ -1,6 +1,7 @@
 <template>
   <WidgetContent
     :is-widget-open="isWidgetOpen"
+    button-label="LEARN MORE"
     @toggle-dialog="isDialogOpen = true"
     @close-widget="isWidgetOpen = false"
   >
