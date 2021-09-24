@@ -16,11 +16,7 @@
         </Button>
       </div>
       <div class="widget__close">
-        <ButtonClose
-          :icon-opacity="iconOpacity"
-          fill="var(--color-1-contrast)"
-          @click="closeWidget"
-        >
+        <ButtonClose :icon-opacity="iconOpacity" @click="closeWidget">
           Close
         </ButtonClose>
       </div>
