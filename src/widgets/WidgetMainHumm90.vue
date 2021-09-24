@@ -27,17 +27,36 @@
     :tabs-data="tabs"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
-  />
+  >
+    <template #header>
+      <Humm90PlatinumCardExisting>
+        <Card v-for="card in getApplyCards" :key="card.id" size="lg">
+          <img :src="card.src" :alt="card.alt" />
+        </Card>
+      </Humm90PlatinumCardExisting>
+    </template>
+    <template #footer>
+      <Humm90PlatinumCardApply>
+        <Card v-for="card in getApplyCards" :key="card.id" size="lg">
+          <img :src="card.src" :alt="card.alt" />
+        </Card>
+      </Humm90PlatinumCardApply>
+    </template>
+  </DialogOverlay>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import IconHumm90Bird from 'src/components/icons/IconHumm90Bird.vue'
+import Card from 'src/components/dataDisplay/Card.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
+import CardProps from 'src/models/Card'
 import TabProps from 'src/models/Tabs'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
+import Humm90PlatinumCardApply from 'src/modules/Humm90PlatinumCardApply.vue'
+import Humm90PlatinumCardExisting from 'src/modules/Humm90PlatinumCardExisting.vue'
 
 export default defineComponent({
   name: 'WidgetMainHumm90',
@@ -45,11 +64,18 @@ export default defineComponent({
     IconHumm90Bird,
     WidgetContent,
     DialogOverlay,
+    Card,
+    Humm90PlatinumCardExisting,
+    Humm90PlatinumCardApply,
   },
   props: {
     productPrice: Number,
     lang: String as () => LanguageCodeEnum,
     theme: String as () => ThemeEnum,
+    cards: {
+      type: Array as () => CardProps[],
+      required: true,
+    },
     tabs: {
       type: Array as () => TabProps[],
       required: true,
@@ -66,6 +92,11 @@ export default defineComponent({
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
     }
+  },
+  computed: {
+    getApplyCards(): CardProps[] {
+      return this.cards.slice(0, 1)
+    },
   },
 })
 </script>
