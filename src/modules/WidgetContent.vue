@@ -46,7 +46,7 @@ export default defineComponent({
     },
     buttonLabel: {
       type: String,
-      default: 'EXPLORE',
+      default: 'Learn More',
     },
     buttonColor: {
       type: String,

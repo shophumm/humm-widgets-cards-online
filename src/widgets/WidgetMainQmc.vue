@@ -2,7 +2,6 @@
   <WidgetContent
     :is-widget-open="isWidgetOpen"
     :is-button-bold="true"
-    button-label="Learn More"
     button-color="var(--color-1)"
     icon-opacity="0.3"
     @toggle-dialog="isDialogOpen = true"
