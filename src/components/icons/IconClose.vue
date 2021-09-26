@@ -17,7 +17,7 @@ export default defineComponent({
   props: {
     fill: {
       type: String,
-      default: '#000000',
+      default: '#fff',
     },
   },
 })

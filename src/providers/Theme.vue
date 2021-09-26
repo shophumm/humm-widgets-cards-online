@@ -53,7 +53,7 @@ export default defineComponent({
 
   &[data-lang='au'][data-dark='true'] {
     --color-0: #002555;
-    --color-1: #002555;
+    --color-1: #ecb250;
     --color-1-contrast: #fff;
     --color-2: #ecb250; // Web / Tile / Button / Secondary
     --bg-1: #002555; // Widget background
