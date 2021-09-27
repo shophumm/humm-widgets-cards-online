@@ -74,7 +74,9 @@ export const createDynamicAppAtScriptTag = async (
     !isDevelopment &&
     (props.productPrice === undefined || props.merchantId === undefined)
   )
-    throw new Error('Mandatory paramters merchantId and productPrice')
+    throw new Error(
+      'Widget instance is missing one or more mandatory parameters'
+    )
 
   // In development we only render one region's app at the time by using a generic selector
   // in production we use a region specific selector
