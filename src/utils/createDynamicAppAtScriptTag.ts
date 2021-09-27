@@ -70,6 +70,11 @@ export const createDynamicAppAtScriptTag = async (
     scriptEl.insertAdjacentElement('afterend', mountTargetEl)
   }
 
+  if (!isDevelopment && (!props.productPrice || !props.merchantId))
+    throw new Error(
+      'Widget instance is missing one or more mandatory parameters'
+    )
+
   // In development we only render one region's app at the time by using a generic selector
   // in production we use a region specific selector
   const mountTargetID = isDevelopment
