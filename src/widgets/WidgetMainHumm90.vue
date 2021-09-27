@@ -29,18 +29,25 @@
     @toggle-dialog="isDialogOpen = false"
   >
     <template #header>
-      <Humm90PlatinumCardExisting>
-        <Card v-for="card in getApplyCards" :key="card.id" size="lg">
-          <img :src="card.src" :alt="card.alt" />
-        </Card>
-      </Humm90PlatinumCardExisting>
+      <ExistingCard>
+        <template #cards>
+          <Card v-for="card in getApplyCards" :key="card.id" size="lg">
+            <img :src="card.src" :alt="card.alt" />
+          </Card>
+        </template>
+        <template #title>Have a humm®90 Platinum Mastercard®?</template>
+      </ExistingCard>
     </template>
     <template #footer>
-      <Humm90PlatinumCardApply>
-        <Card v-for="card in getApplyCards" :key="card.id" size="lg">
-          <img :src="card.src" :alt="card.alt" />
-        </Card>
-      </Humm90PlatinumCardApply>
+      <ApplyCard>
+        <template #title>
+          Or apply for your humm®90 Platinum Mastercard®
+        </template>
+        <template #subtitle>
+          Apply now! It takes 5-10 minutes on average to fill for most
+          applicants.
+        </template>
+      </ApplyCard>
     </template>
   </DialogOverlay>
 </template>
@@ -55,8 +62,8 @@ import CardProps from 'src/models/Card'
 import TabProps from 'src/models/Tabs'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
-import Humm90PlatinumCardApply from 'src/modules/Humm90PlatinumCardApply.vue'
-import Humm90PlatinumCardExisting from 'src/modules/Humm90PlatinumCardExisting.vue'
+import ApplyCard from 'src/modules/ApplyCard.vue'
+import ExistingCard from 'src/modules/ExistingCard.vue'
 
 export default defineComponent({
   name: 'WidgetMainHumm90',
@@ -65,8 +72,8 @@ export default defineComponent({
     WidgetContent,
     DialogOverlay,
     Card,
-    Humm90PlatinumCardExisting,
-    Humm90PlatinumCardApply,
+    ExistingCard,
+    ApplyCard,
   },
   props: {
     productPrice: Number,

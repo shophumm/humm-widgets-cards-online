@@ -33,18 +33,20 @@
     @toggle-dialog="isDialogOpen = false"
   >
     <template #header>
-      <MastercardExisting>
-        <Card v-for="card in getApplyCards" :key="card.id" size="lg">
-          <img :src="card.src" :alt="card.alt" />
-        </Card>
-      </MastercardExisting>
+      <ExistingCard>
+        <template #cards>
+          <Card v-for="card in getApplyCards" :key="card.id" size="lg">
+            <img :src="card.src" :alt="card.alt" />
+          </Card>
+        </template>
+        <template #title>Have a Farmers Mastercard® or Q Mastercard®?</template>
+      </ExistingCard>
     </template>
     <template #footer>
-      <MastercardApply>
-        <Card v-for="card in getApplyCards" :key="card.id" size="lg">
-          <img :src="card.src" :alt="card.alt" />
-        </Card>
-      </MastercardApply>
+      <ApplyCard>
+        <template #title> Or apply for your Farmers Mastercard® </template>
+        <template #subtitle> Apply now! It’s simple! </template>
+      </ApplyCard>
     </template>
   </DialogOverlay>
 </template>
@@ -59,8 +61,8 @@ import TabProps from 'src/models/Tabs'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import CardsLogo from 'src/modules/CardsLogo.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
-import MastercardApply from 'src/modules/MastercardApply.vue'
-import MastercardExisting from 'src/modules/MastercardExisting.vue'
+import ApplyCard from 'src/modules/ApplyCard.vue'
+import ExistingCard from 'src/modules/ExistingCard.vue'
 
 export default defineComponent({
   name: 'WidgetMainQmc',
@@ -69,8 +71,8 @@ export default defineComponent({
     WidgetContent,
     CardsLogo,
     DialogOverlay,
-    MastercardApply,
-    MastercardExisting,
+    ApplyCard,
+    ExistingCard,
   },
   props: {
     productPrice: Number,
