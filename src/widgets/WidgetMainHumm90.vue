@@ -1,9 +1,9 @@
 <template>
   <WidgetContent
     :is-widget-open="isWidgetOpen"
-    :is-button-bold="true"
     button-color="var(--color-1)"
     icon-opacity="0.3"
+    button-label="LEARN MORE"
     @toggle-dialog="isDialogOpen = true"
     @close-widget="isWidgetOpen = false"
   >

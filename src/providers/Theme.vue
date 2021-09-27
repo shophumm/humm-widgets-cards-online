@@ -68,6 +68,7 @@ export default defineComponent({
     --bg-1: #ffffff; // Widget background
   }
 
+  &[data-lang='nz'][data-dark='true'],
   &[data-theme='qmc'][data-dark='true'] {
     --color-0: #000000;
     --color-1: #ffffff;
