@@ -25,9 +25,9 @@ export const fetchData = async <T>(
 
 export const fetchWidgetData = async (
   merchantId?: string,
-  productPrice?: number
+  price?: number
 ): Promise<WidgetResponseBody | undefined> => {
-  const requestBody = { merchantId: merchantId, price: productPrice }
+  const requestBody = { merchantId, price }
   const response = await fetchData<WidgetResponseBody>('widget', {
     method: 'POST',
     body: JSON.stringify(requestBody),
