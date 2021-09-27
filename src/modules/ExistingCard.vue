@@ -1,15 +1,21 @@
 <template>
   <div class="cards">
     <CardsList>
-      <slot />
+      <slot name="cards" />
     </CardsList>
   </div>
-  <p class="mc__title">Have a Farmers Mastercard® or Q Mastercard®?</p>
-  <p class="mc__subtitle">Enjoy interest-free shopping now!</p>
+  <p class="mc__title">
+    <slot name="title">Have a card already?</slot>
+  </p>
+  <p class="mc__subtitle">
+    <slot name="subtitle">Enjoy interest-free shopping now!</slot>
+  </p>
   <ol class="mc__list">
-    <li>Add the item and continue to checkout</li>
-    <li>Choose interest-free as your payment option</li>
-    <li>Enter your card details and choose a plan listed below:</li>
+    <slot name="list">
+      <li>Add the item and continue to checkout</li>
+      <li>Choose interest-free as your payment option</li>
+      <li>Enter your card details and choose a plan listed below:</li>
+    </slot>
   </ol>
 </template>
 
@@ -18,7 +24,7 @@ import { defineComponent } from 'vue'
 import CardsList from 'src/modules/CardsList.vue'
 
 export default defineComponent({
-  name: 'MastercardExisting',
+  name: 'ExistingCard',
   components: {
     CardsList,
   },
