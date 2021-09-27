@@ -36,20 +36,12 @@ export default defineComponent({
   // Default theme
   --color-0: #002555;
   --color-1: #002555;
-  --color-1-contrast: #fff;
+  --color-1-contrast: #002555;
   --color-2: #ecb250; // Web / Tile / Button / Secondary
   --color-3: #8c8c8c; // Mid grey
   --color-4: #e7e7e7;
   --color-5: #fff;
-  --bg-1: #002555; // Widget background
-
-  &[data-lang='au'] {
-    --color-0: #002555;
-    --color-1: #002555;
-    --color-1-contrast: #002555;
-    --color-2: #ecb250; // Web / Tile / Button / Secondary
-    --bg-1: #ffffff; // Widget background
-  }
+  --bg-1: #ffffff; // Widget background
 
   &[data-lang='au'][data-dark='true'] {
     --color-0: #002555;
