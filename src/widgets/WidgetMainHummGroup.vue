@@ -27,36 +27,25 @@
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
-    <template #footer>
-      <MastercardApply>
-        <Card v-for="card in getApplyCards" :key="card.id" size="lg">
-          <img :src="card.src" :alt="card.alt" />
-        </Card>
-      </MastercardApply>
-    </template>
   </DialogOverlay>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import IconHummGroup from 'src/components/icons/IconHummGroup.vue'
-import Card from 'src/components/dataDisplay/Card.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import CardProps from 'src/models/Card'
 import TabProps from 'src/models/Tabs'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
-import MastercardApply from 'src/modules/MastercardApply.vue'
 
 export default defineComponent({
   name: 'WidgetMainHummGroup',
   components: {
     IconHummGroup,
-    Card,
     WidgetContent,
     DialogOverlay,
-    MastercardApply,
   },
   props: {
     productPrice: Number,
