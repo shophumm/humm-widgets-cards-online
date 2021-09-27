@@ -70,10 +70,7 @@ export const createDynamicAppAtScriptTag = async (
     scriptEl.insertAdjacentElement('afterend', mountTargetEl)
   }
 
-  if (
-    !isDevelopment &&
-    (props.productPrice === undefined || props.merchantId === undefined)
-  )
+  if (!isDevelopment && (!props.productPrice || !props.merchantId))
     throw new Error(
       'Widget instance is missing one or more mandatory parameters'
     )
