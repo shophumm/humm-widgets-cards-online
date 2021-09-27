@@ -26,6 +26,7 @@ export const createDynamicAppAtScriptTag = async (
   const scriptEl = getCurrentScript()
   const props = getAllScriptURLParameters(scriptEl)
   const removeCss = String(props.removeCss).toLowerCase() === 'true'
+  const darkMode = String(props.darkMode).toLowerCase() === 'true'
   const theme = parseThemeParameter(props.theme, removeCss)
 
   if (elementID.slice(0, 1) !== '#') {
@@ -34,9 +35,11 @@ export const createDynamicAppAtScriptTag = async (
     )
   }
 
-  const mountTargetSelector = `${elementID.substring(1)}-${lang}${
-    theme ? `-${theme}` : ``
+  const selectorSuffix = `${lang}${theme ? `-${theme}` : ``}${
+    darkMode ? `-dark` : ``
   }`
+
+  const mountTargetSelector = `${elementID.substring(1)}-${selectorSuffix}`
 
   // Inject the stylesheet by default if in prod
   // TODO, reserve the space for the widget before it loads to prevent CLS
@@ -71,7 +74,7 @@ export const createDynamicAppAtScriptTag = async (
   // in production we use a region specific selector
   const mountTargetID = isDevelopment
     ? elementID
-    : `${elementID}-${lang}${theme ? `-${theme}` : ``}`
+    : `${elementID}-${selectorSuffix}`
 
   createApp(component, { ...props, lang, theme }).mount(mountTargetID)
 }
