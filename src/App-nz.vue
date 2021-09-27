@@ -33,6 +33,7 @@ export default defineComponent({
   props: {
     productPrice: Number,
     darkMode: Boolean,
+    merchantId: String,
     lang: String as () => LanguageCodeEnum,
     theme: {
       type: String as () => ThemeEnum,
@@ -61,7 +62,10 @@ export default defineComponent({
     },
   },
   async created() {
-    const responseData = await fetchWidgetData()
+    const responseData = await fetchWidgetData(
+      this.merchantId,
+      this.productPrice
+    )
     if (responseData) {
       this.terms = responseData.terms
       this.tabs = getTabsData(responseData.products)
