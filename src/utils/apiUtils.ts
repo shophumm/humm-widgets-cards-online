@@ -3,7 +3,7 @@ import { apiUrl } from './constants'
 
 export const fetchData = async <T>(
   endpoint: string,
-  config?: RequestInit
+  config: RequestInit
 ): Promise<T | undefined> => {
   const url = `${apiUrl}/${endpoint}`
   try {
@@ -23,11 +23,14 @@ export const fetchData = async <T>(
   }
 }
 
-export const fetchWidgetData = async (): Promise<
-  WidgetResponseBody | undefined
-> => {
+export const fetchWidgetData = async (
+  merchantId?: string,
+  productPrice?: number
+): Promise<WidgetResponseBody | undefined> => {
+  const requestBody = { merchantId: merchantId, price: productPrice }
   const response = await fetchData<WidgetResponseBody>('widget', {
     method: 'POST',
+    body: JSON.stringify(requestBody),
   })
   if (response) return response
 }
