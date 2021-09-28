@@ -2,16 +2,16 @@
   font-family: var(--font-base);
   background: var(--bg-1);
   color: var(--color-1-contrast);
-  padding: 11px 10px 8px 8px;
+  padding: 10px 8px;
   border-radius: var(--radius-2);
   position: relative;
   filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.1));
 
   @media (min-width: 430px) {
     display: flex;
-    padding: 5px 10px 6px 8px;
-    max-width: 412px;
-    min-height: 36px;
+    padding: 10px 12px;
+    max-width: 436px;
+    min-height: 28px;
   }
 
   &__content {
@@ -21,52 +21,44 @@
 
   &__container {
     display: block;
-    margin-left: 10px;
+    margin-left: 8px;
 
     @media (min-width: 430px) {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       width: 100%;
       justify-content: space-between;
-      margin-right: 10px;
+      margin-right: 8px;
     }
 
     .button {
-      margin-top: 5px;
-
-      @media (min-width: 430px) {
-        margin-top: 0;
-      }
+      margin-top: 4px;
     }
   }
 
   &__text {
     display: flex;
     flex-direction: column;
-    padding-right: 5px;
+    padding-right: 8px;
   }
 
   &__title {
     font-size: 14px;
-    font-weight: 200;
+    font-weight: 300;
     letter-spacing: -0.03em;
+    line-height: 14px;
     margin: 0;
   }
 
   &__title + &__subtitle {
     font-size: 12px;
-    font-weight: 200;
+    font-weight: 300;
     letter-spacing: -0.03em;
-    line-height: 13px;
-    margin-top: 2px;
+    line-height: 14px;
   }
 
   &__iconbird {
-    margin: 0;
-
-    @media (min-width: 430px) {
-      margin: 9px 0 0 0;
-    }
+    margin: 5px 0 0 0;
   }
 
   &__hummgroup {
@@ -81,9 +73,5 @@
   &__close {
     display: flex;
     margin-left: auto;
-
-    @media (min-width: 430px) {
-      align-items: center;
-    }
   }
 }

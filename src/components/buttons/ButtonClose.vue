@@ -34,6 +34,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .button {
   border: 0;
+  margin-top: 5px;
   padding: 0;
   border-radius: 50%;
   width: 18px;
