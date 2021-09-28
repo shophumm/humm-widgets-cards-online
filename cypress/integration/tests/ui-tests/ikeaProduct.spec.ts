@@ -3,7 +3,7 @@ import { merchantProductPage } from "cypress/page-objects/merchantProductPage";
 describe('Ikea Product Page Injection Test', () => {
     beforeEach(() => {
         merchantProductPage.visitAndInjectWidget(
-            'https://www.ikea.com/au/en/p/kivik-corner-sofa-6-seat-with-chaise-longue-skiftebo-dark-grey-s59305551/',
+            Cypress.env('ikeaProductUrl'),
             '[class="range-revamp-product-availability"]',
             'before'
         )

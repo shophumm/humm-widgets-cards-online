@@ -2,8 +2,11 @@ import { merchantProductPage } from "cypress/page-objects/merchantProductPage";
 
 describe('Farmers Product Page Injection Test', () => {
     beforeEach(() => {
+        Cypress.on('uncaught:exception', (err, runnable) => {
+            return false
+        })
         merchantProductPage.visitAndInjectWidget(
-            'http://www.farmers.co.nz/fisher-paykel-614l-french-door-fridge-freezer-stainless-steel-rf610anux5-6604672',
+            Cypress.env('farmersProductUrl'),
             '[class="mobile-check-store-container"]',
             ''
         )
