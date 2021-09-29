@@ -1,47 +1,47 @@
 class _merchantProductPage {
+  visitAndInjectWidget(url: string, targetElement: string, position: string) {
+    cy.visit(url, {
+      onLoad: contentWindow => {
+        return new Cypress.Promise((resolve, reject) => {
+          // create script element
+          const tag = document.createElement('script')
 
-    visitAndInjectWidget(url: string, targetElement: string, position: string) {
-        cy.visit(url, {
-            onLoad: contentWindow => {
-                return new Cypress.Promise((resolve, reject) => {
-                    // create script element
-                    const tag = document.createElement('script')
+          // append script element
+          const el = cy.$$(<any>contentWindow.document.body).find(targetElement)
 
-                    // append script element
-                    const el = cy.$$(<any>contentWindow.document.body).find(targetElement)
+          switch (position) {
+            case 'append':
+              el.append(tag)
+              break
+            case 'prepend':
+              el.prepend(tag)
+              break
+            case 'after':
+              el.after(tag)
+              break
+            default:
+              el.before(tag)
+              break
+          }
 
-                    switch (position) {
-                        case 'append':
-                            el.append(tag)
-                            break
-                        case 'prepend':
-                            el.prepend(tag)
-                            break
-                        case 'after':
-                            el.after(tag)
-                            break
-                        default:
-                            el.before(tag)
-                            break
-                    }
+          // Add an onload event to script tag to resolve promise
+          tag.onload = () => {
+            resolve()
+          }
 
-                    // Add an onload event to script tag to resolve promise
-                    tag.onload = () => {
-                        resolve()
-                    }
+          // set source of element (Note, must be done post injection, else the script wont have a "DOM" location to inject
+          tag.src =
+            Cypress.env('baseUrl') +
+            `humm-widgets-cards-nz.umd.js?productPrice=300&merchantId='8ea286eb-b884-4518-8fa1-b65a107a350d'`
 
-                    // set source of element (Note, must be done post injection, else the script wont have a "DOM" location to inject
-                    tag.src =
-                        Cypress.env('baseUrl') + 'humm-widgets-cards-nz.umd.js?productPrice=300'
-
-                    // Add a timeout, to reject promise after 2.5s of not "load" fired
-                    setTimeout(() => {
-                        tag.onload = null
-                        reject()
-                    }, 3000)
-                })
-            },
+          // Add a timeout, to reject promise after 2.5s of not "load" fired
+          setTimeout(() => {
+            tag.onload = null
+            reject()
+          }, 3000)
         })
-    }
+      },
+    })
+  }
 }
-export const merchantProductPage = new _merchantProductPage();
+export const merchantProductPage = new _merchantProductPage()

@@ -1,8 +1,12 @@
 {
-    "watchForFileChanges": false,
-    "screenshotOnRunFailure": false,
-    "video": false,
-    "env": {
-        "baseUrl": "http://localhost:5000/"
-    }
+  "watchForFileChanges": false,
+  "screenshotOnRunFailure": false,
+  "video": false,
+  "env": {
+    "baseUrl": "http://localhost:5000/",
+    "farmersProductUrl": "http://www.farmers.co.nz/fisher-paykel-614l-french-door-fridge-freezer-stainless-steel-rf610anux5-6604672",
+    "pbtectProductUrl": "https://www.pbtech.co.nz/product/MONLGL33255/LG-UltraGear-32GN550-B-315-Full-HD-Gaming-Monitor?qr=rec-view",
+    "samsungProductUrl": "https://www.samsung.com/nz/audio-sound/galaxy-buds/galaxy-buds2-olive-sm-r177nzgaasa/",
+    "ikeaProductUrl": "https://www.ikea.com/au/en/p/kivik-corner-sofa-6-seat-with-chaise-longue-skiftebo-dark-grey-s59305551/"
+  }
 }
