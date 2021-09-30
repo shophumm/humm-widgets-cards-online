@@ -18,10 +18,16 @@ export interface Product {
   remainderInterestPeriodMontlyRepayment: number
 }
 
+export interface Terms {
+  standard: string
+  hybrid: string
+  fixed: string
+}
+
 export interface WidgetResponseBody {
   products: Product[]
   cards: Card[]
-  terms: string
+  terms: Terms
 }
 
 export default WidgetResponseBody

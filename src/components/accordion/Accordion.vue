@@ -23,7 +23,14 @@
       :aria-labelledby="id + '-header'"
       class="accordion__collapse"
     >
-      <div class="accordion__body">{{ content }}</div>
+      <div class="accordion__body">
+        {{ content.standard }}<br /><br />
+        {{ content.hybrid }}<br /><br />
+        {{ content.fixed }}
+      </div>
+      <div class="accordion__footer">
+        <a href="#terms-conditions">FIND OUT MORE</a>
+      </div>
     </div>
   </div>
 </template>
@@ -31,7 +38,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import IconChevron from 'src/components/icons/IconChevron.vue'
-import type AccordionProps from 'src/models/Accordion'
+import TermsProps from 'src/models/Terms'
 
 export default defineComponent({
   name: 'Accordion',
@@ -43,14 +50,17 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    content: String,
+    content: {
+      type: Object as () => TermsProps,
+      required: true,
+    },
     isDefaultOpen: {
       type: Boolean,
       default: false,
     },
   },
   emits: ['click-accordion'],
-  setup(props: AccordionProps, { emit }) {
+  setup(props, { emit }) {
     return {
       onClick() {
         emit('click-accordion')
@@ -104,8 +114,19 @@ export default defineComponent({
 
   &__body {
     font-family: var(--font-base);
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  &__footer {
+    margin: 25px 0 10px 0;
+    font-family: var(--font-base);
     font-size: 14px;
     line-height: 1.3;
+    a {
+      color: var(--color-0);
+      font-weight: 700;
+    }
   }
 }
 </style>

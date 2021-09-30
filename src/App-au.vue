@@ -42,7 +42,7 @@ export default defineComponent({
     return {
       cards: [{}],
       tabs: [{}],
-      terms: '',
+      terms: {},
     }
   },
   computed: {

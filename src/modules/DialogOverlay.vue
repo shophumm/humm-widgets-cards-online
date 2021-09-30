@@ -40,6 +40,7 @@ import Tabs from 'src/components/tabs/Tabs.vue'
 import Tab from 'src/components/tabs/Tab.vue'
 import DataList from 'src/components/tabs/DataList.vue'
 import { TabItemProps, ContentsProps } from 'src/models/Tabs'
+import TermsProps from 'src/models/Terms'
 
 export default defineComponent({
   name: 'DialogOverlay',
@@ -63,7 +64,7 @@ export default defineComponent({
       required: true,
     },
     accordionData: {
-      type: String,
+      type: Object as () => TermsProps,
       required: true,
     },
   },
