@@ -14,7 +14,7 @@
             </div>
             <ButtonClose
               icon-opacity="0.8"
-              fill="var(--color-6)"
+              fill="var(--color-4)"
               @click="toggleDialog"
             >
               {{ buttonCloseLabel }}
