@@ -20,8 +20,9 @@
     <Button
       href="#apply-now"
       size="md"
-      button-color="var(--color-2)"
+      :button-color="applyButtonColor"
       :is-rounded="true"
+      :primary="applyButtonPrimary"
     >
       Apply now
     </Button>
@@ -36,6 +37,16 @@ export default defineComponent({
   name: 'ApplyCard',
   components: {
     Button,
+  },
+  props: {
+    applyButtonPrimary: {
+      type: Boolean,
+      default: false,
+    },
+    applyButtonColor: {
+      type: String,
+      default: 'var(--color-2)',
+    },
   },
 })
 </script>
