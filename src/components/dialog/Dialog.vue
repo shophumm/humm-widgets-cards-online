@@ -14,7 +14,7 @@
             </div>
             <ButtonClose
               icon-opacity="0.8"
-              fill="var(--color-3)"
+              fill="var(--color-4)"
               @click="toggleDialog"
             >
               {{ buttonCloseLabel }}
@@ -154,7 +154,7 @@ export default defineComponent({
     max-width: 331px;
     margin: 0 auto;
     padding: 18px 20px;
-    background-color: #f7f7f7;
+    background-color: var(--bg-2);
     border-radius: var(--radius-3);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
     transition: all 0.3s ease;
