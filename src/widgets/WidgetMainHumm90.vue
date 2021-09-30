@@ -40,8 +40,9 @@
     </template>
     <template #footer>
       <ApplyCard
-        :apply-button-primary="true"
-        :apply-button-color="'var(--bg-2)'"
+        :button-primary="true"
+        button-color="var(--bg-2)"
+        button-label="APPLY NOW"
       >
         <template #title>
           Or apply for your humm®90 Platinum Mastercard®

@@ -20,11 +20,11 @@
     <Button
       href="#apply-now"
       size="md"
-      :button-color="applyButtonColor"
+      :button-color="buttonColor"
       :is-rounded="true"
-      :primary="applyButtonPrimary"
+      :primary="buttonPrimary"
     >
-      Apply now
+      {{ buttonLabel }}
     </Button>
   </div>
 </template>
@@ -39,13 +39,17 @@ export default defineComponent({
     Button,
   },
   props: {
-    applyButtonPrimary: {
+    buttonPrimary: {
       type: Boolean,
       default: false,
     },
-    applyButtonColor: {
+    buttonColor: {
       type: String,
       default: 'var(--color-2)',
+    },
+    buttonLabel: {
+      type: String,
+      default: 'Apply now',
     },
   },
 })
