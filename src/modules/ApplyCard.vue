@@ -24,7 +24,7 @@
       :is-rounded="true"
       :primary="buttonPrimary"
     >
-      Apply now
+      {{ buttonLabel }}
     </Button>
   </div>
 </template>
@@ -46,6 +46,10 @@ export default defineComponent({
     buttonColor: {
       type: String,
       default: 'var(--color-2)',
+    },
+    buttonLabel: {
+      type: String,
+      default: 'Apply now',
     },
   },
 })
