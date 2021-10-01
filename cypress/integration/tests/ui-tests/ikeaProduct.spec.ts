@@ -2,6 +2,7 @@ import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
 
 describe('Ikea Product Page Injection Test', () => {
   beforeEach(() => {
+    cy.viewport('macbook-15')
     merchantProductPage.visitAndInjectWidget(
       Cypress.env('ikeaProductUrl'),
       '[class="range-revamp-product-availability"]',

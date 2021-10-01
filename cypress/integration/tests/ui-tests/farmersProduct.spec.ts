@@ -2,6 +2,7 @@ import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
 
 describe('Farmers Product Page Injection Test', () => {
   beforeEach(() => {
+    cy.viewport('macbook-15')
     Cypress.on('uncaught:exception', (err, runnable) => {
       return false
     })
