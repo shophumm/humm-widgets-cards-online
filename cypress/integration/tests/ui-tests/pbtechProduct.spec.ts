@@ -1,14 +1,11 @@
 import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
 
-describe('Farmers Product Page Injection Test', () => {
+describe('PBTech Product Page Injection Test', () => {
   beforeEach(() => {
-    Cypress.on('uncaught:exception', (err, runnable) => {
-      return false
-    })
     merchantProductPage.visitAndInjectWidget(
-      Cypress.env('farmersProductUrl'),
-      '[class="mobile-check-store-container"]',
-      ''
+      Cypress.env('pbtectProductUrl'),
+      '[class="product_bgWrap p-3 bgcolor rounded"]',
+      'after'
     )
   })
 
