@@ -1,7 +1,7 @@
 <template>
   <WidgetContent
     :is-widget-open="isWidgetOpen"
-    button-color="var(--color-1)"
+    button-color="var(--color-3)"
     icon-opacity="0.3"
     button-label="LEARN MORE"
     @toggle-dialog="isDialogOpen = true"
@@ -39,7 +39,11 @@
       </ExistingCard>
     </template>
     <template #footer>
-      <ApplyCard>
+      <ApplyCard
+        :button-primary="true"
+        button-color="var(--bg-2)"
+        button-label="APPLY NOW"
+      >
         <template #title>
           Or apply for your humm®90 Platinum Mastercard®
         </template>

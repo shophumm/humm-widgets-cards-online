@@ -2,7 +2,7 @@
   <WidgetContent
     :is-widget-open="isWidgetOpen"
     :is-button-bold="true"
-    button-color="var(--color-1)"
+    button-color="var(--color-3)"
     icon-opacity="0.3"
     @toggle-dialog="isDialogOpen = true"
     @close-widget="isWidgetOpen = false"
