@@ -23,7 +23,7 @@
     id="widget-dialog"
     :is-dialog-open="isDialogOpen"
     :button-close-label="buttonCloseLabel"
-    :tabs-data="tabs"
+    :tabs-data="tabs[0].productItems"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
@@ -36,7 +36,7 @@ import IconHummGroup from 'src/components/icons/IconHummGroup.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import CardProps from 'src/models/Card'
-import TabProps from 'src/models/Tabs'
+import { ProductItemProps } from 'src/models/Tabs'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
 
@@ -56,7 +56,7 @@ export default defineComponent({
       required: true,
     },
     tabs: {
-      type: Array as () => TabProps[],
+      type: Array as () => ProductItemProps[],
       required: true,
     },
     terms: {

@@ -63,7 +63,7 @@ import Card from 'src/components/dataDisplay/Card.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import CardProps from 'src/models/Card'
-import TabsProps from 'src/models/Tabs'
+import { ProductItemProps } from 'src/models/Tabs'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
 import ApplyCard from 'src/modules/ApplyCard.vue'
@@ -88,7 +88,7 @@ export default defineComponent({
       required: true,
     },
     tabs: {
-      type: Array as () => TabsProps[],
+      type: Array as () => ProductItemProps[],
       required: true,
     },
     terms: {
