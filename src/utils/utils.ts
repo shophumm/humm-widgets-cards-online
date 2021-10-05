@@ -2,7 +2,11 @@ import { isDevelopment, merchantId } from 'src/utils/constants'
 import ScriptParametersEnum from 'src/models/enums/ScriptParametersEnum'
 import type ScriptParameters from 'src/models/ScriptParameters'
 import { Product, Card } from 'src/models/Response'
-import { ContentsProps, TabItemProps } from 'src/models/Tabs'
+import TabsProps, {
+  ContentsProps,
+  ProductItemProps,
+  TabItemProps,
+} from 'src/models/Tabs'
 import CardProps from 'src/models/Card'
 import { ProductLanguage } from 'src/lang/ResponseLanguage'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
@@ -111,13 +115,36 @@ export const getAllScriptURLParameters = (
   return params
 }
 
-export const getTabsData = (productsData: Product[]): TabItemProps[] => {
-  const tabs = productsData.map(product => ({
-    id: product.id,
-    label: product.type,
-    contents: getProductContent(product),
-  }))
+export const getTabsData = (productsData: Product[]): ProductItemProps[] => {
+  const tabs = productsData.reduce((acc, productItem) => {
+    const indexOfProductType = acc.findIndex(
+      item => item.productType === productItem.type
+    )
+    if (indexOfProductType >= 0) {
+      acc[indexOfProductType].productItems.push({
+        id: productItem.id,
+        label: createTabLabel(productItem.termPeriod),
+        contents: getProductContent(productItem),
+      })
+    } else {
+      acc.push({
+        productType: productItem.type,
+        productItems: [
+          {
+            id: productItem.id,
+            label: createTabLabel(productItem.termPeriod),
+            contents: getProductContent(productItem),
+          },
+        ],
+      })
+    }
+    return acc
+  }, [] as ProductItemProps[])
   return tabs
+}
+
+export const createTabLabel = (productTerm: number): string => {
+  return productTerm.toString() + ' Months'
 }
 
 export const getProductContent = (productData: Product): ContentsProps[] => {
