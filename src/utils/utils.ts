@@ -2,11 +2,7 @@ import { isDevelopment, merchantId } from 'src/utils/constants'
 import ScriptParametersEnum from 'src/models/enums/ScriptParametersEnum'
 import type ScriptParameters from 'src/models/ScriptParameters'
 import { Product, Card } from 'src/models/Response'
-import TabsProps, {
-  ContentsProps,
-  ProductItemProps,
-  TabItemProps,
-} from 'src/models/Tabs'
+import { ContentsProps, ProductItemProps } from 'src/models/Tabs'
 import CardProps from 'src/models/Card'
 import { ProductLanguage } from 'src/lang/ResponseLanguage'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
@@ -115,8 +111,8 @@ export const getAllScriptURLParameters = (
   return params
 }
 
-export const getTabsData = (productsData: Product[]): ProductItemProps[] => {
-  const tabs = productsData.reduce((acc, productItem) => {
+export const getProductData = (productsData: Product[]): ProductItemProps[] => {
+  const products = productsData.reduce((acc, productItem) => {
     const indexOfProductType = acc.findIndex(
       item => item.productType === productItem.type
     )
@@ -140,7 +136,7 @@ export const getTabsData = (productsData: Product[]): ProductItemProps[] => {
     }
     return acc
   }, [] as ProductItemProps[])
-  return tabs
+  return products
 }
 
 export const createTabLabel = (productTerm: number): string => {

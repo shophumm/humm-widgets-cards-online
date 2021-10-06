@@ -25,7 +25,7 @@
     id="widget-dialog"
     :is-dialog-open="isDialogOpen"
     :button-close-label="buttonCloseLabel"
-    :tabs-data="tabs"
+    :tabs-data="products"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   />
@@ -58,7 +58,7 @@ export default defineComponent({
       type: Array as () => CardProps[],
       required: true,
     },
-    tabs: {
+    products: {
       type: Array as () => ProductItemProps[],
       required: true,
     },
