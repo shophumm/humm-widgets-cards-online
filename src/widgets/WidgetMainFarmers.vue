@@ -42,11 +42,7 @@
       </ExistingCard>
     </template>
     <template #footer>
-      <ApplyCard
-        :button-primary="true"
-        button-color="var(--bg-2)"
-        :is-button-rounded="false"
-      >
+      <ApplyCard>
         <template #title> Or apply for your Farmers Mastercard® </template>
         <template #subtitle> Apply now! It’s simple! </template>
       </ApplyCard>
@@ -64,6 +60,8 @@ import TabProps from 'src/models/Tabs'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import CardsLogo from 'src/modules/CardsLogo.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
+import ApplyCard from 'src/modules/ApplyCard.vue'
+import ExistingCard from 'src/modules/ExistingCard.vue'
 
 export default defineComponent({
   name: 'WidgetMainFarmers',
@@ -72,6 +70,8 @@ export default defineComponent({
     WidgetContent,
     CardsLogo,
     DialogOverlay,
+    ApplyCard,
+    ExistingCard,
   },
   props: {
     productPrice: Number,
@@ -101,6 +101,9 @@ export default defineComponent({
   computed: {
     getLogoCards(): CardProps[] {
       return this.cards.slice(0, 2)
+    },
+    getApplyCards(): CardProps[] {
+      return this.cards.slice(0, 4)
     },
   },
 })
