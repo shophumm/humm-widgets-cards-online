@@ -30,7 +30,28 @@
     :tabs-data="tabs"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
-  />
+  >
+    <template #header>
+      <ExistingCard>
+        <template #cards>
+          <Card v-for="card in getApplyCards" :key="card.id" size="lg">
+            <img :src="card.src" :alt="card.alt" />
+          </Card>
+        </template>
+        <template #title>Have a Farmers Mastercard® or Q Mastercard®?</template>
+      </ExistingCard>
+    </template>
+    <template #footer>
+      <ApplyCard
+        :button-primary="true"
+        button-color="var(--bg-2)"
+        :is-button-rounded="false"
+      >
+        <template #title> Or apply for your Farmers Mastercard® </template>
+        <template #subtitle> Apply now! It’s simple! </template>
+      </ApplyCard>
+    </template>
+  </DialogOverlay>
 </template>
 
 <script lang="ts">

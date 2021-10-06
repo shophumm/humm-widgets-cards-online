@@ -21,7 +21,7 @@
       href="#apply-now"
       size="md"
       :button-color="buttonColor"
-      :is-rounded="true"
+      :is-rounded="isButtonRounded"
       :primary="buttonPrimary"
     >
       {{ buttonLabel }}
@@ -50,6 +50,10 @@ export default defineComponent({
     buttonLabel: {
       type: String,
       default: 'Apply now',
+    },
+    isButtonRounded: {
+      type: Boolean,
+      default: true,
     },
   },
 })
