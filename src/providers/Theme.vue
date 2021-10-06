@@ -38,16 +38,19 @@ export default defineComponent({
   --color-1: #002555;
   --color-1-contrast: #002555;
   --color-2: #ecb250; // Web / Tile / Button / Secondary
-  --color-3: #8c8c8c; // Mid grey
-  --color-4: #e7e7e7;
-  --color-5: #fff;
+  --color-3: #002555; // Main Widget Button
+  --color-4: #8c8c8c; // Mid grey
+  --color-5: #e7e7e7;
+  --color-6: #fff;
   --bg-1: #ffffff; // Widget background
+  --bg-2: #f7f7f7; // Dialog background
 
   &[data-lang='au'][data-dark='true'] {
     --color-0: #002555;
-    --color-1: #ecb250;
+    --color-1: #002555;
     --color-1-contrast: #fff;
     --color-2: #ecb250; // Web / Tile / Button / Secondary
+    --color-3: #ecb250; // Main Widget Button
     --bg-1: #002555; // Widget background
   }
 
@@ -56,7 +59,8 @@ export default defineComponent({
     --color-0: #000000;
     --color-1: #732d81;
     --color-1-contrast: #000000;
-    --color-2: #732d81; // Web / Tile / Button / Secondary
+    --color-2: #573a90; // Web / Tile / Button / Secondary
+    --color-3: #732d81; // Main Widget Button
     --bg-1: #ffffff; // Widget background
   }
 
@@ -66,6 +70,7 @@ export default defineComponent({
     --color-1: #ffffff;
     --color-1-contrast: #ffffff;
     --color-2: #573a90; // Web / Tile / Button / Secondary
+    --color-3: #ffffff; // Main Widget Button
     --bg-1: linear-gradient(
       90deg,
       #b83990 18.24%,

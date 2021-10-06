@@ -1,7 +1,7 @@
 <template>
   <WidgetContent
     :is-widget-open="isWidgetOpen"
-    button-color="var(--color-1)"
+    button-color="var(--color-3)"
     icon-opacity="0.3"
     button-label="LEARN MORE"
     @toggle-dialog="isDialogOpen = true"
@@ -24,7 +24,7 @@
     id="widget-dialog"
     :is-dialog-open="isDialogOpen"
     :button-close-label="buttonCloseLabel"
-    :tabs-data="tabs"
+    :tabs-data="products"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
@@ -39,7 +39,11 @@
       </ExistingCard>
     </template>
     <template #footer>
-      <ApplyCard>
+      <ApplyCard
+        :button-primary="true"
+        button-color="var(--bg-2)"
+        button-label="APPLY NOW"
+      >
         <template #title>
           Or apply for your humm®90 Platinum Mastercard®
         </template>
@@ -59,8 +63,8 @@ import Card from 'src/components/dataDisplay/Card.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import CardProps from 'src/models/Card'
-import TabProps from 'src/models/Tabs'
 import TermsProps from 'src/models/Terms'
+import { ProductItemProps } from 'src/models/Tabs'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
 import ApplyCard from 'src/modules/ApplyCard.vue'
@@ -84,8 +88,8 @@ export default defineComponent({
       type: Array as () => CardProps[],
       required: true,
     },
-    tabs: {
-      type: Array as () => TabProps[],
+    products: {
+      type: Array as () => ProductItemProps[],
       required: true,
     },
     terms: {

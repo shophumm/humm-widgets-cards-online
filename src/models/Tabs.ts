@@ -8,9 +8,14 @@ export interface TabItemProps {
   contents: ContentsProps[]
 }
 
+export interface ProductItemProps {
+  productType: string
+  productItems: TabItemProps[]
+}
+
 export interface TabsProps {
   defaultTabId?: string
-  tabs: TabItemProps[]
+  tabs: ProductItemProps[]
 }
 
 export default TabsProps

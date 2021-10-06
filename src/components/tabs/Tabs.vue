@@ -71,7 +71,7 @@ export default defineComponent({
 
   &__button {
     width: 100%;
-    background: var(--color-4);
+    background: var(--color-5);
     border: none;
     border-top: 4px solid transparent;
     padding: 4px 0;
@@ -87,7 +87,7 @@ export default defineComponent({
 
     &.is-active {
       border-top-color: var(--color-2);
-      background: var(--color-5);
+      background: var(--color-6);
     }
   }
 }

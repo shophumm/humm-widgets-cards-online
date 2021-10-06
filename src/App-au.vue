@@ -6,7 +6,7 @@
       :lang="lang"
       :theme="theme"
       :cards="cards"
-      :tabs="tabs"
+      :products="products"
       :terms="terms"
     />
   </Theme>
@@ -20,7 +20,7 @@ import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import AppProps from 'src/models/App'
 import { fetchWidgetData } from 'src/utils/apiUtils'
-import { getTabsData, getCardsData } from 'src/utils/utils'
+import { getProductData, getCardsData } from 'src/utils/utils'
 
 // TODO: i18n layer, use config/props to select widget type
 export default defineComponent({
@@ -41,8 +41,8 @@ export default defineComponent({
   data() {
     return {
       cards: [{}],
-      tabs: [{}],
-      terms: {},
+      products: [{}],
+      terms: '',
     }
   },
   computed: {
@@ -63,7 +63,7 @@ export default defineComponent({
     )
     if (responseData) {
       this.terms = responseData.terms
-      this.tabs = getTabsData(responseData.products)
+      this.products = getProductData(responseData.products)
       this.cards = getCardsData(responseData.cards)
     }
   },

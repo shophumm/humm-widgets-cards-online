@@ -12,10 +12,10 @@
       <slot name="header" />
     </template>
     <template #body>
-      <Tabs :tabs="tabsData">
+      <Tabs :tabs="getPrimaryProductData(tabsData)">
         <template #default="{ activeTabId }">
           <Tab
-            v-for="tab in tabsData"
+            v-for="tab in getPrimaryProductData(tabsData)"
             :key="tab.id"
             :tab-id="tab.id"
             :active-tab-id="activeTabId"
@@ -39,7 +39,7 @@ import Dialog from 'src/components/dialog/Dialog.vue'
 import Tabs from 'src/components/tabs/Tabs.vue'
 import Tab from 'src/components/tabs/Tab.vue'
 import DataList from 'src/components/tabs/DataList.vue'
-import { TabItemProps, ContentsProps } from 'src/models/Tabs'
+import { TabItemProps, ContentsProps, ProductItemProps } from 'src/models/Tabs'
 import TermsProps from 'src/models/Terms'
 
 export default defineComponent({
@@ -60,7 +60,7 @@ export default defineComponent({
       type: String,
     },
     tabsData: {
-      type: Array as () => TabItemProps[],
+      type: Array as () => ProductItemProps[],
       required: true,
     },
     accordionData: {
@@ -73,8 +73,12 @@ export default defineComponent({
     toggleDialog() {
       this.$emit('toggle-dialog')
     },
+    getPrimaryProductData(data: ProductItemProps[]): TabItemProps[] {
+      return data[0].productItems
+    },
     tabsContents(id: string): ContentsProps[] | undefined {
-      return this.tabsData.find(item => item.id === id)?.contents
+      const productData = this.getPrimaryProductData(this.tabsData)
+      return productData.find(item => item.id === id)?.contents
     },
   },
 })
