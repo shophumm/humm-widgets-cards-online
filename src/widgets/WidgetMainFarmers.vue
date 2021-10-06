@@ -1,6 +1,8 @@
 <template>
   <WidgetContent
     :is-widget-open="isWidgetOpen"
+    icon-opacity="0.3"
+    button-color="var(--color-3)"
     @toggle-dialog="isDialogOpen = true"
     @close-widget="isWidgetOpen = false"
   >
@@ -77,7 +79,7 @@ export default defineComponent({
   },
   computed: {
     getLogoCards(): CardProps[] {
-      return this.cards.slice(0, 1)
+      return this.cards.slice(0, 2)
     },
   },
 })

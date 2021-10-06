@@ -80,10 +80,24 @@ export default defineComponent({
 
   &[data-theme='farmers'] {
     --color-0: #000000;
-    --color-1: #ffffff;
+    --color-1: #732d81;
     --color-1-contrast: #000000;
-    --color-2: #732d81; // Web / Tile / Button / Secondary
+    --color-2: #573a90; // Web / Tile / Button / Secondary
+    --color-3: #732d81; // Main Widget Button
     --bg-1: #ffffff; // Widget background
+  }
+
+  &[data-theme='farmers'][data-dark='true'] {
+    --color-0: #000000;
+    --color-1: #ffffff;
+    --color-1-contrast: #ffffff;
+    --color-2: #573a90; // Web / Tile / Button / Secondary
+    --color-3: #ffffff; // Main Widget Button
+    --bg-1: linear-gradient(
+      90deg,
+      #b83990 18.24%,
+      #573a90 87.88%
+    ); // Widget background
   }
 
   &[data-theme='hummgroup'] {
