@@ -7,7 +7,7 @@
   position: relative;
   filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.1));
 
-  @media (min-width: 430px) {
+  [data-size-large='true'] & {
     display: flex;
     padding: 10px 12px;
     max-width: 436px;
@@ -23,7 +23,7 @@
     display: block;
     margin-left: 8px;
 
-    @media (min-width: 430px) {
+    [data-size-large='true'] & {
       display: flex;
       align-items: flex-start;
       width: 100%;
@@ -64,7 +64,7 @@
   &__hummgroup {
     width: 72px;
 
-    @media (min-width: 430px) {
+    [data-size-large='true'] & {
       width: 100px;
       margin: 11px 0 0 0;
     }

@@ -1,5 +1,5 @@
 <template>
-  <div ref="box" class="box">
+  <div ref="box" class="box" :data-size-large="isSizeLarge">
     <WidgetContent
       :is-widget-open="isWidgetOpen"
       button-color="var(--color-3)"
@@ -23,7 +23,6 @@
       </template>
     </WidgetContent>
     <div>width: {{ width }}</div>
-    <div>height: {{ height }}</div>
   </div>
 
   <DialogOverlay
@@ -110,7 +109,7 @@ export default defineComponent({
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
       width: 0,
-      height: 0,
+      isSizeLarge: undefined,
       observer: {} as ResizeObserver,
     }
   },
@@ -131,14 +130,18 @@ export default defineComponent({
       const box = this.$refs.box as Element
       console.log({ box })
       const width = box.clientWidth
-      const height = box.clientHeight
 
       this.width = width
-      this.height = height
       console.log({ width })
-      console.log({ height })
+
+      if (width > 410) {
+        this.isSizeLarge = true
+      } else {
+        this.isSizeLarge = false
+      }
+
       // Optionally, emit event with dimensions
-      this.$emit('resize', { width, height })
+      this.$emit('resize', { width })
     },
     initObserver() {
       const observer = new ResizeObserver(this.onResize)
