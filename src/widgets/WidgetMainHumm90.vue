@@ -109,9 +109,9 @@ export default defineComponent({
       isDialogOpen: false,
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
-      width: null,
-      height: null,
-      observer: {},
+      width: 0,
+      height: 0,
+      observer: {} as ResizeObserver,
     }
   },
   computed: {
@@ -124,14 +124,14 @@ export default defineComponent({
     this.initObserver()
   },
   beforeUnmount() {
-    if (this.observer) this.observer?.unobserve(this.$refs.box)
+    if (this.observer) this.observer?.unobserve(this.$refs.box as Element)
   },
   methods: {
     onResize() {
-      const box = this.$refs.box
+      const box = this.$refs.box as Element
       console.log({ box })
-      const width = (box as any).clientWidth
-      const height = (box as any).clientHeight
+      const width = box.clientWidth
+      const height = box.clientHeight
 
       this.width = width
       this.height = height
