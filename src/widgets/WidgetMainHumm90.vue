@@ -1,24 +1,30 @@
 <template>
-  <WidgetContent
-    :is-widget-open="isWidgetOpen"
-    button-color="var(--color-3)"
-    icon-opacity="0.3"
-    button-label="LEARN MORE"
-    @toggle-dialog="isDialogOpen = true"
-    @close-widget="isWidgetOpen = false"
-  >
-    <template #logo>
-      <div class="widget__iconbird">
-        <IconHumm90Bird fill="var(--color-1-contrast)" />
-      </div>
-    </template>
-    <template #title>
-      <p class="widget__title">UP TO 60 MONTHS INTEREST-FREE.</p>
-    </template>
-    <template #subtitle>
-      <span class="widget__subtitle">Indicative Payments. Ts&Cs Apply.</span>
-    </template>
-  </WidgetContent>
+  <div ref="box" class="box">
+    <WidgetContent
+      :is-widget-open="isWidgetOpen"
+      button-color="var(--color-3)"
+      icon-opacity="0.3"
+      button-label="LEARN MORE"
+      @toggle-dialog="isDialogOpen = true"
+      @close-widget="isWidgetOpen = false"
+    >
+      <template #logo>
+        <div class="widget__iconbird">
+          <IconHumm90Bird fill="var(--color-1-contrast)" />
+        </div>
+      </template>
+      <template #title>
+        <p class="widget__title">UP TO 60 MONTHS INTEREST-FREE.</p>
+      </template>
+      <template #subtitle>
+        <span class="widget__subtitle">
+          Indicative Payments. Ts&Cs Apply.
+        </span>
+      </template>
+    </WidgetContent>
+    <div>width: {{ width }}</div>
+    <div>height: {{ height }}</div>
+  </div>
 
   <DialogOverlay
     id="widget-dialog"
@@ -96,17 +102,48 @@ export default defineComponent({
       required: true,
     },
   },
+  emits: ['resize'],
   data() {
     return {
       isWidgetOpen: true,
       isDialogOpen: false,
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
+      width: null,
+      height: null,
+      observer: {},
     }
   },
   computed: {
     getApplyCards(): CardProps[] {
       return this.cards.slice(0, 1)
+    },
+  },
+  mounted() {
+    // initialize the observer on mount
+    this.initObserver()
+  },
+  beforeUnmount() {
+    if (this.observer) this.observer?.unobserve(this.$refs.box)
+  },
+  methods: {
+    onResize() {
+      const box = this.$refs.box
+      console.log({ box })
+      const width = (box as any).clientWidth
+      const height = (box as any).clientHeight
+
+      this.width = width
+      this.height = height
+      console.log({ width })
+      console.log({ height })
+      // Optionally, emit event with dimensions
+      this.$emit('resize', { width, height })
+    },
+    initObserver() {
+      const observer = new ResizeObserver(this.onResize)
+      observer.observe(this.$refs.box as Element)
+      this.observer = observer
     },
   },
 })
