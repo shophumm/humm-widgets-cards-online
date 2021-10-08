@@ -1,6 +1,7 @@
 <template>
-  <div ref="box" class="box" :data-size-large="isSizeLarge">
+  <div :data-size-large="isSizeLarge">
     <WidgetContent
+      :data-size-large="isSizeLarge"
       :is-widget-open="isWidgetOpen"
       button-color="var(--color-3)"
       icon-opacity="0.3"
@@ -22,8 +23,8 @@
         </span>
       </template>
     </WidgetContent>
-    <div>width: {{ width }}</div>
   </div>
+  <div>isSizeLarge: {{ isSizeLarge }}</div>
 
   <DialogOverlay
     id="widget-dialog"
@@ -88,6 +89,10 @@ export default defineComponent({
     productPrice: Number,
     lang: String as () => LanguageCodeEnum,
     theme: String as () => ThemeEnum,
+    isSizeLarge: {
+      type: Boolean,
+      required: true,
+    },
     cards: {
       type: Array as () => CardProps[],
       required: true,
@@ -101,52 +106,17 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ['resize'],
   data() {
     return {
       isWidgetOpen: true,
       isDialogOpen: false,
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
-      width: 0,
-      isSizeLarge: undefined,
-      observer: {} as ResizeObserver,
     }
   },
   computed: {
     getApplyCards(): CardProps[] {
       return this.cards.slice(0, 1)
-    },
-  },
-  mounted() {
-    // initialize the observer on mount
-    this.initObserver()
-  },
-  beforeUnmount() {
-    if (this.observer) this.observer?.unobserve(this.$refs.box as Element)
-  },
-  methods: {
-    onResize() {
-      const box = this.$refs.box as Element
-      console.log({ box })
-      const width = box.clientWidth
-
-      this.width = width
-      console.log({ width })
-
-      if (width > 410) {
-        this.isSizeLarge = true
-      } else {
-        this.isSizeLarge = false
-      }
-
-      // Optionally, emit event with dimensions
-      this.$emit('resize', { width })
-    },
-    initObserver() {
-      const observer = new ResizeObserver(this.onResize)
-      observer.observe(this.$refs.box as Element)
-      this.observer = observer
     },
   },
 })
