@@ -1,8 +1,6 @@
 <template v-slot:default="slotProps">
   <div ref="box" class="box">
     <slot :isSizeLarge="isSizeLarge"></slot>
-    <div>{{ width }}</div>
-    <div>{{ isSizeLarge }}</div>
   </div>
 </template>
 

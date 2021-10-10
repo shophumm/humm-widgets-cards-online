@@ -24,7 +24,6 @@
       <span class="widget__subtitle">T&Cs Apply.</span>
     </template>
   </WidgetContent>
-  <div>isSizeLarge: {{ isSizeLarge }}</div>
 
   <DialogOverlay
     id="widget-dialog"
