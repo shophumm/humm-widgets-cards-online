@@ -161,10 +161,6 @@ export default defineComponent({
     font-family: var(--font-base);
     pointer-events: all;
     color: var(--color-0);
-
-    @media (min-width: 560px) {
-      max-width: 536px;
-    }
   }
 
   &__title {

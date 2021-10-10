@@ -28,10 +28,6 @@ export default defineComponent({
 
   &--auto {
     width: 34px;
-
-    @media (min-width: 430px) {
-      width: 35px;
-    }
   }
 
   &--sm {
