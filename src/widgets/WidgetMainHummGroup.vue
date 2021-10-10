@@ -1,5 +1,6 @@
 <template>
   <WidgetContent
+    :is-size-large="isSizeLarge"
     :is-widget-open="isWidgetOpen"
     @toggle-dialog="isDialogOpen = true"
     @close-widget="isWidgetOpen = false"
@@ -18,6 +19,7 @@
       <span class="widget__subtitle">Indicative Payments. Ts&Cs Apply.</span>
     </template>
   </WidgetContent>
+  <div>isSizeLarge: {{ isSizeLarge }}</div>
 
   <DialogOverlay
     id="widget-dialog"
@@ -51,6 +53,10 @@ export default defineComponent({
     productPrice: Number,
     lang: String as () => LanguageCodeEnum,
     theme: String as () => ThemeEnum,
+    isSizeLarge: {
+      type: Boolean,
+      required: true,
+    },
     cards: {
       type: Array as () => CardProps[],
       required: true,

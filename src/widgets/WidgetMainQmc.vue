@@ -1,5 +1,6 @@
 <template>
   <WidgetContent
+    :is-size-large="isSizeLarge"
     :is-widget-open="isWidgetOpen"
     :is-button-bold="true"
     button-color="var(--color-3)"
@@ -23,6 +24,7 @@
       <span class="widget__subtitle">T&Cs Apply.</span>
     </template>
   </WidgetContent>
+  <div>isSizeLarge: {{ isSizeLarge }}</div>
 
   <DialogOverlay
     id="widget-dialog"
@@ -80,6 +82,10 @@ export default defineComponent({
     theme: String as () => ThemeEnum,
     cards: {
       type: Array as () => CardProps[],
+      required: true,
+    },
+    isSizeLarge: {
+      type: Boolean,
       required: true,
     },
     products: {

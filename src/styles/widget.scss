@@ -7,7 +7,7 @@
   position: relative;
   filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.1));
 
-  [data-size-large='true'] & {
+  &[data-size-large='true'] {
     display: flex;
     padding: 10px 12px;
     max-width: 436px;
@@ -23,17 +23,17 @@
     display: block;
     margin-left: 8px;
 
-    [data-size-large='true'] & {
-      display: flex;
-      align-items: flex-start;
-      width: 100%;
-      justify-content: space-between;
-      margin-right: 8px;
-    }
-
     .button {
       margin-top: 4px;
     }
+  }
+
+  &[data-size-large='true'] &__container {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    justify-content: space-between;
+    margin-right: 8px;
   }
 
   &__text {
@@ -63,11 +63,11 @@
 
   &__hummgroup {
     width: 72px;
+  }
 
-    [data-size-large='true'] & {
-      width: 100px;
-      margin: 11px 0 0 0;
-    }
+  &[data-size-large='true'] &__hummgroup {
+    width: 100px;
+    margin: 11px 0 0 0;
   }
 
   &__close {

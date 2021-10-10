@@ -1,29 +1,25 @@
 <template>
-  <div :data-size-large="isSizeLarge">
-    <WidgetContent
-      :data-size-large="isSizeLarge"
-      :is-widget-open="isWidgetOpen"
-      button-color="var(--color-3)"
-      icon-opacity="0.3"
-      button-label="LEARN MORE"
-      @toggle-dialog="isDialogOpen = true"
-      @close-widget="isWidgetOpen = false"
-    >
-      <template #logo>
-        <div class="widget__iconbird">
-          <IconHumm90Bird fill="var(--color-1-contrast)" />
-        </div>
-      </template>
-      <template #title>
-        <p class="widget__title">UP TO 60 MONTHS INTEREST-FREE.</p>
-      </template>
-      <template #subtitle>
-        <span class="widget__subtitle">
-          Indicative Payments. Ts&Cs Apply.
-        </span>
-      </template>
-    </WidgetContent>
-  </div>
+  <WidgetContent
+    :is-size-large="isSizeLarge"
+    :is-widget-open="isWidgetOpen"
+    button-color="var(--color-3)"
+    icon-opacity="0.3"
+    button-label="LEARN MORE"
+    @toggle-dialog="isDialogOpen = true"
+    @close-widget="isWidgetOpen = false"
+  >
+    <template #logo>
+      <div class="widget__iconbird">
+        <IconHumm90Bird fill="var(--color-1-contrast)" />
+      </div>
+    </template>
+    <template #title>
+      <p class="widget__title">UP TO 60 MONTHS INTEREST-FREE.</p>
+    </template>
+    <template #subtitle>
+      <span class="widget__subtitle"> Indicative Payments. Ts&Cs Apply. </span>
+    </template>
+  </WidgetContent>
   <div>isSizeLarge: {{ isSizeLarge }}</div>
 
   <DialogOverlay
