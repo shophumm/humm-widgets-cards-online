@@ -1,6 +1,9 @@
 <template>
   <WidgetContent
+    :is-size-large="isSizeLarge"
     :is-widget-open="isWidgetOpen"
+    icon-opacity="0.3"
+    button-color="var(--color-3)"
     @toggle-dialog="isDialogOpen = true"
     @close-widget="isWidgetOpen = false"
   >
@@ -28,7 +31,24 @@
     :tabs-data="products"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
-  />
+  >
+    <template #header>
+      <ExistingCard>
+        <template #cards>
+          <Card v-for="card in getApplyCards" :key="card.id" size="lg">
+            <img :src="card.src" :alt="card.alt" />
+          </Card>
+        </template>
+        <template #title>Have a Farmers Mastercard® or Q Mastercard®?</template>
+      </ExistingCard>
+    </template>
+    <template #footer>
+      <ApplyCard>
+        <template #title> Or apply for your Farmers Mastercard® </template>
+        <template #subtitle> Apply now! It’s simple! </template>
+      </ApplyCard>
+    </template>
+  </DialogOverlay>
 </template>
 
 <script lang="ts">
@@ -42,6 +62,8 @@ import { TermProps } from 'src/models/Terms'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import CardsLogo from 'src/modules/CardsLogo.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
+import ApplyCard from 'src/modules/ApplyCard.vue'
+import ExistingCard from 'src/modules/ExistingCard.vue'
 
 export default defineComponent({
   name: 'WidgetMainFarmers',
@@ -50,11 +72,17 @@ export default defineComponent({
     WidgetContent,
     CardsLogo,
     DialogOverlay,
+    ApplyCard,
+    ExistingCard,
   },
   props: {
     productPrice: Number,
     lang: String as () => LanguageCodeEnum,
     theme: String as () => ThemeEnum,
+    isSizeLarge: {
+      type: Boolean,
+      required: true,
+    },
     cards: {
       type: Array as () => CardProps[],
       required: true,
@@ -78,7 +106,10 @@ export default defineComponent({
   },
   computed: {
     getLogoCards(): CardProps[] {
-      return this.cards.slice(0, 1)
+      return this.cards.slice(0, 2)
+    },
+    getApplyCards(): CardProps[] {
+      return this.cards.slice(0, 4)
     },
   },
 })

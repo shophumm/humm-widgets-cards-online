@@ -1,5 +1,6 @@
 <template>
   <WidgetContent
+    :is-size-large="isSizeLarge"
     :is-widget-open="isWidgetOpen"
     :is-button-bold="true"
     button-color="var(--color-3)"
@@ -39,12 +40,16 @@
             <img :src="card.src" :alt="card.alt" />
           </Card>
         </template>
-        <template #title>Have a Farmers Mastercard® or Q Mastercard®?</template>
+        <template #title>Have a Q Mastercard® or Q Card?</template>
       </ExistingCard>
     </template>
     <template #footer>
-      <ApplyCard>
-        <template #title> Or apply for your Farmers Mastercard® </template>
+      <ApplyCard
+        :button-primary="true"
+        button-color="var(--bg-2)"
+        :is-button-rounded="false"
+      >
+        <template #title> Or apply for your Q Mastercard® </template>
         <template #subtitle> Apply now! It’s simple! </template>
       </ApplyCard>
     </template>
@@ -81,6 +86,10 @@ export default defineComponent({
     theme: String as () => ThemeEnum,
     cards: {
       type: Array as () => CardProps[],
+      required: true,
+    },
+    isSizeLarge: {
+      type: Boolean,
       required: true,
     },
     products: {
