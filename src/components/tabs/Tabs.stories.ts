@@ -1,6 +1,7 @@
 import { Story, Meta } from '@storybook/vue3'
 import Tabs from 'src/components/tabs/Tabs.vue'
 import type TabsProps from 'src/models/Tabs'
+import ProductEnum from 'src/models/enums/ProductEnum'
 
 export default {
   title: 'Tabs/Tabs',
@@ -25,7 +26,7 @@ export const Default = Template.bind({})
 Default.args = {
   tabs: [
     {
-      productType: 'Standard',
+      productType: ProductEnum.Standard,
       productItems: [
         {
           id: '18months',
@@ -73,7 +74,7 @@ WithDefaultTabId.args = {
   defaultTabId: '24months',
   tabs: [
     {
-      productType: 'Standard',
+      productType: ProductEnum.Standard,
       productItems: [
         {
           id: '18months',
