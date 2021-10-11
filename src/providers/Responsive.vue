@@ -8,7 +8,6 @@
 import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'Responsive',
-  emits: ['resize'],
   data() {
     return {
       width: 0,
@@ -26,17 +25,7 @@ export default defineComponent({
   methods: {
     onResize() {
       const box = this.$refs.box as Element
-      const width = box.clientWidth
-      this.width = width
-
-      if (width > 410) {
-        this.isSizeLarge = true
-      } else {
-        this.isSizeLarge = false
-      }
-
-      // Optionally, emit event with dimensions
-      this.$emit('resize', { width })
+      this.isSizeLarge = box.clientWidth > 410
     },
     initObserver() {
       const observer = new ResizeObserver(this.onResize)
