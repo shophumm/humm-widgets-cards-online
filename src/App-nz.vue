@@ -1,20 +1,26 @@
 <template>
   <Theme :lang="lang" :theme="theme" :is-dark="darkMode">
-    <component
-      :is="currentWidget"
-      :product-price="productPrice"
-      :lang="lang"
-      :theme="theme"
-      :cards="cards"
-      :products="products"
-      :terms="terms"
-    />
+    <Responsive>
+      <template #default="{ isSizeLarge }">
+        <component
+          :is="currentWidget"
+          :product-price="productPrice"
+          :lang="lang"
+          :theme="theme"
+          :is-size-large="isSizeLarge"
+          :cards="cards"
+          :products="products"
+          :terms="terms"
+        />
+      </template>
+    </Responsive>
   </Theme>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Theme from 'src/providers/Theme.vue'
+import Responsive from 'src/providers/Responsive.vue'
 import WidgetMainQmc from 'src/widgets/WidgetMainQmc.vue'
 import WidgetMainFarmers from 'src/widgets/WidgetMainFarmers.vue'
 import WidgetMainHummGroup from 'src/widgets/WidgetMainHummGroup.vue'
@@ -29,6 +35,7 @@ export default defineComponent({
   name: 'App',
   components: {
     Theme,
+    Responsive,
   },
   props: {
     productPrice: Number,

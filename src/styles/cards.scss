@@ -21,12 +21,8 @@
   }
 
   &--logo {
-    width: 75px;
+    min-width: 75px;
     margin-top: 3px;
-
-    @media (min-width: 430px) {
-      width: 107px;
-    }
   }
 
   &__products {

@@ -1,5 +1,6 @@
 <template>
   <WidgetContent
+    :is-size-large="isSizeLarge"
     :is-widget-open="isWidgetOpen"
     button-color="var(--color-3)"
     icon-opacity="0.3"
@@ -16,7 +17,7 @@
       <p class="widget__title">UP TO 60 MONTHS INTEREST-FREE.</p>
     </template>
     <template #subtitle>
-      <span class="widget__subtitle">Indicative Payments. Ts&Cs Apply.</span>
+      <span class="widget__subtitle"> Indicative Payments. Ts&Cs Apply. </span>
     </template>
   </WidgetContent>
 
@@ -83,6 +84,10 @@ export default defineComponent({
     productPrice: Number,
     lang: String as () => LanguageCodeEnum,
     theme: String as () => ThemeEnum,
+    isSizeLarge: {
+      type: Boolean,
+      required: true,
+    },
     cards: {
       type: Array as () => CardProps[],
       required: true,

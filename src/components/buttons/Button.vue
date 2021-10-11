@@ -90,17 +90,12 @@ export default defineComponent({
 
   &--auto {
     min-height: 35px;
-    width: 100%;
-    max-width: 138px;
-
-    @media (min-width: 430px) {
-      letter-spacing: -0.01em;
-      font-size: 12px;
-      font-weight: 500;
-      width: auto;
-      min-width: 90px;
-      min-height: 20px;
-    }
+    letter-spacing: -0.01em;
+    font-size: 12px;
+    font-weight: 500;
+    width: auto;
+    min-width: 90px;
+    min-height: 20px;
   }
 
   &--sm {

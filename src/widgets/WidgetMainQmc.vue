@@ -1,5 +1,6 @@
 <template>
   <WidgetContent
+    :is-size-large="isSizeLarge"
     :is-widget-open="isWidgetOpen"
     :is-button-bold="true"
     button-color="var(--color-3)"
@@ -84,6 +85,10 @@ export default defineComponent({
     theme: String as () => ThemeEnum,
     cards: {
       type: Array as () => CardProps[],
+      required: true,
+    },
+    isSizeLarge: {
+      type: Boolean,
       required: true,
     },
     products: {
