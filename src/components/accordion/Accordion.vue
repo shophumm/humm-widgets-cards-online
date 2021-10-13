@@ -24,6 +24,9 @@
       class="accordion__collapse"
     >
       <div class="accordion__body">{{ content }}</div>
+      <div class="accordion__footer">
+        <a href="#terms">FIND OUT MORE</a>
+      </div>
     </div>
   </div>
 </template>
@@ -104,8 +107,22 @@ export default defineComponent({
 
   &__body {
     font-family: var(--font-base);
-    font-size: 14px;
-    line-height: 1.3;
+    font-size: 12px;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+  }
+
+  &__footer {
+    margin: 15px 0 16px 0;
+    a {
+      font-family: var(--font-base);
+      color: var(--color-0);
+      font-weight: 600;
+      text-decoration: underline;
+      font-size: 12px;
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+    }
   }
 }
 </style>
