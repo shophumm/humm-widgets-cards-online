@@ -7,11 +7,12 @@ describe('Ikea Mobile Product Page Injection Test', () => {
     merchantProductPage.visitAndInjectWidget(
       Cypress.env('ikeaProductUrl'),
       '[class="range-revamp-product-availability"]',
-      'before'
+      'before',
+      'au'
     )
   })
 
   it('The Widget should be visible after injection', () => {
-    cy.get('#humm-widgets-cards-nz-default').should('be.visible')
+    cy.get('#humm-widgets-cards-au-default').should('be.visible')
   })
 })
