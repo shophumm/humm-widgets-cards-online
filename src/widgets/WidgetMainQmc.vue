@@ -16,8 +16,17 @@
       </CardsLogo>
     </template>
     <template #title>
-      <p class="widget__title">
-        Up To <strong>60 Months Interest-Free</strong>
+      <p v-if="isStandardProduct" class="widget__title">
+        Up To
+        <strong>{{ interestFreePeriod }} Months Interest-Free</strong>
+      </p>
+      <!-- TODO : update copy below -->
+      <p v-if="isHybridProduct" class="widget__title">
+        Hybrid Up To <strong>60 Months Interest-Free</strong>
+      </p>
+      <!-- TODO : update copy below -->
+      <p v-if="isFixedProduct" class="widget__title">
+        Fixed Up To <strong>60 Months Interest-Free</strong>
       </p>
     </template>
     <template #subtitle>
@@ -61,6 +70,7 @@ import { defineComponent } from 'vue'
 import Card from 'src/components/dataDisplay/Card.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
+import ProductEnum from 'src/models/enums/ProductEnum'
 import CardProps from 'src/models/Card'
 import { ProductItemProps } from 'src/models/Tabs'
 import { TermProps } from 'src/models/Terms'
@@ -107,6 +117,11 @@ export default defineComponent({
       isDialogOpen: false,
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
+      isStandardProduct: false,
+      isFixedProduct: false,
+      isHybridProduct: false,
+      interestFreePeriod: '',
+      interestFreeMonthlyRepayment: '',
     }
   },
   computed: {
@@ -115,6 +130,33 @@ export default defineComponent({
     },
     getApplyCards(): CardProps[] {
       return this.cards.slice(0, 4)
+    },
+  },
+  created() {
+    this.generateTitle()
+  },
+  methods: {
+    generateTitle() {
+      switch (this.products[0].productType.toLowerCase()) {
+        case ProductEnum.Standard:
+          this.interestFreePeriod = this.products[0].productItems[0].contents.find(
+            item => item.key === 'interestFreePeriod'
+          )?.value as string
+          this.isStandardProduct = true
+          break
+        case ProductEnum.Hybrid:
+          this.isHybridProduct = true
+          break
+        case ProductEnum.Fixed:
+          this.interestFreePeriod = this.products[0].productItems[0].contents.find(
+            item => item.key === 'interestFreePeriod'
+          )?.value as string
+          this.interestFreeMonthlyRepayment = this.products[0].productItems[0].contents.find(
+            item => item.key === 'interestFreeMonthlyRepayment'
+          )?.value as string
+          this.isFixedProduct = true
+          break
+      }
     },
   },
 })

@@ -150,6 +150,7 @@ export const getProductContent = (productData: Product): ContentsProps[] => {
   const contents = Object.entries(productData).map(item => {
     const [langKey, langValue] = item
     return {
+      key: langKey,
       name: getProductLabel(langKey),
       value: langValue,
     }

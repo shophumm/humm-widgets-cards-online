@@ -32,14 +32,28 @@ Default.args = {
           id: '18months',
           label: '18 months',
           contents: [
-            { name: 'Interest free period', value: '18 months' },
-            { name: 'Purchase amount', value: '$1,699.00' },
-            { name: 'Establishment fee', value: '$50.00' },
             {
+              key: 'interestFreePeriod',
+              name: 'Interest free period',
+              value: '18 months',
+            },
+            {
+              key: 'purchaseAmount',
+              name: 'Purchase amount',
+              value: '$1,699.00',
+            },
+            {
+              key: 'establishmentFee',
+              name: 'Establishment fee',
+              value: '$50.00',
+            },
+            {
+              key: 'minimumMonthlyRepayment',
               name: 'Indicative minimum monthly repayments*',
               value: '$48.00',
             },
             {
+              key: 'interestFreeMonthlyRepayment',
               name:
                 'Indicative repayment to pay before Interest free period expires ^',
               value: '$450.50',
@@ -50,14 +64,28 @@ Default.args = {
           id: '24months',
           label: '24 months',
           contents: [
-            { name: 'Interest free period', value: '24 months' },
-            { name: 'Purchase amount', value: '$1,699.50' },
-            { name: 'Establishment fee', value: '$50.50' },
             {
+              key: '',
+              name: 'Interest free period',
+              value: '24 months',
+            },
+            {
+              key: 'purchaseAmount',
+              name: 'Purchase amount',
+              value: '$1,699.50',
+            },
+            {
+              key: 'establishmentFee',
+              name: 'Establishment fee',
+              value: '$50.50',
+            },
+            {
+              key: 'minimumMonthlyRepayment',
               name: 'Indicative minimum monthly repayments*',
               value: '$48.50',
             },
             {
+              key: 'interestFreeMonthlyRepayment',
               name:
                 'Indicative repayment to pay before Interest free period expires ^',
               value: '$450.00',
@@ -80,14 +108,28 @@ WithDefaultTabId.args = {
           id: '18months',
           label: '18 months',
           contents: [
-            { name: 'Interest free period', value: '18 months' },
-            { name: 'Purchase amount', value: '$1,699.00' },
-            { name: 'Establishment fee', value: '$50.00' },
             {
+              key: 'interestFreePeriod',
+              name: 'Interest free period',
+              value: '18 months',
+            },
+            {
+              key: 'purchaseAmount',
+              name: 'Purchase amount',
+              value: '$1,699.00',
+            },
+            {
+              key: 'establishmentFee',
+              name: 'Establishment fee',
+              value: '$50.00',
+            },
+            {
+              key: 'minimumMonthlyRepayment',
               name: 'Indicative minimum monthly repayments*',
               value: '$48.00',
             },
             {
+              key: 'interestFreeMonthlyRepayment',
               name:
                 'Indicative repayment to pay before Interest free period expires ^',
               value: '$450.50',
@@ -98,14 +140,28 @@ WithDefaultTabId.args = {
           id: '24months',
           label: '24 months',
           contents: [
-            { name: 'Interest free period', value: '24 months' },
-            { name: 'Purchase amount', value: '$1,699.50' },
-            { name: 'Establishment fee', value: '$50.50' },
             {
+              key: 'interestFreePeriod',
+              name: 'Interest free period',
+              value: '24 months',
+            },
+            {
+              key: 'purchaseAmount',
+              name: 'Purchase amount',
+              value: '$1,699.50',
+            },
+            {
+              key: 'establishmentFee',
+              name: 'Establishment fee',
+              value: '$50.50',
+            },
+            {
+              key: 'minimumMonthlyRepayment',
               name: 'Indicative minimum monthly repayments*',
               value: '$48.50',
             },
             {
+              key: 'interestFreeMonthlyRepayment',
               name:
                 'Indicative repayment to pay before Interest free period expires ^',
               value: '$450.00',

@@ -14,10 +14,10 @@
       </div>
     </template>
     <template #title>
-      <p class="widget__title">UP TO 60 MONTHS INTEREST-FREE.</p>
+      <p class="widget__title">{{ title }}</p>
     </template>
     <template #subtitle>
-      <span class="widget__subtitle"> Indicative Payments. Ts&Cs Apply. </span>
+      <span class="widget__subtitle">{{ subtitle }}</span>
     </template>
   </WidgetContent>
 
@@ -63,6 +63,7 @@ import IconHumm90Bird from 'src/components/icons/IconHumm90Bird.vue'
 import Card from 'src/components/dataDisplay/Card.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
+import ProductEnum from 'src/models/enums/ProductEnum'
 import CardProps from 'src/models/Card'
 import { ProductItemProps } from 'src/models/Tabs'
 import { TermProps } from 'src/models/Terms'
@@ -108,11 +109,65 @@ export default defineComponent({
       isDialogOpen: false,
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
+      title: '',
+      subtitle: '',
     }
   },
   computed: {
     getApplyCards(): CardProps[] {
       return this.cards.slice(0, 1)
+    },
+  },
+  created() {
+    this.title = this.createTitle()
+    this.subtitle = this.createSubtitle()
+  },
+  methods: {
+    getStandardTitle() {
+      return `UP TO ${
+        this.products[0].productItems[0].contents.find(
+          item => item.key === 'interestFreePeriod'
+        )?.value
+      } MONTHS INTEREST FREE.`
+    },
+    getFixedTitle() {
+      return `GET ME FOR $${
+        this.products[0].productItems[0].contents.find(
+          item => item.key === 'interestFreeMonthlyRepayment'
+        )?.value
+      } PER MONTH OVER ${
+        this.products[0].productItems[0].contents.find(
+          item => item.key === 'interestFreePeriod'
+        )?.value
+      } MONTHS`
+    },
+    createTitle() {
+      switch (this.products[0].productType.toLowerCase()) {
+        case ProductEnum.Standard:
+          return this.getStandardTitle()
+        // TODO : update copy below
+        case ProductEnum.Hybrid:
+          return 'Hybrid Title'
+        case ProductEnum.Fixed:
+          return this.getFixedTitle()
+        // TODO : update copy below
+        default:
+          return 'Default Title'
+      }
+    },
+    createSubtitle() {
+      switch (this.products[0].productType.toLowerCase()) {
+        case ProductEnum.Standard:
+          return 'T&Cs apply.'
+        // TODO : update copy below
+        case ProductEnum.Hybrid:
+          return 'Hybrid subTitle'
+        case ProductEnum.Fixed:
+          return 'Indicative payments. T&Cs apply.'
+        // TODO : update copy below
+        default:
+          return 'Default subTitle'
+      }
     },
   },
 })

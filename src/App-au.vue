@@ -1,5 +1,5 @@
 <template>
-  <Theme :lang="lang" :theme="theme" :is-dark="darkMode">
+  <Theme v-if="!isFetching" :lang="lang" :theme="theme" :is-dark="darkMode">
     <Responsive>
       <template #default="{ isSizeLarge }">
         <component
@@ -47,6 +47,7 @@ export default defineComponent({
   },
   data() {
     return {
+      isFetching: true,
       cards: [{}],
       products: [{}],
       terms: {},
@@ -72,6 +73,7 @@ export default defineComponent({
       this.terms = responseData.terms
       this.products = getProductData(responseData.products)
       this.cards = getCardsData(responseData.cards)
+      this.isFetching = false
     }
   },
 })
