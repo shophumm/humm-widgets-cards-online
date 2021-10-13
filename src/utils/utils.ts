@@ -124,7 +124,7 @@ export const getProductData = (productsData: Product[]): ProductItemProps[] => {
         contents: getProductContent(productItem),
       })
     } else {
-      if (productItem.type in ProductEnum)
+      if (Object.values(ProductEnum).includes(productItem.type as ProductEnum))
         acc.push({
           productType: productItem.type as ProductEnum,
           productItems: [
