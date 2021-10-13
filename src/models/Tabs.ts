@@ -1,3 +1,5 @@
+import ProductEnum from 'src/models/enums/ProductEnum'
+
 export interface ContentsProps {
   name: string
   value: string
@@ -9,7 +11,7 @@ export interface TabItemProps {
 }
 
 export interface ProductItemProps {
-  productType: string
+  productType: ProductEnum
   productItems: TabItemProps[]
 }
 

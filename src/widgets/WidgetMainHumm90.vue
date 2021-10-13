@@ -65,6 +65,7 @@ import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import CardProps from 'src/models/Card'
 import { ProductItemProps } from 'src/models/Tabs'
+import { TermProps } from 'src/models/Terms'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
 import ApplyCard from 'src/modules/ApplyCard.vue'
@@ -97,7 +98,7 @@ export default defineComponent({
       required: true,
     },
     terms: {
-      type: String,
+      type: Object as () => TermProps,
       required: true,
     },
   },

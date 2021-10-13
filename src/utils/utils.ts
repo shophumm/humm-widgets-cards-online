@@ -6,6 +6,7 @@ import { ContentsProps, ProductItemProps } from 'src/models/Tabs'
 import CardProps from 'src/models/Card'
 import { ProductLanguage } from 'src/lang/ResponseLanguage'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
+import ProductEnum from 'src/models/enums/ProductEnum'
 
 export const getCurrentScript = (): HTMLOrSVGScriptElement =>
   document.currentScript ||
@@ -123,16 +124,18 @@ export const getProductData = (productsData: Product[]): ProductItemProps[] => {
         contents: getProductContent(productItem),
       })
     } else {
-      acc.push({
-        productType: productItem.type,
-        productItems: [
-          {
-            id: productItem.id,
-            label: createTabLabel(productItem.termPeriod),
-            contents: getProductContent(productItem),
-          },
-        ],
-      })
+      if (Object.values(ProductEnum).includes(productItem.type as ProductEnum))
+        acc.push({
+          productType: productItem.type as ProductEnum,
+          productItems: [
+            {
+              id: productItem.id,
+              label: createTabLabel(productItem.termPeriod),
+              contents: getProductContent(productItem),
+            },
+          ],
+        })
+      else throw new Error(`Unknown product type, ${productItem.type}`)
     }
     return acc
   }, [] as ProductItemProps[])

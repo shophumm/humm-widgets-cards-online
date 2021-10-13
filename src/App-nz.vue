@@ -51,7 +51,7 @@ export default defineComponent({
     return {
       cards: [{}],
       products: [{}],
-      terms: '',
+      terms: {},
     }
   },
   computed: {
