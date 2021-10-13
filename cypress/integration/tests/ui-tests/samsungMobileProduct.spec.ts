@@ -2,6 +2,11 @@ import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
 
 describe('Samsung Mobile Product Page Injection Test', () => {
   beforeEach(() => {
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      // returning false here prevents Cypress from
+      // failing the test
+      return false
+    })
     cy.viewport('iphone-x') // Set viewport to 375px x 812px
     //other available presets iphone-7, samsung-s10. You can also set specific width/height
     merchantProductPage.visitAndInjectWidget(
