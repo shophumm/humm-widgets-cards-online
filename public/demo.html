@@ -8,17 +8,28 @@
   </head>
   <body>
     <!-- This demo file is used to test both the production bundles after running yarn build -->
-    <h1>Humm widgets cards online</h1>
+    <h1 style="padding: 10px">Humm widgets cards online</h1>
 
     <div
       class="resizeWidget"
-      style="resize: horizontal; overflow: auto; width: fit-content"
+      style="
+        resize: horizontal;
+        overflow: auto;
+        width: 500px;
+        padding: 30px 10px;
+      "
     >
       <h2>AU default widget</h2>
       <script src="./humm-widgets-cards-au.umd.js?productPrice=400&merchantId='aaa143af-a96b-4887-bcd2-85960da544ea'"></script>
 
       <h2>AU default dark widget</h2>
       <script src="./humm-widgets-cards-au.umd.js?productPrice=400&merchantId='2b1bd959-5c95-45d7-9365-5844e270a2b6'&darkMode='true'"></script>
+
+      <h2>AU Humm90 widget</h2>
+      <script src="./humm-widgets-cards-au.umd.js?productPrice=400&merchantId='aaa143af-a96b-4887-bcd2-85960da544ea'&theme='humm90'"></script>
+
+      <h2>AU Humm90 dark widget</h2>
+      <script src="./humm-widgets-cards-au.umd.js?productPrice=400&merchantId='2b1bd959-5c95-45d7-9365-5844e270a2b6'&theme='humm90'&darkMode='true'"></script>
 
       <h2>AU blank widget (remove other widgets to see this in action)</h2>
       <script src="./humm-widgets-cards-au.umd.js?productPrice=400&merchantId='fc02c112-e8dd-49ee-bb8f-ab706c8df80f'&removeCss='true'"></script>
@@ -41,8 +52,8 @@
       <h2>NZ Farmers dark widget</h2>
       <script src="./humm-widgets-cards-nz.umd.js?productPrice=300&merchantId='09ce684d-cba6-44fb-a47c-77401f343be1'&theme='farmers'&darkMode='true'"></script>
 
-      <h2>NZ Humm Group widget</h2>
-      <script src="./humm-widgets-cards-nz.umd.js?productPrice=300&merchantId='260a994e-b577-44ca-af6c-76a538386d27'&theme='hummgroup'"></script>
+      <!-- <h2>NZ Humm Group widget</h2>
+        <script src="./humm-widgets-cards-nz.umd.js?productPrice=300&merchantId='260a994e-b577-44ca-af6c-76a538386d27'&theme='hummgroup'"></script> -->
 
       <h2>NZ blank widget (remove other widgets to see this in action)</h2>
       <script src="./humm-widgets-cards-nz.umd.js?productPrice=300&merchantId='aa7844ff-c24c-4087-8e9e-534eb59a9a18'&removeCss='true'"></script>
