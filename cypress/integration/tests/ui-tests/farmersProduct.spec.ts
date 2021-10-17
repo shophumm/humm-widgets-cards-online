@@ -5,6 +5,7 @@ describe('Farmers Product Page Injection Test', () => {
     Cypress.on('uncaught:exception', (err, runnable) => {
       return false
     })
+    cy.viewport('macbook-15')
     merchantProductPage.visitAndInjectWidget(
       Cypress.env('farmersProductUrl'),
       '[class="mobile-check-store-container"]',

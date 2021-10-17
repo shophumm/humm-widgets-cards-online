@@ -1,6 +1,6 @@
 import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
 
-describe('PBTech Mobile Product Page Injection Test', () => {
+describe('Michael Hill Mobile Product Page Injection Test', () => {
   beforeEach(() => {
     Cypress.on('uncaught:exception', (err, runnable) => {
       return false
@@ -8,13 +8,14 @@ describe('PBTech Mobile Product Page Injection Test', () => {
     cy.viewport('iphone-x') // Set viewport to 375px x 812px
     //other available presets iphone-7, samsung-s10. You can also set specific width/height
     merchantProductPage.visitAndInjectWidget(
-      Cypress.env('pbtectProductUrl'),
-      '[class="product_bgWrap p-3 bgcolor rounded"]',
-      'after'
+      Cypress.env('michaelHillUrl'),
+      '[class="pdp-payment-messages moved"]',
+      'before',
+      'au'
     )
   })
 
   it('The Widget should be visible after injection', () => {
-    cy.get('#humm-widgets-cards-nz-default').should('be.visible')
+    cy.get('#humm-widgets-cards-au-default').should('be.visible')
   })
 })

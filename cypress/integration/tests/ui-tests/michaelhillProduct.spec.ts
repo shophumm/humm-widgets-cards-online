@@ -1,15 +1,15 @@
 import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
 
-describe('Ikea Product Page Injection Test', () => {
+describe('Michael Hill Product Page Injection Test', () => {
   beforeEach(() => {
     Cypress.on('uncaught:exception', (err, runnable) => {
       return false
     })
     cy.viewport('macbook-15')
     merchantProductPage.visitAndInjectWidget(
-      Cypress.env('ikeaProductUrl'),
-      '[class="range-revamp-product-availability"]',
-      'before',
+      Cypress.env('michaelHillUrl'),
+      '[class="pdp-payment-messages moved"]',
+      'after',
       'au'
     )
   })
