@@ -2,10 +2,11 @@ import { isDevelopment, merchantId } from 'src/utils/constants'
 import ScriptParametersEnum from 'src/models/enums/ScriptParametersEnum'
 import type ScriptParameters from 'src/models/ScriptParameters'
 import { Product, Card } from 'src/models/Response'
-import { ContentsProps, TabItemProps } from 'src/models/Tabs'
+import { ContentsProps, ProductItemProps } from 'src/models/Tabs'
 import CardProps from 'src/models/Card'
 import { ProductLanguage } from 'src/lang/ResponseLanguage'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
+import ProductEnum from 'src/models/enums/ProductEnum'
 
 export const getCurrentScript = (): HTMLOrSVGScriptElement =>
   document.currentScript ||
@@ -111,13 +112,38 @@ export const getAllScriptURLParameters = (
   return params
 }
 
-export const getTabsData = (productsData: Product[]): TabItemProps[] => {
-  const tabs = productsData.map(product => ({
-    id: product.id,
-    label: product.type,
-    contents: getProductContent(product),
-  }))
-  return tabs
+export const getProductData = (productsData: Product[]): ProductItemProps[] => {
+  const products = productsData.reduce((acc, productItem) => {
+    const indexOfProductType = acc.findIndex(
+      item => item.productType === productItem.type
+    )
+    if (indexOfProductType >= 0) {
+      acc[indexOfProductType].productItems.push({
+        id: productItem.id,
+        label: createTabLabel(productItem.termPeriod),
+        contents: getProductContent(productItem),
+      })
+    } else {
+      if (Object.values(ProductEnum).includes(productItem.type as ProductEnum))
+        acc.push({
+          productType: productItem.type as ProductEnum,
+          productItems: [
+            {
+              id: productItem.id,
+              label: createTabLabel(productItem.termPeriod),
+              contents: getProductContent(productItem),
+            },
+          ],
+        })
+      else throw new Error(`Unknown product type, ${productItem.type}`)
+    }
+    return acc
+  }, [] as ProductItemProps[])
+  return products
+}
+
+export const createTabLabel = (productTerm: number): string => {
+  return productTerm.toString() + ' Months'
 }
 
 export const getProductContent = (productData: Product): ContentsProps[] => {

@@ -12,10 +12,10 @@
       <slot name="header" />
     </template>
     <template #body>
-      <Tabs :tabs="tabsData">
+      <Tabs :tabs="getDataForProduct()">
         <template #default="{ activeTabId }">
           <Tab
-            v-for="tab in tabsData"
+            v-for="tab in getDataForProduct()"
             :key="tab.id"
             :tab-id="tab.id"
             :active-tab-id="activeTabId"
@@ -25,7 +25,7 @@
         </template>
       </Tabs>
       <slot name="footer" />
-      <Accordion id="widget-terms" :content="accordionData">
+      <Accordion id="widget-terms" :content="getTermsForProduct()">
         Terms & Conditions
       </Accordion>
     </template>
@@ -39,7 +39,9 @@ import Dialog from 'src/components/dialog/Dialog.vue'
 import Tabs from 'src/components/tabs/Tabs.vue'
 import Tab from 'src/components/tabs/Tab.vue'
 import DataList from 'src/components/tabs/DataList.vue'
-import { TabItemProps, ContentsProps } from 'src/models/Tabs'
+import { TabItemProps, ContentsProps, ProductItemProps } from 'src/models/Tabs'
+import { TermProps } from 'src/models/Terms'
+import ProductEnum from 'src/models/enums/ProductEnum'
 
 export default defineComponent({
   name: 'DialogOverlay',
@@ -59,11 +61,11 @@ export default defineComponent({
       type: String,
     },
     tabsData: {
-      type: Array as () => TabItemProps[],
+      type: Array as () => ProductItemProps[],
       required: true,
     },
     accordionData: {
-      type: String,
+      type: Object as () => TermProps,
       required: true,
     },
   },
@@ -72,8 +74,25 @@ export default defineComponent({
     toggleDialog() {
       this.$emit('toggle-dialog')
     },
+    selectProductType(): ProductEnum {
+      const productType = this.tabsData[0].productType
+      return productType
+    },
+    getDataForProduct(): TabItemProps[] | undefined {
+      const productType = this.selectProductType()
+      const productData = this.tabsData.find(
+        product => product.productType === productType
+      )
+      return productData?.productItems
+    },
+    getTermsForProduct() {
+      const productType = this.selectProductType()
+      const productTypeLower = productType?.toLowerCase() as ProductEnum
+      return this.accordionData[productTypeLower]
+    },
     tabsContents(id: string): ContentsProps[] | undefined {
-      return this.tabsData.find(item => item.id === id)?.contents
+      const productData = this.getDataForProduct()
+      return productData?.find(item => item.id === id)?.contents
     },
   },
 })

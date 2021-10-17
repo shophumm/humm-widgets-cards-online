@@ -1,8 +1,9 @@
 <template>
   <WidgetContent
+    :is-size-large="isSizeLarge"
     :is-widget-open="isWidgetOpen"
     :is-button-bold="true"
-    button-color="var(--color-1)"
+    button-color="var(--color-3)"
     icon-opacity="0.3"
     @toggle-dialog="isDialogOpen = true"
     @close-widget="isWidgetOpen = false"
@@ -28,7 +29,7 @@
     id="widget-dialog"
     :is-dialog-open="isDialogOpen"
     :button-close-label="buttonCloseLabel"
-    :tabs-data="tabs"
+    :tabs-data="products"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
@@ -39,12 +40,16 @@
             <img :src="card.src" :alt="card.alt" />
           </Card>
         </template>
-        <template #title>Have a Farmers Mastercard® or Q Mastercard®?</template>
+        <template #title>Have a Q Mastercard® or Q Card?</template>
       </ExistingCard>
     </template>
     <template #footer>
-      <ApplyCard>
-        <template #title> Or apply for your Farmers Mastercard® </template>
+      <ApplyCard
+        :button-primary="true"
+        button-color="var(--bg-2)"
+        :is-button-rounded="false"
+      >
+        <template #title> Or apply for your Q Mastercard® </template>
         <template #subtitle> Apply now! It’s simple! </template>
       </ApplyCard>
     </template>
@@ -57,7 +62,8 @@ import Card from 'src/components/dataDisplay/Card.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import CardProps from 'src/models/Card'
-import TabProps from 'src/models/Tabs'
+import { ProductItemProps } from 'src/models/Tabs'
+import { TermProps } from 'src/models/Terms'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import CardsLogo from 'src/modules/CardsLogo.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
@@ -82,12 +88,16 @@ export default defineComponent({
       type: Array as () => CardProps[],
       required: true,
     },
-    tabs: {
-      type: Array as () => TabProps[],
+    isSizeLarge: {
+      type: Boolean,
+      required: true,
+    },
+    products: {
+      type: Array as () => ProductItemProps[],
       required: true,
     },
     terms: {
-      type: String,
+      type: Object as () => TermProps,
       required: true,
     },
   },

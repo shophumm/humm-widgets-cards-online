@@ -1,5 +1,11 @@
 class _merchantProductPage {
-  visitAndInjectWidget(url: string, targetElement: string, position: string) {
+  visitAndInjectWidget(
+    url: string,
+    targetElement: string,
+    position: string,
+    country: 'nz' | 'au' = 'nz',
+    darkMode = false
+  ) {
     cy.visit(url, {
       onLoad: contentWindow => {
         return new Cypress.Promise((resolve, reject) => {
@@ -32,7 +38,9 @@ class _merchantProductPage {
           // set source of element (Note, must be done post injection, else the script wont have a "DOM" location to inject
           tag.src =
             Cypress.env('baseUrl') +
-            `humm-widgets-cards-nz.umd.js?productPrice=300&merchantId='8ea286eb-b884-4518-8fa1-b65a107a350d'`
+            `humm-widgets-cards-${country}.umd.js?productPrice=300&merchantId='8ea286eb-b884-4518-8fa1-b65a107a350d'${
+              darkMode && `&darkMode='${darkMode.toString()}'`
+            }`
 
           // Add a timeout, to reject promise after 2.5s of not "load" fired
           setTimeout(() => {

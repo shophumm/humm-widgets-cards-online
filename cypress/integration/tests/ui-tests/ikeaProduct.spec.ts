@@ -6,12 +6,13 @@ describe('Ikea Product Page Injection Test', () => {
     merchantProductPage.visitAndInjectWidget(
       Cypress.env('ikeaProductUrl'),
       '[class="range-revamp-product-availability"]',
-      'before'
+      'before',
+      'au'
     )
   })
 
   it('The Widget should be visible after injection', () => {
     cy.scrollTo(0, 200) // TODO: this is TEMP, need to figure out why element thinks its invisible if not "on the screen", vs other tests which dont suffer from this? is it due to some overflow:hidden?
-    cy.get('#humm-widgets-cards-nz-default').should('be.visible')
+    cy.get('#humm-widgets-cards-au-default').should('be.visible')
   })
 })

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isWidgetOpen" class="widget">
+  <div v-if="isWidgetOpen" :data-size-large="isSizeLarge" class="widget">
     <div class="widget__content">
       <slot name="logo" />
       <div class="widget__container">
@@ -44,6 +44,7 @@ export default defineComponent({
       type: Boolean,
       required: true,
     },
+    isSizeLarge: Boolean,
     buttonLabel: {
       type: String,
       default: 'Learn More',
