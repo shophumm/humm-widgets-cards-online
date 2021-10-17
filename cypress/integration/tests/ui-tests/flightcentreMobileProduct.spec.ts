@@ -1,6 +1,6 @@
 import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
 
-describe('Ikea Mobile Product Page Injection Test', () => {
+describe('Flight Centre Mobile Product Page Injection Test', () => {
   beforeEach(() => {
     Cypress.on('uncaught:exception', (err, runnable) => {
       return false

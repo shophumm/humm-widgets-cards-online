@@ -1,6 +1,6 @@
 import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
 
-describe('Michael Hill Product Page Injection Test', () => {
+describe('Flight Centre Product Page Injection Test', () => {
   beforeEach(() => {
     Cypress.on('uncaught:exception', (err, runnable) => {
       return false
