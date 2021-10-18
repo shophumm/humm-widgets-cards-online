@@ -39,7 +39,7 @@ import Dialog from 'src/components/dialog/Dialog.vue'
 import Tabs from 'src/components/tabs/Tabs.vue'
 import Tab from 'src/components/tabs/Tab.vue'
 import DataList from 'src/components/tabs/DataList.vue'
-import { TabItemProps, ProductItemProps } from 'src/models/Tabs'
+import { TabItemProps, ContentsProps, ProductItemProps } from 'src/models/Tabs'
 import { TermProps } from 'src/models/Terms'
 import ProductEnum from 'src/models/enums/ProductEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
@@ -95,15 +95,17 @@ export default defineComponent({
       const productTypeLower = productType?.toLowerCase() as ProductEnum
       return this.accordionData[productTypeLower]
     },
-    tabsContents(id: string): any[] | undefined {
+    tabsContents(id: string): Partial<ContentsProps[]> | undefined {
       const productData = this.getDataForProduct()
       const allContents = productData?.find(item => item.id === id)?.contents
       if (this.lang === LanguageCodeEnum.Australia)
         return allContents?.filter(item =>
+          // TODO: replace with "keys" corresponding to breakdown
           ['interestFreePeriod', 'establishmentFee'].includes(item.key)
         )
       if (this.lang === LanguageCodeEnum.NewZealand)
         return allContents?.filter(item =>
+          // TODO: replace with "keys" corresponding to breakdown
           ['interestFreePeriod', 'establishmentFee'].includes(item.key)
         )
     },
