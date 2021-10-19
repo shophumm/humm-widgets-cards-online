@@ -65,6 +65,10 @@ export default defineComponent({
       type: String as () => LanguageCodeEnum,
       required: true,
     },
+    productPrice: {
+      type: Number,
+      required: true,
+    },
     tabsData: {
       type: Array as () => ProductItemProps[],
       required: true,
@@ -98,16 +102,36 @@ export default defineComponent({
     tabsContents(id: string): Partial<ContentsProps[]> | undefined {
       const productData = this.getDataForProduct()
       const allContents = productData?.find(item => item.id === id)?.contents
-      if (this.lang === LanguageCodeEnum.Australia)
-        return allContents?.filter(item =>
-          // TODO: replace with "keys" corresponding to breakdown
-          ['interestFreePeriod', 'establishmentFee'].includes(item.key)
+      if (allContents?.findIndex(item => item.key === 'productPrice') === -1) {
+        allContents?.push({
+          key: 'productPrice',
+          name: 'Purchase Amount',
+          value: Number(this.productPrice).toFixed(2),
+        })
+      }
+      if (this.lang === LanguageCodeEnum.Australia) {
+        const displayedContent = allContents?.filter(item =>
+          [
+            'interestFreePeriod',
+            'establishmentFee',
+            'productPrice',
+            'indicativeMinMonthly',
+            'indicativeMonthly',
+          ].includes(item.key)
         )
-      if (this.lang === LanguageCodeEnum.NewZealand)
-        return allContents?.filter(item =>
-          // TODO: replace with "keys" corresponding to breakdown
-          ['interestFreePeriod', 'establishmentFee'].includes(item.key)
+        return displayedContent
+      }
+      if (this.lang === LanguageCodeEnum.NewZealand) {
+        const displayedContent = allContents?.filter(item =>
+          [
+            'interestFreePeriod',
+            'establishmentFee',
+            'productPrice',
+            'indicativeMinMonthly',
+          ].includes(item.key)
         )
+        return displayedContent
+      }
     },
   },
 })
