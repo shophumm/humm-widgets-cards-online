@@ -4,7 +4,7 @@ import type ScriptParameters from 'src/models/ScriptParameters'
 import { Product, Card } from 'src/models/Response'
 import { ContentsProps, ProductItemProps } from 'src/models/Tabs'
 import CardProps from 'src/models/Card'
-import { ProductLanguage } from 'src/lang/ResponseLanguage'
+import { productLanguage } from 'src/lang/ResponseLanguage'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import ProductEnum from 'src/models/enums/ProductEnum'
 
@@ -159,12 +159,12 @@ export const getProductContent = (productData: Product): ContentsProps[] => {
 }
 
 export const getProductLabel = (nameKey: string): string => {
-  const nameLabelPair = ProductLanguage.find(item => item.name === nameKey)
+  const nameLabelPair = productLanguage.find(item => item.name === nameKey)
   return nameLabelPair ? nameLabelPair.label : nameKey
 }
 
 export const getProductValue = (nameKey: string, value: string): string => {
-  const nameLabelPair = ProductLanguage.find(item => item.name === nameKey)
+  const nameLabelPair = productLanguage.find(item => item.name === nameKey)
   if (nameLabelPair)
     switch (nameLabelPair.unit.toLowerCase()) {
       case '$':
