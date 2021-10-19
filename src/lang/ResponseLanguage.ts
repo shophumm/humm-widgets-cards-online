@@ -1,4 +1,6 @@
-export const ProductLanguage = [
+import ProductLanguageProps from 'src/models/ProductLanguage'
+
+export const productLanguage: ProductLanguageProps[] = [
   { name: 'interestFreePeriod', label: 'Interest free period', unit: 'months' },
   { name: 'establishmentFee', label: 'Establishment fee', unit: '$' },
   {
