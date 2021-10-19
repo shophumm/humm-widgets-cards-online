@@ -1,22 +1,14 @@
 export const ProductLanguage = [
-  { name: 'id', label: 'id' },
-  { name: 'type', label: 'Type' },
-  { name: 'interestFreePeriod', label: 'Interest free period' },
-  { name: 'termPeriod', label: 'Term period' },
-  { name: 'termRate', label: 'Term rate' },
-  { name: 'deferredPeriod', label: 'Deferred period' },
-  { name: 'establishmentFee', label: 'Establishment fee' },
-  { name: 'description', label: 'Description' },
+  { name: 'interestFreePeriod', label: 'Interest free period', unit: 'months' },
+  { name: 'establishmentFee', label: 'Establishment fee', unit: '$' },
   {
-    name: 'interestFreeMonthlyRepayment',
+    name: 'indicativeMinMonthly',
+    label: 'Indicative minimum monthly repayments*',
+    unit: '$',
+  },
+  {
+    name: 'indicativeMonthly',
     label: 'Indicative repayment to pay before Interest free period expires ^',
-  },
-  {
-    name: 'minTermMonthlyRepayment',
-    label: 'Minimum term monthly repayment',
-  },
-  {
-    name: 'remainderInterestPeriodMontlyRepayment',
-    label: 'Reminder interest period monthly repayment',
+    unit: '$',
   },
 ]
