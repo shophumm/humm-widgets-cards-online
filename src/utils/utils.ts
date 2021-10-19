@@ -151,7 +151,7 @@ export const getProductContent = (productData: Product): ContentsProps[] => {
     const [langKey, langValue] = item
     return {
       name: getProductLabel(langKey),
-      value: langValue,
+      value: getProductValue(langKey, langValue),
     }
   })
   return contents
@@ -160,6 +160,22 @@ export const getProductContent = (productData: Product): ContentsProps[] => {
 export const getProductLabel = (nameKey: string): string => {
   const nameLabelPair = ProductLanguage.find(item => item.name === nameKey)
   return nameLabelPair ? nameLabelPair.label : nameKey
+}
+
+export const getProductValue = (nameKey: string, value: string): string => {
+  const nameLabelPair = ProductLanguage.find(item => item.name === nameKey)
+  if (nameLabelPair)
+    switch (nameLabelPair.unit.toLowerCase()) {
+      case '$':
+        return `${nameLabelPair.unit}${parseFloat(value).toFixed(2)}`
+      case 'months': {
+        const unit = `month${value === '1' ? '' : 's'}`
+        return `${value} ${unit}`
+      }
+      default:
+        return value
+    }
+  return value
 }
 
 export const getCardsData = (cardsData: Card[]): CardProps[] => {
