@@ -4,7 +4,7 @@ import type ScriptParameters from 'src/models/ScriptParameters'
 import { Product, Card } from 'src/models/Response'
 import { ContentsProps, ProductItemProps } from 'src/models/Tabs'
 import CardProps from 'src/models/Card'
-import { ProductLanguage } from 'src/lang/ResponseLanguage'
+import { productLanguage } from 'src/lang/ResponseLanguage'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import ProductEnum from 'src/models/enums/ProductEnum'
 
@@ -151,15 +151,31 @@ export const getProductContent = (productData: Product): ContentsProps[] => {
     const [langKey, langValue] = item
     return {
       name: getProductLabel(langKey),
-      value: langValue,
+      value: getProductValue(langKey, langValue),
     }
   })
   return contents
 }
 
 export const getProductLabel = (nameKey: string): string => {
-  const nameLabelPair = ProductLanguage.find(item => item.name === nameKey)
+  const nameLabelPair = productLanguage.find(item => item.name === nameKey)
   return nameLabelPair ? nameLabelPair.label : nameKey
+}
+
+export const getProductValue = (nameKey: string, value: string): string => {
+  const nameLabelPair = productLanguage.find(item => item.name === nameKey)
+  if (nameLabelPair)
+    switch (nameLabelPair.unit.toLowerCase()) {
+      case '$':
+        return `${nameLabelPair.unit}${parseFloat(value).toFixed(2)}`
+      case 'months': {
+        const unit = `month${value === '1' ? '' : 's'}`
+        return `${value} ${unit}`
+      }
+      default:
+        return value
+    }
+  return value
 }
 
 export const getCardsData = (cardsData: Card[]): CardProps[] => {

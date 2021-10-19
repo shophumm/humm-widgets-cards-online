@@ -20,8 +20,8 @@ export interface Product {
 
 export interface Terms {
   standard?: string
-  hybrid?: string
   fixed?: string
+  'payment-holiday'?: string
 }
 
 export interface WidgetResponseBody {
