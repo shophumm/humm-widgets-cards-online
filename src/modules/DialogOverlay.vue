@@ -79,6 +79,23 @@ export default defineComponent({
     },
   },
   emits: ['toggle-dialog'],
+  data() {
+    return {
+      fieldBreakdownAu: [
+        'interestFreePeriod',
+        'establishmentFee',
+        'productPrice',
+        'indicativeMinMonthly',
+        'indicativeMonthly',
+      ],
+      fieldBreakdownNz: [
+        'interestFreePeriod',
+        'establishmentFee',
+        'productPrice',
+        'indicativeMinMonthly',
+      ],
+    }
+  },
   methods: {
     toggleDialog() {
       this.$emit('toggle-dialog')
@@ -87,51 +104,63 @@ export default defineComponent({
       const productType = this.tabsData[0].productType
       return productType
     },
-    getDataForProduct(): TabItemProps[] | undefined {
+    getDataForProduct(): TabItemProps[] {
       const productType = this.selectProductType()
       const productData = this.tabsData.find(
         product => product.productType === productType
       )
-      return productData?.productItems
+      if (!productData)
+        throw new Error(`No data found corresponding to ${productType}`)
+      return productData.productItems
     },
     getTermsForProduct() {
       const productType = this.selectProductType()
       const productTypeLower = productType?.toLowerCase() as ProductEnum
       return this.accordionData[productTypeLower]
     },
-    tabsContents(id: string): Partial<ContentsProps[]> | undefined {
-      const productData = this.getDataForProduct()
-      const allContents = productData?.find(item => item.id === id)?.contents
-      if (allContents?.findIndex(item => item.key === 'productPrice') === -1) {
-        allContents?.push({
+    appendProductPrice(productContents: ContentsProps[]): ContentsProps[] {
+      if (
+        productContents.findIndex(item => item.key === 'productPrice') === -1
+      ) {
+        productContents.push({
           key: 'productPrice',
           name: 'Purchase Amount',
-          value: Number(this.productPrice).toFixed(2),
+          value: `$${Number(this.productPrice).toFixed(2)}`,
         })
       }
+      return productContents
+    },
+    orderContent(
+      unorderedContent: ContentsProps[],
+      customOrder: string[]
+    ): ContentsProps[] {
+      return unorderedContent.sort(
+        (a, b) => customOrder.indexOf(a.key) - customOrder.indexOf(b.key)
+      )
+    },
+    tabsContents(id: string): Partial<ContentsProps[]> {
+      const productData = this.getDataForProduct()
+      const productContents = productData?.find(item => item.id === id)
+        ?.contents
+
+      if (!productContents)
+        throw new Error(`No content found corresponding to id ${id}`)
+
+      const allContent = this.appendProductPrice(productContents)
+
       if (this.lang === LanguageCodeEnum.Australia) {
-        const displayedContent = allContents?.filter(item =>
-          [
-            'interestFreePeriod',
-            'establishmentFee',
-            'productPrice',
-            'indicativeMinMonthly',
-            'indicativeMonthly',
-          ].includes(item.key)
+        const displayedContent = allContent.filter(item =>
+          this.fieldBreakdownAu.includes(item.key)
         )
-        return displayedContent
+        return this.orderContent(displayedContent, this.fieldBreakdownAu)
       }
       if (this.lang === LanguageCodeEnum.NewZealand) {
-        const displayedContent = allContents?.filter(item =>
-          [
-            'interestFreePeriod',
-            'establishmentFee',
-            'productPrice',
-            'indicativeMinMonthly',
-          ].includes(item.key)
+        const displayedContent = allContent.filter(item =>
+          this.fieldBreakdownNz.includes(item.key)
         )
-        return displayedContent
+        return this.orderContent(displayedContent, this.fieldBreakdownNz)
       }
+      return allContent
     },
   },
 })
