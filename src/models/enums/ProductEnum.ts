@@ -1,7 +1,7 @@
 export enum ProductEnum {
   Standard = 'standard',
-  Hybrid = 'hybrid',
   Fixed = 'fixed',
+  PaymentHoliday = 'payment-holiday',
 }
 
 export default ProductEnum

@@ -1,14 +1,14 @@
 import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
 
-describe('Ikea Product Page Injection Test', () => {
+describe('Flight Centre Product Page Injection Test', () => {
   beforeEach(() => {
     Cypress.on('uncaught:exception', (err, runnable) => {
       return false
     })
     cy.viewport('macbook-15')
     merchantProductPage.visitAndInjectWidget(
-      Cypress.env('ikeaProductUrl'),
-      '[class="range-revamp-product-availability"]',
+      Cypress.env('flightcentreUrl'),
+      '[class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"]',
       'before',
       'au'
     )

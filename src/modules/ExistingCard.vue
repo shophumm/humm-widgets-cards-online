@@ -38,6 +38,7 @@ export default defineComponent({
   &__title {
     font-weight: 700;
     font-size: 20px;
+    margin-top: 24px;
   }
 
   &__subtitle,
