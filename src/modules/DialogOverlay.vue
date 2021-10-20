@@ -130,15 +130,50 @@ export default defineComponent({
       }
       return productContents
     },
-    orderContent(
-      unorderedContent: ContentsProps[],
-      customOrder: string[]
-    ): ContentsProps[] {
-      return unorderedContent.sort(
-        (a, b) => customOrder.indexOf(a.key) - customOrder.indexOf(b.key)
-      )
+    filterContentByLang(content: ContentsProps[]): ContentsProps[] {
+      let displayedContent = undefined
+      switch (this.lang) {
+        case LanguageCodeEnum.Australia:
+          displayedContent = content.filter(item =>
+            this.fieldBreakdownAu.includes(item.key)
+          )
+          if (!displayedContent)
+            throw new Error(
+              `No content that matches AU breakdown : ${this.fieldBreakdownAu}`
+            )
+          return displayedContent
+        case LanguageCodeEnum.NewZealand:
+          displayedContent = content.filter(item =>
+            this.fieldBreakdownNz.includes(item.key)
+          )
+          if (!displayedContent)
+            throw new Error(
+              `No content that matches NZ breakdown : ${this.fieldBreakdownNz}`
+            )
+          return displayedContent
+        default:
+          return content
+      }
     },
-    tabsContents(id: string): Partial<ContentsProps[]> {
+    orderContent(unorderedContent: ContentsProps[]): ContentsProps[] {
+      switch (this.lang) {
+        case LanguageCodeEnum.Australia:
+          return unorderedContent.sort(
+            (a, b) =>
+              this.fieldBreakdownAu.indexOf(a.key) -
+              this.fieldBreakdownAu.indexOf(b.key)
+          )
+        case LanguageCodeEnum.NewZealand:
+          return unorderedContent.sort(
+            (a, b) =>
+              this.fieldBreakdownNz.indexOf(a.key) -
+              this.fieldBreakdownNz.indexOf(b.key)
+          )
+        default:
+          return unorderedContent
+      }
+    },
+    tabsContents(id: string): ContentsProps[] {
       const productData = this.getDataForProduct()
       const productContents = productData?.find(item => item.id === id)
         ?.contents
@@ -148,19 +183,9 @@ export default defineComponent({
 
       const allContent = this.appendProductPrice(productContents)
 
-      if (this.lang === LanguageCodeEnum.Australia) {
-        const displayedContent = allContent.filter(item =>
-          this.fieldBreakdownAu.includes(item.key)
-        )
-        return this.orderContent(displayedContent, this.fieldBreakdownAu)
-      }
-      if (this.lang === LanguageCodeEnum.NewZealand) {
-        const displayedContent = allContent.filter(item =>
-          this.fieldBreakdownNz.includes(item.key)
-        )
-        return this.orderContent(displayedContent, this.fieldBreakdownNz)
-      }
-      return allContent
+      const displayedContent = this.filterContentByLang(allContent)
+
+      return this.orderContent(displayedContent)
     },
   },
 })
