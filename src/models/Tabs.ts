@@ -1,6 +1,7 @@
 import ProductEnum from 'src/models/enums/ProductEnum'
 
 export interface ContentsProps {
+  key: string
   name: string
   value: string
 }
