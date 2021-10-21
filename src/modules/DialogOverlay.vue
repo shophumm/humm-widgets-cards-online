@@ -43,6 +43,7 @@ import { TabItemProps, ContentsProps, ProductItemProps } from 'src/models/Tabs'
 import { TermProps } from 'src/models/Terms'
 import ProductEnum from 'src/models/enums/ProductEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
+import { productLanguage } from 'src/lang/ResponseLanguage'
 
 export default defineComponent({
   name: 'DialogOverlay',
@@ -125,76 +126,88 @@ export default defineComponent({
         productContents.push({
           key: 'productPrice',
           name: 'Purchase Amount',
-          value: `$${Number(this.productPrice).toFixed(2)}`,
+          value: `${parseFloat(`${this.productPrice}`).toFixed(2)}`,
         })
       }
       return productContents
     },
     filterContentByLang(content: ContentsProps[]): ContentsProps[] {
-      let displayedContent = undefined
+      let filteredContent = undefined
       switch (this.lang) {
         case LanguageCodeEnum.Australia:
-          displayedContent = content.filter(item =>
+          filteredContent = content.filter(item =>
             this.fieldBreakdownAu.includes(item.key)
           )
-          if (!displayedContent)
+          if (!filteredContent)
             throw new Error(
               `No content that matches AU breakdown : ${this.fieldBreakdownAu}`
             )
-          return displayedContent
+          return filteredContent
         case LanguageCodeEnum.NewZealand:
-          displayedContent = content.filter(item =>
+          filteredContent = content.filter(item =>
             this.fieldBreakdownNz.includes(item.key)
           )
-          if (!displayedContent)
+          if (!filteredContent)
             throw new Error(
               `No content that matches NZ breakdown : ${this.fieldBreakdownNz}`
             )
-          return displayedContent
+          return filteredContent
         default:
           return content
       }
     },
     orderContent(unorderedContent: ContentsProps[]): ContentsProps[] {
       switch (this.lang) {
-        case LanguageCodeEnum.Australia:
-          return unorderedContent.sort(
+        case LanguageCodeEnum.Australia: {
+          const orderedContent = unorderedContent.sort(
             (a, b) =>
               this.fieldBreakdownAu.indexOf(a.key) -
               this.fieldBreakdownAu.indexOf(b.key)
           )
-        case LanguageCodeEnum.NewZealand:
-          return unorderedContent.sort(
+          return orderedContent
+        }
+        case LanguageCodeEnum.NewZealand: {
+          const orderedContent = unorderedContent.sort(
             (a, b) =>
               this.fieldBreakdownNz.indexOf(a.key) -
               this.fieldBreakdownNz.indexOf(b.key)
           )
+          return orderedContent
+        }
         default:
           return unorderedContent
       }
     },
-    // appendUnits(filteredContent: ContentsProps[]) {
-    // export const getProductValue = (
-    //   nameKey: string,
-    //   value: string
-    // ): string => {
-    //   const nameLabelPair = productLanguage.find(
-    //     item => item.name === nameKey
-    //   )
-    //   if (nameLabelPair)
-    //     switch (nameLabelPair.unit.toLowerCase()) {
-    //       case '$':
-    //         return `${nameLabelPair.unit}${parseFloat(value).toFixed(2)}`
-    //       case 'months': {
-    //         const unit = `month${value === '1' ? '' : 's'}`
-    //         return `${value} ${unit}`
-    //       }
-    //       default:
-    //         return value
-    //     }
-    //   return value
-    // }
-    // },
+    appendUnits(content: ContentsProps[]): ContentsProps[] {
+      const contentWithUnit = content.map(breakdownItem => {
+        const nameLabelPair = productLanguage.find(
+          item => item.name === breakdownItem.key
+        )
+        let valueWithUnit = ''
+        if (nameLabelPair) {
+          switch (nameLabelPair.unit.toLowerCase()) {
+            case '$':
+              valueWithUnit = `${nameLabelPair.unit}${parseFloat(
+                breakdownItem.value
+              ).toFixed(2)}`
+              break
+            case 'months': {
+              const unit = `month${breakdownItem.value === '1' ? '' : 's'}`
+              valueWithUnit = `${breakdownItem.value} ${unit}`
+              break
+            }
+            default:
+              valueWithUnit = breakdownItem.value
+          }
+        }
+        return {
+          key: breakdownItem.key,
+          name: breakdownItem.name,
+          value: valueWithUnit,
+        }
+      })
+      return contentWithUnit
+    },
     tabsContents(id: string): ContentsProps[] {
       const productData = this.getDataForProduct()
       const productContents = productData?.find(item => item.id === id)
@@ -207,7 +220,9 @@ export default defineComponent({
 
       const filteredContent = this.filterContentByLang(allContent)
 
-      return this.orderContent(filteredContent)
+      const orderedContent = this.orderContent(filteredContent)
+
+      return this.appendUnits(orderedContent)
     },
   },
 })
