@@ -147,13 +147,13 @@ export default defineComponent({
       switch (this.products[0].productType.toLowerCase()) {
         case ProductEnum.Standard:
           return this.getStandardTitle()
-        // TODO : update copy below
-        case ProductEnum.Hybrid:
-          return 'Hybrid Title'
+        case ProductEnum.PaymentHoliday:
+          // TODO : update copy below
+          return 'PaymentHoliday Title'
         case ProductEnum.Fixed:
           return this.getFixedTitle()
-        // TODO : update copy below
         default:
+          // TODO : update copy below
           return 'Default Title'
       }
     },
@@ -161,13 +161,13 @@ export default defineComponent({
       switch (this.products[0].productType.toLowerCase()) {
         case ProductEnum.Standard:
           return 'T&Cs apply.'
-        // TODO : update copy below
-        case ProductEnum.Hybrid:
-          return 'Hybrid subTitle'
+        case ProductEnum.PaymentHoliday:
+          // TODO : update copy below
+          return 'PaymentHoliday subTitle'
         case ProductEnum.Fixed:
           return 'Indicative payments. T&Cs apply.'
-        // TODO : update copy below
         default:
+          // TODO : update copy below
           return 'Default subTitle'
       }
     },

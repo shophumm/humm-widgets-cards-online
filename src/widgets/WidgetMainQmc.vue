@@ -121,7 +121,7 @@ export default defineComponent({
       Theme: ThemeEnum,
       isStandardProduct: false,
       isFixedProduct: false,
-      isHybridProduct: false,
+      isPaymentHolidayProduct: false,
       interestFreePeriod: '',
       interestFreeMonthlyRepayment: '',
     }
@@ -146,8 +146,8 @@ export default defineComponent({
           )?.value as string
           this.isStandardProduct = true
           break
-        case ProductEnum.Hybrid:
-          this.isHybridProduct = true
+        case ProductEnum.PaymentHoliday:
+          this.isPaymentHolidayProduct = true
           break
         case ProductEnum.Fixed:
           this.interestFreePeriod = this.products[0].productItems[0].contents.find(

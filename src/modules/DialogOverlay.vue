@@ -173,6 +173,28 @@ export default defineComponent({
           return unorderedContent
       }
     },
+    // appendUnits(filteredContent: ContentsProps[]) {
+    // export const getProductValue = (
+    //   nameKey: string,
+    //   value: string
+    // ): string => {
+    //   const nameLabelPair = productLanguage.find(
+    //     item => item.name === nameKey
+    //   )
+    //   if (nameLabelPair)
+    //     switch (nameLabelPair.unit.toLowerCase()) {
+    //       case '$':
+    //         return `${nameLabelPair.unit}${parseFloat(value).toFixed(2)}`
+    //       case 'months': {
+    //         const unit = `month${value === '1' ? '' : 's'}`
+    //         return `${value} ${unit}`
+    //       }
+    //       default:
+    //         return value
+    //     }
+    //   return value
+    // }
+    // },
     tabsContents(id: string): ContentsProps[] {
       const productData = this.getDataForProduct()
       const productContents = productData?.find(item => item.id === id)
@@ -183,9 +205,9 @@ export default defineComponent({
 
       const allContent = this.appendProductPrice(productContents)
 
-      const displayedContent = this.filterContentByLang(allContent)
+      const filteredContent = this.filterContentByLang(allContent)
 
-      return this.orderContent(displayedContent)
+      return this.orderContent(filteredContent)
     },
   },
 })
