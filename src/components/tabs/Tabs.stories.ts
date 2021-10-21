@@ -48,12 +48,12 @@ Default.args = {
               value: '$50.00',
             },
             {
-              key: 'minimumMonthlyRepayment',
+              key: 'indicativeMinimumMonthly',
               name: 'Indicative minimum monthly repayments*',
               value: '$48.00',
             },
             {
-              key: 'interestFreeMonthlyRepayment',
+              key: 'indicativeRepaymentToPay',
               name:
                 'Indicative repayment to pay before Interest free period expires ^',
               value: '$450.50',
@@ -65,7 +65,7 @@ Default.args = {
           label: '24 months',
           contents: [
             {
-              key: '',
+              key: 'interestFreePeriod',
               name: 'Interest free period',
               value: '24 months',
             },
@@ -80,12 +80,12 @@ Default.args = {
               value: '$50.50',
             },
             {
-              key: 'minimumMonthlyRepayment',
+              key: 'indicativeMinimumMonthly',
               name: 'Indicative minimum monthly repayments*',
               value: '$48.50',
             },
             {
-              key: 'interestFreeMonthlyRepayment',
+              key: 'indicativeRepaymentToPay',
               name:
                 'Indicative repayment to pay before Interest free period expires ^',
               value: '$450.00',
@@ -124,12 +124,12 @@ WithDefaultTabId.args = {
               value: '$50.00',
             },
             {
-              key: 'minimumMonthlyRepayment',
+              key: 'indicativeMinimumMonthly',
               name: 'Indicative minimum monthly repayments*',
               value: '$48.00',
             },
             {
-              key: 'interestFreeMonthlyRepayment',
+              key: 'indicativeRepaymentToPay',
               name:
                 'Indicative repayment to pay before Interest free period expires ^',
               value: '$450.50',
@@ -156,12 +156,12 @@ WithDefaultTabId.args = {
               value: '$50.50',
             },
             {
-              key: 'minimumMonthlyRepayment',
+              key: 'indicativeMinimumMonthly',
               name: 'Indicative minimum monthly repayments*',
               value: '$48.50',
             },
             {
-              key: 'interestFreeMonthlyRepayment',
+              key: 'indicativeRepaymentToPay',
               name:
                 'Indicative repayment to pay before Interest free period expires ^',
               value: '$450.00',
