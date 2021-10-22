@@ -45,16 +45,6 @@
         <template #title>Have a Q Mastercard® or Q Card?</template>
       </ExistingCard>
     </template>
-    <template #footer>
-      <ApplyCard
-        :button-primary="true"
-        button-color="var(--bg-2)"
-        :is-button-rounded="false"
-      >
-        <template #title> Or apply for your Q Mastercard® </template>
-        <template #subtitle> Apply now! It’s simple! </template>
-      </ApplyCard>
-    </template>
   </DialogOverlay>
 </template>
 
@@ -69,7 +59,6 @@ import { TermProps } from 'src/models/Terms'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import CardsLogo from 'src/modules/CardsLogo.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
-import ApplyCard from 'src/modules/ApplyCard.vue'
 import ExistingCard from 'src/modules/ExistingCard.vue'
 
 export default defineComponent({
@@ -79,7 +68,6 @@ export default defineComponent({
     WidgetContent,
     CardsLogo,
     DialogOverlay,
-    ApplyCard,
     ExistingCard,
   },
   props: {
