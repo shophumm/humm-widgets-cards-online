@@ -125,7 +125,7 @@ export default defineComponent({
         productContents.push({
           key: 'productPrice',
           name: 'Purchase Amount',
-          value: `$${Number(this.productPrice).toFixed(2)}`,
+          value: `$${parseFloat(`${this.productPrice}`).toFixed(2)}`,
         })
       }
       return productContents
