@@ -41,21 +41,6 @@
         <template #title>Have a humm®90 Platinum Mastercard®?</template>
       </ExistingCard>
     </template>
-    <template #footer>
-      <ApplyCard
-        :button-primary="true"
-        button-color="var(--bg-2)"
-        button-label="APPLY NOW"
-      >
-        <template #title>
-          Or apply for your humm®90 Platinum Mastercard®
-        </template>
-        <template #subtitle>
-          Apply now! It takes 5-10 minutes on average to fill for most
-          applicants.
-        </template>
-      </ApplyCard>
-    </template>
   </DialogOverlay>
 </template>
 
@@ -70,7 +55,6 @@ import { ProductItemProps } from 'src/models/Tabs'
 import { TermProps } from 'src/models/Terms'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
-import ApplyCard from 'src/modules/ApplyCard.vue'
 import ExistingCard from 'src/modules/ExistingCard.vue'
 
 export default defineComponent({
@@ -81,7 +65,6 @@ export default defineComponent({
     DialogOverlay,
     Card,
     ExistingCard,
-    ApplyCard,
   },
   props: {
     productPrice: Number,

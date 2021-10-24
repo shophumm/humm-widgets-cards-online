@@ -24,6 +24,8 @@ export default defineComponent({
 
   &.is-active {
     display: block;
+    border-bottom-left-radius: var(--radius-3);
+    border-bottom-right-radius: var(--radius-3);
   }
 
   &__content {
