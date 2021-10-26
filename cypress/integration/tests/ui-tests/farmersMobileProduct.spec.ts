@@ -7,11 +7,11 @@ describe('Farmers Mobile Product Page Injection Test', () => {
     })
     cy.viewport('iphone-x') // Set viewport to 375px x 812px
     //other available presets iphone-7, samsung-s10. You can also set specific width/height
-    merchantProductPage.visitAndInjectWidget(
-      Cypress.env('farmersProductUrl'),
-      '[class="mobile-check-store-container"]',
-      ''
-    )
+    merchantProductPage.visitAndInjectWidget({
+      url: Cypress.env('farmersProductUrl'),
+      targetElement: '[class="mobile-check-store-container"]',
+      theme: 'farmers',
+    })
   })
 
   it('The Widget should be visible after injection', () => {

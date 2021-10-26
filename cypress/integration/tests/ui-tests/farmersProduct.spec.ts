@@ -6,11 +6,11 @@ describe('Farmers Product Page Injection Test', () => {
       return false
     })
     cy.viewport('macbook-15')
-    merchantProductPage.visitAndInjectWidget(
-      Cypress.env('farmersProductUrl'),
-      '[class="mobile-check-store-container"]',
-      ''
-    )
+    merchantProductPage.visitAndInjectWidget({
+      url: Cypress.env('farmersProductUrl'),
+      targetElement: '[class="mobile-check-store-container"]',
+      theme: 'farmers',
+    })
   })
 
   it('The Widget should be visible after injection', () => {
