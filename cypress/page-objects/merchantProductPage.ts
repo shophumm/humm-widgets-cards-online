@@ -1,11 +1,19 @@
 class _merchantProductPage {
-  visitAndInjectWidget(
-    url: string,
-    targetElement: string,
-    position: string,
-    country: 'nz' | 'au' = 'nz',
-    darkMode = false
-  ) {
+  visitAndInjectWidget({
+    url,
+    targetElement,
+    position = '',
+    country = 'nz',
+    theme = undefined,
+    darkMode = false,
+  }: {
+    url: string
+    targetElement: string
+    position?: string
+    country?: 'nz' | 'au'
+    theme?: 'farmers' | 'qmc' | 'humm90' | undefined
+    darkMode?: boolean
+  }) {
     cy.visit(url, {
       onLoad: contentWindow => {
         return new Cypress.Promise((resolve, reject) => {
@@ -39,9 +47,11 @@ class _merchantProductPage {
           tag.src =
             Cypress.env('baseUrl') +
             `humm-widgets-cards-${country}.umd.js?productPrice=300&merchantId='8ea286eb-b884-4518-8fa1-b65a107a350d'${
-              darkMode && `&darkMode='${darkMode.toString()}'`
-            }`
+              theme && `&theme='${theme.toString()}'`
+            }${darkMode && `&darkMode='${darkMode.toString()}'`}`
 
+          console.log('tag.src')
+          console.log(tag.src)
           // Add a timeout, to reject promise after 2.5s of not "load" fired
           setTimeout(() => {
             tag.onload = null
