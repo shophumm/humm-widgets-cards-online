@@ -1,17 +1,9 @@
 <template>
-  <div class="logoWrapper">
-    <div class="borderHumm90" />
-    <img
-      srcset="
-        ../../assets/Humm90_Card_Small.png,
-        ../../assets/Humm90_Card_Medium.png 1.5x,
-        ../../assets/Humm90_Card_Large.png  2x
-      "
-      src="../../assets/Humm90_Card_Medium.png"
-      alt="Humm 90 card with yellow border"
-      class="humm90card"
-    />
-  </div>
+  <img
+    src="../../assets/Humm90_Card_Logo.png"
+    alt="Humm 90 card with yellow border"
+    class="humm90card"
+  />
 </template>
 
 <script lang="ts">
@@ -26,23 +18,10 @@ export default defineComponent({
 @import 'src/styles/widget.scss';
 
 .logoWrapper {
-  position: relative;
   min-width: 35px;
-  display: flex;
 }
 
 .humm90card {
-  position: absolute;
-  top: -2px;
-  left: 2px;
-}
-
-.borderHumm90 {
-  position: absolute;
-  top: 1px;
-  left: 5px;
-  border: solid var(--color-2) 1px;
-  min-width: 23px;
-  height: 23px;
+  max-width: 30px;
 }
 </style>
