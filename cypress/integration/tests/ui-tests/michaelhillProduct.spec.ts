@@ -1,4 +1,5 @@
 import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
+import CountryEnum from 'cypress/models/enum/CountryEnum'
 
 describe('Michael Hill Product Page Injection Test', () => {
   beforeEach(() => {
@@ -10,7 +11,7 @@ describe('Michael Hill Product Page Injection Test', () => {
       url: Cypress.env('michaelHillUrl'),
       targetElement: '[class="pdp-payment-messages moved"]',
       position: 'after',
-      country: 'au',
+      country: CountryEnum.Australia,
     })
   })
 

@@ -1,4 +1,5 @@
 import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
+import CountryEnum from 'cypress/models/enum/CountryEnum'
 
 describe('Flight Centre Mobile Product Page Injection Test', () => {
   beforeEach(() => {
@@ -12,7 +13,7 @@ describe('Flight Centre Mobile Product Page Injection Test', () => {
       targetElement:
         '[class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"]',
       position: 'before',
-      country: 'au',
+      country: CountryEnum.Australia,
     })
   })
 

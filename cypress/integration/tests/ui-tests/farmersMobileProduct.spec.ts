@@ -1,4 +1,5 @@
 import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
+import ThemeEnum from 'cypress/models/enum/ThemeEnum'
 
 describe('Farmers Mobile Product Page Injection Test', () => {
   beforeEach(() => {
@@ -10,7 +11,7 @@ describe('Farmers Mobile Product Page Injection Test', () => {
     merchantProductPage.visitAndInjectWidget({
       url: Cypress.env('farmersProductUrl'),
       targetElement: '[class="mobile-check-store-container"]',
-      theme: 'farmers',
+      theme: ThemeEnum.Farmers,
     })
   })
 

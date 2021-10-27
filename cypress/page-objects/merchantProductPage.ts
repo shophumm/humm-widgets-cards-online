@@ -1,19 +1,15 @@
+import visitAndInjectWidgetProps from 'cypress/models/visitAndInjectWidget'
+import CountryEnum from 'cypress/models/enum/CountryEnum'
+
 class _merchantProductPage {
   visitAndInjectWidget({
     url,
     targetElement,
     position = '',
-    country = 'nz',
+    country = CountryEnum.NewZealand,
     theme = undefined,
     darkMode = false,
-  }: {
-    url: string
-    targetElement: string
-    position?: string
-    country?: 'nz' | 'au'
-    theme?: 'farmers' | 'qmc' | 'humm90' | undefined
-    darkMode?: boolean
-  }) {
+  }: visitAndInjectWidgetProps) {
     cy.visit(url, {
       onLoad: contentWindow => {
         return new Cypress.Promise((resolve, reject) => {

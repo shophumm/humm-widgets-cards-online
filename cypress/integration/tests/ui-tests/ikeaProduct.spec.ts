@@ -1,4 +1,5 @@
 import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
+import CountryEnum from 'cypress/models/enum/CountryEnum'
 
 describe('Ikea Product Page Injection Test', () => {
   beforeEach(() => {
@@ -10,7 +11,7 @@ describe('Ikea Product Page Injection Test', () => {
       url: Cypress.env('ikeaProductUrl'),
       targetElement: '[class="range-revamp-product-availability"]',
       position: 'before',
-      country: 'au',
+      country: CountryEnum.Australia,
     })
   })
 
