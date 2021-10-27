@@ -1,4 +1,4 @@
-import visitAndInjectWidgetProps from 'cypress/models/visitAndInjectWidget'
+import VisitAndInjectWidgetProps from 'cypress/models/visitAndInjectWidget'
 import CountryEnum from 'cypress/models/enum/CountryEnum'
 
 class _merchantProductPage {
@@ -9,7 +9,7 @@ class _merchantProductPage {
     country = CountryEnum.NewZealand,
     theme = undefined,
     darkMode = false,
-  }: visitAndInjectWidgetProps) {
+  }: VisitAndInjectWidgetProps) {
     cy.visit(url, {
       onLoad: contentWindow => {
         return new Cypress.Promise((resolve, reject) => {

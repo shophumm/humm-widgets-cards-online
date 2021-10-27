@@ -1,7 +1,7 @@
 import CountryEnum from 'cypress/models/enum/CountryEnum'
 import ThemeEnum from 'cypress/models/enum/ThemeEnum'
 
-export interface visitAndInjectWidgetProps {
+export interface VisitAndInjectWidgetProps {
   url: string
   targetElement: string
   position?: string
@@ -10,4 +10,4 @@ export interface visitAndInjectWidgetProps {
   darkMode?: boolean
 }
 
-export default visitAndInjectWidgetProps
+export default VisitAndInjectWidgetProps
