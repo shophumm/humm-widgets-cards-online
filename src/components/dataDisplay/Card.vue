@@ -27,7 +27,7 @@ export default defineComponent({
   margin-right: 2px;
 
   &--auto {
-    width: 34px;
+    width: auto;
   }
 
   &--sm {
