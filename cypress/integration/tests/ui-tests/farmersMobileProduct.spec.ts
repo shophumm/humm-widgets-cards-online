@@ -11,10 +11,11 @@ describe('Farmers Mobile Product Page Injection Test', () => {
       url: Cypress.env('farmersProductUrl'),
       targetElement: '[class="mobile-check-store-container"]',
       theme: 'farmers',
+      // darkMode: true,
     })
   })
 
   it('The Widget should be visible after injection', () => {
-    cy.get('#humm-widgets-cards-nz-default').should('be.visible')
+    cy.get('#humm-widgets-cards-nz-farmers').should('be.visible')
   })
 })

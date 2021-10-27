@@ -6,12 +6,12 @@ describe('Ikea Product Page Injection Test', () => {
       return false
     })
     cy.viewport('macbook-15')
-    merchantProductPage.visitAndInjectWidget(
-      Cypress.env('ikeaProductUrl'),
-      '[class="range-revamp-product-availability"]',
-      'before',
-      'au'
-    )
+    merchantProductPage.visitAndInjectWidget({
+      url: Cypress.env('ikeaProductUrl'),
+      targetElement: '[class="range-revamp-product-availability"]',
+      position: 'before',
+      country: 'au',
+    })
   })
 
   it('The Widget should be visible after injection', () => {

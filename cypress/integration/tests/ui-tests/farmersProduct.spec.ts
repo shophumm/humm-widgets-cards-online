@@ -14,6 +14,6 @@ describe('Farmers Product Page Injection Test', () => {
   })
 
   it('The Widget should be visible after injection', () => {
-    cy.get('#humm-widgets-cards-nz-default').should('be.visible')
+    cy.get('#humm-widgets-cards-nz-farmers').should('be.visible')
   })
 })

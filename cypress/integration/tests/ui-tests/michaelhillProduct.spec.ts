@@ -6,12 +6,12 @@ describe('Michael Hill Product Page Injection Test', () => {
       return false
     })
     cy.viewport('macbook-15')
-    merchantProductPage.visitAndInjectWidget(
-      Cypress.env('michaelHillUrl'),
-      '[class="pdp-payment-messages moved"]',
-      'after',
-      'au'
-    )
+    merchantProductPage.visitAndInjectWidget({
+      url: Cypress.env('michaelHillUrl'),
+      targetElement: '[class="pdp-payment-messages moved"]',
+      position: 'after',
+      country: 'au',
+    })
   })
 
   it('The Widget should be visible after injection', () => {

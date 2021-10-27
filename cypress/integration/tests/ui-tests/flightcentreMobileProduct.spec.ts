@@ -7,12 +7,13 @@ describe('Flight Centre Mobile Product Page Injection Test', () => {
     })
     cy.viewport('iphone-x') // Set viewport to 375px x 812px
     //other available presets iphone-7, samsung-s10. You can also set specific width/height
-    merchantProductPage.visitAndInjectWidget(
-      Cypress.env('flightcentreUrl'),
-      '[class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"]',
-      'before',
-      'au'
-    )
+    merchantProductPage.visitAndInjectWidget({
+      url: Cypress.env('flightcentreUrl'),
+      targetElement:
+        '[class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"]',
+      position: 'before',
+      country: 'au',
+    })
   })
 
   it('The Widget should be visible after injection', () => {
