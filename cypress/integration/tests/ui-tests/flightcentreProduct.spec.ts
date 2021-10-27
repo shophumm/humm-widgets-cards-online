@@ -1,4 +1,5 @@
 import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
+import CountryEnum from 'cypress/models/enum/CountryEnum'
 
 describe('Flight Centre Product Page Injection Test', () => {
   beforeEach(() => {
@@ -6,12 +7,13 @@ describe('Flight Centre Product Page Injection Test', () => {
       return false
     })
     cy.viewport('macbook-15')
-    merchantProductPage.visitAndInjectWidget(
-      Cypress.env('flightcentreUrl'),
-      '[class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"]',
-      'before',
-      'au'
-    )
+    merchantProductPage.visitAndInjectWidget({
+      url: Cypress.env('flightcentreUrl'),
+      targetElement:
+        '[class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item"]',
+      position: 'before',
+      country: CountryEnum.Australia,
+    })
   })
 
   it('The Widget should be visible after injection', () => {

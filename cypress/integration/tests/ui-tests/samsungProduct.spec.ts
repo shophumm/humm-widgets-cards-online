@@ -6,11 +6,12 @@ describe('Samsung Product Page Injection Test', () => {
       return false
     })
     cy.viewport('macbook-15')
-    merchantProductPage.visitAndInjectWidget(
-      Cypress.env('samsungProductUrl'),
-      '[class="pd-select-option__list pd-select-option__list--color"]',
-      'after'
-    )
+    merchantProductPage.visitAndInjectWidget({
+      url: Cypress.env('samsungProductUrl'),
+      targetElement:
+        '[class="pd-select-option__list pd-select-option__list--color"]',
+      position: 'after',
+    })
   })
 
   it('The Widget should be visible after injection', () => {

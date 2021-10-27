@@ -1,4 +1,5 @@
 import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
+import ThemeEnum from 'cypress/models/enum/ThemeEnum'
 
 describe('Farmers Product Page Injection Test', () => {
   beforeEach(() => {
@@ -6,14 +7,14 @@ describe('Farmers Product Page Injection Test', () => {
       return false
     })
     cy.viewport('macbook-15')
-    merchantProductPage.visitAndInjectWidget(
-      Cypress.env('farmersProductUrl'),
-      '[class="mobile-check-store-container"]',
-      ''
-    )
+    merchantProductPage.visitAndInjectWidget({
+      url: Cypress.env('farmersProductUrl'),
+      targetElement: '[class="mobile-check-store-container"]',
+      theme: ThemeEnum.Farmers,
+    })
   })
 
   it('The Widget should be visible after injection', () => {
-    cy.get('#humm-widgets-cards-nz-default').should('be.visible')
+    cy.get('#humm-widgets-cards-nz-farmers').should('be.visible')
   })
 })

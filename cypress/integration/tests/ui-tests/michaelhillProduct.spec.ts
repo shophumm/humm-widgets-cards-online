@@ -1,4 +1,5 @@
 import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
+import CountryEnum from 'cypress/models/enum/CountryEnum'
 
 describe('Michael Hill Product Page Injection Test', () => {
   beforeEach(() => {
@@ -6,12 +7,12 @@ describe('Michael Hill Product Page Injection Test', () => {
       return false
     })
     cy.viewport('macbook-15')
-    merchantProductPage.visitAndInjectWidget(
-      Cypress.env('michaelHillUrl'),
-      '[class="pdp-payment-messages moved"]',
-      'after',
-      'au'
-    )
+    merchantProductPage.visitAndInjectWidget({
+      url: Cypress.env('michaelHillUrl'),
+      targetElement: '[class="pdp-payment-messages moved"]',
+      position: 'after',
+      country: CountryEnum.Australia,
+    })
   })
 
   it('The Widget should be visible after injection', () => {
