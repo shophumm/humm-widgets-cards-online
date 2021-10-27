@@ -19,5 +19,6 @@ export default defineComponent({
 
 .humm90card {
   max-width: 30px;
+  max-height: 28px;
 }
 </style>
