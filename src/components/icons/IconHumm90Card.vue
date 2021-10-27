@@ -17,10 +17,6 @@ export default defineComponent({
 <style scoped lang="scss">
 @import 'src/styles/widget.scss';
 
-.logoWrapper {
-  min-width: 35px;
-}
-
 .humm90card {
   max-width: 30px;
 }
