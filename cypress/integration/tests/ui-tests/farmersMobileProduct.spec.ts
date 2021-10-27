@@ -11,7 +11,6 @@ describe('Farmers Mobile Product Page Injection Test', () => {
       url: Cypress.env('farmersProductUrl'),
       targetElement: '[class="mobile-check-store-container"]',
       theme: 'farmers',
-      // darkMode: true,
     })
   })
 
