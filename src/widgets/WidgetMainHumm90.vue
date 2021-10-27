@@ -9,9 +9,7 @@
     @close-widget="isWidgetOpen = false"
   >
     <template #logo>
-      <div class="widget__iconbird">
-        <IconHumm90Bird fill="var(--color-1-contrast)" />
-      </div>
+      <IconHumm90Card />
     </template>
     <template #title>
       <p class="widget__title">UP TO 60 MONTHS INTEREST-FREE.</p>
@@ -46,7 +44,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import IconHumm90Bird from 'src/components/icons/IconHumm90Bird.vue'
+import IconHumm90Card from 'src/components/icons/IconHumm90Card.vue'
 import Card from 'src/components/dataDisplay/Card.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
@@ -60,7 +58,7 @@ import ExistingCard from 'src/modules/ExistingCard.vue'
 export default defineComponent({
   name: 'WidgetMainHumm90',
   components: {
-    IconHumm90Bird,
+    IconHumm90Card,
     WidgetContent,
     DialogOverlay,
     Card,
