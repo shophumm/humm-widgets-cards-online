@@ -26,7 +26,7 @@
     :lang="lang"
     :product-price="productPrice"
     :tabs-data="products"
-    accordian-title="TERMS & CONDITIONS"
+    accordion-title="TERMS & CONDITIONS"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
