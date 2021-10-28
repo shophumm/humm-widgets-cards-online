@@ -3,6 +3,8 @@
   a {
     height: auto;
     line-height: normal;
+    outline: none;
+    box-shadow: none;
   }
   div,
   dt,
@@ -11,6 +13,8 @@
     font-weight: normal;
     border: none;
     background: none;
+    text-align: unset;
+    white-space: unset;
   }
   strong {
     font-weight: bold;
