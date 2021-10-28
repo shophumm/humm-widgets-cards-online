@@ -13,7 +13,7 @@
   <ol class="mc__list">
     <slot name="list">
       <li>Add the item and continue to checkout</li>
-      <li>Choose interest-free as your payment option</li>
+      <li>Choose <strong>interest-free</strong> as your payment option</li>
       <li>Enter your card details and choose a plan listed below:</li>
     </slot>
   </ol>

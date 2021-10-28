@@ -6,7 +6,7 @@
     @toggle-dialog="toggleDialog"
   >
     <template #title>
-      <slot name="title">Interest-free Payment</slot>
+      <slot name="title"><strong>Interest-free Payment</strong></slot>
     </template>
     <template #header>
       <slot name="header" />
