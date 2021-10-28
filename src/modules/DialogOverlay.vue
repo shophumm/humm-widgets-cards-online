@@ -87,15 +87,15 @@ export default defineComponent({
     return {
       fieldBreakdownAu: [
         'interestFreePeriod',
-        'establishmentFee',
         'productPrice',
+        'establishmentFee',
         'indicativeMinMonthly',
         'indicativeMonthly',
       ],
       fieldBreakdownNz: [
         'interestFreePeriod',
-        'establishmentFee',
         'productPrice',
+        'establishmentFee',
         'indicativeMonthly',
       ],
     }
