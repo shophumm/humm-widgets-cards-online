@@ -26,7 +26,7 @@
       </Tabs>
       <slot name="footer" />
       <Accordion id="widget-terms" :content="getTermsForProduct()">
-        Terms & Conditions
+        {{ accordianTitle }}
       </Accordion>
     </template>
   </Dialog>
@@ -73,6 +73,10 @@ export default defineComponent({
       type: Array as () => ProductItemProps[],
       required: true,
     },
+    accordianTitle: {
+      type: String,
+      default: 'Terms & Conditions',
+    },
     accordionData: {
       type: Object as () => TermProps,
       required: true,
@@ -92,7 +96,7 @@ export default defineComponent({
         'interestFreePeriod',
         'establishmentFee',
         'productPrice',
-        'indicativeMinMonthly',
+        'indicativeMonthly',
       ],
     }
   },
