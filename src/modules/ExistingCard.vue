@@ -54,6 +54,7 @@ export default defineComponent({
     margin: 0;
     padding-left: 5px;
     list-style-position: inside;
+    list-style-type: decimal;
   }
 }
 </style>
