@@ -6,7 +6,7 @@
     @toggle-dialog="toggleDialog"
   >
     <template #title>
-      <slot name="title">Interest-free Payment</slot>
+      <slot name="title"><strong>Interest-free Payment</strong></slot>
     </template>
     <template #header>
       <slot name="header" />
@@ -26,7 +26,7 @@
       </Tabs>
       <slot name="footer" />
       <Accordion id="widget-terms" :content="getTermsForProduct()">
-        Terms & Conditions
+        {{ accordionTitle }}
       </Accordion>
     </template>
   </Dialog>
@@ -73,6 +73,10 @@ export default defineComponent({
       type: Array as () => ProductItemProps[],
       required: true,
     },
+    accordionTitle: {
+      type: String,
+      default: 'Terms & Conditions',
+    },
     accordionData: {
       type: Object as () => TermProps,
       required: true,
@@ -83,16 +87,16 @@ export default defineComponent({
     return {
       fieldBreakdownAu: [
         'interestFreePeriod',
-        'establishmentFee',
         'productPrice',
+        'establishmentFee',
         'indicativeMinMonthly',
         'indicativeMonthly',
       ],
       fieldBreakdownNz: [
         'interestFreePeriod',
-        'establishmentFee',
         'productPrice',
-        'indicativeMinMonthly',
+        'establishmentFee',
+        'indicativeMonthly',
       ],
     }
   },
