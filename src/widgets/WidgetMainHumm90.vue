@@ -9,9 +9,7 @@
     @close-widget="isWidgetOpen = false"
   >
     <template #logo>
-      <div class="widget__iconbird">
-        <IconHumm90Bird fill="var(--color-1-contrast)" />
-      </div>
+      <IconHumm90Card />
     </template>
     <template #title>
       <p class="widget__title">{{ title }}</p>
@@ -28,6 +26,7 @@
     :lang="lang"
     :product-price="productPrice"
     :tabs-data="products"
+    accordion-title="TERMS & CONDITIONS"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
@@ -41,27 +40,12 @@
         <template #title>Have a humm®90 Platinum Mastercard®?</template>
       </ExistingCard>
     </template>
-    <template #footer>
-      <ApplyCard
-        :button-primary="true"
-        button-color="var(--bg-2)"
-        button-label="APPLY NOW"
-      >
-        <template #title>
-          Or apply for your humm®90 Platinum Mastercard®
-        </template>
-        <template #subtitle>
-          Apply now! It takes 5-10 minutes on average to fill for most
-          applicants.
-        </template>
-      </ApplyCard>
-    </template>
   </DialogOverlay>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import IconHumm90Bird from 'src/components/icons/IconHumm90Bird.vue'
+import IconHumm90Card from 'src/components/icons/IconHumm90Card.vue'
 import Card from 'src/components/dataDisplay/Card.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
@@ -71,18 +55,16 @@ import { ProductItemProps } from 'src/models/Tabs'
 import { TermProps } from 'src/models/Terms'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
-import ApplyCard from 'src/modules/ApplyCard.vue'
 import ExistingCard from 'src/modules/ExistingCard.vue'
 
 export default defineComponent({
   name: 'WidgetMainHumm90',
   components: {
-    IconHumm90Bird,
+    IconHumm90Card,
     WidgetContent,
     DialogOverlay,
     Card,
     ExistingCard,
-    ApplyCard,
   },
   props: {
     productPrice: Number,

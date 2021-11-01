@@ -6,11 +6,11 @@ describe('PBTech Product Page Injection Test', () => {
       return false
     })
     cy.viewport('macbook-15')
-    merchantProductPage.visitAndInjectWidget(
-      Cypress.env('pbtectProductUrl'),
-      '[class="product_bgWrap p-3 bgcolor rounded"]',
-      'after'
-    )
+    merchantProductPage.visitAndInjectWidget({
+      url: Cypress.env('pbtectProductUrl'),
+      targetElement: '[class="product_bgWrap p-3 bgcolor rounded"]',
+      position: 'after',
+    })
   })
 
   it('The Widget should be visible after injection', () => {

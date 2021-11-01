@@ -7,11 +7,11 @@ describe('PBTech Mobile Product Page Injection Test', () => {
     })
     cy.viewport('iphone-x') // Set viewport to 375px x 812px
     //other available presets iphone-7, samsung-s10. You can also set specific width/height
-    merchantProductPage.visitAndInjectWidget(
-      Cypress.env('pbtectProductUrl'),
-      '[class="product_bgWrap p-3 bgcolor rounded"]',
-      'after'
-    )
+    merchantProductPage.visitAndInjectWidget({
+      url: Cypress.env('pbtectProductUrl'),
+      targetElement: '[class="product_bgWrap p-3 bgcolor rounded"]',
+      position: 'after',
+    })
   })
 
   it('The Widget should be visible after injection', () => {

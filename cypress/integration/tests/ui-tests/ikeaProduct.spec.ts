@@ -1,4 +1,5 @@
 import { merchantProductPage } from 'cypress/page-objects/merchantProductPage'
+import CountryEnum from 'cypress/models/enum/CountryEnum'
 
 describe('Ikea Product Page Injection Test', () => {
   beforeEach(() => {
@@ -6,12 +7,12 @@ describe('Ikea Product Page Injection Test', () => {
       return false
     })
     cy.viewport('macbook-15')
-    merchantProductPage.visitAndInjectWidget(
-      Cypress.env('ikeaProductUrl'),
-      '[class="range-revamp-product-availability"]',
-      'before',
-      'au'
-    )
+    merchantProductPage.visitAndInjectWidget({
+      url: Cypress.env('ikeaProductUrl'),
+      targetElement: '[class="range-revamp-product-availability"]',
+      position: 'before',
+      country: CountryEnum.Australia,
+    })
   })
 
   it('The Widget should be visible after injection', () => {
