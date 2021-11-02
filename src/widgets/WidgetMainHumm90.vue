@@ -56,6 +56,7 @@ import { TermProps } from 'src/models/Terms'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
 import ExistingCard from 'src/modules/ExistingCard.vue'
+import { getProductPropertyByValue, pluralize } from 'src/utils/utils'
 
 export default defineComponent({
   name: 'WidgetMainHumm90',
@@ -102,24 +103,24 @@ export default defineComponent({
     },
   },
   created() {
-    this.title = this.createTitle()
+    this.createTitle()
   },
   methods: {
     getLongTermInterestFreeTitle() {
-      const interestFreePeriod = this.products[0].productItems[0].contents.find(
-        item => item.key === 'interestFreePeriod'
-      )?.value
-      return `UP TO ${interestFreePeriod} MONTH${
-        interestFreePeriod === 1 ? '' : 'S'
-      } INTEREST-FREE.`
+      const interestFreePeriod = getProductPropertyByValue(
+        this.products[0],
+        'interestFreePeriod'
+      ) as number
+      return `UP TO ${interestFreePeriod} ${pluralize(
+        interestFreePeriod,
+        'MONTH',
+        'MONTHS'
+      )} INTEREST-FREE.`
     },
     createTitle() {
       switch (this.products[0].productType.toLowerCase()) {
         case ProductEnum.LongTermInterestFree:
-          return this.getLongTermInterestFreeTitle()
-        default:
-          // TODO : update copy below
-          return 'Default Title'
+          this.title = this.getLongTermInterestFreeTitle()
       }
     },
   },

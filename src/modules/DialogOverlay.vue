@@ -44,6 +44,7 @@ import { TermProps } from 'src/models/Terms'
 import ProductEnum from 'src/models/enums/ProductEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import { productLanguage } from 'src/lang/ResponseLanguage'
+import { convertToCurrencyFormat, pluralize } from 'src/utils/utils'
 
 export default defineComponent({
   name: 'DialogOverlay',
@@ -130,7 +131,7 @@ export default defineComponent({
         productContents.push({
           key: 'productPrice',
           name: 'Purchase Amount',
-          value: `${parseFloat(`${this.productPrice}`).toFixed(2)}`,
+          value: this.productPrice,
         })
       }
       return productContents
@@ -191,17 +192,18 @@ export default defineComponent({
         if (nameLabelPair) {
           switch (nameLabelPair.unit.toLowerCase()) {
             case '$':
-              valueWithUnit = `${nameLabelPair.unit}${parseFloat(
-                breakdownItem.value
-              ).toFixed(2)}`
+              valueWithUnit = convertToCurrencyFormat(breakdownItem.value)
               break
             case 'months': {
-              const unit = `month${breakdownItem.value === '1' ? '' : 's'}`
+              const unit = `${pluralize(
+                breakdownItem.value as number,
+                'month'
+              )}`
               valueWithUnit = `${breakdownItem.value} ${unit}`
               break
             }
             default:
-              valueWithUnit = breakdownItem.value
+              valueWithUnit = breakdownItem.value as string
           }
         }
         return {
