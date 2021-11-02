@@ -2,6 +2,8 @@ export interface Card {
   id: string
   image: string
   name: string
+  interestRate: number
+  annualFee: number
 }
 
 export interface Product {
@@ -9,25 +11,26 @@ export interface Product {
   type: string
   interestFreePeriod: number
   termPeriod: number
-  termRate: number
-  deferredPeriod: number
+  interestRate: number
+  paymentHolidayPeriod: number
   establishmentFee: number
+  advancedFee: number
   description: string
-  interestFreeMonthlyRepayment: number
-  minTermMonthlyRepayment: number
-  remainderInterestPeriodMontlyRepayment: number
+  minPurchasePrice: number
+  endDate: string
+  indicativeMinMonthly: number
+  indicativeMonthly: number
 }
 
 export interface Terms {
   standard?: string
-  fixed?: string
   'payment-holiday'?: string
 }
 
 export interface WidgetResponseBody {
   products: Product[]
   cards: Card[]
-  terms: string
+  terms: Terms[]
 }
 
 export default WidgetResponseBody

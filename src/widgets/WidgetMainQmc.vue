@@ -16,21 +16,12 @@
       </CardsLogo>
     </template>
     <template #title>
-      <p v-if="isStandardProduct" class="widget__title">
-        Up To
-        <strong>{{ interestFreePeriod }} Months Interest-Free</strong>
-      </p>
-      <!-- TODO : update copy below -->
-      <p v-if="isHybridProduct" class="widget__title">
-        Hybrid Up To <strong>60 Months Interest-Free</strong>
-      </p>
-      <!-- TODO : update copy below -->
-      <p v-if="isFixedProduct" class="widget__title">
-        Fixed Up To <strong>60 Months Interest-Free</strong>
+      <p class="widget__title">
+        <strong>{{ title }}</strong>
       </p>
     </template>
     <template #subtitle>
-      <span class="widget__subtitle">T&Cs Apply.</span>
+      <span class="widget__subtitle">{{ subtitle }}</span>
     </template>
   </WidgetContent>
 
@@ -64,7 +55,7 @@ import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import ProductEnum from 'src/models/enums/ProductEnum'
 import CardProps from 'src/models/Card'
-import { ProductItemProps } from 'src/models/Tabs'
+import { ProductItemProps, TabItemProps } from 'src/models/Tabs'
 import { TermProps } from 'src/models/Terms'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import CardsLogo from 'src/modules/CardsLogo.vue'
@@ -107,11 +98,14 @@ export default defineComponent({
       isDialogOpen: false,
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
-      isStandardProduct: false,
-      isFixedProduct: false,
-      isPaymentHolidayProduct: false,
-      interestFreePeriod: '',
-      interestFreeMonthlyRepayment: '',
+      primaryProduct: {
+        productType: '' as ProductEnum,
+        productItems: [] as TabItemProps[],
+      },
+      cardAccountFee: undefined as number | undefined,
+      cardStandardInterestRate: undefined as number | undefined,
+      title: '',
+      subtitle: '',
     }
   },
   computed: {
@@ -123,28 +117,91 @@ export default defineComponent({
     },
   },
   created() {
-    this.generateTitle()
+    this.getPrimaryProduct()
+    this.getCardAccountFee()
+    this.getCardStandardInterestRate()
+    this.createTitle()
+    this.createSubtitle()
   },
   methods: {
-    generateTitle() {
-      switch (this.products[0].productType.toLowerCase()) {
-        case ProductEnum.Standard:
-          this.interestFreePeriod = this.products[0].productItems[0].contents.find(
-            item => item.key === 'interestFreePeriod'
-          )?.value as string
-          this.isStandardProduct = true
+    getPrimaryProduct() {
+      this.primaryProduct.productType = this.products[0].productType
+      this.primaryProduct.productItems = this.products[0].productItems
+    },
+    getCardAccountFee() {
+      this.cardAccountFee = this.cards.find(
+        card => card.id === 'QMC1'
+      )?.annualFee
+    },
+    getCardStandardInterestRate() {
+      this.cardStandardInterestRate = this.cards.find(
+        card => card.id === 'QMC1'
+      )?.interestRate
+    },
+    getLongTermInterestFreeTitle() {
+      const interestFreePeriod = this.primaryProduct.productItems[0].contents.find(
+        item => item.key === 'interestFreePeriod'
+      )?.value
+      const indicativeMinMonthly = this.primaryProduct.productItems[0].contents.find(
+        item => item.key === 'indicativeMinMonthly'
+      )?.value
+      return `${interestFreePeriod} Month${
+        interestFreePeriod === 1 ? '' : 'ly'
+      } Payment${
+        interestFreePeriod === 1 ? '' : 's'
+      } of $${indicativeMinMonthly}*`
+    },
+    getPaymentHolidayTitle() {
+      const interestFreePeriod = this.primaryProduct.productItems[0].contents.find(
+        item => item.key === 'interestFreePeriod'
+      )?.value
+      return `${interestFreePeriod} Month${
+        interestFreePeriod === 1 ? '' : 's'
+      } No Payments & No Interest`
+    },
+    getLongTermInterestFreeSubtitle(
+      establishmentFee: number,
+      advancedFee: number
+    ) {
+      if (establishmentFee === 0 || advancedFee === 0)
+        return `*indicative. $${this.cardAccountFee} annual Account Fee, Ts&Cs apply.`
+      return `*indicative. $${establishmentFee} Establishment Fee or $${advancedFee} Advance Fee, $${this.cardAccountFee} annual Account Fee, Ts&Cs apply.`
+    },
+    getPaymentHolidaySubtitle(establishmentFee: number, advancedFee: number) {
+      if (establishmentFee === 0 || advancedFee === 0)
+        return `Standard Interest Rate ${this.cardStandardInterestRate}% applies at the end of the interest free period. $${this.cardAccountFee} annual Account Fee. Ts&Cs apply.`
+      return `Standard Interest Rate ${this.cardStandardInterestRate}% applies at the end of the interest free period. $${establishmentFee} Establishment Fee or $${advancedFee} Advance Fee applies. $${this.cardAccountFee} annual Account Fee. Ts&Cs apply.`
+    },
+    createTitle() {
+      switch (this.primaryProduct.productType) {
+        case ProductEnum.LongTermInterestFree:
+          this.title = this.getLongTermInterestFreeTitle()
           break
         case ProductEnum.PaymentHoliday:
-          this.isPaymentHolidayProduct = true
+          this.title = this.getPaymentHolidayTitle()
           break
-        case ProductEnum.Fixed:
-          this.interestFreePeriod = this.products[0].productItems[0].contents.find(
-            item => item.key === 'interestFreePeriod'
-          )?.value as string
-          this.interestFreeMonthlyRepayment = this.products[0].productItems[0].contents.find(
-            item => item.key === 'interestFreeMonthlyRepayment'
-          )?.value as string
-          this.isFixedProduct = true
+      }
+    },
+    createSubtitle() {
+      const establishmentFee = this.primaryProduct.productItems[0].contents.find(
+        item => item.key === 'establishmentFee'
+      )?.value as number
+      const advancedFee = this.primaryProduct.productItems[0].contents.find(
+        item => item.key === 'advancedFee'
+      )?.value as number
+      console.log({ advancedFee })
+      switch (this.primaryProduct.productType) {
+        case ProductEnum.LongTermInterestFree:
+          this.subtitle = this.getLongTermInterestFreeSubtitle(
+            establishmentFee,
+            advancedFee
+          )
+          break
+        case ProductEnum.PaymentHoliday:
+          this.subtitle = this.getPaymentHolidaySubtitle(
+            establishmentFee,
+            advancedFee
+          )
           break
       }
     },

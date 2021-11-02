@@ -168,6 +168,8 @@ export const getCardsData = (cardsData: Card[]): CardProps[] => {
     id: card.id,
     alt: card.name,
     src: card.image,
+    interestRate: card.interestRate,
+    annualFee: card.annualFee,
   }))
   return cards
 }

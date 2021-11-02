@@ -1,6 +1,5 @@
 export enum ProductEnum {
-  Standard = 'standard',
-  Fixed = 'fixed',
+  LongTermInterestFree = 'standard',
   PaymentHoliday = 'payment-holiday',
 }
 

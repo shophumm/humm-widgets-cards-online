@@ -15,7 +15,7 @@
       <p class="widget__title">{{ title }}</p>
     </template>
     <template #subtitle>
-      <span class="widget__subtitle">{{ subtitle }}</span>
+      <span class="widget__subtitle">T&Cs apply.</span>
     </template>
   </WidgetContent>
 
@@ -94,7 +94,6 @@ export default defineComponent({
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
       title: '',
-      subtitle: '',
     }
   },
   computed: {
@@ -104,53 +103,23 @@ export default defineComponent({
   },
   created() {
     this.title = this.createTitle()
-    this.subtitle = this.createSubtitle()
   },
   methods: {
-    getStandardTitle() {
-      return `UP TO ${
-        this.products[0].productItems[0].contents.find(
-          item => item.key === 'interestFreePeriod'
-        )?.value
-      } MONTHS INTEREST FREE.`
-    },
-    getFixedTitle() {
-      return `GET ME FOR $${
-        this.products[0].productItems[0].contents.find(
-          item => item.key === 'interestFreeMonthlyRepayment'
-        )?.value
-      } PER MONTH OVER ${
-        this.products[0].productItems[0].contents.find(
-          item => item.key === 'interestFreePeriod'
-        )?.value
-      } MONTHS`
+    getLongTermInterestFreeTitle() {
+      const interestFreePeriod = this.products[0].productItems[0].contents.find(
+        item => item.key === 'interestFreePeriod'
+      )?.value
+      return `UP TO ${interestFreePeriod} MONTH${
+        interestFreePeriod === 1 ? '' : 'S'
+      } INTEREST-FREE.`
     },
     createTitle() {
       switch (this.products[0].productType.toLowerCase()) {
-        case ProductEnum.Standard:
-          return this.getStandardTitle()
-        case ProductEnum.PaymentHoliday:
-          // TODO : update copy below
-          return 'PaymentHoliday Title'
-        case ProductEnum.Fixed:
-          return this.getFixedTitle()
+        case ProductEnum.LongTermInterestFree:
+          return this.getLongTermInterestFreeTitle()
         default:
           // TODO : update copy below
           return 'Default Title'
-      }
-    },
-    createSubtitle() {
-      switch (this.products[0].productType.toLowerCase()) {
-        case ProductEnum.Standard:
-          return 'T&Cs apply.'
-        case ProductEnum.PaymentHoliday:
-          // TODO : update copy below
-          return 'PaymentHoliday subTitle'
-        case ProductEnum.Fixed:
-          return 'Indicative payments. T&Cs apply.'
-        default:
-          // TODO : update copy below
-          return 'Default subTitle'
       }
     },
   },
