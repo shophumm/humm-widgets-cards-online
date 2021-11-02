@@ -189,7 +189,6 @@ export default defineComponent({
       const advancedFee = this.primaryProduct.productItems[0].contents.find(
         item => item.key === 'advancedFee'
       )?.value as number
-      console.log({ advancedFee })
       switch (this.primaryProduct.productType) {
         case ProductEnum.LongTermInterestFree:
           this.subtitle = this.getLongTermInterestFreeSubtitle(
