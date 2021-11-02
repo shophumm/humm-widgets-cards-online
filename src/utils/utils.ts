@@ -173,3 +173,27 @@ export const getCardsData = (cardsData: Card[]): CardProps[] => {
   }))
   return cards
 }
+
+export const convertToCurrencyFormat = (
+  value: string | number,
+  currencySymbol = '$'
+): string => {
+  return currencySymbol + parseFloat(value as string).toFixed(2)
+}
+
+export const pluralize = (
+  count: number,
+  word: string,
+  plural: string = word + 's'
+): string => {
+  const _pluralize = (num: number, word: string, plural: string = word + 's') =>
+    [1, -1].includes(Number(num)) ? word : plural
+  return _pluralize(count, word, plural)
+}
+
+export const getProductPropertyByValue = (
+  product: ProductItemProps,
+  key: string
+): string | number | undefined => {
+  return product.productItems[0].contents.find(item => item.key === key)?.value
+}
