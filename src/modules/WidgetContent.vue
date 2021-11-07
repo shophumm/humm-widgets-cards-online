@@ -7,11 +7,7 @@
           <slot name="title" />
           <slot name="subtitle" />
         </div>
-        <Button
-          :button-color="buttonColor"
-          :is-bold="isButtonBold"
-          @click="toggleDialog"
-        >
+        <Button :button-color="buttonColor" @click="toggleDialog">
           {{ buttonLabel }}
         </Button>
       </div>
