@@ -56,7 +56,7 @@ import { TermProps } from 'src/models/Terms'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
 import ExistingCard from 'src/modules/ExistingCard.vue'
-import { getProductPropertyByValue, pluralize } from 'src/utils/utils'
+import { getProductValueByKey, pluralize } from 'src/utils/utils'
 
 export default defineComponent({
   name: 'WidgetMainHumm90',
@@ -107,7 +107,7 @@ export default defineComponent({
   },
   methods: {
     getLongTermInterestFreeTitle() {
-      const interestFreePeriod = getProductPropertyByValue(
+      const interestFreePeriod = getProductValueByKey(
         this.products[0],
         'interestFreePeriod'
       ) as number

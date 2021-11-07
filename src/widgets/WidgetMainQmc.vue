@@ -61,7 +61,7 @@ import WidgetContent from 'src/modules/WidgetContent.vue'
 import CardsLogo from 'src/modules/CardsLogo.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
 import ExistingCard from 'src/modules/ExistingCard.vue'
-import { getProductPropertyByValue, pluralize } from 'src/utils/utils'
+import { getProductValueByKey, pluralize } from 'src/utils/utils'
 
 const cardId = 'QMC1'
 
@@ -149,11 +149,11 @@ export default defineComponent({
       )?.interestRate
     },
     getLongTermInterestFreeTitle() {
-      const interestFreePeriod = getProductPropertyByValue(
+      const interestFreePeriod = getProductValueByKey(
         this.primaryProduct,
         'interestFreePeriod'
       ) as number
-      const indicativeMinMonthly = getProductPropertyByValue(
+      const indicativeMinMonthly = getProductValueByKey(
         this.primaryProduct,
         'indicativeMinMonthly'
       ) as number
@@ -167,7 +167,7 @@ export default defineComponent({
       )} of $${indicativeMinMonthly}*`
     },
     getPaymentHolidayTitle() {
-      const interestFreePeriod = getProductPropertyByValue(
+      const interestFreePeriod = getProductValueByKey(
         this.primaryProduct,
         'interestFreePeriod'
       ) as number
@@ -202,11 +202,11 @@ export default defineComponent({
       }
     },
     createSubtitle() {
-      const establishmentFee = getProductPropertyByValue(
+      const establishmentFee = getProductValueByKey(
         this.primaryProduct,
         'establishmentFee'
       ) as number
-      const advancedFee = getProductPropertyByValue(
+      const advancedFee = getProductValueByKey(
         this.primaryProduct,
         'advancedFee'
       ) as number

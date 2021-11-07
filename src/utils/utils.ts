@@ -191,7 +191,7 @@ export const pluralize = (
   return _pluralize(count, word, plural)
 }
 
-export const getProductPropertyByValue = (
+export const getProductValueByKey = (
   product: ProductItemProps,
   key: string
 ): string | number | undefined => {
