@@ -5,6 +5,8 @@ export interface CardProps {
   alt: string
   src: string
   size?: Sizes
+  interestRate: number
+  annualFee: number
 }
 
 export default CardProps

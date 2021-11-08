@@ -12,10 +12,10 @@
       <IconHumm90Card />
     </template>
     <template #title>
-      <p class="widget__title">UP TO 60 MONTHS INTEREST-FREE.</p>
+      <p class="widget__title">{{ title }}</p>
     </template>
     <template #subtitle>
-      <span class="widget__subtitle"> Indicative Payments. Ts&Cs Apply. </span>
+      <span class="widget__subtitle">T&Cs apply.</span>
     </template>
   </WidgetContent>
 
@@ -49,12 +49,14 @@ import IconHumm90Card from 'src/components/icons/IconHumm90Card.vue'
 import Card from 'src/components/dataDisplay/Card.vue'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
+import ProductEnum from 'src/models/enums/ProductEnum'
 import CardProps from 'src/models/Card'
 import { ProductItemProps } from 'src/models/Tabs'
 import { TermProps } from 'src/models/Terms'
 import WidgetContent from 'src/modules/WidgetContent.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
 import ExistingCard from 'src/modules/ExistingCard.vue'
+import { getProductValueByKey, pluralize } from 'src/utils/utils'
 
 export default defineComponent({
   name: 'WidgetMainHumm90',
@@ -92,11 +94,34 @@ export default defineComponent({
       isDialogOpen: false,
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
+      title: '',
     }
   },
   computed: {
     getApplyCards(): CardProps[] {
       return this.cards.slice(0, 1)
+    },
+  },
+  created() {
+    this.createTitle()
+  },
+  methods: {
+    getLongTermInterestFreeTitle() {
+      const interestFreePeriod = getProductValueByKey(
+        this.products[0],
+        'interestFreePeriod'
+      ) as number
+      return `UP TO ${interestFreePeriod} ${pluralize(
+        interestFreePeriod,
+        'MONTH',
+        'MONTHS'
+      )} INTEREST-FREE.`
+    },
+    createTitle() {
+      switch (this.products[0].productType.toLowerCase()) {
+        case ProductEnum.LongTermInterestFree:
+          this.title = this.getLongTermInterestFreeTitle()
+      }
     },
   },
 })

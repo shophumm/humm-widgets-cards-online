@@ -3,7 +3,7 @@ import ProductEnum from 'src/models/enums/ProductEnum'
 export interface ContentsProps {
   key: string
   name: string
-  value: string
+  value: string | number
 }
 export interface TabItemProps {
   label: string

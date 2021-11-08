@@ -43,6 +43,8 @@ import { TabItemProps, ContentsProps, ProductItemProps } from 'src/models/Tabs'
 import { TermProps } from 'src/models/Terms'
 import ProductEnum from 'src/models/enums/ProductEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
+import { productLanguage } from 'src/lang/ResponseLanguage'
+import { convertToCurrencyFormat, pluralize } from 'src/utils/utils'
 
 export default defineComponent({
   name: 'DialogOverlay',
@@ -129,53 +131,88 @@ export default defineComponent({
         productContents.push({
           key: 'productPrice',
           name: 'Purchase Amount',
-          value: `$${parseFloat(`${this.productPrice}`).toFixed(2)}`,
+          value: this.productPrice,
         })
       }
       return productContents
     },
     filterContentByLang(content: ContentsProps[]): ContentsProps[] {
-      let displayedContent = undefined
+      let filteredContent = undefined
       switch (this.lang) {
         case LanguageCodeEnum.Australia:
-          displayedContent = content.filter(item =>
+          filteredContent = content.filter(item =>
             this.fieldBreakdownAu.includes(item.key)
           )
-          if (!displayedContent)
+          if (!filteredContent)
             throw new Error(
               `No content that matches AU breakdown : ${this.fieldBreakdownAu}`
             )
-          return displayedContent
+          return filteredContent
         case LanguageCodeEnum.NewZealand:
-          displayedContent = content.filter(item =>
+          filteredContent = content.filter(item =>
             this.fieldBreakdownNz.includes(item.key)
           )
-          if (!displayedContent)
+          if (!filteredContent)
             throw new Error(
               `No content that matches NZ breakdown : ${this.fieldBreakdownNz}`
             )
-          return displayedContent
+          return filteredContent
         default:
           return content
       }
     },
     orderContent(unorderedContent: ContentsProps[]): ContentsProps[] {
       switch (this.lang) {
-        case LanguageCodeEnum.Australia:
-          return unorderedContent.sort(
+        case LanguageCodeEnum.Australia: {
+          const orderedContent = unorderedContent.sort(
             (a, b) =>
               this.fieldBreakdownAu.indexOf(a.key) -
               this.fieldBreakdownAu.indexOf(b.key)
           )
-        case LanguageCodeEnum.NewZealand:
-          return unorderedContent.sort(
+          return orderedContent
+        }
+        case LanguageCodeEnum.NewZealand: {
+          const orderedContent = unorderedContent.sort(
             (a, b) =>
               this.fieldBreakdownNz.indexOf(a.key) -
               this.fieldBreakdownNz.indexOf(b.key)
           )
+          return orderedContent
+        }
         default:
           return unorderedContent
       }
+    },
+    appendUnits(content: ContentsProps[]): ContentsProps[] {
+      const contentWithUnit = content.map(breakdownItem => {
+        const nameLabelPair = productLanguage.find(
+          item => item.name === breakdownItem.key
+        )
+        let valueWithUnit = ''
+        if (nameLabelPair) {
+          switch (nameLabelPair.unit.toLowerCase()) {
+            case '$':
+              valueWithUnit = convertToCurrencyFormat(breakdownItem.value)
+              break
+            case 'months': {
+              const unit = `${pluralize(
+                breakdownItem.value as number,
+                'month'
+              )}`
+              valueWithUnit = `${breakdownItem.value} ${unit}`
+              break
+            }
+            default:
+              valueWithUnit = breakdownItem.value as string
+          }
+        }
+        return {
+          key: breakdownItem.key,
+          name: breakdownItem.name,
+          value: valueWithUnit,
+        }
+      })
+      return contentWithUnit
     },
     tabsContents(id: string): ContentsProps[] {
       const productData = this.getDataForProduct()
@@ -187,9 +224,11 @@ export default defineComponent({
 
       const allContent = this.appendProductPrice(productContents)
 
-      const displayedContent = this.filterContentByLang(allContent)
+      const filteredContent = this.filterContentByLang(allContent)
 
-      return this.orderContent(displayedContent)
+      const orderedContent = this.orderContent(filteredContent)
+
+      return this.appendUnits(orderedContent)
     },
   },
 })

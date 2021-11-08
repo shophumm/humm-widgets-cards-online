@@ -26,7 +26,7 @@ export const Default = Template.bind({})
 Default.args = {
   tabs: [
     {
-      productType: ProductEnum.Standard,
+      productType: ProductEnum.LongTermInterestFree,
       productItems: [
         {
           id: '18months',
@@ -102,7 +102,7 @@ WithDefaultTabId.args = {
   defaultTabId: '24months',
   tabs: [
     {
-      productType: ProductEnum.Standard,
+      productType: ProductEnum.LongTermInterestFree,
       productItems: [
         {
           id: '18months',

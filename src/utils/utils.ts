@@ -152,7 +152,7 @@ export const getProductContent = (productData: Product): ContentsProps[] => {
     return {
       key: langKey,
       name: getProductLabel(langKey),
-      value: getProductValue(langKey, langValue),
+      value: langValue,
     }
   })
   return contents
@@ -163,27 +163,37 @@ export const getProductLabel = (nameKey: string): string => {
   return nameLabelPair ? nameLabelPair.label : nameKey
 }
 
-export const getProductValue = (nameKey: string, value: string): string => {
-  const nameLabelPair = productLanguage.find(item => item.name === nameKey)
-  if (nameLabelPair)
-    switch (nameLabelPair.unit.toLowerCase()) {
-      case '$':
-        return `${nameLabelPair.unit}${parseFloat(value).toFixed(2)}`
-      case 'months': {
-        const unit = `month${value === '1' ? '' : 's'}`
-        return `${value} ${unit}`
-      }
-      default:
-        return value
-    }
-  return value
-}
-
 export const getCardsData = (cardsData: Card[]): CardProps[] => {
   const cards = cardsData.map(card => ({
     id: card.id,
     alt: card.name,
     src: card.image,
+    interestRate: card.interestRate,
+    annualFee: card.annualFee,
   }))
   return cards
+}
+
+export const convertToCurrencyFormat = (
+  value: string | number,
+  currencySymbol = '$'
+): string => {
+  return currencySymbol + parseFloat(value as string).toFixed(2)
+}
+
+export const pluralize = (
+  count: number,
+  word: string,
+  plural: string = word + 's'
+): string => {
+  const _pluralize = (num: number, word: string, plural: string = word + 's') =>
+    [1, -1].includes(Number(num)) ? word : plural
+  return _pluralize(count, word, plural)
+}
+
+export const getProductValueByKey = (
+  product: ProductItemProps,
+  key: string
+): string | number | undefined => {
+  return product.productItems[0].contents.find(item => item.key === key)?.value
 }
