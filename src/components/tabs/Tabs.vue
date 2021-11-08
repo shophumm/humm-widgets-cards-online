@@ -1,6 +1,6 @@
 <template>
   <div class="tabs">
-    <ul class="tabs__controls" role="tablist">
+    <ul v-if="tabs.length > 1" class="tabs__controls" role="tablist">
       <li
         v-for="tab in tabs"
         :key="tab.id"

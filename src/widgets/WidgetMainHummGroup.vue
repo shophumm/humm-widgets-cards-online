@@ -24,7 +24,7 @@
     id="widget-dialog"
     :is-dialog-open="isDialogOpen"
     :button-close-label="buttonCloseLabel"
-    :tabs-data="products"
+    :products-data="products"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >

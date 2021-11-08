@@ -25,7 +25,7 @@
     :button-close-label="buttonCloseLabel"
     :lang="lang"
     :product-price="productPrice"
-    :tabs-data="products"
+    :products-data="products"
     accordion-title="TERMS & CONDITIONS"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
