@@ -27,7 +27,7 @@
         </template>
       </Tabs>
       <slot name="footer" />
-      <Accordion id="widget-terms" :content="getTermsForProduct()">
+      <Accordion id="widget-terms" :content="accordionData">
         {{ accordionTitle }}
       </Accordion>
     </template>
@@ -42,7 +42,6 @@ import Tabs from 'src/components/tabs/Tabs.vue'
 import Tab from 'src/components/tabs/Tab.vue'
 import DataList from 'src/components/tabs/DataList.vue'
 import { TabItemProps, ContentsProps, ProductItemProps } from 'src/models/Tabs'
-import { TermProps } from 'src/models/Terms'
 import ProductEnum from 'src/models/enums/ProductEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import { productLanguage } from 'src/lang/ResponseLanguage'
@@ -86,7 +85,7 @@ export default defineComponent({
       default: 'Terms & Conditions',
     },
     accordionData: {
-      type: Object as () => TermProps,
+      type: String,
       required: true,
     },
   },
@@ -146,11 +145,6 @@ export default defineComponent({
         default:
           return productType
       }
-    },
-    getTermsForProduct() {
-      const productType = this.getPrimaryProductType()
-      const productTypeLower = productType?.toLowerCase() as ProductEnum
-      return this.accordionData[productTypeLower]
     },
     appendProductPrice(productContents: ContentsProps[]): ContentsProps[] {
       if (

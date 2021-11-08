@@ -22,15 +22,10 @@ export interface Product {
   indicativeMonthly: number
 }
 
-export interface Terms {
-  standard?: string
-  'payment-holiday'?: string
-}
-
 export interface WidgetResponseBody {
   products: Product[]
   cards: Card[]
-  terms: Terms[]
+  terms: string
 }
 
 export default WidgetResponseBody
