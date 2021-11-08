@@ -3,7 +3,7 @@
     :is-size-large="isSizeLarge"
     :is-widget-open="isWidgetOpen"
     button-color="var(--color-3)"
-    icon-opacity="0.3"
+    :icon-opacity="isDark ? '0.8' : '0.3'"
     button-label="LEARN MORE"
     @toggle-dialog="isDialogOpen = true"
     @close-widget="isWidgetOpen = false"
@@ -71,6 +71,10 @@ export default defineComponent({
     productPrice: Number,
     lang: String as () => LanguageCodeEnum,
     theme: String as () => ThemeEnum,
+    isDark: {
+      type: Boolean,
+      default: false,
+    },
     isSizeLarge: {
       type: Boolean,
       required: true,

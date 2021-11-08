@@ -57,7 +57,10 @@ export default defineComponent({
       type: String,
       default: '1',
     },
-    isButtonBold: Boolean,
+    isButtonBold: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['toggle-dialog', 'close-widget'],
   methods: {

@@ -7,6 +7,7 @@
           :product-price="productPrice"
           :lang="lang"
           :theme="theme"
+          :is-dark="darkMode"
           :is-size-large="isSizeLarge"
           :cards="cards"
           :products="products"
