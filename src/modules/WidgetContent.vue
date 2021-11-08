@@ -7,7 +7,11 @@
           <slot name="title" />
           <slot name="subtitle" />
         </div>
-        <Button :button-color="buttonColor" @click="toggleDialog">
+        <Button
+          :button-color="buttonColor"
+          :is-bold="isButtonBold"
+          @click="toggleDialog"
+        >
           {{ buttonLabel }}
         </Button>
       </div>
@@ -53,7 +57,10 @@ export default defineComponent({
       type: String,
       default: '1',
     },
-    isButtonBold: Boolean,
+    isButtonBold: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['toggle-dialog', 'close-widget'],
   methods: {

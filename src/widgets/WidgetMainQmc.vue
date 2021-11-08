@@ -2,7 +2,6 @@
   <WidgetContent
     :is-size-large="isSizeLarge"
     :is-widget-open="isWidgetOpen"
-    :is-button-bold="true"
     button-color="var(--color-3)"
     :icon-opacity="isDark ? '0.8' : '0.3'"
     @toggle-dialog="isDialogOpen = true"
