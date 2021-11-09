@@ -46,7 +46,7 @@ export default defineComponent({
         case ProductEnum.PaymentHoliday:
           return 'Payment Holiday'
         default:
-          return 'interest free'
+          return this.product.productType
       }
     },
   },
