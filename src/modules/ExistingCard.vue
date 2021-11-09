@@ -13,7 +13,9 @@
   <ol class="mc__list">
     <slot name="list">
       <li>Add the item and continue to checkout</li>
-      <li>Choose <strong>interest-free</strong> as your payment option</li>
+      <li>
+        Choose <strong>{{ getPaymentOption() }}</strong> as your payment option
+      </li>
       <li>Enter your card details and choose a plan listed below:</li>
     </slot>
   </ol>
@@ -22,11 +24,31 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import CardsList from 'src/modules/CardsList.vue'
+import { ProductItemProps } from 'src/models/Tabs'
+import ProductEnum from 'src/models/enums/ProductEnum'
 
 export default defineComponent({
   name: 'ExistingCard',
   components: {
     CardsList,
+  },
+  props: {
+    product: {
+      type: Object as () => ProductItemProps,
+      required: true,
+    },
+  },
+  methods: {
+    getPaymentOption(): string {
+      switch (this.product.productType) {
+        case ProductEnum.LongTermInterestFree:
+          return 'Long Term Finance'
+        case ProductEnum.PaymentHoliday:
+          return 'Payment Holiday'
+        default:
+          return 'interest free'
+      }
+    },
   },
 })
 </script>

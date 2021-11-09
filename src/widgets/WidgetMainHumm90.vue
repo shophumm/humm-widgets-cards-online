@@ -25,13 +25,13 @@
     :button-close-label="buttonCloseLabel"
     :lang="lang"
     :product-price="productPrice"
-    :products-data="products"
+    :product="displayedProduct"
     accordion-title="TERMS & CONDITIONS"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
     <template #header>
-      <ExistingCard>
+      <ExistingCard :product="displayedProduct">
         <template #cards>
           <Card v-for="card in getApplyCards" :key="card.id" size="lg">
             <img :src="card.src" :alt="card.alt" />
@@ -95,6 +95,7 @@ export default defineComponent({
     return {
       isWidgetOpen: true,
       isDialogOpen: false,
+      displayedProduct: {} as ProductItemProps,
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
       title: '',
@@ -107,9 +108,10 @@ export default defineComponent({
   },
   created() {
     this.createTitle()
+    this.setProduct()
   },
   methods: {
-    getLongTermInterestFreeTitle() {
+    getLongTermInterestFreeTitle(): string {
       const interestFreePeriod = getProductValueByKey(
         this.products[0],
         'interestFreePeriod'
@@ -125,6 +127,9 @@ export default defineComponent({
         case ProductEnum.LongTermInterestFree:
           this.title = this.getLongTermInterestFreeTitle()
       }
+    },
+    setProduct() {
+      this.displayedProduct = this.products[0]
     },
   },
 })

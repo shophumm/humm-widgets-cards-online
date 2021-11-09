@@ -14,10 +14,10 @@
       <slot name="header" />
     </template>
     <template #body>
-      <Tabs :tabs="getPrimaryProductData()">
+      <Tabs :tabs="getProductData()">
         <template #default="{ activeTabId }">
           <Tab
-            v-for="tab in getPrimaryProductData()"
+            v-for="tab in getProductData()"
             :key="tab.id"
             :tab-id="tab.id"
             :active-tab-id="activeTabId"
@@ -76,8 +76,8 @@ export default defineComponent({
       type: Number,
       required: true,
     },
-    productsData: {
-      type: Array as () => ProductItemProps[],
+    product: {
+      type: Object as () => ProductItemProps,
       required: true,
     },
     accordionTitle: {
@@ -89,7 +89,7 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ['toggle-dialog'],
+  emits: ['toggle-dialog', 'primary-products'],
   data() {
     return {
       fieldBreakdownAu: [
@@ -111,30 +111,22 @@ export default defineComponent({
     toggleDialog() {
       this.$emit('toggle-dialog')
     },
-    getPrimaryProduct(): ProductItemProps {
-      return this.productsData[0]
-    },
-    getPrimaryProductType(): ProductEnum {
-      const productType = this.getPrimaryProduct().productType
+    getProductType(): ProductEnum {
+      const productType = this.product.productType
       return productType
     },
-    getPrimaryProductData(): TabItemProps[] {
-      const productType = this.getPrimaryProductType()
-      const productData = this.productsData.find(
-        product => product.productType === productType
-      )
-      if (!productData)
-        throw new Error(`No data found corresponding to ${productType}`)
-      return productData.productItems
+    getProductData(): TabItemProps[] {
+      const productData = this.product.productItems
+      return productData
     },
-    getOverlayTitle() {
-      const productType = this.getPrimaryProductType()
+    getOverlayTitle(): string {
+      const productType = this.getProductType()
       switch (productType) {
         case ProductEnum.LongTermInterestFree:
           return 'Long Term Finance Offer'
         case ProductEnum.PaymentHoliday: {
           const interestFreePeriod = getProductValueByKey(
-            this.getPrimaryProduct(),
+            this.product,
             'interestFreePeriod'
           )
           return `${interestFreePeriod} ${pluralize(
@@ -237,7 +229,7 @@ export default defineComponent({
       return contentWithUnit
     },
     tabsContents(id: string): ContentsProps[] {
-      const productData = this.getPrimaryProductData()
+      const productData = this.getProductData()
       const productContents = productData?.find(item => item.id === id)
         ?.contents
 

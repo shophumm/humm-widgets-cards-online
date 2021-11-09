@@ -24,7 +24,7 @@
     id="widget-dialog"
     :is-dialog-open="isDialogOpen"
     :button-close-label="buttonCloseLabel"
-    :products-data="products"
+    :product="displayedProduct"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
@@ -73,6 +73,7 @@ export default defineComponent({
     return {
       isWidgetOpen: true,
       isDialogOpen: false,
+      displayedProduct: this.products[0],
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
     }

@@ -30,12 +30,12 @@
     :button-close-label="buttonCloseLabel"
     :lang="lang"
     :product-price="productPrice"
-    :products-data="products"
+    :product="displayedProduct"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
     <template #header>
-      <ExistingCard>
+      <ExistingCard :product="displayedProduct">
         <template #cards>
           <Card v-for="card in getApplyCards" :key="card.id" size="lg">
             <img :src="card.src" :alt="card.alt" />
@@ -93,6 +93,7 @@ export default defineComponent({
     return {
       isWidgetOpen: true,
       isDialogOpen: false,
+      displayedProduct: this.products[0],
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
     }

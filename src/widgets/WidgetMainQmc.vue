@@ -30,12 +30,12 @@
     :button-close-label="buttonCloseLabel"
     :lang="lang"
     :product-price="productPrice"
-    :products-data="products"
+    :product="displayedProduct"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
     <template #header>
-      <ExistingCard>
+      <ExistingCard :product="displayedProduct">
         <template #cards>
           <Card v-for="card in getApplyCards" :key="card.id" size="lg">
             <img :src="card.src" :alt="card.alt" />
@@ -102,7 +102,7 @@ export default defineComponent({
     isDialogOpen: boolean
     buttonCloseLabel: string
     Theme: typeof ThemeEnum
-    primaryProduct: ProductItemProps
+    displayedProduct: ProductItemProps
     cardAccountFee: number | undefined
     cardStandardInterestRate: number | undefined
     title: string
@@ -113,7 +113,7 @@ export default defineComponent({
       isDialogOpen: false,
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
-      primaryProduct: {} as ProductItemProps,
+      displayedProduct: {} as ProductItemProps,
       cardAccountFee: undefined,
       cardStandardInterestRate: undefined,
       title: '',
@@ -129,16 +129,15 @@ export default defineComponent({
     },
   },
   created() {
-    this.getPrimaryProduct()
+    this.setProduct()
     this.getCardAccountFee()
     this.getCardStandardInterestRate()
     this.createTitle()
     this.createSubtitle()
   },
   methods: {
-    getPrimaryProduct() {
-      this.primaryProduct.productType = this.products[0].productType
-      this.primaryProduct.productItems = this.products[0].productItems
+    setProduct() {
+      this.displayedProduct = this.products[0]
     },
     getCardAccountFee() {
       this.cardAccountFee = this.cards.find(
@@ -152,11 +151,11 @@ export default defineComponent({
     },
     getLongTermInterestFreeTitle() {
       const interestFreePeriod = getProductValueByKey(
-        this.primaryProduct,
+        this.displayedProduct,
         'interestFreePeriod'
       ) as number
       const indicativeMinMonthly = getProductValueByKey(
-        this.primaryProduct,
+        this.displayedProduct,
         'indicativeMinMonthly'
       ) as number
       return `${interestFreePeriod} ${pluralize(
@@ -170,7 +169,7 @@ export default defineComponent({
     },
     getPaymentHolidayTitle() {
       const interestFreePeriod = getProductValueByKey(
-        this.primaryProduct,
+        this.displayedProduct,
         'interestFreePeriod'
       ) as number
       return `${interestFreePeriod} ${pluralize(
@@ -194,7 +193,7 @@ export default defineComponent({
       return `Standard Interest Rate ${this.cardStandardInterestRate}% applies at the end of the interest free period. $${establishmentFee} Establishment Fee or $${advancedFee} Advance Fee applies. $${this.cardAccountFee} annual Account Fee. Ts&Cs apply.`
     },
     createTitle() {
-      switch (this.primaryProduct.productType) {
+      switch (this.displayedProduct.productType) {
         case ProductEnum.LongTermInterestFree:
           this.title = this.getLongTermInterestFreeTitle()
           break
@@ -205,14 +204,14 @@ export default defineComponent({
     },
     createSubtitle() {
       const establishmentFee = getProductValueByKey(
-        this.primaryProduct,
+        this.displayedProduct,
         'establishmentFee'
       ) as number
       const advancedFee = getProductValueByKey(
-        this.primaryProduct,
+        this.displayedProduct,
         'advancedFee'
       ) as number
-      switch (this.primaryProduct.productType) {
+      switch (this.displayedProduct.productType) {
         case ProductEnum.LongTermInterestFree:
           this.subtitle = this.getLongTermInterestFreeSubtitle(
             establishmentFee,
