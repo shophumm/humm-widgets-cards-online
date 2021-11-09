@@ -30,7 +30,7 @@
     :button-close-label="buttonCloseLabel"
     :lang="lang"
     :product-price="productPrice"
-    :products-data=="products"
+    :products-data="products"
     :accordion-data="terms"
     @toggle-dialog="isDialogOpen = false"
   >
