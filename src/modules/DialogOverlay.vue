@@ -6,16 +6,18 @@
     @toggle-dialog="toggleDialog"
   >
     <template #title>
-      <slot name="title"><strong>Interest-free Payment</strong></slot>
+      <slot name="title">
+        <strong> {{ getOverlayTitle() }} </strong>
+      </slot>
     </template>
     <template #header>
       <slot name="header" />
     </template>
     <template #body>
-      <Tabs :tabs="getDataForProduct()">
+      <Tabs :tabs="getProductData()">
         <template #default="{ activeTabId }">
           <Tab
-            v-for="tab in getDataForProduct()"
+            v-for="tab in getProductData()"
             :key="tab.id"
             :tab-id="tab.id"
             :active-tab-id="activeTabId"
@@ -43,7 +45,11 @@ import { TabItemProps, ContentsProps, ProductItemProps } from 'src/models/Tabs'
 import ProductEnum from 'src/models/enums/ProductEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import { productLanguage } from 'src/lang/ResponseLanguage'
-import { convertToCurrencyFormat, pluralize } from 'src/utils/utils'
+import {
+  getProductValueByKey,
+  convertToCurrencyFormat,
+  pluralize,
+} from 'src/utils/utils'
 
 export default defineComponent({
   name: 'DialogOverlay',
@@ -70,8 +76,8 @@ export default defineComponent({
       type: Number,
       required: true,
     },
-    tabsData: {
-      type: Array as () => ProductItemProps[],
+    product: {
+      type: Object as () => ProductItemProps,
       required: true,
     },
     accordionTitle: {
@@ -83,7 +89,7 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ['toggle-dialog'],
+  emits: ['toggle-dialog', 'primary-products'],
   data() {
     return {
       fieldBreakdownAu: [
@@ -105,18 +111,32 @@ export default defineComponent({
     toggleDialog() {
       this.$emit('toggle-dialog')
     },
-    selectProductType(): ProductEnum {
-      const productType = this.tabsData[0].productType
+    getProductType(): ProductEnum {
+      const productType = this.product.productType
       return productType
     },
-    getDataForProduct(): TabItemProps[] {
-      const productType = this.selectProductType()
-      const productData = this.tabsData.find(
-        product => product.productType === productType
-      )
-      if (!productData)
-        throw new Error(`No data found corresponding to ${productType}`)
-      return productData.productItems
+    getProductData(): TabItemProps[] {
+      const productData = this.product.productItems
+      return productData
+    },
+    getOverlayTitle(): string {
+      const productType = this.getProductType()
+      switch (productType) {
+        case ProductEnum.LongTermInterestFree:
+          return 'Long Term Finance Offer'
+        case ProductEnum.PaymentHoliday: {
+          const interestFreePeriod = getProductValueByKey(
+            this.product,
+            'interestFreePeriod'
+          )
+          return `${interestFreePeriod} ${pluralize(
+            interestFreePeriod as number,
+            'Month'
+          )} No Payments & No Interest`
+        }
+        default:
+          return productType
+      }
     },
     appendProductPrice(productContents: ContentsProps[]): ContentsProps[] {
       if (
@@ -209,7 +229,7 @@ export default defineComponent({
       return contentWithUnit
     },
     tabsContents(id: string): ContentsProps[] {
-      const productData = this.getDataForProduct()
+      const productData = this.getProductData()
       const productContents = productData?.find(item => item.id === id)
         ?.contents
 
