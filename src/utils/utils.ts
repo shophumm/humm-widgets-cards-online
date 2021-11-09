@@ -143,7 +143,7 @@ export const getProductData = (productsData: Product[]): ProductItemProps[] => {
 }
 
 export const createTabLabel = (productTerm: number): string => {
-  return productTerm.toString() + ' Months'
+  return productTerm.toString() + ` ${pluralize(productTerm, 'Month')}`
 }
 
 export const getProductContent = (productData: Product): ContentsProps[] => {
