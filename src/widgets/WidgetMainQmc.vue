@@ -128,7 +128,7 @@ export default defineComponent({
       return this.cards.slice(0, 4)
     },
   },
-  created() {
+  created(): void {
     this.setProduct()
     this.getCardAccountFee()
     this.getCardStandardInterestRate()
@@ -136,20 +136,20 @@ export default defineComponent({
     this.createSubtitle()
   },
   methods: {
-    setProduct() {
+    setProduct(): void {
       this.displayedProduct = this.products[0]
     },
-    getCardAccountFee() {
+    getCardAccountFee(): void {
       this.cardAccountFee = this.cards.find(
         card => card.id === cardId
       )?.annualFee
     },
-    getCardStandardInterestRate() {
+    getCardStandardInterestRate(): void {
       this.cardStandardInterestRate = this.cards.find(
         card => card.id === cardId
       )?.interestRate
     },
-    getLongTermInterestFreeTitle() {
+    getLongTermInterestFreeTitle(): string {
       const interestFreePeriod = getProductValueByKey(
         this.displayedProduct,
         'interestFreePeriod'
@@ -167,7 +167,7 @@ export default defineComponent({
         'Payment'
       )} of $${indicativeMinMonthly}*`
     },
-    getPaymentHolidayTitle() {
+    getPaymentHolidayTitle(): string {
       const interestFreePeriod = getProductValueByKey(
         this.displayedProduct,
         'interestFreePeriod'
@@ -180,19 +180,22 @@ export default defineComponent({
     getLongTermInterestFreeSubtitle(
       establishmentFee: number,
       advancedFee: number
-    ) {
+    ): string {
       if (establishmentFee === 0 || advancedFee === 0) {
         return `*indicative. $${this.cardAccountFee} annual Account Fee, Ts&Cs apply.`
       }
       return `*indicative. $${establishmentFee} Establishment Fee or $${advancedFee} Advance Fee, $${this.cardAccountFee} annual Account Fee, Ts&Cs apply.`
     },
-    getPaymentHolidaySubtitle(establishmentFee: number, advancedFee: number) {
+    getPaymentHolidaySubtitle(
+      establishmentFee: number,
+      advancedFee: number
+    ): string {
       if (establishmentFee === 0 || advancedFee === 0) {
         return `Standard Interest Rate ${this.cardStandardInterestRate}% applies at the end of the interest free period. $${this.cardAccountFee} annual Account Fee. Ts&Cs apply.`
       }
       return `Standard Interest Rate ${this.cardStandardInterestRate}% applies at the end of the interest free period. $${establishmentFee} Establishment Fee or $${advancedFee} Advance Fee applies. $${this.cardAccountFee} annual Account Fee. Ts&Cs apply.`
     },
-    createTitle() {
+    createTitle(): void {
       switch (this.displayedProduct.productType) {
         case ProductEnum.LongTermInterestFree:
           this.title = this.getLongTermInterestFreeTitle()
@@ -202,7 +205,7 @@ export default defineComponent({
           break
       }
     },
-    createSubtitle() {
+    createSubtitle(): void {
       const establishmentFee = getProductValueByKey(
         this.displayedProduct,
         'establishmentFee'

@@ -21,12 +21,10 @@ export default defineComponent({
     fill: String,
   },
   emits: ['click-close'],
-  setup(props, { emit }) {
-    return {
-      onClick() {
-        emit('click-close')
-      },
-    }
+  methods: {
+    onClick(): void {
+      this.$emit('click-close')
+    },
   },
 })
 </script>

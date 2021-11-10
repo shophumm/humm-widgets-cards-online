@@ -23,11 +23,11 @@ export default defineComponent({
     if (this.observer) this.observer?.unobserve(this.$refs.box as Element)
   },
   methods: {
-    onResize() {
+    onResize(): void {
       const box = this.$refs.box as Element
       this.isSizeLarge = box.clientWidth > 410
     },
-    initObserver() {
+    initObserver(): void {
       const observer = new ResizeObserver(this.onResize)
       observer.observe(this.$refs.box as Element)
       this.observer = observer

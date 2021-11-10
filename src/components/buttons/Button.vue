@@ -36,8 +36,7 @@
 </template>
 
 <script lang="ts">
-import { reactive, computed, defineComponent } from 'vue'
-import { ButtonProps } from 'src/models/Button'
+import { defineComponent } from 'vue'
 import SizeEnum from 'src/models/enums/SizeEnum'
 import type { PropType } from 'vue'
 import type { Sizes } from 'src/models/enums/SizeEnum'
@@ -59,16 +58,15 @@ export default defineComponent({
     isRounded: Boolean,
   },
   emits: ['click'],
-  setup(props: ButtonProps, { emit }) {
-    props = reactive(props)
-    return {
-      style: computed(() => ({
-        color: props.buttonColor,
-      })),
-      onClick() {
-        emit('click')
-      },
-    }
+  computed: {
+    style(): string {
+      return 'color: ' + this.buttonColor
+    },
+  },
+  methods: {
+    onClick(): void {
+      this.$emit('click')
+    },
   },
 })
 </script>

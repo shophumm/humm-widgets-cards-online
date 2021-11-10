@@ -45,7 +45,7 @@ export default defineComponent({
     }
   },
   methods: {
-    changeTab(tabId: string) {
+    changeTab(tabId: string): void {
       this.activeTabId = tabId
     },
   },

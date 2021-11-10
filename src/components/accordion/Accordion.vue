@@ -6,7 +6,6 @@
       class="accordion__button"
       :aria-expanded="isOpen"
       :aria-controls="id + '-collapse'"
-      @clickAccordion="onClick"
       @click="toggleOpen"
     >
       <span class="accordion__label">
@@ -34,7 +33,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import IconChevron from 'src/components/icons/IconChevron.vue'
-import type AccordionProps from 'src/models/Accordion'
 
 export default defineComponent({
   name: 'Accordion',
@@ -52,21 +50,13 @@ export default defineComponent({
       default: false,
     },
   },
-  emits: ['click-accordion'],
-  setup(props: AccordionProps, { emit }) {
-    return {
-      onClick() {
-        emit('click-accordion')
-      },
-    }
-  },
   data() {
     return {
       isOpen: this.isDefaultOpen,
     }
   },
   methods: {
-    toggleOpen() {
+    toggleOpen(): void {
       this.isOpen = !this.isOpen
     },
   },

@@ -89,7 +89,7 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ['toggle-dialog', 'primary-products'],
+  emits: ['toggle-dialog'],
   data() {
     return {
       fieldBreakdownAu: [
@@ -108,7 +108,7 @@ export default defineComponent({
     }
   },
   methods: {
-    toggleDialog() {
+    toggleDialog(): void {
       this.$emit('toggle-dialog')
     },
     getProductType(): ProductEnum {

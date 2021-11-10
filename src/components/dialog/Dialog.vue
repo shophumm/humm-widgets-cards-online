@@ -55,13 +55,6 @@ export default defineComponent({
     },
   },
   emits: ['toggle-dialog'],
-  setup(props, { emit }) {
-    return {
-      toggleDialog() {
-        emit('toggle-dialog')
-      },
-    }
-  },
   mounted() {
     this.$nextTick(() => {
       // Focus on the first element when mounting as a11y best practice
@@ -80,7 +73,10 @@ export default defineComponent({
     document.removeEventListener('keydown', this.handleFocusTrap)
   },
   methods: {
-    handleFocusTrap: function (event: KeyboardEvent) {
+    toggleDialog(): void {
+      this.$emit('toggle-dialog')
+    },
+    handleFocusTrap(event: KeyboardEvent): void {
       if (event.key !== 'Tab') return
 
       const focusableSelectors =
@@ -104,12 +100,12 @@ export default defineComponent({
         event.preventDefault()
       }
     },
-    handleKeyboardToggle: function (event: KeyboardEvent) {
+    handleKeyboardToggle(event: KeyboardEvent): void {
       if (event.key !== 'Escape') return
 
       this.toggleDialog()
     },
-    handleMaskClick: function (event: Event) {
+    handleMaskClick(event: Event): void {
       const element = this.$refs.dialogMask as HTMLDivElement | undefined
       const target = event.target as HTMLElement | null
 
