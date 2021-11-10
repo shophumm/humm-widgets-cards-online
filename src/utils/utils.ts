@@ -15,7 +15,7 @@ export const getCurrentScript = (): HTMLOrSVGScriptElement =>
     return scripts[scripts.length - 1]
   })()
 
-export const injectStyles = (styles?: string): void => {
+export const injectStyles = (styles?: string) => {
   if (!styles) return
 
   const style = document.createElement('style')

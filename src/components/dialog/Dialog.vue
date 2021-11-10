@@ -73,10 +73,10 @@ export default defineComponent({
     document.removeEventListener('keydown', this.handleFocusTrap)
   },
   methods: {
-    toggleDialog(): void {
+    toggleDialog() {
       this.$emit('toggle-dialog')
     },
-    handleFocusTrap(event: KeyboardEvent): void {
+    handleFocusTrap(event: KeyboardEvent) {
       if (event.key !== 'Tab') return
 
       const focusableSelectors =
@@ -100,12 +100,12 @@ export default defineComponent({
         event.preventDefault()
       }
     },
-    handleKeyboardToggle(event: KeyboardEvent): void {
+    handleKeyboardToggle(event: KeyboardEvent) {
       if (event.key !== 'Escape') return
 
       this.toggleDialog()
     },
-    handleMaskClick(event: Event): void {
+    handleMaskClick(event: Event) {
       const element = this.$refs.dialogMask as HTMLDivElement | undefined
       const target = event.target as HTMLElement | null
 

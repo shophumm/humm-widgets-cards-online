@@ -64,7 +64,7 @@ export default defineComponent({
     },
   },
   methods: {
-    onClick(): void {
+    onClick() {
       this.$emit('click')
     },
   },

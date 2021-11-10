@@ -122,13 +122,13 @@ export default defineComponent({
         'MONTHS'
       )} INTEREST-FREE.`
     },
-    createTitle(): void {
+    createTitle() {
       switch (this.products[0].productType.toLowerCase()) {
         case ProductEnum.LongTermInterestFree:
           this.title = this.getLongTermInterestFreeTitle()
       }
     },
-    setProduct(): void {
+    setProduct() {
       this.displayedProduct = this.products[0]
     },
   },

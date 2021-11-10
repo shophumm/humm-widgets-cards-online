@@ -108,7 +108,7 @@ export default defineComponent({
     }
   },
   methods: {
-    toggleDialog(): void {
+    toggleDialog() {
       this.$emit('toggle-dialog')
     },
     getProductType(): ProductEnum {

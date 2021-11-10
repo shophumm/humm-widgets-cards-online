@@ -22,7 +22,7 @@ export default defineComponent({
   },
   emits: ['click-close'],
   methods: {
-    onClick(): void {
+    onClick() {
       this.$emit('click-close')
     },
   },

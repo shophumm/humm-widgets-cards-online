@@ -64,10 +64,10 @@ export default defineComponent({
   },
   emits: ['toggle-dialog', 'close-widget'],
   methods: {
-    toggleDialog(): void {
+    toggleDialog() {
       this.$emit('toggle-dialog')
     },
-    closeWidget(): void {
+    closeWidget() {
       this.$emit('close-widget')
     },
   },
