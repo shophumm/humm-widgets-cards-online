@@ -26,15 +26,16 @@
     :lang="lang"
     :product-price="productPrice"
     :product="displayedProduct"
-    accordion-title="TERMS & CONDITIONS"
-    :accordion-data="terms"
+    :cards="cards"
+    terms-title="TERMS & CONDITIONS"
+    :terms-template="terms"
     @toggle-dialog="isDialogOpen = false"
   >
     <template #header>
       <ExistingCard :product="displayedProduct">
         <template #cards>
           <Card v-for="card in getApplyCards" :key="card.id" size="lg">
-            <img :src="card.src" :alt="card.alt" />
+            <img :src="card.src" :alt="card.name" />
           </Card>
         </template>
         <template #title>Have a humm®90 Platinum Mastercard®?</template>

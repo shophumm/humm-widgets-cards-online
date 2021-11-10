@@ -10,7 +10,7 @@
     <template #logo>
       <CardsLogo>
         <Card v-for="card in getLogoCards" :key="card.id" size="sm">
-          <img :src="card.src" :alt="card.alt" />
+          <img :src="card.src" :alt="card.name" />
         </Card>
       </CardsLogo>
     </template>
@@ -38,7 +38,7 @@
       <ExistingCard :product="displayedProduct">
         <template #cards>
           <Card v-for="card in getApplyCards" :key="card.id" size="lg">
-            <img :src="card.src" :alt="card.alt" />
+            <img :src="card.src" :alt="card.name" />
           </Card>
         </template>
         <template #title>Have a Farmers Mastercard® or Q Mastercard®?</template>

@@ -14,7 +14,7 @@
       <slot name="header" />
     </template>
     <template #body>
-      <Tabs :tabs="getProductData()">
+      <Tabs :tabs="getProductData()" @set-product-terms="setProductTerms">
         <template #default="{ activeTabId }">
           <Tab
             v-for="tab in getProductData()"
@@ -27,8 +27,8 @@
         </template>
       </Tabs>
       <slot name="footer" />
-      <Accordion id="widget-terms" :content="accordionData">
-        {{ accordionTitle }}
+      <Accordion id="widget-terms" :content="terms">
+        {{ termsTitle }}
       </Accordion>
     </template>
   </Dialog>
@@ -42,6 +42,7 @@ import Tabs from 'src/components/tabs/Tabs.vue'
 import Tab from 'src/components/tabs/Tab.vue'
 import DataList from 'src/components/tabs/DataList.vue'
 import { TabItemProps, ContentsProps, ProductItemProps } from 'src/models/Tabs'
+import CardProps from 'src/models/Card'
 import ProductEnum from 'src/models/enums/ProductEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import { productLanguage } from 'src/lang/ResponseLanguage'
@@ -80,16 +81,20 @@ export default defineComponent({
       type: Object as () => ProductItemProps,
       required: true,
     },
-    accordionTitle: {
+    cards: {
+      type: Array as () => CardProps[],
+      required: true,
+    },
+    termsTitle: {
       type: String,
       default: 'Terms & Conditions',
     },
-    accordionData: {
+    termsTemplate: {
       type: String,
       required: true,
     },
   },
-  emits: ['toggle-dialog', 'primary-products'],
+  emits: ['toggle-dialog'],
   data() {
     return {
       fieldBreakdownAu: [
@@ -105,7 +110,11 @@ export default defineComponent({
         'establishmentFee',
         'indicativeMonthly',
       ],
+      terms: '',
     }
+  },
+  created() {
+    this.setProductTerms(this.product.productItems[0].id)
   },
   methods: {
     toggleDialog() {
@@ -243,6 +252,37 @@ export default defineComponent({
       const orderedContent = this.orderContent(filteredContent)
 
       return this.appendUnits(orderedContent)
+    },
+    replaceProductPlaceholdersInTerms(content: string, id: string): string {
+      const productData = this.getProductData()
+      const productContents = productData?.find(item => item.id === id)
+        ?.contents
+      const replacedContent = content.replace(
+        /\{{(.*?)\}}/g,
+        function (placeholder) {
+          const placeholderKey = placeholder.replace('{{', '').replace('}}', '')
+          return (
+            (productContents?.find(item => item.key === placeholderKey)
+              ?.value as string) || placeholder
+          )
+        }
+      )
+      return replacedContent
+    },
+    getOrderedListOfAnnualFees(cards: CardProps[]) {
+      let listOfAnnualFees = ''
+      cards.map((item, index) => {
+        if (index === 0) listOfAnnualFees = item.annualFee.toString()
+        else listOfAnnualFees += `/${item.annualFee.toString()}`
+      })
+      return listOfAnnualFees
+    },
+    setProductTerms(id: string) {
+      const setTermsWithProductPlaceholder = this.replaceProductPlaceholdersInTerms(
+        this.termsTemplate,
+        id
+      )
+      this.terms = setTermsWithProductPlaceholder
     },
   },
 })

@@ -39,6 +39,7 @@ export default defineComponent({
       validator: (tabs: unknown[]) => !!tabs.length,
     },
   },
+  emits: ['set-product-terms'],
   data() {
     return {
       activeTabId: this.defaultTabId || this.tabs?.[0]?.id,
@@ -47,6 +48,7 @@ export default defineComponent({
   methods: {
     changeTab(tabId: string) {
       this.activeTabId = tabId
+      this.$emit('set-product-terms', tabId)
     },
   },
 })
