@@ -95,13 +95,5 @@ export default defineComponent({
       #573a90 87.88%
     ); // Widget background
   }
-
-  &[data-theme='hummgroup'] {
-    --color-0: #000000;
-    --color-1: #ffffff;
-    --color-1-contrast: #000000;
-    --color-2: #ff6c00; // Web / Tile / Button / Secondary
-    --bg-1: #ffffff; // Widget background
-  }
 }
 </style>
