@@ -89,7 +89,7 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ['toggle-dialog', 'primary-products'],
+  emits: ['toggle-dialog'],
   data() {
     return {
       fieldBreakdownAu: [
