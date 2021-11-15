@@ -14,10 +14,10 @@
       <slot name="header" />
     </template>
     <template #body>
-      <Tabs :tabs="getProductData()" @set-product-terms="setProductTerms">
+      <Tabs :tabs="productData" @set-product-terms="setTerms">
         <template #default="{ activeTabId }">
           <Tab
-            v-for="tab in getProductData()"
+            v-for="tab in productData"
             :key="tab.id"
             :tab-id="tab.id"
             :active-tab-id="activeTabId"
@@ -27,16 +27,18 @@
         </template>
       </Tabs>
       <slot name="footer" />
-      <Accordion id="widget-terms" :content="terms">
-        {{ termsTitle }}
-      </Accordion>
+      <AccordionTerms
+        :title="termsTitle"
+        :terms-template="termsTemplate"
+        :terms-values="termsValues"
+      />
     </template>
   </Dialog>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Accordion from 'src/components/accordion/Accordion.vue'
+import AccordionTerms from 'src/modules/AccordionTerms.vue'
 import Dialog from 'src/components/dialog/Dialog.vue'
 import Tabs from 'src/components/tabs/Tabs.vue'
 import Tab from 'src/components/tabs/Tab.vue'
@@ -55,7 +57,7 @@ import {
 export default defineComponent({
   name: 'DialogOverlay',
   components: {
-    Accordion,
+    AccordionTerms,
     Dialog,
     DataList,
     Tab,
@@ -110,11 +112,15 @@ export default defineComponent({
         'establishmentFee',
         'indicativeMonthly',
       ],
-      terms: '',
+      // terms: '',
+      productData: [{}] as TabItemProps[],
+      termsValues: {},
     }
   },
   created() {
-    this.setProductTerms(this.product.productItems[0].id)
+    this.getProductData()
+    this.tabsContents(this.product.productItems[0].id)
+    this.setTerms(this.product.productItems[0].id)
   },
   methods: {
     toggleDialog() {
@@ -124,9 +130,8 @@ export default defineComponent({
       const productType = this.product.productType
       return productType
     },
-    getProductData(): TabItemProps[] {
-      const productData = this.product.productItems
-      return productData
+    getProductData() {
+      this.productData = this.product.productItems
     },
     getOverlayTitle(): string {
       const productType = this.getProductType()
@@ -238,8 +243,7 @@ export default defineComponent({
       return contentWithUnit
     },
     tabsContents(id: string): ContentsProps[] {
-      const productData = this.getProductData()
-      const productContents = productData?.find(item => item.id === id)
+      const productContents = this.productData?.find(item => item.id === id)
         ?.contents
 
       if (!productContents)
@@ -253,36 +257,39 @@ export default defineComponent({
 
       return this.appendUnits(orderedContent)
     },
-    replaceProductPlaceholdersInTerms(content: string, id: string): string {
-      const productData = this.getProductData()
-      const productContents = productData?.find(item => item.id === id)
-        ?.contents
-      const replacedContent = content.replace(
-        /\{{(.*?)\}}/g,
-        function (placeholder) {
-          const placeholderKey = placeholder.replace('{{', '').replace('}}', '')
-          return (
-            (productContents?.find(item => item.key === placeholderKey)
-              ?.value as string) || placeholder
-          )
+    setTerms(id: string) {
+      console.log(`set product with id=${id} to send to accordian`)
+      const selectedProduct = this.product.productItems.find(
+        product => product.id === id
+      )
+      const productTerms = selectedProduct?.contents.reduce((acc, feature) => {
+        return { ...acc, [feature.key]: feature.value }
+      }, {})
+      console.log({ productTerms })
+
+      const mainCard = this.cards[0]
+      const cardTerms = {
+        id: mainCard.id,
+        image: mainCard.src,
+        name: mainCard.name,
+        interestRate: mainCard.interestRate,
+        annualFee: mainCard.annualFee,
+      }
+      console.log({ cardTerms })
+
+      const cardsTerms = this.cards.reduce((acc, card) => {
+        return {
+          ...acc,
+          [card.id]: { name: card.name, interestRate: card.interestRate },
         }
-      )
-      return replacedContent
-    },
-    getOrderedListOfAnnualFees(cards: CardProps[]) {
-      let listOfAnnualFees = ''
-      cards.map((item, index) => {
-        if (index === 0) listOfAnnualFees = item.annualFee.toString()
-        else listOfAnnualFees += `/${item.annualFee.toString()}`
-      })
-      return listOfAnnualFees
-    },
-    setProductTerms(id: string) {
-      const setTermsWithProductPlaceholder = this.replaceProductPlaceholdersInTerms(
-        this.termsTemplate,
-        id
-      )
-      this.terms = setTermsWithProductPlaceholder
+      }, {})
+      console.log({ cardsTerms })
+
+      this.termsValues = {
+        product: productTerms,
+        card: cardTerms,
+        cards: cardsTerms,
+      }
     },
   },
 })
