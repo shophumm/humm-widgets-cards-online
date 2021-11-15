@@ -9,7 +9,7 @@
       @click="toggleOpen"
     >
       <span class="accordion__label">
-        <slot />
+        {{ title }}
       </span>
       <span :class="['accordion__icon', { 'is-open': isOpen }]">
         <IconChevron fill="currentColor" />
@@ -44,7 +44,14 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    content: String,
+    title: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
     isDefaultOpen: {
       type: Boolean,
       default: false,
