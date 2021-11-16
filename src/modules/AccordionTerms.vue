@@ -5,7 +5,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Accordion from 'src/components/accordion/Accordion.vue'
-import Handlebars from 'handlebars'
 
 export default defineComponent({
   name: 'AccordionTerms',
@@ -37,7 +36,9 @@ export default defineComponent({
   },
   computed: {
     generateTerms(): string {
-      const template = Handlebars.compile(this.termsTemplate)
+      const template = window.handlebarsForHummWidget.compile(
+        this.termsTemplate
+      )
       return template(this.termsValues)
     },
   },
