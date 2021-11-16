@@ -150,7 +150,7 @@ export default defineComponent({
         card => card.id === cardId
       )?.interestRate
     },
-    getLongTermInterestFreeTitle() {
+    getLongTermInterestFreeTitle(): string {
       const interestFreePeriod = getProductValueByKey(
         this.displayedProduct,
         'interestFreePeriod'
@@ -168,7 +168,7 @@ export default defineComponent({
         'Payment'
       )} of $${indicativeMinMonthly}*`
     },
-    getPaymentHolidayTitle() {
+    getPaymentHolidayTitle(): string {
       const interestFreePeriod = getProductValueByKey(
         this.displayedProduct,
         'interestFreePeriod'
@@ -181,13 +181,16 @@ export default defineComponent({
     getLongTermInterestFreeSubtitle(
       establishmentFee: number,
       advancedFee: number
-    ) {
+    ): string {
       if (establishmentFee === 0 || advancedFee === 0) {
         return `*indicative. $${this.cardAccountFee} annual Account Fee, Ts&Cs apply.`
       }
       return `*indicative. $${establishmentFee} Establishment Fee or $${advancedFee} Advance Fee, $${this.cardAccountFee} annual Account Fee, Ts&Cs apply.`
     },
-    getPaymentHolidaySubtitle(establishmentFee: number, advancedFee: number) {
+    getPaymentHolidaySubtitle(
+      establishmentFee: number,
+      advancedFee: number
+    ): string {
       if (establishmentFee === 0 || advancedFee === 0) {
         return `Standard Interest Rate ${this.cardStandardInterestRate}% applies at the end of the interest free period. $${this.cardAccountFee} annual Account Fee. Ts&Cs apply.`
       }

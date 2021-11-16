@@ -24,7 +24,6 @@ import Theme from 'src/providers/Theme.vue'
 import Responsive from 'src/providers/Responsive.vue'
 import WidgetMainQmc from 'src/widgets/WidgetMainQmc.vue'
 import WidgetMainFarmers from 'src/widgets/WidgetMainFarmers.vue'
-import WidgetMainHummGroup from 'src/widgets/WidgetMainHummGroup.vue'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import ThemeEnum from 'src/models/enums/ThemeEnum'
 import AppProps from 'src/models/App'
@@ -63,8 +62,6 @@ export default defineComponent({
           return WidgetMainQmc
         case ThemeEnum.Farmers:
           return WidgetMainFarmers
-        case ThemeEnum.HummGroup:
-          return WidgetMainHummGroup
         default:
           return WidgetMainQmc
       }
