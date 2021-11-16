@@ -112,9 +112,9 @@ export default defineComponent({
         'establishmentFee',
         'indicativeMonthly',
       ],
-      // terms: '',
       productData: [{}] as TabItemProps[],
       termsValues: {},
+      termsContent: '',
     }
   },
   created() {
@@ -258,14 +258,12 @@ export default defineComponent({
       return this.appendUnits(orderedContent)
     },
     setTerms(id: string) {
-      console.log(`set product with id=${id} to send to accordian`)
       const selectedProduct = this.product.productItems.find(
         product => product.id === id
       )
       const productTerms = selectedProduct?.contents.reduce((acc, feature) => {
         return { ...acc, [feature.key]: feature.value }
       }, {})
-      console.log({ productTerms })
 
       const mainCard = this.cards[0]
       const cardTerms = {
@@ -275,7 +273,6 @@ export default defineComponent({
         interestRate: mainCard.interestRate,
         annualFee: mainCard.annualFee,
       }
-      console.log({ cardTerms })
 
       const cardsTerms = this.cards.reduce((acc, card) => {
         return {
@@ -283,7 +280,6 @@ export default defineComponent({
           [card.id]: { name: card.name, interestRate: card.interestRate },
         }
       }, {})
-      console.log({ cardsTerms })
 
       this.termsValues = {
         product: productTerms,

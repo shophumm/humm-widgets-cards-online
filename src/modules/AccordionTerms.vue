@@ -1,11 +1,11 @@
 <template>
-  <Accordion :id="id" :title="title" :content="termsTemplate" />
+  <Accordion :id="id" :title="title" :content="generateTerms" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Accordion from 'src/components/accordion/Accordion.vue'
-// import Handlebars from 'handlebars'
+import Handlebars from 'handlebars'
 
 export default defineComponent({
   name: 'AccordionTerms',
@@ -30,11 +30,16 @@ export default defineComponent({
       required: true,
     },
   },
-  created() {
-    console.log(this.termsValues)
-    console.log(this.termsTemplate)
-    // const template = Handlebars.compile(this.termsTemplate)
-    // console.log(template(this.productData))
+  data() {
+    return {
+      termsContent: '',
+    }
+  },
+  computed: {
+    generateTerms(): string {
+      const template = Handlebars.compile(this.termsTemplate)
+      return template(this.termsValues)
+    },
   },
 })
 </script>
