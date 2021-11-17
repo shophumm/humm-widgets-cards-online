@@ -12,9 +12,6 @@ module.exports = {
   },
 
   configureWebpack(config) {
-    config.externals = {
-      handlebars: 'handlebars',
-    }
     // Replace the default Vue demo.html page when building in lib mode
     // See https://github.com/vuejs/vue-cli/issues/3291
     config.plugins.some((plugin, index) => {

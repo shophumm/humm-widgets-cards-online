@@ -4,7 +4,6 @@ import {
   getAllScriptURLParameters,
   parseThemeParameter,
   loadStyles,
-  loadHandlebars,
 } from 'src/utils/utils'
 import { isDevelopment, publicUrl, appName } from 'src/utils/constants'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
@@ -56,8 +55,6 @@ export const createDynamicAppAtScriptTag = async (
         )
     }
   }
-
-  loadHandlebars()
 
   if (!isDevelopment && document.getElementById(mountTargetSelector)) {
     throw new Error(

@@ -5,6 +5,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Accordion from 'src/components/accordion/Accordion.vue'
+import ejs from 'ejs'
 
 export default defineComponent({
   name: 'AccordionTerms',
@@ -36,9 +37,7 @@ export default defineComponent({
   },
   computed: {
     generateTerms(): string {
-      const template = window.handlebarsForHummWidget.compile(
-        this.termsTemplate
-      )
+      let template = ejs.compile(this.termsTemplate)
       return template(this.termsValues)
     },
   },
