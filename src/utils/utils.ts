@@ -166,7 +166,7 @@ export const getProductLabel = (nameKey: string): string => {
 export const getCardsData = (cardsData: Card[]): CardProps[] => {
   const cards = cardsData.map(card => ({
     id: card.id,
-    alt: card.name,
+    name: card.name,
     src: card.image,
     interestRate: card.interestRate,
     annualFee: card.annualFee,

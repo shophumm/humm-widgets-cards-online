@@ -10,7 +10,7 @@
     <template #logo>
       <CardsLogo>
         <Card v-for="card in getLogoCards" :key="card.id" size="sm">
-          <img :src="card.src" :alt="card.alt" />
+          <img :src="card.src" :alt="card.name" />
         </Card>
       </CardsLogo>
     </template>
@@ -31,14 +31,15 @@
     :lang="lang"
     :product-price="productPrice"
     :product="displayedProduct"
-    :accordion-data="terms"
+    :cards="cards"
+    :terms-template="terms"
     @toggle-dialog="isDialogOpen = false"
   >
     <template #header>
       <ExistingCard :product="displayedProduct">
         <template #cards>
           <Card v-for="card in getApplyCards" :key="card.id" size="lg">
-            <img :src="card.src" :alt="card.alt" />
+            <img :src="card.src" :alt="card.name" />
           </Card>
         </template>
         <template #title>Have a Q Mastercard® or Q Card?</template>

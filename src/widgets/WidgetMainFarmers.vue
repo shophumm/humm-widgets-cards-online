@@ -10,7 +10,7 @@
     <template #logo>
       <CardsLogo>
         <Card v-for="card in getLogoCards" :key="card.id" size="sm">
-          <img :src="card.src" :alt="card.alt" />
+          <img :src="card.src" :alt="card.name" />
         </Card>
       </CardsLogo>
     </template>
@@ -31,14 +31,15 @@
     :lang="lang"
     :product-price="productPrice"
     :product="displayedProduct"
-    :accordion-data="terms"
+    :cards="cards"
+    :terms-template="terms"
     @toggle-dialog="isDialogOpen = false"
   >
     <template #header>
       <ExistingCard :product="displayedProduct">
         <template #cards>
           <Card v-for="card in getApplyCards" :key="card.id" size="lg">
-            <img :src="card.src" :alt="card.alt" />
+            <img :src="card.src" :alt="card.name" />
           </Card>
         </template>
         <template #title>Have a Farmers Mastercard® or Q Mastercard®?</template>
@@ -58,6 +59,8 @@ import WidgetContent from 'src/modules/WidgetContent.vue'
 import CardsLogo from 'src/modules/CardsLogo.vue'
 import DialogOverlay from 'src/modules/DialogOverlay.vue'
 import ExistingCard from 'src/modules/ExistingCard.vue'
+
+const cardId = 'FMC'
 
 export default defineComponent({
   name: 'WidgetMainFarmers',
@@ -89,13 +92,23 @@ export default defineComponent({
       required: true,
     },
   },
-  data() {
+  data(): {
+    isWidgetOpen: boolean
+    isDialogOpen: boolean
+    buttonCloseLabel: string
+    Theme: typeof ThemeEnum
+    displayedProduct: ProductItemProps
+    cardAccountFee: number | undefined
+    cardStandardInterestRate: number | undefined
+  } {
     return {
       isWidgetOpen: true,
       isDialogOpen: false,
-      displayedProduct: this.products[0],
       buttonCloseLabel: 'Close',
       Theme: ThemeEnum,
+      displayedProduct: {} as ProductItemProps,
+      cardAccountFee: undefined,
+      cardStandardInterestRate: undefined,
     }
   },
   computed: {
@@ -104,6 +117,26 @@ export default defineComponent({
     },
     getApplyCards(): CardProps[] {
       return this.cards.slice(0, 4)
+    },
+  },
+  created() {
+    this.setProduct()
+    this.getCardAccountFee()
+    this.getCardStandardInterestRate()
+  },
+  methods: {
+    setProduct() {
+      this.displayedProduct = this.products[0]
+    },
+    getCardAccountFee() {
+      this.cardAccountFee = this.cards.find(
+        card => card.id === cardId
+      )?.annualFee
+    },
+    getCardStandardInterestRate() {
+      this.cardStandardInterestRate = this.cards.find(
+        card => card.id === cardId
+      )?.interestRate
     },
   },
 })
