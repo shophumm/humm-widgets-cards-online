@@ -28,6 +28,14 @@ Default: false
 Values: true | false
 If set to true this will prevent the loading of the widget's CSS to make it easier to apply custom styling.
 
+`darkMode`
+Default: false
+Values: true | false
+
+`theme`
+Default: `humm90` for Australia and `qmc` for New Zealand
+Values: humm90 | qmc
+
 ## Development
 
 ### Quick start
@@ -72,7 +80,7 @@ yarn
 **Starting the project**
 
 Runs the app in the development mode. Starts the Australian widget by default
-Open [http://localhost:8081](http://localhost:8081) to view it in the browser.
+Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
 
 ```sh
 yarn start
@@ -101,7 +109,7 @@ yarn build
 **Build preview**
 Does a production build as above and serves `build/index.html` to be previewed.
 Note that `public/demo.html` is renamed and copied to `build/index.html` on production build.
-Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ```sh
 yarn preview
