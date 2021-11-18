@@ -62,7 +62,7 @@ export const loadHandlebars = (): void => {
   const handlebarScript = document.createElement('script')
   handlebarScript.src =
     'https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js'
-  document.body.appendChild(handlebarScript)
+  document.head.appendChild(handlebarScript)
 
   handlebarScript.addEventListener('load', () => {
     const assignScript = document.createElement('script')
