@@ -58,6 +58,19 @@ export const loadStyles = async (url: string): Promise<void> => {
   })
 }
 
+export const loadHandlebars = (): void => {
+  const handlebarScript = document.createElement('script')
+  handlebarScript.src =
+    'https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js'
+  document.head.appendChild(handlebarScript)
+
+  handlebarScript.addEventListener('load', () => {
+    const assignScript = document.createElement('script')
+    assignScript.textContent = ' window.handlebarsForHummWidget = Handlebars '
+    document.head.appendChild(assignScript)
+  })
+}
+
 export const parseThemeParameter = (
   themeParam: unknown,
   removeCss: boolean
@@ -166,7 +179,7 @@ export const getProductLabel = (nameKey: string): string => {
 export const getCardsData = (cardsData: Card[]): CardProps[] => {
   const cards = cardsData.map(card => ({
     id: card.id,
-    alt: card.name,
+    name: card.name,
     src: card.image,
     interestRate: card.interestRate,
     annualFee: card.annualFee,

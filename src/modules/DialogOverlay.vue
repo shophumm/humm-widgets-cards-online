@@ -14,10 +14,10 @@
       <slot name="header" />
     </template>
     <template #body>
-      <Tabs :tabs="getProductData()">
+      <Tabs :tabs="productData" @set-product-terms="setTerms">
         <template #default="{ activeTabId }">
           <Tab
-            v-for="tab in getProductData()"
+            v-for="tab in productData"
             :key="tab.id"
             :tab-id="tab.id"
             :active-tab-id="activeTabId"
@@ -27,21 +27,24 @@
         </template>
       </Tabs>
       <slot name="footer" />
-      <Accordion id="widget-terms" :content="accordionData">
-        {{ accordionTitle }}
-      </Accordion>
+      <AccordionTerms
+        :title="termsTitle"
+        :terms-template="termsTemplate"
+        :terms-values="termsValues"
+      />
     </template>
   </Dialog>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Accordion from 'src/components/accordion/Accordion.vue'
+import AccordionTerms from 'src/modules/AccordionTerms.vue'
 import Dialog from 'src/components/dialog/Dialog.vue'
 import Tabs from 'src/components/tabs/Tabs.vue'
 import Tab from 'src/components/tabs/Tab.vue'
 import DataList from 'src/components/tabs/DataList.vue'
 import { TabItemProps, ContentsProps, ProductItemProps } from 'src/models/Tabs'
+import CardProps from 'src/models/Card'
 import ProductEnum from 'src/models/enums/ProductEnum'
 import LanguageCodeEnum from 'src/models/enums/LanguageCodeEnum'
 import { productLanguage } from 'src/lang/ResponseLanguage'
@@ -54,7 +57,7 @@ import {
 export default defineComponent({
   name: 'DialogOverlay',
   components: {
-    Accordion,
+    AccordionTerms,
     Dialog,
     DataList,
     Tab,
@@ -80,11 +83,15 @@ export default defineComponent({
       type: Object as () => ProductItemProps,
       required: true,
     },
-    accordionTitle: {
+    cards: {
+      type: Array as () => CardProps[],
+      required: true,
+    },
+    termsTitle: {
       type: String,
       default: 'Terms & Conditions',
     },
-    accordionData: {
+    termsTemplate: {
       type: String,
       required: true,
     },
@@ -105,7 +112,15 @@ export default defineComponent({
         'establishmentFee',
         'indicativeMonthly',
       ],
+      productData: [{}] as TabItemProps[],
+      termsValues: {},
+      termsContent: '',
     }
+  },
+  created() {
+    this.getProductData()
+    this.tabsContents(this.product.productItems[0].id)
+    this.setTerms(this.product.productItems[0].id)
   },
   methods: {
     toggleDialog() {
@@ -115,9 +130,8 @@ export default defineComponent({
       const productType = this.product.productType
       return productType
     },
-    getProductData(): TabItemProps[] {
-      const productData = this.product.productItems
-      return productData
+    getProductData() {
+      this.productData = this.product.productItems
     },
     getOverlayTitle(): string {
       const productType = this.getProductType()
@@ -229,8 +243,7 @@ export default defineComponent({
       return contentWithUnit
     },
     tabsContents(id: string): ContentsProps[] {
-      const productData = this.getProductData()
-      const productContents = productData?.find(item => item.id === id)
+      const productContents = this.productData?.find(item => item.id === id)
         ?.contents
 
       if (!productContents)
@@ -243,6 +256,36 @@ export default defineComponent({
       const orderedContent = this.orderContent(filteredContent)
 
       return this.appendUnits(orderedContent)
+    },
+    setTerms(id: string) {
+      const selectedProduct = this.product.productItems.find(
+        product => product.id === id
+      )
+      const productTerms = selectedProduct?.contents.reduce((acc, feature) => {
+        return { ...acc, [feature.key]: feature.value }
+      }, {})
+
+      const mainCard = this.cards[0]
+      const cardTerms = {
+        id: mainCard.id,
+        image: mainCard.src,
+        name: mainCard.name,
+        interestRate: mainCard.interestRate,
+        annualFee: mainCard.annualFee,
+      }
+
+      const cardsTerms = this.cards.reduce((acc, card) => {
+        return {
+          ...acc,
+          [card.id]: { name: card.name, interestRate: card.interestRate },
+        }
+      }, {})
+
+      this.termsValues = {
+        product: productTerms,
+        card: cardTerms,
+        cards: cardsTerms,
+      }
     },
   },
 })
